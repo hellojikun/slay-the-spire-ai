@@ -1352,6 +1352,80 @@ class PolicyTests(unittest.TestCase):
 
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1}])
 
+    def test_combat_guardian_search_commits_attack_followup_for_mode_shift(self):
+        first_state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "current_hp": 42,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 11,
+                    "player": {"current_energy": 3, "current_hp": 42, "max_hp": 80, "block": 0},
+                    "hand": [
+                        {"id": "Whirlwind", "name": "Whirlwind", "type": "ATTACK", "cost": -1, "damage": 8, "is_playable": True, "has_target": False},
+                        {"id": "Wound", "name": "Wound", "type": "STATUS", "cost": -2, "is_playable": False},
+                        {"id": "Strike_R", "name": "Strike", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                        {"id": "Defend_R", "name": "Defend", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"id": "Bash", "name": "Bash", "type": "ATTACK", "cost": 2, "damage": 10, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 114,
+                            "max_hp": 240,
+                            "block": 9,
+                            "move": {"damage": 36},
+                            "powers": [{"id": "Mode Shift", "amount": 41}],
+                        }
+                    ],
+                },
+            },
+        }
+        second_state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "current_hp": 42,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 11,
+                    "player": {"current_energy": 2, "current_hp": 42, "max_hp": 80, "block": 5},
+                    "hand": [
+                        {"id": "Whirlwind", "name": "Whirlwind", "type": "ATTACK", "cost": -1, "damage": 8, "is_playable": True, "has_target": False},
+                        {"id": "Wound", "name": "Wound", "type": "STATUS", "cost": -2, "is_playable": False},
+                        {"id": "Strike_R", "name": "Strike", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                        {"id": "Bash", "name": "Bash", "type": "ATTACK", "cost": 2, "damage": 10, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 114,
+                            "max_hp": 240,
+                            "block": 9,
+                            "move": {"damage": 36},
+                            "powers": [{"id": "Mode Shift", "amount": 41}],
+                        }
+                    ],
+                },
+            },
+        }
+        test_policy = policy()
+
+        first_decision = test_policy.decide(first_state)
+        second_decision = test_policy.decide(second_state)
+
+        self.assertEqual(first_decision.actions, [{"action": "play_card", "card_index": 4}])
+        self.assertIn("One-turn search", first_decision.reason)
+        self.assertEqual(second_decision.actions, [{"action": "play_card", "card_index": 1}])
+        self.assertIn("Continue one-turn search", second_decision.reason)
+
     def test_combat_local_search_ignores_spurious_non_attack_damage_after_probe69(self):
         game = {
             "current_hp": 44,

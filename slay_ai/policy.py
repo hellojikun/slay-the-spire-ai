@@ -627,7 +627,11 @@ class HeuristicPolicy:
         remaining = tuple(normalize_card_name(key) for key in sequence_card_keys[1:])
         if loss_reduction <= 0 or not remaining:
             return
-        if not _sequence_has_block_followup(game.get("combat_state", {}).get("hand", []), remaining):
+        hand = game.get("combat_state", {}).get("hand", [])
+        monsters = game.get("combat_state", {}).get("monsters", [])
+        if not _sequence_has_block_followup(hand, remaining) and not (
+            _guardian_mode_shift_under_pressure(monsters) and _sequence_has_attack_followup(hand, remaining)
+        ):
             return
         combat = game.get("combat_state", {})
         self._pending_search_sequence = _PendingSearchSequence(
@@ -1329,6 +1333,18 @@ def _sequence_has_block_followup(hand: list[dict[str, Any]], card_keys: tuple[st
         if key not in remaining:
             continue
         if _card_block_value(card) > 0:
+            return True
+        remaining.remove(key)
+    return False
+
+
+def _sequence_has_attack_followup(hand: list[dict[str, Any]], card_keys: tuple[str, ...]) -> bool:
+    remaining = list(card_keys)
+    for card in hand:
+        key = _card_key(card)
+        if key not in remaining:
+            continue
+        if _card_damage_value(card) > 0:
             return True
         remaining.remove(key)
     return False
