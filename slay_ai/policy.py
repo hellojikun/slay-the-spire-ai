@@ -45,7 +45,7 @@ SEARCH_PROTECTED_SINGLE_CARDS = {
     "Piercing Wail",
     "Shockwave",
 }
-AOE_ATTACK_CARDS = {"Cleave", "Immolate", "Reaper", "Thunderclap"}
+AOE_ATTACK_CARDS = {"Cleave", "Immolate", "Reaper", "Thunderclap", "Whirlwind"}
 REFLECT_DAMAGE_POWER_IDS = {"sharphide", "thorns"}
 SHOP_BUY_CARD_THRESHOLD = 54.0
 SHOP_PURGE_STRIKE_SCORE = 58.0
@@ -352,6 +352,12 @@ class HeuristicPolicy:
             if _single_target_x_cost_penalty_applies(card, hand, index, monsters, energy):
                 score -= min(18.0, 4.0 * max(energy, 1))
                 reason = f"Play {card.get('name')} with score {score:.1f}."
+            if _x_cost_attack_spends_needed_block(
+                card, hand, index, monsters, energy, incoming, current_block, current_hp, hp_ratio
+            ):
+                pressure = max(0, incoming - current_block)
+                score -= min(24.0, max(12.0, float(pressure)))
+                reason = f"Play {card.get('name')} with score {score:.1f}."
             if score < self.memory.base["combat"]["minimum_card_score"]:
                 continue
             action = {"action": "play_card", "card_index": index}
@@ -375,6 +381,7 @@ class HeuristicPolicy:
         player = combat.get("player", {})
         monsters = combat.get("monsters", [])
         current_hp = int(player.get("current_hp", game.get("current_hp", 0)) or 0)
+        current_block = int(player.get("block", 0) or 0)
         if current_hp > 0 and result.projected_loss >= current_hp and not result.avoided_lethal:
             return None
         if _is_gremlin_nob_fight(monsters) and not result.avoided_lethal:
@@ -393,12 +400,20 @@ class HeuristicPolicy:
         single = self.best_single_combat_action(game)
         single_action = single.actions[0] if single.actions else {}
         single_card_key = _card_key_for_action(game, single_action)
+        loss_reduction = result.initial_loss - result.projected_loss
+        modest_block_sequence = (
+            loss_reduction >= 5
+            and result.initial_loss >= 8
+            and current_block > 0
+            and _action_adds_block(game, result.first_action)
+        )
         if single_card_key in SEARCH_PROTECTED_SINGLE_CARDS and not result.avoided_lethal:
             return None
         if (
             single_action.get("action") == "play_card"
             and single_card_key != result.first_card_key
             and not result.avoided_lethal
+            and not modest_block_sequence
             and result.projected_loss > result.initial_loss - 6
             and result.kills <= 0
             and result.attacks_removed <= 0
@@ -999,6 +1014,48 @@ def _single_target_x_cost_penalty_applies(
     return False
 
 
+def _x_cost_attack_spends_needed_block(
+    card: dict[str, Any],
+    hand: list[dict[str, Any]],
+    card_index: int,
+    monsters: list[dict[str, Any]],
+    energy: int,
+    incoming: int,
+    current_block: int,
+    current_hp: int,
+    hp_ratio: float,
+) -> bool:
+    if energy <= 1 or int(card.get("cost", 0) or 0) >= 0 or int(card.get("damage", 0) or 0) <= 0:
+        return False
+    pressure = max(0, incoming - current_block)
+    if not _dangerous_pressure(pressure, current_hp, hp_ratio):
+        return False
+    live_monsters = [monster for monster in monsters if not (monster.get("is_dead") or monster.get("is_gone"))]
+    attackers = [monster for monster in live_monsters if _monster_attack(monster) > 0]
+    if not attackers:
+        return False
+    damage = int(card.get("damage", 0) or 0) * energy
+    if damage <= 0:
+        return False
+    name = _card_key(card)
+    if name in AOE_ATTACK_CARDS or not card.get("has_target", True):
+        if all(_attack_stops_current_intent(monster, damage) for monster in attackers):
+            return False
+    else:
+        _, target = _choose_target(live_monsters, damage)
+        if target is not None and len(attackers) == 1 and _attack_stops_current_intent(target, damage):
+            return False
+    for index, other in enumerate(hand, start=1):
+        if index == card_index or not other.get("is_playable", True):
+            continue
+        if int(other.get("block", 0) or 0) <= 0:
+            continue
+        other_cost = _card_energy_cost(other, energy)
+        if 0 < other_cost <= energy:
+            return True
+    return False
+
+
 def _dangerous_pressure(pressure: int, current_hp: int, hp_ratio: float) -> bool:
     if pressure <= 0:
         return False
@@ -1090,6 +1147,11 @@ def _card_for_action(game: dict[str, Any], action: dict[str, Any]) -> dict[str, 
         return None
     card = hand[index - 1]
     return card if isinstance(card, dict) else None
+
+
+def _action_adds_block(game: dict[str, Any], action: dict[str, Any]) -> bool:
+    card = _card_for_action(game, action)
+    return bool(card and int(card.get("block", 0) or 0) > 0)
 
 
 def _search_first_attack_has_reflect_risk(

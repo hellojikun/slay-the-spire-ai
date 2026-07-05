@@ -410,6 +410,31 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(result.rewrite_reason, "Preflight action rewrite: hand select->choose.")
         self.assertEqual(result.available_commands, ["choose"])
 
+    def test_preflight_rewrites_multi_hand_select_drop_to_choose_and_proceed(self):
+        before = hand_select_state()
+        client = FakeClient([before], available_tools=["choose", "proceed"])
+        with patch.object(runner.time, "sleep", return_value=None):
+            result = runner._execute_actions_with_settle(
+                client,
+                [{"action": "select_cards", "drop": [5, 3, 4, 2, 1]}],
+                interval=0.01,
+                before_state=before,
+            )
+
+        expected = [
+            {"action": "choose", "choice_index": 5},
+            {"action": "choose", "choice_index": 3},
+            {"action": "choose", "choice_index": 4},
+            {"action": "choose", "choice_index": 2},
+            {"action": "choose", "choice_index": 1},
+            {"action": "proceed"},
+        ]
+        self.assertEqual(client.executed, [expected])
+        self.assertEqual(result.status, "ok")
+        self.assertEqual(result.executed_actions, expected)
+        self.assertEqual(result.rewrite_reason, "Preflight action rewrite: hand select->choose.")
+        self.assertEqual(result.available_commands, ["choose", "proceed"])
+
     def test_shop_room_proceeds_after_shop_screen_cancel(self):
         shop_screen = {
             "in_game": True,

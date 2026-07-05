@@ -772,6 +772,32 @@ class PolicyTests(unittest.TestCase):
             decision = isolated_policy(tmp).decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
 
+    def test_combat_reserves_block_energy_before_probe59_slime_split_attack(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 35,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 8,
+                    "player": {"current_hp": 35, "max_hp": 88, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Bash", "id": "Bash", "type": "ATTACK", "cost": 2, "damage": 6, "has_target": True, "is_playable": True},
+                        {"name": "Whirlwind", "id": "Whirlwind", "type": "ATTACK", "cost": -1, "damage": 6, "has_target": False, "is_playable": True},
+                        {"name": "True Grit", "id": "True Grit", "type": "SKILL", "cost": 1, "block": 5, "exhausts": True, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Spike Slime", "id": "SpikeSlime_L", "current_hp": 62, "max_hp": 62, "move": {"damage": 18}},
+                        {"name": "Acid Slime", "id": "AcidSlime_L", "current_hp": 42, "max_hp": 62, "move": None},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3}])
+
     def test_combat_plays_seeing_red_before_probe48_hexaghost_x_cost_setup(self):
         state = {
             "in_game": True,
@@ -887,6 +913,33 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+        self.assertIn("One-turn search", decision.reason)
+
+    def test_combat_local_search_continues_block_after_probe59_impervious(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 58,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 3,
+                    "player": {"current_energy": 1, "current_hp": 58, "max_hp": 88, "block": 30},
+                    "hand": [
+                        {"id": "Defend_R", "name": "Defend", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"id": "Strike_R", "name": "Strike", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                        {"id": "Anger", "name": "Anger", "type": "ATTACK", "cost": 0, "damage": 6, "is_playable": True, "has_target": True},
+                        {"id": "True Grit", "name": "True Grit", "type": "SKILL", "cost": 1, "block": 7, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Slime Boss", "id": "SlimeBoss", "current_hp": 118, "max_hp": 140, "move": {"damage": 38}},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1}])
         self.assertIn("One-turn search", decision.reason)
 
     def test_combat_local_search_plays_energy_setup_before_x_cost_sequence(self):

@@ -519,15 +519,22 @@ def _rewrite_hand_select_to_choose(
     if game.get("screen_type") != "HAND_SELECT":
         return None
     drop = action.get("drop") or action.get("cards") or action.get("indices")
-    if not isinstance(drop, list) or len(drop) != 1:
+    if not isinstance(drop, list) or not drop:
         return None
-    try:
-        choice_index = int(drop[0])
-    except (TypeError, ValueError):
-        return None
-    if choice_index <= 0:
-        return None
-    return [{"action": "choose", "choice_index": choice_index}]
+    choose_actions: list[dict[str, Any]] = []
+    for item in drop:
+        try:
+            choice_index = int(item)
+        except (TypeError, ValueError):
+            return None
+        if choice_index <= 0:
+            return None
+        choose_actions.append({"action": "choose", "choice_index": choice_index})
+    if len(choose_actions) > 1:
+        if "proceed" not in available:
+            return None
+        choose_actions.append({"action": "proceed"})
+    return choose_actions
 
 
 def _can_rewrite_grid_confirm_to_proceed(
