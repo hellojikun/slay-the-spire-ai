@@ -1119,6 +1119,70 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
         self.assertIn("One-turn search", decision.reason)
 
+    def test_combat_local_search_ignores_spurious_non_attack_damage_after_probe69(self):
+        game = {
+            "current_hp": 44,
+            "max_hp": 80,
+            "combat_state": {
+                "turn": 7,
+                "player": {"current_hp": 44, "max_hp": 80, "current_energy": 3, "block": 0},
+                "hand": [
+                    {"name": "Battle Trance", "id": "Battle Trance", "type": "SKILL", "cost": 0, "damage": 1, "is_playable": True},
+                    {"name": "Headbutt", "id": "Headbutt", "type": "ATTACK", "cost": 1, "damage": 11, "is_playable": True, "has_target": True},
+                    {"name": "Twin Strike", "id": "Twin Strike", "type": "ATTACK", "cost": 1, "damage": 7, "is_playable": True, "has_target": True},
+                    {"name": "Slimed", "id": "Slimed", "type": "STATUS", "cost": 1, "damage": 1, "is_playable": True},
+                    {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "damage": 1, "block": 4, "is_playable": True},
+                ],
+                "monsters": [
+                    {"name": "Spike Slime", "id": "SpikeSlime_L", "current_hp": 50, "max_hp": 60, "move": {"damage": 18}},
+                    {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 20, "max_hp": 30, "move": {"damage": 12}},
+                    {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 12, "max_hp": 30, "move": None},
+                ],
+            },
+        }
+
+        result = find_best_combat_sequence(game)
+
+        self.assertIsNotNone(result)
+        assert result is not None
+        self.assertEqual(result.first_action, {"action": "play_card", "card_index": 5})
+        self.assertNotIn({"action": "play_card", "card_index": 1}, result.sequence)
+        self.assertNotIn({"action": "play_card", "card_index": 4}, result.sequence)
+
+    def test_combat_accepts_probe69_defend_under_extreme_slime_pressure(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 44,
+                "max_hp": 80,
+                "act": 1,
+                "floor": 16,
+                "combat_state": {
+                    "turn": 7,
+                    "player": {"current_hp": 44, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Battle Trance", "id": "Battle Trance", "type": "SKILL", "cost": 0, "damage": 1, "is_playable": True},
+                        {"name": "Headbutt", "id": "Headbutt", "type": "ATTACK", "cost": 1, "damage": 11, "is_playable": True, "has_target": True},
+                        {"name": "Twin Strike", "id": "Twin Strike", "type": "ATTACK", "cost": 1, "damage": 7, "is_playable": True, "has_target": True},
+                        {"name": "Slimed", "id": "Slimed", "type": "STATUS", "cost": 1, "damage": 1, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "damage": 1, "block": 4, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Spike Slime", "id": "SpikeSlime_L", "current_hp": 50, "max_hp": 60, "move": {"damage": 18}},
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 20, "max_hp": 30, "move": {"damage": 12}},
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 12, "max_hp": 30, "move": None},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 5}])
+        self.assertIn("One-turn search", decision.reason)
+
     def test_combat_local_search_continues_block_after_probe59_impervious(self):
         state = {
             "in_game": True,

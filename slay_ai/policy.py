@@ -438,6 +438,11 @@ class HeuristicPolicy:
             and current_block > 0
             and _action_adds_block(game, result.first_action)
         )
+        pressure_block_sequence = (
+            loss_reduction > 0
+            and result.initial_loss >= max(18, int(current_hp * 0.40))
+            and _action_adds_block(game, result.first_action)
+        )
         if single_card_key in SEARCH_PROTECTED_SINGLE_CARDS and not result.avoided_lethal:
             return None
         if (
@@ -445,6 +450,7 @@ class HeuristicPolicy:
             and single_card_key != result.first_card_key
             and not result.avoided_lethal
             and not modest_block_sequence
+            and not pressure_block_sequence
             and result.projected_loss > result.initial_loss - 6
             and result.kills <= 0
             and result.attacks_removed <= 0
@@ -497,7 +503,7 @@ class HeuristicPolicy:
             cost = _card_energy_cost(card, energy)
             if cost > energy:
                 continue
-            damage = int(card.get("damage", 0) or 0)
+            damage = _card_damage_value(card)
             if damage <= 0:
                 continue
             target_index, target = _choose_target(monsters, damage)
@@ -536,7 +542,7 @@ class HeuristicPolicy:
     ) -> tuple[float, int | None, str]:
         name = _card_key(card)
         ctype = card.get("type")
-        damage = int(card.get("damage", 0))
+        damage = _card_damage_value(card)
         block = _card_block_value(card)
         score = 0.0
         target_index: int | None = None
@@ -544,7 +550,7 @@ class HeuristicPolicy:
         pressure = max(0, incoming - current_block)
         dangerous_pressure = _dangerous_pressure(pressure, current_hp, hp_ratio)
 
-        if ctype == "ATTACK" or damage:
+        if damage:
             target_index, target = _choose_target(monsters, damage)
             score += damage
             if name in AOE_ATTACK_CARDS and damage:
@@ -992,7 +998,7 @@ def _card_energy_cost(card: dict[str, Any], current_energy: int) -> int:
 
 
 def _zero_energy_x_attack(card: dict[str, Any], current_energy: int) -> bool:
-    return int(card.get("cost", 0) or 0) < 0 and current_energy <= 0 and int(card.get("damage", 0) or 0) > 0
+    return int(card.get("cost", 0) or 0) < 0 and current_energy <= 0 and _card_damage_value(card) > 0
 
 
 def _energy_setup_has_payoff(
@@ -1017,7 +1023,7 @@ def _energy_setup_has_payoff(
         if not _card_has_immediate_value(other, incoming, current_block):
             continue
         raw_cost = int(other.get("cost", 0) or 0)
-        if raw_cost < 0 and int(other.get("damage", 0) or 0) > 0:
+        if raw_cost < 0 and _card_damage_value(other) > 0:
             return True
         other_cost = _card_energy_cost(other, energy_after_gain)
         if energy_after_cost < other_cost <= energy_after_gain:
@@ -1028,7 +1034,7 @@ def _energy_setup_has_payoff(
 
 def _card_has_immediate_value(card: dict[str, Any], incoming: int, current_block: int) -> bool:
     name = _card_key(card)
-    if int(card.get("damage", 0) or 0) > 0:
+    if _card_damage_value(card) > 0:
         return True
     if _card_block_value(card) > 0 and incoming > current_block:
         return True
@@ -1044,19 +1050,20 @@ def _single_target_x_cost_penalty_applies(
     monsters: list[dict[str, Any]],
     energy: int,
 ) -> bool:
-    if energy <= 1 or int(card.get("cost", 0) or 0) >= 0 or int(card.get("damage", 0) or 0) <= 0:
+    damage = _card_damage_value(card)
+    if energy <= 1 or int(card.get("cost", 0) or 0) >= 0 or damage <= 0:
         return False
     live_monsters = [monster for monster in monsters if not (monster.get("is_dead") or monster.get("is_gone"))]
     if len(live_monsters) != 1:
         return False
-    if _attack_kills(live_monsters[0], int(card.get("damage", 0) or 0)):
+    if _attack_kills(live_monsters[0], damage):
         return False
     for index, other in enumerate(hand, start=1):
         if index == card_index or not other.get("is_playable", True):
             continue
         if int(other.get("cost", 0) or 0) < 0:
             continue
-        if _card_energy_cost(other, energy) <= energy and int(other.get("damage", 0) or 0) > 0:
+        if _card_energy_cost(other, energy) <= energy and _card_damage_value(other) > 0:
             return True
     return False
 
@@ -1072,7 +1079,8 @@ def _x_cost_attack_spends_needed_block(
     current_hp: int,
     hp_ratio: float,
 ) -> bool:
-    if energy <= 1 or int(card.get("cost", 0) or 0) >= 0 or int(card.get("damage", 0) or 0) <= 0:
+    card_damage = _card_damage_value(card)
+    if energy <= 1 or int(card.get("cost", 0) or 0) >= 0 or card_damage <= 0:
         return False
     pressure = max(0, incoming - current_block)
     if not _dangerous_pressure(pressure, current_hp, hp_ratio):
@@ -1081,7 +1089,7 @@ def _x_cost_attack_spends_needed_block(
     attackers = [monster for monster in live_monsters if _monster_attack(monster) > 0]
     if not attackers:
         return False
-    damage = int(card.get("damage", 0) or 0) * energy
+    damage = card_damage * energy
     if damage <= 0:
         return False
     name = _card_key(card)
@@ -1157,7 +1165,13 @@ def _is_safe_non_self_damage_play(card: dict[str, Any]) -> bool:
         return False
     if _card_key(card) in SELF_DAMAGE_RISK_CARDS:
         return False
-    return int(card.get("damage", 0) or 0) > 0 or _card_block_value(card) > 0
+    return _card_damage_value(card) > 0 or _card_block_value(card) > 0
+
+
+def _card_damage_value(card: dict[str, Any]) -> int:
+    if str(card.get("type") or "").upper() != "ATTACK":
+        return 0
+    return max(0, int(card.get("damage", 0) or 0))
 
 
 def _card_block_value(card: dict[str, Any]) -> int:
@@ -1313,7 +1327,7 @@ def _search_first_attack_has_reflect_risk(
     monsters: list[dict[str, Any]],
     player: dict[str, Any],
 ) -> bool:
-    damage = int(card.get("damage", 0) or 0)
+    damage = _card_damage_value(card)
     if damage <= 0:
         return False
     target_index = action.get("target_index")
@@ -1504,7 +1518,7 @@ def _has_duplication_potion_target(
             continue
         name = _card_key(card)
         block = _card_block_value(card)
-        damage = int(card.get("damage", 0) or 0)
+        damage = _card_damage_value(card)
         if pressure > 0 and block >= DUPLICATION_DEFENSE_BLOCK_THRESHOLD:
             return True
         if incoming_sensitive and pressure >= 12 and name in DUPLICATION_HIGH_VALUE_CARDS:

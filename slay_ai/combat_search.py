@@ -248,6 +248,8 @@ def _card_cost(card: dict[str, Any], current_energy: int) -> int | None:
 
 
 def _card_damage(card: dict[str, Any], x_energy: int) -> int:
+    if str(card.get("type") or "").upper() != "ATTACK":
+        return 0
     damage = max(0, _as_int(card.get("damage", 0)))
     if damage <= 0:
         return 0
