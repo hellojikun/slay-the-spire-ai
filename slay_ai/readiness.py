@@ -481,6 +481,24 @@ def _risk_flags(
             flags.append("hallway_no_immediate_tempo_potion")
         if deck_features["premium_block_cards"] <= 0:
             flags.append("hallway_lacks_premium_block")
+    if _act2_low_hp_route_pressure(
+        act=act,
+        hp_ratio=hp_ratio,
+        monster_available=monster_available,
+        route_context=route_context,
+    ):
+        if hp_ratio < 0.35:
+            flags.append("act2_critical_hp_forced_combat")
+        else:
+            flags.append("act2_low_hp_forced_combat")
+        if not _route_has_close_recovery(route_context, rest_depth=1, shop_depth=1):
+            flags.append("act2_no_recovery_buffer")
+        if potion_features["immediate_tempo_potions"] <= 0 and potion_features["defensive_potions"] <= 0:
+            flags.append("act2_no_emergency_potion")
+        if scores["defense"] < 55:
+            flags.append("act2_defense_gap")
+        if deck_features["weak_sources"] <= 0 and potion_features["weak_potions"] <= 0:
+            flags.append("act2_weak_gap")
     if boss_available and deck_features["premium_block_cards"] <= 0:
         flags.append("boss_lacks_premium_block")
     if boss_available and potion_features["high_impact_potions"] <= 0:
@@ -516,6 +534,12 @@ def _recommendations(gaps: list[str], flags: list[str], *, boss_available: bool,
         recommendations.append("prefer_rest_shop_or_safe_event")
     if "hallway_no_immediate_tempo_potion" in flags:
         recommendations.append("seek_or_save_hallway_tempo_potion")
+    if "act2_critical_hp_forced_combat" in flags or "act2_low_hp_forced_combat" in flags:
+        recommendations.append("prefer_act2_recovery_or_safe_event")
+    if "act2_no_emergency_potion" in flags:
+        recommendations.append("seek_or_save_act2_emergency_potion")
+    if "act2_defense_gap" in flags:
+        recommendations.append("prioritize_act2_block_and_weak")
     if boss_available and ("boss_not_ready" in flags or "boss_no_tempo_potion" in flags):
         recommendations.append("prefer_rest_or_buy_potion_before_boss_if_possible")
     return _dedupe(recommendations)
@@ -538,6 +562,27 @@ def _act1_hallway_low_buffer_no_recovery(
     rest_near = nearest_rest is not None and nearest_rest <= 2
     shop_near = nearest_shop is not None and nearest_shop <= 1
     return not rest_near and not shop_near
+
+
+def _act2_low_hp_route_pressure(
+    *,
+    act: int,
+    hp_ratio: float,
+    monster_available: bool,
+    route_context: dict[str, Any],
+) -> bool:
+    if act < 2 or hp_ratio >= 0.50:
+        return False
+    combat_pressure = monster_available or bool(route_context.get("forced_combat_within_2"))
+    return combat_pressure
+
+
+def _route_has_close_recovery(route_context: dict[str, Any], *, rest_depth: int, shop_depth: int) -> bool:
+    nearest_rest = route_context.get("nearest_rest")
+    nearest_shop = route_context.get("nearest_shop")
+    rest_near = nearest_rest is not None and nearest_rest <= rest_depth
+    shop_near = nearest_shop is not None and nearest_shop <= shop_depth
+    return bool(rest_near or shop_near)
 
 
 def _route_context(game: dict[str, Any], screen_state: dict[str, Any]) -> dict[str, Any]:

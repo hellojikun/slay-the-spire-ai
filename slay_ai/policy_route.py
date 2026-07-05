@@ -16,6 +16,7 @@ ACT1_DEEP_FORCED_ELITE_NO_BUFFER_PENALTY = 24.0
 ACT1_FORCED_ELITE_BUFFER_BONUS = 18.0
 ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY = 35.0
 ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY = 18.0
+ACT2_LOW_HP_ROUTE_RISK_CAP = 95.0
 ROUTE_LOOKAHEAD_HORIZON = 6
 ROUTE_PATH_CAP = 128
 ROUTE_CHILD_KEYS = ("children", "next_nodes", "edges", "connected_nodes", "connections", "links")
@@ -224,11 +225,70 @@ def _route_lookahead_adjustment(
     if hp_ratio < 0.50 and nearest_shop is not None and nearest_shop <= 2 and int(game.get("gold", 0) or 0) >= 80:
         adjustment += 25
 
+    act2_adjustment, act2_features = _route_act2_risk_adjustment(game, choice_node, hp_ratio, features)
+    adjustment += act2_adjustment
+    features.update(act2_features)
+
     readiness_adjustment, readiness_features = _route_readiness_adjustment(game, choice_node, features)
     adjustment += readiness_adjustment
     features.update(readiness_features)
 
     return adjustment, features
+
+
+def _route_act2_risk_adjustment(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    hp_ratio: float,
+    lookahead_features: dict[str, Any],
+) -> tuple[float, dict[str, Any]]:
+    if int(game.get("act", 1) or 1) < 2 or not lookahead_features.get("map_match"):
+        return 0.0, {}
+    if hp_ratio >= 0.50 or lookahead_features.get("forced_elite_within_3"):
+        return 0.0, {}
+    symbol = str(choice_node.get("symbol", "")).upper()
+    if symbol in {"$", "R", "T"}:
+        return 0.0, {}
+    immediate_combat = symbol in {"M", "E"}
+    forced_combat = bool(lookahead_features.get("forced_combat_within_2")) or immediate_combat
+    if not forced_combat:
+        return 0.0, {}
+
+    nearest_rest = lookahead_features.get("nearest_rest")
+    nearest_shop = lookahead_features.get("nearest_shop")
+    close_rest = nearest_rest is not None and nearest_rest <= 1
+    close_shop = nearest_shop is not None and nearest_shop <= 1 and int(game.get("gold", 0) or 0) >= 80
+    flags: list[str] = []
+    gaps: list[str] = []
+    penalty = 0.0
+
+    if hp_ratio < 0.35:
+        flags.append("act2_critical_hp_forced_combat")
+        penalty -= 30.0 if immediate_combat else 22.0
+    else:
+        flags.append("act2_low_hp_forced_combat")
+        penalty -= 18.0 if immediate_combat else 12.0
+    if not (close_rest or close_shop):
+        flags.append("act2_no_recovery_buffer")
+        penalty -= 26.0 if hp_ratio < 0.35 else 18.0
+    if not _has_act2_emergency_potion(game):
+        flags.append("act2_no_emergency_potion")
+        penalty -= 16.0
+    if _act2_deck_lacks_premium_block(game):
+        gaps.append("act2_premium_block_missing")
+        penalty -= 12.0
+    if _act2_deck_lacks_weak(game):
+        gaps.append("act2_weak_missing")
+        penalty -= 8.0
+
+    penalty = max(-ACT2_LOW_HP_ROUTE_RISK_CAP, penalty)
+    if not penalty:
+        return 0.0, {}
+    return penalty, {
+        "act2_route_penalty": round(penalty, 1),
+        "act2_route_flags": flags,
+        "act2_route_gaps": gaps,
+    }
 
 
 def _route_readiness_adjustment(
@@ -597,6 +657,57 @@ def _has_high_impact_elite_potion(game: dict[str, Any]) -> bool:
         if any(token in key for token in high_impact_tokens):
             return True
     return False
+
+
+def _has_act2_emergency_potion(game: dict[str, Any]) -> bool:
+    emergency_tokens = {
+        "attack",
+        "block",
+        "dexterity",
+        "distilledchaos",
+        "duplication",
+        "elixir",
+        "energy",
+        "essenceofsteel",
+        "explosive",
+        "fairy",
+        "fear",
+        "fire",
+        "fruitjuice",
+        "gamblersbrew",
+        "heartofiron",
+        "liquidmemories",
+        "regen",
+        "skill",
+        "smoke",
+        "speed",
+        "steroid",
+        "strength",
+        "swift",
+        "weak",
+    }
+    for potion in game.get("potions", []):
+        if potion.get("is_empty"):
+            continue
+        key = _potion_key(potion)
+        if any(token in key for token in emergency_tokens):
+            return True
+    return False
+
+
+def _act2_deck_lacks_premium_block(game: dict[str, Any]) -> bool:
+    names = _deck_card_names(game)
+    if not names:
+        return False
+    return not any(name in ACT1_BLOCK_STABILIZER_CARDS for name in names)
+
+
+def _act2_deck_lacks_weak(game: dict[str, Any]) -> bool:
+    weak_cards = {"Clothesline", "Disarm", "Intimidate", "Shockwave", "Uppercut"}
+    names = _deck_card_names(game)
+    if not names:
+        return False
+    return not any(name in weak_cards for name in names)
 
 
 def _act1_late_event_risk_state(

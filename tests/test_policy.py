@@ -3138,6 +3138,93 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(route_eval["options"][1]["lookahead_adjustment"], -145.0)
         self.assertLess(route_eval["options"][1]["base_score"], route_eval["options"][0]["base_score"])
 
+    def test_map_act2_probe76_critical_hp_monster_route_is_marked_risky(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 20,
+            "current_hp": 22,
+            "max_hp": 88,
+            "gold": 91,
+            "potions": [],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+                {"id": "Shrug It Off"},
+                {"id": "Cleave"},
+            ],
+            "screen_state": {"next_nodes": [{"symbol": "M", "x": 0, "y": 3}]},
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [{"symbol": "M", "x": 0, "y": 3, "children": [{"x": 0, "y": 4}]}],
+                    [{"symbol": "M", "x": 0, "y": 4, "children": [{"x": 0, "y": 5}]}],
+                    [{"symbol": "R", "x": 0, "y": 5}],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertLessEqual(lookahead["act2_route_penalty"], -70.0)
+        self.assertIn("act2_critical_hp_forced_combat", lookahead["act2_route_flags"])
+        self.assertIn("act2_no_recovery_buffer", lookahead["act2_route_flags"])
+        self.assertIn("act2_no_emergency_potion", lookahead["act2_route_flags"])
+        self.assertIn("act2_weak_missing", lookahead["act2_route_gaps"])
+
+    def test_map_act2_low_hp_prefers_close_recovery_over_forced_hallway(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 20,
+            "current_hp": 24,
+            "max_hp": 88,
+            "gold": 91,
+            "potions": [],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+                {"id": "Shrug It Off"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 0, "y": 3},
+                    {"symbol": "?", "x": 1, "y": 3},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 0, "y": 3, "children": [{"x": 0, "y": 4}]},
+                        {"symbol": "?", "x": 1, "y": 3, "children": [{"x": 1, "y": 4}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 4, "children": [{"x": 0, "y": 5}]},
+                        {"symbol": "R", "x": 1, "y": 4},
+                    ],
+                    [
+                        {"symbol": "R", "x": 0, "y": 5},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        route_eval = game["route_evaluation"]
+        self.assertIn("act2_route_penalty", route_eval["options"][0]["lookahead"])
+        self.assertNotIn("act2_route_penalty", route_eval["options"][1]["lookahead"])
+
     def test_map_probe63_prefers_shop_buffer_before_forced_elite(self):
         game = {
             "screen_type": "MAP",

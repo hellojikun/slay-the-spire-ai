@@ -229,6 +229,42 @@ class ReadinessTests(unittest.TestCase):
         self.assertIn("non_act1_context", result["risk_flags"])
         self.assertIn("overall", result["scores"])
 
+    def test_act2_low_hp_forced_combat_route_is_flagged(self):
+        state = {
+            "act": 2,
+            "floor": 20,
+            "current_hp": 22,
+            "max_hp": 88,
+            "deck": starting_ironclad_deck() + [{"id": "Shrug It Off"}, {"id": "Cleave"}],
+            "potions": [],
+            "map_options": [{"symbol": "M", "x": 0, "y": 3}],
+            "route_evaluation": {
+                "options": [
+                    {
+                        "choice_index": 1,
+                        "symbol": "M",
+                        "score": 42.0,
+                        "lookahead": {
+                            "forced_combat_within_2": True,
+                            "forced_combat_within_4": True,
+                            "nearest_rest": 2,
+                            "nearest_shop": 6,
+                        },
+                    }
+                ]
+            },
+        }
+
+        result = act1_readiness(state)
+
+        self.assertIn("non_act1_context", result["risk_flags"])
+        self.assertIn("act2_critical_hp_forced_combat", result["risk_flags"])
+        self.assertIn("act2_no_recovery_buffer", result["risk_flags"])
+        self.assertIn("act2_no_emergency_potion", result["risk_flags"])
+        self.assertIn("act2_defense_gap", result["risk_flags"])
+        self.assertIn("act2_weak_gap", result["risk_flags"])
+        self.assertIn("prefer_act2_recovery_or_safe_event", result["recommendations"])
+
     def test_forced_elite_flags_aoe_weak_and_potion_gaps_before_immediate_elite(self):
         state = {
             "act": 1,
