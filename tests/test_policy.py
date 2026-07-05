@@ -1274,6 +1274,84 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
         self.assertIn("One-turn search", decision.reason)
 
+    def test_combat_guardian_high_pressure_draws_before_spending_block_energy(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 11,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 8,
+                    "player": {"current_energy": 3, "current_hp": 11, "max_hp": 80, "block": 0},
+                    "hand": [
+                        {"id": "Flame Barrier", "name": "Flame Barrier", "type": "SKILL", "cost": 2, "block": 12, "is_playable": True},
+                        {"id": "Anger", "name": "Anger", "type": "ATTACK", "cost": 0, "damage": 6, "is_playable": True, "has_target": True},
+                        {"id": "Anger", "name": "Anger", "type": "ATTACK", "cost": 0, "damage": 6, "is_playable": True, "has_target": True},
+                        {"id": "Defend_R", "name": "Defend", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"id": "Battle Trance", "name": "Battle Trance", "type": "SKILL", "cost": 0, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 138,
+                            "max_hp": 240,
+                            "block": 9,
+                            "move": {"damage": 36},
+                            "powers": [{"id": "Mode Shift", "amount": 10}],
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 5}])
+        self.assertIn("draw before spending energy", decision.reason)
+
+    def test_combat_guardian_draw_setup_respects_no_draw_power(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 11,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 8,
+                    "player": {
+                        "current_energy": 3,
+                        "current_hp": 11,
+                        "max_hp": 80,
+                        "block": 0,
+                        "powers": [{"id": "No Draw", "amount": -1}],
+                    },
+                    "hand": [
+                        {"id": "Flame Barrier", "name": "Flame Barrier", "type": "SKILL", "cost": 2, "block": 12, "is_playable": True},
+                        {"id": "Battle Trance", "name": "Battle Trance", "type": "SKILL", "cost": 0, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 138,
+                            "max_hp": 240,
+                            "block": 9,
+                            "move": {"damage": 36},
+                            "powers": [{"id": "Mode Shift", "amount": 10}],
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1}])
+
     def test_combat_local_search_ignores_spurious_non_attack_damage_after_probe69(self):
         game = {
             "current_hp": 44,

@@ -246,6 +246,11 @@ class HeuristicPolicy:
         if pending_action:
             return pending_action
 
+        draw_setup = self._guardian_pressure_draw_action(game, monsters, incoming, current_block, hp_ratio)
+        if draw_setup:
+            self._clear_pending_search_sequence()
+            return draw_setup
+
         search_action = self._combat_local_search_action(game)
         if search_action:
             return search_action
@@ -293,6 +298,41 @@ class HeuristicPolicy:
             _PendingSearchSequence(pending.floor, pending.turn, remaining, pending.reason) if remaining else None
         )
         return Decision([action], f"Continue one-turn search: play {card.get('name', next_key)} from {pending.reason}.")
+
+    def _guardian_pressure_draw_action(
+        self,
+        game: dict[str, Any],
+        monsters: list[dict[str, Any]],
+        incoming: int,
+        current_block: int,
+        hp_ratio: float,
+    ) -> Decision | None:
+        combat = game.get("combat_state", {})
+        player = combat.get("player", {})
+        current_hp = int(player.get("current_hp", game.get("current_hp", 0)) or 0)
+        pressure = max(0, incoming - current_block)
+        if not _dangerous_pressure(pressure, current_hp, hp_ratio):
+            return None
+        if not _guardian_mode_shift_under_pressure(monsters):
+            return None
+        if _player_has_power(player, {"nodraw"}):
+            return None
+        energy = int(player.get("current_energy", 0) or 0)
+        if energy <= 0:
+            return None
+        hand = combat.get("hand", [])
+        for index, card in enumerate(hand, start=1):
+            if _card_key(card) != "Battle Trance":
+                continue
+            if not card.get("is_playable", True):
+                continue
+            if _card_energy_cost(card, energy) > energy:
+                continue
+            return Decision(
+                [{"action": "play_card", "card_index": index}],
+                "Guardian high-pressure turn; draw before spending energy on block.",
+            )
+        return None
 
     def _strategic_combat_potion(self, game: dict[str, Any], monsters: list[dict[str, Any]]) -> Decision | None:
         combat = game.get("combat_state", {})
@@ -1453,6 +1493,28 @@ def _monster_power_amount(monster: dict[str, Any], power_ids: set[str]) -> int:
         if key in power_ids:
             return max(0, int(power.get("amount", 0) or 0))
     return 0
+
+
+def _player_has_power(player: dict[str, Any], power_ids: set[str]) -> bool:
+    for power in player.get("powers", []) or []:
+        key = str(power.get("id") or power.get("name") or "").replace(" ", "").lower()
+        if key in power_ids:
+            return True
+    return False
+
+
+def _guardian_mode_shift_under_pressure(monsters: list[dict[str, Any]]) -> bool:
+    for monster in monsters:
+        if monster.get("is_dead") or monster.get("is_gone"):
+            continue
+        label = f"{monster.get('id', '')} {monster.get('name', '')}".replace(" ", "").lower()
+        if "guardian" not in label:
+            continue
+        if _monster_attack(monster) <= 0:
+            continue
+        if _monster_power_amount(monster, {"modeshift"}) > 0:
+            return True
+    return False
 
 
 def _attack_reflect_damage(monsters: list[dict[str, Any]], target_index: int | None, damage: int) -> int:
