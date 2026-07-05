@@ -49,6 +49,7 @@ If context compaction or tool state makes an agent's actual status uncertain, fi
 ```text
 multi_agent_v1.send_input(Archimedes, "Continue as the flow/run-data agent. Review probe84 evidence, then run probe85 and generate data\\training_manifest_probe85.json plus data\\shadow_probe85 if game/MCP are available. Do not edit or commit.")
 multi_agent_v1.send_input(Archimedes, "Continue as the flow/run-data agent. Run probe86 after the probe84 route fix and Elixir refresh, then generate data\\training_manifest_probe86.json plus data\\shadow_probe86. Do not edit or commit.")
+multi_agent_v1.send_input(Archimedes, "Continue as the flow/run-data agent. The main thread has pushed f55335e (Second Wind Burn cleanup) to origin/codex/sts-ai-progress. Pull/update if needed, then run probe87 with ai_runs_strategy_probe87 and data\\campaign_strategy_probe87.json. After the run, generate data\\training_manifest_probe87.json and data\\shadow_probe87. Do not edit code, do not commit, and report clean/diagnostic/infra status plus the next concrete bottleneck.")
 ```
 
 - Program-agent spawn attempt:
@@ -66,6 +67,7 @@ multi_agent_v1.spawn_agent(worker, "AI upgrade/algorithm agent: inspect policy_r
 - Result: both fresh worker spawns failed with `agent thread limit reached`. Current real parallel mode is therefore Archimedes for flow/data plus the main Codex thread temporarily covering both program optimization and AI algorithm work. Do not record Harvey/Mill as active until a later spawn/resume succeeds.
 - Main-thread result: probe84 was recorded as clean training/shadow evidence, then a narrow route fix was added locally for the confirmed F11 `R` vs `?` bug. Act 1 rest choices now get a capped resource penalty when the rest node still forces a close elite and readiness flags show no AOE/Weak/elite-tempo potion support. Probe85 then added clean F5 hallway data and exposed `ElixirPotion` as missing static knowledge; Elixir is now a known situational exhaust/status-cleanup potion and probe85 shadow rows were regenerated.
 - Follow-up result: Archimedes generated probe86 as a clean F16 Hexaghost failure. Main thread kept the code fix evidence-scoped: add `Second Wind` Burn/Burn+ cleanup value under Hexaghost/low-HP burn pressure, update probe86 manifest/shadow/docs, then validate and push before asking Archimedes for probe87.
+- Post-push agent status: Archimedes accepted the probe87 flow assignment. Fresh program-optimization and AI-upgrade agent spawn attempts both failed again with `agent thread limit reached`, so the main thread still temporarily owns code and algorithm changes while Archimedes owns process/log accumulation.
 
 2026-07-05 multi-agent parallelization round:
 
