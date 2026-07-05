@@ -121,6 +121,7 @@ class TrainingManifestTests(unittest.TestCase):
         self.assertEqual(len(shadow["potion_tempo"]), 1)
         self.assertEqual(len(shadow["pre_boss_deck_quality"]), 1)
         self.assertEqual(shadow["pre_boss_deck_quality"][0]["block_cards"], 2)
+        self.assertFalse(shadow["pre_boss_deck_quality"][0]["boss_potion_gap"])
 
     def test_clean_log_paths_from_manifest_returns_only_clean_bucket(self):
         with TemporaryDirectory() as tmp:
@@ -222,6 +223,7 @@ class TrainingManifestTests(unittest.TestCase):
         self.assertEqual(pre_boss["deck_tag_weak"], 1)
         self.assertEqual(pre_boss["deck_tag_premium_defense"], 1)
         self.assertIn("readiness_score_boss", pre_boss)
+        self.assertFalse(pre_boss["boss_potion_gap"])
 
     def test_static_knowledge_deck_features_fall_back_to_card_pick_history(self):
         with TemporaryDirectory() as tmp:
@@ -275,6 +277,7 @@ class TrainingManifestTests(unittest.TestCase):
         self.assertEqual(pre_boss["deck_tag_weak"], 1)
         self.assertEqual(pre_boss["deck_tag_starter"], 10)
         self.assertAlmostEqual(pre_boss["readiness_score_hp"], 63.3, places=1)
+        self.assertTrue(pre_boss["boss_potion_gap"])
 
 
 if __name__ == "__main__":

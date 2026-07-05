@@ -53,6 +53,7 @@ The current advisory agents agree on this boundary:
 - After probe76, readiness is no longer only shadow: Act 1 route lookahead consumes it as a conservative soft penalty, and the run beat the Act 1 boss before dying cleanly at Act 2 F21. This is positive evidence for the hybrid route. Keep learned models as shadow scorers or tie-breakers; the next shadow/control surface should be Act 2 low-HP route risk rather than a full combat action learner.
 - Act 2 low-HP route risk has started as the next small promotion step. Readiness now labels low-HP Act 2 forced-combat paths with recovery, emergency potion, defense, and weak gaps; route policy uses those conditions as a soft penalty when recovery is not close. Probe76 shadow rows were regenerated so F18/F19/F20 are marked as Act2 route-risk examples.
 - After probe77, Act 1 boss access remains possible, but boss readiness remains brittle: the run entered Guardian at full HP with no potions, readiness marked `boss_not_ready` and `boss_no_tempo_potion`, and the run died on a 36-incoming Guardian turn. Keep boss deck/resource quality as a parallel Stage 4 target beside Act 2 low-HP routing.
+- Boss-prep resource quality has started as another small promotion step. Late Act 1 card rewards now prefer boss output/defense over unsupported slow engines when boss prep is weak, shops can prioritize a high-impact boss potion over ordinary Strike purge, and pre-boss shadow rows expose `boss_potion_gap` directly for future models.
 
 ## Clean Training Manifests
 
@@ -113,7 +114,7 @@ Order of expansion:
 4. Act 1 readiness shadow gate for boss/elite preparation.
 5. Route risk shadow model based on HP, floor, path commitment, deck strength, potions, relics, and buffers.
 6. Potion tempo shadow model for elite, boss, and lethal-risk turns.
-7. Pre-boss/post-combat deck quality labels.
+7. Pre-boss/post-combat deck quality labels, including explicit boss potion/resource gaps.
 8. Rest versus smith threshold calibration.
 9. Shop purchase model.
 10. One-turn combat local search and evaluator calibration.

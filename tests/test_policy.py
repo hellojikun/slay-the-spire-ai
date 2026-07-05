@@ -385,6 +385,43 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
         self.assertEqual(decision.learn_card_pick, "Perfected Strike")
 
+    def test_card_reward_probe77_prefers_boss_frontload_over_unsupported_dark_embrace(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "CARD_REWARD",
+                "act": 1,
+                "floor": 7,
+                "class": "IRONCLAD",
+                "current_hp": 80,
+                "max_hp": 80,
+                "potions": [],
+                "deck": [
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Bash"},
+                    {"id": "Cleave"},
+                ],
+                "screen_state": {
+                    "cards": [
+                        {"name": "localized dark embrace", "id": "Dark Embrace", "type": "POWER"},
+                        {"name": "localized dropkick", "id": "Dropkick", "type": "ATTACK"},
+                        {"name": "localized flex", "id": "Flex", "type": "SKILL"},
+                    ]
+                },
+            },
+        }
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        self.assertEqual(decision.learn_card_pick, "Dropkick")
+
     def test_shop_room_enters_shop(self):
         state = {
             "in_game": True,
@@ -518,6 +555,49 @@ class PolicyTests(unittest.TestCase):
             decision = isolated_policy(tmp).decide(state)
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
         self.assertIn("buy Swift Potion", decision.reason)
+
+    def test_shop_screen_boss_prep_potion_can_beat_purge(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "SHOP_SCREEN",
+                "act": 1,
+                "floor": 7,
+                "current_hp": 80,
+                "max_hp": 80,
+                "gold": 111,
+                "potions": [
+                    {"is_empty": True},
+                    {"is_empty": True},
+                    {"is_empty": True},
+                ],
+                "deck": [
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Bash"},
+                    {"id": "Cleave"},
+                ],
+                "screen_state": {
+                    "purge_available": True,
+                    "purge_cost": 75,
+                    "cards": [],
+                    "relics": [],
+                    "potions": [
+                        {"name": "Fire Potion", "id": "Fire Potion", "price": 50},
+                    ],
+                },
+            },
+        }
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        self.assertIn("buy Fire Potion", decision.reason)
 
     def test_shop_screen_cancels_without_high_confidence_purchase(self):
         state = {

@@ -360,6 +360,8 @@ def _pre_boss_examples(
                 row["draw_cards"] = deck_features.get("deck_tag_draw", row["draw_cards"])
             row.update(knowledge.potion_features(state.get("potions") or []))
             row.update(_readiness_features(state, records, record.get("step"), knowledge))
+        flags = row.get("readiness_risk_flags") if isinstance(row.get("readiness_risk_flags"), list) else []
+        row["boss_potion_gap"] = bool(row.get("potion_count", 0) <= 0 or "boss_no_tempo_potion" in flags)
         rows.append(row)
     return rows
 

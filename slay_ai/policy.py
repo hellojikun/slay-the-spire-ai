@@ -32,6 +32,9 @@ EXHAUST_PAYOFF_UNSUPPORTED_PENALTY = 24.0
 EARLY_UNSUPPORTED_ENGINE_PENALTY = 24.0
 EARLY_DUPLICATE_EXHAUST_ENABLER_PENALTY = 16.0
 ACT1_LOW_HP_SURVIVAL_CARD_BONUS = 14.0
+ACT1_BOSS_PREP_DAMAGE_BONUS = 12.0
+ACT1_BOSS_PREP_DEFENSE_BONUS = 8.0
+ACT1_BOSS_PREP_SLOW_ENGINE_PENALTY = 14.0
 LOW_HP_ENGINE_COMBAT_PENALTY = 20.0
 SLOW_ENGINE_CARDS = {"Burning Pact", "Dark Embrace", "Havoc"}
 SELF_DAMAGE_RISK_CARDS = {"Bloodletting", "Combust", "Offering"}
@@ -58,6 +61,7 @@ REFLECT_DAMAGE_POWER_IDS = {"sharphide", "thorns"}
 SHOP_BUY_CARD_THRESHOLD = 54.0
 SHOP_PURGE_STRIKE_SCORE = 58.0
 SHOP_HIGH_IMPACT_POTION_SCORE = 50.0
+SHOP_BOSS_PREP_POTION_BONUS = 12.0
 SHOP_HIGH_IMPACT_POTION_TOKENS = {
     "attack",
     "block",
@@ -106,6 +110,24 @@ ACT1_BLOCK_STABILIZER_CARDS = {
     "True Grit",
 }
 ACT1_LOW_HP_SURVIVAL_CARDS = ACT1_BLOCK_STABILIZER_CARDS | {"Iron Wave"}
+ACT1_BOSS_PREP_DAMAGE_CARDS = {
+    "Carnage",
+    "Clothesline",
+    "Dropkick",
+    "Hemokinesis",
+    "Inflame",
+    "Perfected Strike",
+    "Pommel Strike",
+    "Pummel",
+    "Rampage",
+    "Shockwave",
+    "Spot Weakness",
+    "Thunderclap",
+    "Twin Strike",
+    "Uppercut",
+    "Wild Strike",
+}
+ACT1_BOSS_PREP_DEFENSE_CARDS = ACT1_BLOCK_STABILIZER_CARDS | {"Clothesline", "Disarm", "Intimidate", "Shockwave", "Uppercut"}
 BLOCK_CARDS = ACT1_BLOCK_STABILIZER_CARDS | {"Defend", "Iron Wave"}
 IRONCLAD_ATTACK_CARDS = {
     "Anger",
@@ -836,6 +858,13 @@ class HeuristicPolicy:
                 soft_cap = ATTACK_DUPLICATE_SOFT_CAPS[name]
                 if copies >= soft_cap:
                     score -= 12 + max(0, copies - soft_cap) * 4
+        if self.character == "IRONCLAD" and _act1_boss_prep_needed(game):
+            if name in ACT1_BOSS_PREP_DAMAGE_CARDS:
+                score += ACT1_BOSS_PREP_DAMAGE_BONUS
+            if name in ACT1_BOSS_PREP_DEFENSE_CARDS:
+                score += ACT1_BOSS_PREP_DEFENSE_BONUS
+            if name in SLOW_ENGINE_CARDS and not _deck_has_exhaust_enabler(game):
+                score -= ACT1_BOSS_PREP_SLOW_ENGINE_PENALTY
         return score
 
     def _shop_screen(self, game: dict[str, Any]) -> Decision:
@@ -878,9 +907,12 @@ class HeuristicPolicy:
                 continue
             key = _potion_key(potion)
             if has_empty_potion_slot and any(token in key for token in SHOP_HIGH_IMPACT_POTION_TOKENS):
+                potion_score = SHOP_HIGH_IMPACT_POTION_SCORE
+                if _act1_boss_prep_needs_potion(game):
+                    potion_score += SHOP_BOSS_PREP_POTION_BONUS
                 candidates.append(
                     (
-                        SHOP_HIGH_IMPACT_POTION_SCORE - price * 0.04,
+                        potion_score - price * 0.04,
                         choice_index,
                         f"buy {potion.get('name', potion.get('id'))} for {price} gold",
                     )
@@ -1106,6 +1138,39 @@ def _act1_deck_needs_block_stabilizer(game: dict[str, Any]) -> bool:
     if premium_block == 0:
         return True
     return floor >= 10 and total_block < max(5, int(len(names) * 0.30))
+
+
+def _act1_boss_prep_needed(game: dict[str, Any]) -> bool:
+    if int(game.get("act", 1) or 1) != 1:
+        return False
+    floor = int(game.get("floor", 0) or 0)
+    if floor < 7 or floor > 15:
+        return False
+    return (
+        _act1_deck_lacks_boss_output(game)
+        or _act1_deck_needs_block_stabilizer(game)
+        or not _has_usable_potion(game)
+    )
+
+
+def _act1_boss_prep_needs_potion(game: dict[str, Any]) -> bool:
+    if int(game.get("act", 1) or 1) != 1:
+        return False
+    floor = int(game.get("floor", 0) or 0)
+    if floor < 5 or floor > 15:
+        return False
+    if _has_usable_potion(game):
+        return False
+    return _act1_deck_lacks_boss_output(game) or _act1_deck_needs_block_stabilizer(game)
+
+
+def _act1_deck_lacks_boss_output(game: dict[str, Any]) -> bool:
+    names = _deck_card_names(game)
+    if not names:
+        return False
+    boss_cards = sum(1 for name in names if name in ACT1_BOSS_PREP_DAMAGE_CARDS and name not in {"Bash", "Strike"})
+    weak_or_strength_down = sum(1 for name in names if name in {"Clothesline", "Disarm", "Intimidate", "Shockwave", "Uppercut"})
+    return boss_cards < 2 and weak_or_strength_down <= 0
 
 
 def _deck_is_attack_heavy(game: dict[str, Any]) -> bool:
