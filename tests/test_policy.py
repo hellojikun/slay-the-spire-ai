@@ -472,6 +472,51 @@ class PolicyTests(unittest.TestCase):
             decision = isolated_policy(tmp).decide(state)
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
 
+    def test_shop_screen_buys_elite_potion_after_probe58_purge(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "SHOP_SCREEN",
+                "act": 1,
+                "floor": 3,
+                "current_hp": 76,
+                "max_hp": 80,
+                "gold": 154,
+                "potions": [
+                    {"is_empty": True},
+                    {"is_empty": True},
+                    {"is_empty": True},
+                ],
+                "deck": [
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Bash"},
+                    {"id": "Shrug It Off"},
+                ],
+                "screen_state": {
+                    "purge_available": False,
+                    "purge_cost": 100,
+                    "cards": [],
+                    "relics": [],
+                    "potions": [
+                        {"name": "Swift Potion", "id": "Swift Potion", "price": 50},
+                        {"name": "Regen Potion", "id": "Regen Potion", "price": 77},
+                        {"name": "Duplication Potion", "id": "DuplicationPotion", "price": 78},
+                    ],
+                },
+            },
+        }
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        self.assertIn("buy Swift Potion", decision.reason)
+
     def test_shop_screen_cancels_without_high_confidence_purchase(self):
         state = {
             "in_game": True,

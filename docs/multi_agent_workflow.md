@@ -4,21 +4,21 @@ This document records the multi-agent setup used for the Slay the Spire growing 
 
 ## Current Snapshot
 
-Updated 2026-07-05 after probe57 and boss-fight emergency potion fixes.
+Updated 2026-07-05 after probe59, shop emergency potion buying, and the architecture-route evaluation.
 
 - Current unlock frontier: `IRONCLAD:A4`, `SILENT:A0`, `DEFECT:A0`, `WATCHER:A0`. A20 is the long-term upper target, not the current runnable claim.
-- Latest included probe: `ai_runs_strategy_probe57/20260705_120158_ironclad_a4.jsonl`.
+- Latest included probe: `ai_runs_strategy_probe59/20260705_121759_ironclad_a4.jsonl`.
 - Latest excluded diagnostic probes: `ai_runs_strategy_probe38/20260705_072307_ironclad_a4.jsonl` stopped at max steps due to a `SHOP_ROOM` / `SHOP_SCREEN` loop; the first probe39 attempt was aborted after proving `leave` is not a valid `execute_actions` action; probe43 and its continuation were split empty-hand diagnostics; probe45 and its two continuations were split Fiend Fire empty-hand diagnostics; probe46 (`ai_runs_strategy_probe46/20260705_085517_ironclad_a4.jsonl`) was stopped after exposing a `GRID` `confirm` / MCP `proceed` preflight loop; probe50 (`ai_runs_strategy_probe50/20260705_093533_ironclad_a4.jsonl`) and `ai_runs_strategy_probe50_continue_handselect_rewrite/20260705_093831_ironclad_a0.jsonl` are HAND_SELECT action-rewrite diagnostics; probe51 (`ai_runs_strategy_probe51/20260705_093933_ironclad_a4.jsonl`) ended as MCP unreachable/read_failed; probe52 (`ai_runs_strategy_probe52/20260705_095355_ironclad_a4.jsonl`) was manually stopped after exposing a Neow event GRID duplicate-card selection loop. Do not use these diagnostic logs in default training.
 - Latest execution fix: `SHOP_SCREEN` waits if inventory has not loaded, then uses MCP's valid `cancel` action for the leave button; runner remembers the floor after a shop cancel and forces the next same-floor `SHOP_ROOM` state to `proceed` instead of re-entering the shop.
 - Latest runner action fix: before executing actions, runner now checks `get_available_commands`; stale unavailable actions are skipped as `preflight_mismatch`, followed by settle and stable-state reread so the next loop can replan. Narrow rewrites handle stale `GRID` confirmations (`confirm` -> `proceed`) and single-card `HAND_SELECT` drops (`select_cards` -> `choose`) when MCP exposes the alternate command and records `executed_actions`, `rewrite_reason`, and `available_commands`.
-- Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections. Combat search, policy, and runner share the same `move.damage * move.hits` incoming-damage calculation. After probe56/probe57, combat potion policy now uses Duplication Potion in boss/elite or dangerous turns when the current hand has a high-impact defensive or offensive card, and treats Gambler's Brew as an emergency tempo potion in low-HP/high-incoming turns.
+- Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections. Combat search, policy, and runner share the same `move.damage * move.hits` incoming-damage calculation. After probe56/probe57, combat potion policy now uses Duplication Potion in boss/elite or dangerous turns when the current hand has a high-impact defensive or offensive card, and treats Gambler's Brew as an emergency tempo potion in low-HP/high-incoming turns. After probe58, shop potion scoring now treats Duplication, Energy, Gambler's Brew, Regen, and Swift potions as high-impact buys when potion slots are empty.
 - Latest route policy fix: route decisions now attach a best-effort full-map observation only on `MAP` screens, with a 2.5s timeout and per-episode failure disable after repeated MCP errors. When the map payload can be parsed, `policy_route` evaluates a bounded 4-layer lookahead and applies path-commitment risk for low-HP forced elite/combat routes while logging base score, lookahead adjustment, final score, node count, and edge count. If map observation fails, route policy falls back to the old immediate `next_nodes` scoring.
 - Latest MCP client fix: `MCPClient.initialize()` is idempotent for reused sessions, `campaign` and `runner` call `ensure_initialized()`, and invalid non-JSON HTTP responses are wrapped as `MCPError` with a short response preview.
 - Latest architecture refactor: MCP implementation now lives in `slay_ai.mcp.client`, with `slay_ai.mcp_client` kept as a compatibility shim. State reading/retry/stability checks now live in `slay_ai.core.state_reader`. Monster incoming-damage interpretation now lives in `slay_ai.domain.monsters`, with `slay_ai.combat_math` kept as a compatibility shim. Route/map policy now lives in `slay_ai.policy_route`; `Decision` now lives in `slay_ai.policy_decision`.
 - Latest learning pipeline fix: `GAME_OVER` logs with missing `victory` now default to a completed loss in snapshots and offline learning, recovering older clean failures for `slay_ai.learn`.
-- Latest learning run: `slay_ai.train_card_model` loaded 248 card-pick examples and wrote 69 card deltas; `slay_ai.learn --reset` read 51 logs, applied 40 completed runs, and skipped 11 incomplete runs.
-- Latest validation: `python -m unittest discover -s tests` ran 150 tests OK after the emergency potion fixes; `python -m compileall slay_ai tests` OK.
-- Next live validation: run another current-frontier Ironclad probe and inspect whether Duplication Potion and Gambler's Brew are spent before high-impact boss/elite cards or low-HP lethal pressure. Also keep checking `map_observation.status` and `route_evaluation`; Stage 5 autonomous learning remains shadow/tie-breaker only.
+- Latest learning run: `slay_ai.train_card_model` loaded 258 card-pick examples and wrote 70 card deltas; `slay_ai.learn --reset` read 53 logs, applied 42 completed runs, and skipped 11 incomplete runs.
+- Latest validation: `python -m unittest discover -s tests` ran 151 tests OK after the shop potion fix; `python -m compileall slay_ai tests` OK.
+- Next live validation: inspect Slime Boss failures around hand-changing cards, Slimed hands, local-search coverage, and split timing. Also keep checking `map_observation.status` and `route_evaluation`; Stage 5 autonomous learning remains shadow/tie-breaker only.
 
 ## Long-Lived Agents
 
@@ -34,6 +34,42 @@ Keep these advisory agents available across the project unless the user explicit
 If context compaction or tool state makes an agent's actual status uncertain, first call codex_app.list_threads / codex_app.read_thread and reuse the canonical thread in this table. Start a fresh long-lived agent only if the canonical thread is missing or unusable, then update this table immediately.
 
 ## Current Activation Log
+
+2026-07-05 architecture-route evaluation round:
+
+- User question: evaluate whether the current route is correct and reasonable, given the proposed target structure (`app/`, `core/`, `mcp/`, `domain/`, `policy/`, `search/`, `learning/`, `campaign/`, `tests/`) and the current probe-driven workflow.
+- Joint conclusion: the strategic direction is correct, but full project-wide relocation should not happen in one step. Keep the live evidence loop running and do thin-slice refactors with unchanged behavior.
+- Faraday / Harvey: keep heuristic control, supervised learning as shadow/tie-breaker, and prioritize combat local search, route-risk data, and learning features before larger RL or full policy replacement.
+- Mill / Hegel: the MCP/action boundary is the highest-value refactor area. Next safe cut is `core/action_executor.py`, moving preflight, settle, command alias/rewrite, and recovery out of `runner.py` without changing behavior.
+- Halley / Descartes: avoid creating `slay_ai/policy/` while `slay_ai/policy.py` is still the public import target. Prefer flat compatibility-preserving modules and one architecture boundary per validation round.
+
+Main-thread commands for this review round:
+
+```text
+multi_agent_v1.send_input(Harvey, "Evaluate current route from the game AI/autonomous-learning perspective; do not modify files.")
+multi_agent_v1.send_input(Mill, "Evaluate current route from the Slay the Spire mod/MCP/automation engineering perspective; do not modify files.")
+multi_agent_v1.send_input(Halley, "Evaluate current route from the long-term architecture/work-mode perspective; do not modify files.")
+multi_agent_v1.wait_agent(targets=[Harvey, Mill, Halley], timeout_ms=60000)
+```
+
+2026-07-05 probe58/probe59 shop-potion validation round:
+
+- Probe58 command:
+
+```powershell
+python -m slay_ai.campaign --characters IRONCLAD --ascension 20 --attempts-per-target 1 --max-steps 440 --interval 0.08 --startup-timeout 20 --cooldown 0.5 --existing-save fail --progress-file data\campaign_strategy_probe58.json --log-dir ai_runs_strategy_probe58 --use-all-hardware
+```
+
+- Probe58 result: `IRONCLAD:A4` died on F7 Gremlin Nob. Evidence: F3 shop bought Shrug It Off and purged Strike, then left with 154 gold while Swift, Regen, and Duplication potions were available. The shop high-impact potion token list did not include those potions.
+- Fix: add Duplication, Energy, Gambler's Brew, Regen, and Swift potion tokens to shop high-impact potion scoring and add a regression test for the probe58 shop state.
+- Probe59 command:
+
+```powershell
+python -m slay_ai.campaign --characters IRONCLAD --ascension 20 --attempts-per-target 1 --max-steps 440 --interval 0.08 --startup-timeout 20 --cooldown 0.5 --existing-save fail --progress-file data\campaign_strategy_probe59.json --log-dir ai_runs_strategy_probe59 --use-all-hardware
+```
+
+- Probe59 result: `IRONCLAD:A4` reached F16 Slime Boss and ended as synthetic game-over at step 219 after a likely lethal transition. Evidence: F13 shop bought a Speed Potion after purge; F14 Lagavulin fight used Essence of Steel and Speed Potion, then survived the elite. The new bottleneck is Slime Boss split/minion pressure, especially Slimed hands and hand-changing/search coverage after the split.
+- Learning update after adding probe58/probe59: `slay_ai.train_card_model` loaded 258 card-pick examples and wrote 70 card deltas; `slay_ai.learn --reset` read 53 logs, applied 42 completed runs, and skipped 11 incomplete runs.
 
 2026-07-05 map-lookahead review round:
 
