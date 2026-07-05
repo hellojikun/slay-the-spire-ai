@@ -215,10 +215,13 @@ class TrainingManifestTests(unittest.TestCase):
         pre_boss = shadow["pre_boss_deck_quality"][0]
         self.assertEqual(route["deck_known_cards"], 5)
         self.assertTrue(route["has_liquid_memories"])
+        self.assertIn("readiness_score_elite", route)
+        self.assertIn("readiness_gaps", route)
         self.assertEqual(potion["enemy_boss_count"], 1)
         self.assertEqual(potion["potion_block_value"], 12)
         self.assertEqual(pre_boss["deck_tag_weak"], 1)
         self.assertEqual(pre_boss["deck_tag_premium_defense"], 1)
+        self.assertIn("readiness_score_boss", pre_boss)
 
     def test_static_knowledge_deck_features_fall_back_to_card_pick_history(self):
         with TemporaryDirectory() as tmp:
@@ -271,6 +274,7 @@ class TrainingManifestTests(unittest.TestCase):
         self.assertEqual(pre_boss["deck_unknown_cards"], 0)
         self.assertEqual(pre_boss["deck_tag_weak"], 1)
         self.assertEqual(pre_boss["deck_tag_starter"], 10)
+        self.assertAlmostEqual(pre_boss["readiness_score_hp"], 63.3, places=1)
 
 
 if __name__ == "__main__":

@@ -3081,6 +3081,106 @@ class PolicyTests(unittest.TestCase):
         self.assertLess(route_eval["options"][0]["lookahead_adjustment"], 0)
         self.assertEqual(route_eval["options"][1]["lookahead"]["nearest_rest"], 4)
 
+    def test_map_parallel_flow_avoids_deep_no_buffer_forced_elite(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 0,
+            "current_hp": 88,
+            "max_hp": 88,
+            "gold": 99,
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 0, "y": 0},
+                    {"symbol": "M", "x": 2, "y": 0},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 0, "y": 0, "children": [{"x": 0, "y": 1}]},
+                        {"symbol": "M", "x": 2, "y": 0, "children": [{"x": 2, "y": 1}]},
+                    ],
+                    [
+                        {"symbol": "?", "x": 0, "y": 1, "children": [{"x": 0, "y": 2}]},
+                        {"symbol": "M", "x": 2, "y": 1, "children": [{"x": 2, "y": 2}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 2, "children": [{"x": 0, "y": 3}]},
+                        {"symbol": "?", "x": 2, "y": 2, "children": [{"x": 2, "y": 3}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 3, "children": [{"x": 0, "y": 4}]},
+                        {"symbol": "R", "x": 2, "y": 3, "children": [{"x": 2, "y": 4}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 4, "children": [{"x": 0, "y": 5}]},
+                        {"symbol": "M", "x": 2, "y": 4, "children": [{"x": 2, "y": 5}]},
+                    ],
+                    [
+                        {"symbol": "E", "x": 0, "y": 5},
+                        {"symbol": "E", "x": 2, "y": 5},
+                    ],
+                ],
+            },
+        }
+        state = {"in_game": True, "game_state": game}
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        route_eval = game["route_evaluation"]
+        self.assertTrue(route_eval["options"][0]["lookahead"]["forced_elite_within_5"])
+        self.assertLess(route_eval["options"][0]["lookahead_adjustment"], 0)
+        self.assertEqual(route_eval["options"][1]["lookahead"]["nearest_rest"], 3)
+        self.assertGreater(route_eval["options"][1]["lookahead_adjustment"], route_eval["options"][0]["lookahead_adjustment"])
+
+    def test_map_probe73_prefers_shop_over_healthy_no_buffer_forced_elite(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 3,
+            "current_hp": 80,
+            "max_hp": 88,
+            "gold": 146,
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 0, "y": 3},
+                    {"symbol": "$", "x": 1, "y": 3},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 0, "y": 3, "children": [{"x": 0, "y": 4}]},
+                        {"symbol": "$", "x": 1, "y": 3, "children": [{"x": 1, "y": 4}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 4, "children": [{"x": 0, "y": 5}]},
+                        {"symbol": "M", "x": 1, "y": 4, "children": [{"x": 1, "y": 5}]},
+                    ],
+                    [
+                        {"symbol": "E", "x": 0, "y": 5},
+                        {"symbol": "?", "x": 1, "y": 5, "children": [{"x": 1, "y": 6}]},
+                    ],
+                    [
+                        {"symbol": "R", "x": 1, "y": 6},
+                    ],
+                ],
+            },
+        }
+        state = {"in_game": True, "game_state": game}
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        route_eval = game["route_evaluation"]
+        self.assertLess(route_eval["options"][0]["lookahead_adjustment"], -50)
+        self.assertEqual(route_eval["options"][0]["lookahead"]["nearest_shop"], None)
+        self.assertEqual(route_eval["options"][1]["lookahead"]["nearest_shop"], 0)
+
     def test_map_lookahead_avoids_low_hp_path_committed_to_elite(self):
         game = {
             "screen_type": "MAP",

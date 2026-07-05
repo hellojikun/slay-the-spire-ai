@@ -15,7 +15,7 @@ This project should not wait for a perfect heuristic bot before adding learning.
 - `StrategyMemory.card_score()` already combines base card scores, learned memory deltas, and model deltas.
 - As of 2026-07-05 after probe72, `slay_ai.training_manifest` can classify logs into `clean_trainable`, `diagnostic_excluded`, and `infra_blocked` before any offline learning step. The probe64-72 manifest classified 9 logs as clean, 0 diagnostic, and 0 infra-blocked, then extracted 128 route-risk rows, 484 potion-tempo rows, and 7 pre-boss deck-quality rows for shadow-model work.
 - `slay_ai.static_knowledge` now validates seed card/monster/potion facts under `data/static_knowledge/` and lets `training_manifest --knowledge-dir` enrich shadow samples with deck, potion, and enemy features. This is a feature layer, not a label source.
-- `slay_ai.readiness.act1_readiness()` now provides a read-only Act 1 readiness gate for shadow evaluation: HP, output, defense, AOE, debuffs, potion tempo, boss readiness, and elite readiness. It is not wired to take over route choices yet.
+- `slay_ai.readiness.act1_readiness()` now provides an Act 1 readiness gate for shadow evaluation: HP, output, defense, AOE, debuffs, potion tempo, boss readiness, and elite readiness. `training_manifest --knowledge-dir` writes readiness scores, gaps, flags, and recommendations into route-risk and pre-boss shadow rows.
 - `slay_ai.learn` and `slay_ai.train_card_model` accept `--manifest`, so training can consume only the clean bucket from a generated manifest. A probe64-72 card-model refresh loaded 67 card-pick examples and wrote 60 local comparison deltas.
 
 ## Project Phases
@@ -47,6 +47,7 @@ The current advisory agents agree on this boundary:
 - After probe71, search sequence commitment is live-validated: the run produced 17 continued search-sequence actions and still had 0 `action_failed` records. The route remains correct, but the next Stage 4 priority moves to boss/high-pressure evaluator calibration and deck/resource quality. Do not promote a learned combat controller yet; use learning first as a shadow value model for card rewards, route risk, shop/potion value, and post-sequence state quality.
 - After probe72, the run ended earlier at F11 despite clean execution and live Weak search behavior. This confirms the direction is not "more heuristic exceptions forever"; the next useful work is clean-data labeling plus route risk, potion tempo, and boss-prep deck quality models while keeping heuristics/search as the controller.
 - In the multi-agent parallelization round, program work added a scoped Liquid Memories high-pressure use rule, AI work added an Act 1 readiness scorer, and main-thread infrastructure added static card/monster/potion features to shadow data. These should be evaluated in shadow and targeted probes before broad model authority increases.
+- After the flow-agent run and probe73, Act 1 failure evidence converged on early no-buffer forced elite commitment and Sentries readiness. The route policy now looks 6 layers ahead, logs `forced_elite_within_5`, and more strongly avoids high-HP no-buffer forced-elite paths when a shop/rest-buffer route is visible.
 
 ## Clean Training Manifests
 
@@ -55,6 +56,8 @@ Before replaying logs into memory or model training, build a manifest and option
 ```powershell
 python -m slay_ai.training_manifest ai_runs_strategy_probe64 ai_runs_strategy_probe65 ai_runs_strategy_probe66 ai_runs_strategy_probe67 ai_runs_strategy_probe68 ai_runs_strategy_probe69 ai_runs_strategy_probe70 ai_runs_strategy_probe71 ai_runs_strategy_probe72 --output data\training_manifest_probe64_72.json --shadow-dir data\shadow_probe64_72
 python -m slay_ai.training_manifest ai_runs_strategy_probe64 ai_runs_strategy_probe65 ai_runs_strategy_probe66 ai_runs_strategy_probe67 ai_runs_strategy_probe68 ai_runs_strategy_probe69 ai_runs_strategy_probe70 ai_runs_strategy_probe71 ai_runs_strategy_probe72 --output data\training_manifest_probe64_72.json --shadow-dir data\shadow_probe64_72 --knowledge-dir data\static_knowledge
+python -m slay_ai.training_manifest ai_runs_parallel_flow --output data\training_manifest_parallel_flow.json --shadow-dir data\shadow_parallel_flow --knowledge-dir data\static_knowledge
+python -m slay_ai.training_manifest ai_runs_strategy_probe73 --output data\training_manifest_probe73.json --shadow-dir data\shadow_probe73 --knowledge-dir data\static_knowledge
 python -m slay_ai.train_card_model --manifest data\training_manifest_probe64_72.json --model-path models\card_value_model_probe64_72.json --min-count 1 --max-delta 6
 python -m slay_ai.learn --manifest data\training_manifest_probe64_72.json --reset
 ```
@@ -107,6 +110,6 @@ Order of expansion:
 10. One-turn combat local search and evaluator calibration.
 11. Combat action sequence learning, only after search labels are stable.
 
-Current route assessment: stay in Stage 4 until Slime Boss split/minion pressure, Hexaghost/boss high-pressure survival, deck/resource quality before boss fights, and early Act 2 low-HP survival are less brittle. Stage 5 can grow in shadow mode beside this work, but it should not replace the heuristic/search controller until probes show stable improvement.
+Current route assessment: stay in Stage 4 until early Act 1 forced-elite commitment, Sentries AOE/Weak/readiness, Slime Boss split/minion pressure, Hexaghost/boss high-pressure survival, deck/resource quality before boss fights, and early Act 2 low-HP survival are less brittle. Stage 5 can grow in shadow mode beside this work, but it should not replace the heuristic/search controller until probes show stable improvement.
 
 Pure reinforcement learning is not a near-term target. The game is long, stochastic, and sparse-reward; the current MCP loop is too sample-limited for direct RL to beat the heuristic quickly.

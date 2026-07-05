@@ -9,6 +9,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
+from .readiness import act1_readiness
 from .static_knowledge import StaticKnowledge
 
 
@@ -274,6 +275,7 @@ def _route_risk_examples(
             deck_features = knowledge.deck_features(_deck_items_for_knowledge(state, records, record.get("step"), knowledge))
             row.update(deck_features)
             row.update(knowledge.potion_features(state.get("potions") or []))
+            row.update(_readiness_features(state, records, record.get("step"), knowledge))
         rows.append(row)
     return rows
 
@@ -357,6 +359,7 @@ def _pre_boss_examples(
                 row["block_cards"] = deck_features.get("deck_tag_block", row["block_cards"])
                 row["draw_cards"] = deck_features.get("deck_tag_draw", row["draw_cards"])
             row.update(knowledge.potion_features(state.get("potions") or []))
+            row.update(_readiness_features(state, records, record.get("step"), knowledge))
         rows.append(row)
     return rows
 
@@ -408,6 +411,32 @@ def _deck_items_for_knowledge(
         if pick:
             reconstructed.append(pick)
     return reconstructed if reconstructed else (deck if isinstance(deck, list) else [])
+
+
+def _readiness_features(
+    state: dict[str, Any],
+    records: list[dict[str, Any]],
+    step: Any,
+    knowledge: StaticKnowledge,
+) -> dict[str, Any]:
+    readiness_state = dict(state)
+    readiness_state["deck"] = _deck_items_for_knowledge(state, records, step, knowledge)
+    result = act1_readiness(readiness_state, knowledge=knowledge)
+    scores = result.get("scores") if isinstance(result.get("scores"), dict) else {}
+    return {
+        "readiness_score_hp": scores.get("hp"),
+        "readiness_score_output": scores.get("output"),
+        "readiness_score_defense": scores.get("defense"),
+        "readiness_score_aoe": scores.get("aoe"),
+        "readiness_score_debuff": scores.get("debuff"),
+        "readiness_score_potion": scores.get("potion"),
+        "readiness_score_elite": scores.get("elite"),
+        "readiness_score_boss": scores.get("boss"),
+        "readiness_score_overall": scores.get("overall"),
+        "readiness_gaps": result.get("gaps") or [],
+        "readiness_risk_flags": result.get("risk_flags") or [],
+        "readiness_recommendations": result.get("recommendations") or [],
+    }
 
 
 def _optional_int(value: Any) -> int | None:

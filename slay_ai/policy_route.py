@@ -10,10 +10,12 @@ from .policy_decision import Decision
 
 ACT1_REST_OVER_ELITE_HP_RATIO = 0.72
 ACT1_FORCED_ELITE_NO_BUFFER_PENALTY = 32.0
+ACT1_HEALTHY_FORCED_ELITE_NO_BUFFER_PENALTY = 55.0
+ACT1_DEEP_FORCED_ELITE_NO_BUFFER_PENALTY = 24.0
 ACT1_FORCED_ELITE_BUFFER_BONUS = 18.0
 ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY = 35.0
 ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY = 18.0
-ROUTE_LOOKAHEAD_HORIZON = 4
+ROUTE_LOOKAHEAD_HORIZON = 6
 ROUTE_PATH_CAP = 128
 ROUTE_CHILD_KEYS = ("children", "next_nodes", "edges", "connected_nodes", "connections", "links")
 ACT1_BLOCK_STABILIZER_CARDS = {
@@ -205,9 +207,17 @@ def _route_lookahead_adjustment(
     nearest_shop = features.get("nearest_shop")
     if int(game.get("act", 1) or 1) == 1 and features["forced_elite_within_3"]:
         if nearest_rest is None and nearest_shop is None:
-            adjustment -= ACT1_FORCED_ELITE_NO_BUFFER_PENALTY
+            if hp_ratio >= 0.75 and int(game.get("floor", 0) or 0) >= 3:
+                adjustment -= ACT1_HEALTHY_FORCED_ELITE_NO_BUFFER_PENALTY
+            else:
+                adjustment -= ACT1_FORCED_ELITE_NO_BUFFER_PENALTY
         elif (nearest_rest is not None and nearest_rest <= 2) or (nearest_shop is not None and nearest_shop <= 1):
             adjustment += ACT1_FORCED_ELITE_BUFFER_BONUS
+    elif int(game.get("act", 1) or 1) == 1 and features["forced_elite_within_5"]:
+        if nearest_rest is None and nearest_shop is None:
+            adjustment -= ACT1_DEEP_FORCED_ELITE_NO_BUFFER_PENALTY
+        elif (nearest_rest is not None and nearest_rest <= 4) or (nearest_shop is not None and nearest_shop <= 3):
+            adjustment += ACT1_FORCED_ELITE_BUFFER_BONUS * 0.5
     if hp_ratio < 0.50 and nearest_rest is not None and nearest_rest <= 2:
         adjustment += 35
     if hp_ratio < 0.50 and nearest_shop is not None and nearest_shop <= 2 and int(game.get("gold", 0) or 0) >= 80:
@@ -397,7 +407,9 @@ def _route_path_features(paths: list[list[str]]) -> dict[str, Any]:
         "map_match": True,
         "paths": len(paths),
         "forced_elite_within_3": _all_paths_have_symbol(paths, {"E"}, 3),
+        "forced_elite_within_5": _all_paths_have_symbol(paths, {"E"}, 5),
         "forced_combat_within_2": _all_paths_have_symbol(paths, {"M", "E"}, 2),
+        "forced_combat_within_4": _all_paths_have_symbol(paths, {"M", "E"}, 4),
         "nearest_rest": _nearest_symbol_depth(paths, {"R"}),
         "nearest_shop": _nearest_symbol_depth(paths, {"$"}),
     }
