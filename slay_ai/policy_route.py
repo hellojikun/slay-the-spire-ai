@@ -15,6 +15,7 @@ ACT1_HEALTHY_FORCED_ELITE_NO_BUFFER_PENALTY = 55.0
 ACT1_DEEP_FORCED_ELITE_NO_BUFFER_PENALTY = 24.0
 ACT1_FORCED_ELITE_BUFFER_BONUS = 18.0
 ACT1_ELITE_CHAIN_LOW_BUFFER_PENALTY = 38.0
+ACT1_REST_FORCED_ELITE_RESOURCE_PENALTY_CAP = 64.0
 ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY = 35.0
 ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY = 18.0
 ACT2_LOW_HP_ROUTE_RISK_CAP = 95.0
@@ -233,6 +234,15 @@ def _route_lookahead_adjustment(
     adjustment += act2_adjustment
     features.update(act2_features)
 
+    rest_adjustment, rest_features = _route_act1_rest_commitment_adjustment(
+        game,
+        choice_node,
+        hp_ratio,
+        features,
+    )
+    adjustment += rest_adjustment
+    features.update(rest_features)
+
     readiness_adjustment, readiness_features = _route_readiness_adjustment(game, choice_node, features)
     adjustment += readiness_adjustment
     features.update(readiness_features)
@@ -295,6 +305,59 @@ def _route_act2_risk_adjustment(
     }
 
 
+def _route_act1_rest_commitment_adjustment(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    hp_ratio: float,
+    lookahead_features: dict[str, Any],
+) -> tuple[float, dict[str, Any]]:
+    if int(game.get("act", 1) or 1) != 1 or not lookahead_features.get("map_match"):
+        return 0.0, {}
+    if str(choice_node.get("symbol", "")).upper() != "R":
+        return 0.0, {}
+    if not lookahead_features.get("forced_elite_within_3"):
+        return 0.0, {}
+    if hp_ratio >= 0.70 or _has_high_impact_elite_potion(game):
+        return 0.0, {}
+    nearest_shop = lookahead_features.get("nearest_shop")
+    if nearest_shop is not None and nearest_shop <= 1 and int(game.get("gold", 0) or 0) >= 80:
+        return 0.0, {}
+
+    readiness = _act1_route_readiness(game, choice_node, lookahead_features)
+    flags = list(readiness.get("risk_flags") or [])
+    gaps = list(readiness.get("gaps") or [])
+    if not any(
+        flag in flags
+        for flag in {
+            "elite_not_ready",
+            "elite_low_hp_no_tempo_potion",
+            "forced_elite_no_tempo_potion",
+            "forced_elite_aoe_gap",
+            "forced_elite_weak_gap",
+        }
+    ):
+        return 0.0, {}
+
+    penalty = -24.0 if hp_ratio < 0.55 else -16.0
+    if "elite_not_ready" in flags:
+        penalty -= 20.0
+    if "forced_elite_no_tempo_potion" in flags:
+        penalty -= 16.0
+    if "forced_elite_aoe_gap" in flags:
+        penalty -= 10.0
+    if "forced_elite_weak_gap" in flags:
+        penalty -= 8.0
+    if "premium_block_missing" in gaps:
+        penalty -= 10.0
+
+    penalty = max(-ACT1_REST_FORCED_ELITE_RESOURCE_PENALTY_CAP, penalty)
+    return penalty, {
+        "act1_rest_forced_elite_penalty": round(penalty, 1),
+        "act1_rest_forced_elite_flags": flags,
+        "act1_rest_forced_elite_gaps": gaps,
+    }
+
+
 def _route_readiness_adjustment(
     game: dict[str, Any],
     choice_node: dict[str, Any],
@@ -305,21 +368,7 @@ def _route_readiness_adjustment(
     symbol = str(choice_node.get("symbol", "")).upper()
     if symbol in {"$", "R", "T"}:
         return 0.0, {}
-    state = dict(game)
-    screen_state = dict(game.get("screen_state") if isinstance(game.get("screen_state"), dict) else {})
-    screen_state["next_nodes"] = [choice_node]
-    state["screen_state"] = screen_state
-    state["route_evaluation"] = {
-        "options": [
-            {
-                "choice_index": 1,
-                "symbol": choice_node.get("symbol"),
-                "score": 0.0,
-                "lookahead": lookahead_features,
-            }
-        ]
-    }
-    readiness = act1_readiness(state)
+    readiness = _act1_route_readiness(game, choice_node, lookahead_features)
     flags = list(readiness.get("risk_flags") or [])
     gaps = list(readiness.get("gaps") or [])
     immediate_elite = symbol == "E"
@@ -355,6 +404,28 @@ def _route_readiness_adjustment(
         "readiness_flags": flags,
         "readiness_gaps": gaps,
     }
+
+
+def _act1_route_readiness(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    lookahead_features: dict[str, Any],
+) -> dict[str, Any]:
+    state = dict(game)
+    screen_state = dict(game.get("screen_state") if isinstance(game.get("screen_state"), dict) else {})
+    screen_state["next_nodes"] = [choice_node]
+    state["screen_state"] = screen_state
+    state["route_evaluation"] = {
+        "options": [
+            {
+                "choice_index": 1,
+                "symbol": choice_node.get("symbol"),
+                "score": 0.0,
+                "lookahead": lookahead_features,
+            }
+        ]
+    }
+    return act1_readiness(state)
 
 
 def _build_route_context(game: dict[str, Any]) -> dict[str, Any] | None:

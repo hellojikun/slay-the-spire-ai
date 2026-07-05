@@ -3908,6 +3908,70 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(elite_lookahead["nearest_shop"], 4)
         self.assertEqual(elite_lookahead["act1_elite_chain_penalty"], -38.0)
 
+    def test_map_probe84_rest_node_does_not_hide_forced_late_elite(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 11,
+            "current_hp": 40,
+            "max_hp": 80,
+            "gold": 40,
+            "potions": [],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+                {"id": "Heavy Blade"},
+                {"id": "Wild Strike"},
+                {"id": "Carnage"},
+                {"id": "True Grit"},
+                {"id": "Metallicize"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "R", "x": 5, "y": 11},
+                    {"symbol": "?", "x": 6, "y": 11},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "R", "x": 5, "y": 11, "children": [{"x": 5, "y": 12}]},
+                        {"symbol": "?", "x": 6, "y": 11, "children": [{"x": 6, "y": 12}]},
+                    ],
+                    [
+                        {"symbol": "E", "x": 5, "y": 12, "children": [{"x": 5, "y": 13}]},
+                        {"symbol": "M", "x": 6, "y": 12, "children": [{"x": 6, "y": 13}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 5, "y": 13, "children": [{"x": 5, "y": 14}]},
+                        {"symbol": "?", "x": 6, "y": 13, "children": [{"x": 6, "y": 14}]},
+                    ],
+                    [
+                        {"symbol": "R", "x": 5, "y": 14},
+                        {"symbol": "R", "x": 6, "y": 14},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        route_eval = game["route_evaluation"]
+        rest_lookahead = route_eval["options"][0]["lookahead"]
+        self.assertTrue(rest_lookahead["forced_elite_within_3"])
+        self.assertEqual(rest_lookahead["nearest_rest"], 0)
+        self.assertEqual(rest_lookahead["act1_rest_forced_elite_penalty"], -64.0)
+        self.assertLess(route_eval["options"][0]["score"], route_eval["options"][1]["score"])
+
     def test_map_readiness_avoids_immediate_elite_without_core_tools(self):
         game = {
             "screen_type": "MAP",
