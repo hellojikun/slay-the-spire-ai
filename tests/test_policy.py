@@ -3333,6 +3333,99 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(route_eval["options"][0]["lookahead"]["nearest_shop"], None)
         self.assertEqual(route_eval["options"][1]["lookahead"]["nearest_shop"], 0)
 
+    def test_map_readiness_avoids_immediate_elite_without_core_tools(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 6,
+            "current_hp": 78,
+            "max_hp": 88,
+            "potions": [],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "E", "x": 0, "y": 6},
+                    {"symbol": "?", "x": 1, "y": 6},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "E", "x": 0, "y": 6, "children": [{"x": 0, "y": 7}]},
+                        {"symbol": "?", "x": 1, "y": 6, "children": [{"x": 1, "y": 7}]},
+                    ],
+                    [
+                        {"symbol": "R", "x": 0, "y": 7},
+                        {"symbol": "R", "x": 1, "y": 7},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        elite_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertLess(elite_lookahead["readiness_penalty"], 0)
+        self.assertIn("elite_not_ready", elite_lookahead["readiness_flags"])
+        self.assertIn("premium_block_missing", elite_lookahead["readiness_gaps"])
+
+    def test_map_readiness_allows_elite_with_aoe_weak_block_and_tempo(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 6,
+            "current_hp": 78,
+            "max_hp": 88,
+            "potions": [{"id": "Fire Potion"}],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+                {"id": "Shrug It Off"},
+                {"id": "Clothesline"},
+                {"id": "Cleave"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "E", "x": 0, "y": 6},
+                    {"symbol": "?", "x": 1, "y": 6},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "E", "x": 0, "y": 6, "children": [{"x": 0, "y": 7}]},
+                        {"symbol": "?", "x": 1, "y": 6, "children": [{"x": 1, "y": 7}]},
+                    ],
+                    [
+                        {"symbol": "R", "x": 0, "y": 7},
+                        {"symbol": "R", "x": 1, "y": 7},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        elite_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertNotIn("readiness_penalty", elite_lookahead)
+
     def test_map_lookahead_avoids_low_hp_path_committed_to_elite(self):
         game = {
             "screen_type": "MAP",

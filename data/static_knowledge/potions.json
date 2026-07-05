@@ -33,6 +33,16 @@
       "values": {"dexterity": 2}
     },
     {
+      "id": "Speed Potion",
+      "name": "Speed Potion",
+      "aliases": ["SpeedPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["defense", "burst_turn", "emergency", "multi_hit_defense"],
+      "values": {"temporary_dexterity": 5}
+    },
+    {
       "id": "Fire Potion",
       "name": "Fire Potion",
       "aliases": ["FirePotion"],
@@ -121,6 +131,16 @@
       "combat_only": true,
       "roles": ["card_generation", "offense", "frontload", "hand_fix"],
       "values": {"generated_options": 3}
+    },
+    {
+      "id": "Distilled Chaos",
+      "name": "Distilled Chaos",
+      "aliases": ["DistilledChaos"],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["tempo", "burst_turn", "card_play", "offense", "defense"],
+      "values": {"play_top_cards": 3}
     },
     {
       "id": "Duplication Potion",

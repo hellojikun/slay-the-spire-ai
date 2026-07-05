@@ -6,6 +6,7 @@ from typing import Any
 
 from .memory import StrategyMemory, normalize_card_name
 from .policy_decision import Decision
+from .readiness import act1_readiness
 
 
 ACT1_REST_OVER_ELITE_HP_RATIO = 0.72
@@ -223,7 +224,73 @@ def _route_lookahead_adjustment(
     if hp_ratio < 0.50 and nearest_shop is not None and nearest_shop <= 2 and int(game.get("gold", 0) or 0) >= 80:
         adjustment += 25
 
+    readiness_adjustment, readiness_features = _route_readiness_adjustment(game, choice_node, features)
+    adjustment += readiness_adjustment
+    features.update(readiness_features)
+
     return adjustment, features
+
+
+def _route_readiness_adjustment(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    lookahead_features: dict[str, Any],
+) -> tuple[float, dict[str, Any]]:
+    if int(game.get("act", 1) or 1) != 1 or not lookahead_features.get("map_match"):
+        return 0.0, {}
+    symbol = str(choice_node.get("symbol", "")).upper()
+    if symbol in {"$", "R", "T"}:
+        return 0.0, {}
+    state = dict(game)
+    screen_state = dict(game.get("screen_state") if isinstance(game.get("screen_state"), dict) else {})
+    screen_state["next_nodes"] = [choice_node]
+    state["screen_state"] = screen_state
+    state["route_evaluation"] = {
+        "options": [
+            {
+                "choice_index": 1,
+                "symbol": choice_node.get("symbol"),
+                "score": 0.0,
+                "lookahead": lookahead_features,
+            }
+        ]
+    }
+    readiness = act1_readiness(state)
+    flags = list(readiness.get("risk_flags") or [])
+    gaps = list(readiness.get("gaps") or [])
+    immediate_elite = symbol == "E"
+    forced_elite_within_3 = bool(lookahead_features.get("forced_elite_within_3"))
+    forced_elite_within_5 = bool(lookahead_features.get("forced_elite_within_5"))
+    elite_path = immediate_elite or forced_elite_within_3 or forced_elite_within_5
+
+    penalty = 0.0
+    if elite_path:
+        close_elite = immediate_elite or forced_elite_within_3
+        if "elite_not_ready" in flags:
+            penalty -= 30.0 if close_elite else 18.0
+        if "forced_elite_no_tempo_potion" in flags:
+            penalty -= 18.0 if close_elite else 10.0
+        if "forced_elite_aoe_gap" in flags:
+            penalty -= 12.0 if close_elite else 8.0
+        if "forced_elite_weak_gap" in flags:
+            penalty -= 10.0 if close_elite else 6.0
+        if close_elite and "premium_block_missing" in gaps:
+            penalty -= 12.0
+    if "act1_low_buffer_no_recovery" in flags:
+        penalty -= 20.0
+        if "hallway_no_immediate_tempo_potion" in flags:
+            penalty -= 10.0
+        if "hallway_lacks_premium_block" in flags:
+            penalty -= 10.0
+
+    penalty = max(-85.0, penalty)
+    if not penalty:
+        return 0.0, {}
+    return penalty, {
+        "readiness_penalty": round(penalty, 1),
+        "readiness_flags": flags,
+        "readiness_gaps": gaps,
+    }
 
 
 def _build_route_context(game: dict[str, Any]) -> dict[str, Any] | None:
