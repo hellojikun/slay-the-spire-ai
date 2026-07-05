@@ -11,7 +11,7 @@ import re
 from typing import Any
 
 
-VERSION = 1
+VERSION = 3
 
 ATTACK_DAMAGE = {
     "anger": 6,
@@ -68,6 +68,15 @@ PREMIUM_BLOCK = {
     "shrugitoff",
     "truegrit",
 }
+PREMIUM_BLOCK_TAGS = {
+    "boss_defense",
+    "defense_core",
+    "elite_defense",
+    "multi_hit_defense",
+    "panic_block",
+    "premium_block",
+    "premium_defense",
+}
 
 AOE_CARDS = {"cleave", "immolate", "reaper", "thunderclap", "whirlwind"}
 WEAK_CARDS = {"clothesline", "intimidate", "shockwave", "uppercut"}
@@ -78,6 +87,7 @@ RISKY_ENGINE_CARDS = {"bloodletting", "burningpact", "combust", "darkembrace", "
 HIGH_IMPACT_POTION_TOKENS = {
     "attack",
     "block",
+    "cultist",
     "dexterity",
     "distilledchaos",
     "duplication",
@@ -98,7 +108,43 @@ HIGH_IMPACT_POTION_TOKENS = {
 }
 
 DEFENSIVE_POTION_TOKENS = {"block", "dexterity", "essenceofsteel", "heartofiron", "speed", "weak"}
-OFFENSIVE_POTION_TOKENS = {"attack", "explosive", "fear", "fire", "steroid", "strength"}
+OFFENSIVE_POTION_TOKENS = {"attack", "cultist", "explosive", "fear", "fire", "steroid", "strength"}
+AOE_POTION_TOKENS = {"explosive"}
+WEAK_POTION_TOKENS = {"weak"}
+IMMEDIATE_POTION_TOKENS = {
+    "attack",
+    "block",
+    "dexterity",
+    "distilledchaos",
+    "duplication",
+    "energy",
+    "essenceofsteel",
+    "explosive",
+    "fear",
+    "fire",
+    "heartofiron",
+    "liquidbronze",
+    "skill",
+    "speed",
+    "steroid",
+    "strength",
+    "swift",
+    "weak",
+}
+IMMEDIATE_POTION_ROLES = {
+    "aoe",
+    "aoe_clear",
+    "burst_turn",
+    "damage",
+    "defense",
+    "emergency",
+    "frontload",
+    "hand_fix",
+    "lethal_prevention",
+    "sentries",
+    "tempo",
+}
+SCALING_POTION_ROLES = {"boss_damage", "long_fight", "scaling"}
 
 
 def act1_readiness(state: dict[str, Any], knowledge: Any | None = None) -> dict[str, Any]:
@@ -122,6 +168,11 @@ def act1_readiness(state: dict[str, Any], knowledge: Any | None = None) -> dict[
     boss_available = bool(screen_state.get("boss_available") or game.get("boss_available"))
     elite_available = any(str(node.get("symbol", "")).upper() == "E" for node in next_nodes if isinstance(node, dict))
     monster_available = any(str(node.get("symbol", "")).upper() == "M" for node in next_nodes if isinstance(node, dict))
+    forced_elite_within_3 = _forced_elite_context(game, screen_state, "forced_elite_within_3")
+    forced_elite_within_5 = _forced_elite_context(game, screen_state, "forced_elite_within_5")
+    route_context = _route_context(game, screen_state)
+    sentries_threat = _sentries_threat(game)
+    elite_threat = elite_available or forced_elite_within_3 or sentries_threat
 
     deck_features = _deck_features(deck, knowledge)
     potion_features = _potion_features(potions, knowledge)
@@ -176,11 +227,19 @@ def act1_readiness(state: dict[str, Any], knowledge: Any | None = None) -> dict[
         hp_ratio=hp_ratio,
         boss_available=boss_available,
         elite_available=elite_available,
+        forced_elite_within_3=forced_elite_within_3,
+        sentries_threat=sentries_threat,
         monster_available=monster_available,
+        route_context=route_context,
         deck_features=deck_features,
         potion_features=potion_features,
     )
-    recommendations = _recommendations(gaps, risk_flags, boss_available=boss_available, elite_available=elite_available)
+    recommendations = _recommendations(
+        gaps,
+        risk_flags,
+        boss_available=boss_available,
+        elite_available=elite_available,
+    )
 
     features = {
         "act": act,
@@ -191,7 +250,12 @@ def act1_readiness(state: dict[str, Any], knowledge: Any | None = None) -> dict[
         "hp_ratio": round(hp_ratio, 3),
         "boss_available": boss_available,
         "elite_available": elite_available,
+        "forced_elite_within_3": forced_elite_within_3,
+        "forced_elite_within_5": forced_elite_within_5,
+        "sentries_threat": sentries_threat,
+        "elite_threat": elite_threat,
         "monster_available": monster_available,
+        **route_context,
         "deck_size": deck_features["deck_size"],
         **deck_features,
         **potion_features,
@@ -246,9 +310,8 @@ def _deck_features(deck: list[Any], knowledge: Any | None) -> dict[str, Any]:
             features["attack_cards"] += 1
         if block > 0 or "block" in tags or key in BLOCK_VALUE:
             features["block_cards"] += 1
-        if key in PREMIUM_BLOCK or tags.intersection({"premium_block", "defense_core", "block"}):
-            if block > 0 or key in {"disarm", "shockwave", "metallicize"} or "premium_block" in tags:
-                features["premium_block_cards"] += 1
+        if key in PREMIUM_BLOCK or tags.intersection(PREMIUM_BLOCK_TAGS):
+            features["premium_block_cards"] += 1
         if key in AOE_CARDS or tags.intersection({"aoe", "multi_enemy"}):
             features["aoe_cards"] += 1
         if key in WEAK_CARDS or "weak" in tags:
@@ -271,6 +334,10 @@ def _potion_features(potions: list[Any], knowledge: Any | None) -> dict[str, Any
         "potion_damage_value": 0,
         "potion_block_value": 0,
         "potion_energy_value": 0,
+        "aoe_potions": 0,
+        "weak_potions": 0,
+        "immediate_tempo_potions": 0,
+        "scaling_potions": 0,
     }
     for item in potions:
         row = _potion_row(item, knowledge)
@@ -289,6 +356,14 @@ def _potion_features(potions: list[Any], knowledge: Any | None) -> dict[str, Any
             features["defensive_potions"] += 1
         if _has_token(key, OFFENSIVE_POTION_TOKENS) or roles.intersection({"damage", "aoe_clear", "elite_tempo"}):
             features["offensive_potions"] += 1
+        if _has_token(key, AOE_POTION_TOKENS) or roles.intersection({"aoe", "aoe_clear", "sentries"}):
+            features["aoe_potions"] += 1
+        if _has_token(key, WEAK_POTION_TOKENS) or "weak" in roles:
+            features["weak_potions"] += 1
+        if _has_token(key, IMMEDIATE_POTION_TOKENS) or roles.intersection(IMMEDIATE_POTION_ROLES):
+            features["immediate_tempo_potions"] += 1
+        if roles.intersection(SCALING_POTION_ROLES):
+            features["scaling_potions"] += 1
     return features
 
 
@@ -362,23 +437,50 @@ def _risk_flags(
     hp_ratio: float,
     boss_available: bool,
     elite_available: bool,
+    forced_elite_within_3: bool,
+    sentries_threat: bool,
     monster_available: bool,
+    route_context: dict[str, Any],
     deck_features: dict[str, Any],
     potion_features: dict[str, Any],
 ) -> list[str]:
     flags: list[str] = []
+    elite_context = elite_available or forced_elite_within_3 or sentries_threat
     if act != 1:
         flags.append("non_act1_context")
     if hp_ratio < 0.35:
         flags.append("critical_hp")
     elif hp_ratio < 0.55:
         flags.append("low_hp")
-    if elite_available and scores["elite"] < 55:
+    if elite_context and scores["elite"] < 55:
         flags.append("elite_not_ready")
     if boss_available and scores["boss"] < 60:
         flags.append("boss_not_ready")
-    if elite_available and hp_ratio < 0.65 and potion_features["high_impact_potions"] <= 0:
+    if elite_context and hp_ratio < 0.65 and potion_features["high_impact_potions"] <= 0:
         flags.append("elite_low_hp_no_tempo_potion")
+    if forced_elite_within_3 and scores["aoe"] < 25:
+        flags.append("forced_elite_aoe_gap")
+    if forced_elite_within_3 and deck_features["weak_sources"] <= 0 and potion_features["weak_potions"] <= 0:
+        flags.append("forced_elite_weak_gap")
+    if forced_elite_within_3 and potion_features["high_impact_potions"] <= 0:
+        flags.append("forced_elite_no_tempo_potion")
+    if sentries_threat and scores["aoe"] < 25:
+        flags.append("sentries_no_aoe")
+    if sentries_threat and deck_features["weak_sources"] <= 0 and potion_features["weak_potions"] <= 0:
+        flags.append("sentries_no_weak")
+    if sentries_threat and potion_features["high_impact_potions"] <= 0:
+        flags.append("sentries_no_tempo_potion")
+    if _act1_hallway_low_buffer_no_recovery(
+        act=act,
+        hp_ratio=hp_ratio,
+        monster_available=monster_available,
+        route_context=route_context,
+    ):
+        flags.append("act1_low_buffer_no_recovery")
+        if potion_features["immediate_tempo_potions"] <= 0:
+            flags.append("hallway_no_immediate_tempo_potion")
+        if deck_features["premium_block_cards"] <= 0:
+            flags.append("hallway_lacks_premium_block")
     if boss_available and deck_features["premium_block_cards"] <= 0:
         flags.append("boss_lacks_premium_block")
     if boss_available and potion_features["high_impact_potions"] <= 0:
@@ -402,11 +504,102 @@ def _recommendations(gaps: list[str], flags: list[str], *, boss_available: bool,
         recommendations.append("prioritize_frontload_damage")
     if "aoe_missing" in gaps:
         recommendations.append("prioritize_aoe_before_sentries_or_slime_boss")
+    if "forced_elite_aoe_gap" in flags or "sentries_no_aoe" in flags:
+        recommendations.append("prioritize_aoe_before_forced_elite")
+    if "forced_elite_weak_gap" in flags or "sentries_no_weak" in flags:
+        recommendations.append("prioritize_weak_or_strength_down_before_elite")
     if "elite_potion_missing" in gaps and elite_available:
         recommendations.append("avoid_elite_without_tempo_potion")
+    if "forced_elite_no_tempo_potion" in flags or "sentries_no_tempo_potion" in flags:
+        recommendations.append("seek_or_save_elite_tempo_potion")
+    if "act1_low_buffer_no_recovery" in flags:
+        recommendations.append("prefer_rest_shop_or_safe_event")
+    if "hallway_no_immediate_tempo_potion" in flags:
+        recommendations.append("seek_or_save_hallway_tempo_potion")
     if boss_available and ("boss_not_ready" in flags or "boss_no_tempo_potion" in flags):
         recommendations.append("prefer_rest_or_buy_potion_before_boss_if_possible")
     return _dedupe(recommendations)
+
+
+def _act1_hallway_low_buffer_no_recovery(
+    *,
+    act: int,
+    hp_ratio: float,
+    monster_available: bool,
+    route_context: dict[str, Any],
+) -> bool:
+    if act != 1 or hp_ratio >= 0.62:
+        return False
+    combat_pressure = monster_available or bool(route_context.get("forced_combat_within_2"))
+    if not combat_pressure:
+        return False
+    nearest_rest = route_context.get("nearest_rest")
+    nearest_shop = route_context.get("nearest_shop")
+    rest_near = nearest_rest is not None and nearest_rest <= 2
+    shop_near = nearest_shop is not None and nearest_shop <= 1
+    return not rest_near and not shop_near
+
+
+def _route_context(game: dict[str, Any], screen_state: dict[str, Any]) -> dict[str, Any]:
+    direct = {
+        "forced_combat_within_2": bool(game.get("forced_combat_within_2") or screen_state.get("forced_combat_within_2")),
+        "forced_combat_within_4": bool(game.get("forced_combat_within_4") or screen_state.get("forced_combat_within_4")),
+        "nearest_rest": _optional_int(game.get("nearest_rest", screen_state.get("nearest_rest"))),
+        "nearest_shop": _optional_int(game.get("nearest_shop", screen_state.get("nearest_shop"))),
+    }
+    route = game.get("route_evaluation") if isinstance(game.get("route_evaluation"), dict) else {}
+    options = [option for option in _as_list(route.get("options")) if isinstance(option, dict)]
+    if not options:
+        return direct
+    best = max(options, key=lambda option: _optional_float(option.get("score")) or float("-inf"))
+    lookahead = best.get("lookahead") if isinstance(best.get("lookahead"), dict) else {}
+    return {
+        "forced_combat_within_2": bool(direct["forced_combat_within_2"] or lookahead.get("forced_combat_within_2")),
+        "forced_combat_within_4": bool(direct["forced_combat_within_4"] or lookahead.get("forced_combat_within_4")),
+        "nearest_rest": _first_optional_int(direct["nearest_rest"], lookahead.get("nearest_rest")),
+        "nearest_shop": _first_optional_int(direct["nearest_shop"], lookahead.get("nearest_shop")),
+    }
+
+
+def _forced_elite_context(game: dict[str, Any], screen_state: dict[str, Any], key: str) -> bool:
+    if game.get(key) or screen_state.get(key):
+        return True
+    route = game.get("route_evaluation") if isinstance(game.get("route_evaluation"), dict) else {}
+    options = [option for option in _as_list(route.get("options")) if isinstance(option, dict)]
+    forced_options: list[tuple[bool, float | None]] = []
+    for option in options:
+        lookahead = option.get("lookahead") if isinstance(option.get("lookahead"), dict) else {}
+        if key not in lookahead:
+            continue
+        forced_options.append((bool(lookahead.get(key)), _optional_float(option.get("score"))))
+    if not forced_options:
+        return False
+    if all(forced for forced, _ in forced_options):
+        return True
+    scored = [(forced, score) for forced, score in forced_options if score is not None]
+    if not scored:
+        return len(forced_options) == 1 and forced_options[0][0]
+    best_score = max(score for _, score in scored if score is not None)
+    best_options = [forced for forced, score in scored if score == best_score]
+    return bool(best_options) and all(best_options)
+
+
+def _sentries_threat(game: dict[str, Any]) -> bool:
+    ids = [str(item) for item in _as_list(game.get("enemy_ids"))]
+    for combat_key in ("combat_state", "combat"):
+        combat = game.get(combat_key) if isinstance(game.get(combat_key), dict) else {}
+        for monster in _as_list(combat.get("monsters")):
+            if isinstance(monster, dict):
+                ids.append(str(monster.get("id") or monster.get("name") or ""))
+            else:
+                ids.append(str(monster))
+    if any("sentry" in _norm(item) for item in ids):
+        return True
+    return (
+        _safe_int(game.get("enemy_elite_count")) >= 2
+        and _safe_int(game.get("enemy_tag_aoe_high_value")) >= 2
+        and _safe_int(game.get("enemy_tag_status_pressure")) >= 2
+    )
 
 
 def _card_row(card: Any, knowledge: Any | None) -> dict[str, Any] | None:
@@ -499,6 +692,32 @@ def _safe_int(value: Any, default: int = 0) -> int:
         return int(value)
     except (TypeError, ValueError):
         return default
+
+
+def _optional_int(value: Any) -> int | None:
+    try:
+        if value is None:
+            return None
+        return int(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def _first_optional_int(*values: Any) -> int | None:
+    for value in values:
+        parsed = _optional_int(value)
+        if parsed is not None:
+            return parsed
+    return None
+
+
+def _optional_float(value: Any) -> float | None:
+    try:
+        if value is None:
+            return None
+        return float(value)
+    except (TypeError, ValueError):
+        return None
 
 
 def _clamp_score(value: float) -> float:

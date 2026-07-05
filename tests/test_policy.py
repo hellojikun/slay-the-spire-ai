@@ -1353,6 +1353,40 @@ class PolicyTests(unittest.TestCase):
 
         self.assertNotIn("Continue one-turn search", decision.reason)
 
+    def test_combat_search_blocks_early_sentries_dazed_pressure_from_probe73(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "act": 1,
+                "floor": 6,
+                "current_hp": 63,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 63, "max_hp": 88, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Second Wind", "id": "Second Wind", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                        {"name": "Battle Trance", "id": "Battle Trance", "type": "SKILL", "cost": 0, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {"name": "Sentry", "id": "Sentry", "current_hp": 38, "max_hp": 38, "move": None},
+                        {"name": "Sentry", "id": "Sentry", "current_hp": 41, "max_hp": 41, "move": {"damage": 10}},
+                        {"name": "Sentry", "id": "Sentry", "current_hp": 38, "max_hp": 38, "move": None},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+        self.assertIn("One-turn search", decision.reason)
+
     def test_combat_local_search_continues_block_after_probe59_impervious(self):
         state = {
             "in_game": True,
@@ -2036,6 +2070,124 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+
+    def test_combat_uses_scaling_potion_early_in_dangerous_hallway_before_emergency_threshold(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 60,
+                "max_hp": 95,
+                "potions": [
+                    {"id": "StrengthPotion", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 60, "max_hp": 95, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Jaw Worm", "id": "JawWorm", "current_hp": 35, "max_hp": 35, "move": {"damage": 8}},
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 30, "max_hp": 30, "move": {"damage": 6}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+        self.assertIn("Dangerous early fight", decision.reason)
+
+    def test_combat_uses_cultist_potion_as_probe74_low_hp_hallway_tempo(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 19,
+                "max_hp": 95,
+                "potions": [
+                    {"id": "CultistPotion", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 6,
+                    "player": {"current_hp": 19, "max_hp": 95, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Jaw Worm", "id": "JawWorm", "current_hp": 32, "max_hp": 40, "move": {"damage": 15}},
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 17, "max_hp": 23, "move": None},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+
+    def test_combat_uses_cultist_potion_early_in_probe74_scaling_hallway(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 55,
+                "max_hp": 95,
+                "potions": [
+                    {"id": "CultistPotion", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 55, "max_hp": 95, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Jaw Worm", "id": "JawWorm", "current_hp": 40, "max_hp": 40, "move": {"damage": 15}},
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 28, "max_hp": 28, "move": None},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+
+    def test_combat_saves_cultist_potion_in_safe_short_hallway(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 70,
+                "max_hp": 95,
+                "potions": [
+                    {"id": "CultistPotion", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 70, "max_hp": 95, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Louse", "id": "Louse", "current_hp": 12, "max_hp": 12, "move": {"damage": 6}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
 
     def test_combat_uses_steroid_potion_early_in_sentries_elite(self):
         state = {

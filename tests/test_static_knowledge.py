@@ -25,12 +25,14 @@ class StaticKnowledgeTests(unittest.TestCase):
         knowledge = StaticKnowledge.load()
 
         potion_features = knowledge.potion_features(
-            [{"id": "LiquidMemories"}, {"name": "Block Potion"}, {"id": "SkillPotion"}]
+            [{"id": "LiquidMemories"}, {"name": "Block Potion"}, {"id": "SkillPotion"}, {"id": "CultistPotion"}]
         )
         enemy_features = knowledge.monster_features([{"id": "Hexaghost"}, {"name": "Sentry"}])
 
         self.assertTrue(potion_features["has_liquid_memories"])
         self.assertEqual(potion_features["potion_role_emergency"], 3)
+        self.assertEqual(potion_features["potion_role_scaling"], 1)
+        self.assertEqual(potion_features["potion_known_count"], 4)
         self.assertEqual(potion_features["potion_block_value"], 12)
         self.assertEqual(enemy_features["enemy_boss_count"], 1)
         self.assertEqual(enemy_features["enemy_elite_count"], 1)

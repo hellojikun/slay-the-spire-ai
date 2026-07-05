@@ -73,6 +73,16 @@
       "values": {"strength": 2}
     },
     {
+      "id": "Cultist Potion",
+      "name": "Cultist Potion",
+      "aliases": ["CultistPotion"],
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["offense", "scaling", "boss_damage", "elite_tempo", "long_fight"],
+      "values": {"ritual": 1}
+    },
+    {
       "id": "Energy Potion",
       "name": "Energy Potion",
       "aliases": ["EnergyPotion"],

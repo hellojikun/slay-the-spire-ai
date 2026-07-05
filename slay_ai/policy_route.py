@@ -482,6 +482,7 @@ def _has_elite_tempo_potion(game: dict[str, Any]) -> bool:
     tempo_tokens = {
         "attack",
         "bronze",
+        "cultist",
         "distilledchaos",
         "duplication",
         "essenceofsteel",
@@ -510,6 +511,7 @@ def _has_elite_tempo_potion(game: dict[str, Any]) -> bool:
 def _has_high_impact_elite_potion(game: dict[str, Any]) -> bool:
     high_impact_tokens = {
         "attack",
+        "cultist",
         "distilledchaos",
         "duplication",
         "explosive",

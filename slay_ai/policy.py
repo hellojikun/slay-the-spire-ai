@@ -61,6 +61,7 @@ SHOP_HIGH_IMPACT_POTION_SCORE = 50.0
 SHOP_HIGH_IMPACT_POTION_TOKENS = {
     "attack",
     "block",
+    "cultist",
     "dexterity",
     "distilledchaos",
     "duplication",
@@ -273,8 +274,13 @@ class HeuristicPolicy:
     def _strategic_combat_potion(self, game: dict[str, Any], monsters: list[dict[str, Any]]) -> Decision | None:
         combat = game.get("combat_state", {})
         turn = int(combat.get("turn", 1) or 1)
-        if turn > 2 or not _is_long_fight(monsters):
+        if turn > 2:
             return None
+        long_fight = _is_long_fight(monsters)
+        dangerous_scaling_fight = _is_dangerous_early_scaling_fight(game, monsters)
+        if not long_fight and not dangerous_scaling_fight:
+            return None
+        reason_prefix = "Long boss/elite fight" if long_fight else "Dangerous early fight"
         for slot, potion in enumerate(game.get("potions", []), start=1):
             if potion.get("is_empty") or not potion.get("can_use", True):
                 continue
@@ -282,8 +288,10 @@ class HeuristicPolicy:
             if "cultist" in key or "strength" in key or "steroid" in key:
                 return Decision(
                     [{"action": "use_potion", "potion_slot": slot}],
-                    f"Long boss/elite fight; use {potion.get('name', potion.get('id'))}.",
+                    f"{reason_prefix}; use {potion.get('name', potion.get('id'))}.",
                 )
+        if not long_fight:
+            return None
         for slot, potion in enumerate(game.get("potions", []), start=1):
             if potion.get("is_empty") or not potion.get("can_use", True):
                 continue
@@ -401,6 +409,7 @@ class HeuristicPolicy:
                     "dexterity",
                     "speed",
                     "blessingoftheforge",
+                    "cultist",
                     "forge",
                     "liquidbronze",
                     "bronze",
@@ -519,6 +528,12 @@ class HeuristicPolicy:
             and result.initial_loss >= max(18, int(current_hp * 0.40))
             and _action_adds_block(game, result.first_action)
         )
+        sentries_dazed_pressure_sequence = (
+            _is_sentries_fight(monsters)
+            and loss_reduction >= 5
+            and result.initial_loss >= 10
+            and _action_adds_block(game, result.first_action)
+        )
         if single_card_key in SEARCH_PROTECTED_SINGLE_CARDS and not result.avoided_lethal:
             return None
         if (
@@ -527,6 +542,7 @@ class HeuristicPolicy:
             and not result.avoided_lethal
             and not modest_block_sequence
             and not pressure_block_sequence
+            and not sentries_dazed_pressure_sequence
             and result.projected_loss > result.initial_loss - 6
             and result.kills <= 0
             and result.attacks_removed <= 0
@@ -990,6 +1006,17 @@ def _is_gremlin_nob_fight(monsters: list[dict[str, Any]]) -> bool:
     return any("gremlinnob" in str(monster.get("id") or monster.get("name") or "").replace(" ", "").lower() for monster in monsters)
 
 
+def _is_sentries_fight(monsters: list[dict[str, Any]]) -> bool:
+    live_sentries = 0
+    for monster in monsters:
+        if monster.get("is_dead") or monster.get("is_gone"):
+            continue
+        label = str(monster.get("id") or monster.get("name") or "").replace(" ", "").lower()
+        if "sentry" in label:
+            live_sentries += 1
+    return live_sentries >= 2
+
+
 def _is_long_fight(monsters: list[dict[str, Any]]) -> bool:
     live_count = 0
     total_hp = 0
@@ -1010,6 +1037,28 @@ def _is_long_fight(monsters: list[dict[str, Any]]) -> bool:
     if total_hp >= 110:
         return True
     return False
+
+
+def _is_dangerous_early_scaling_fight(game: dict[str, Any], monsters: list[dict[str, Any]]) -> bool:
+    combat = game.get("combat_state", {})
+    player = combat.get("player", {})
+    current_hp = int(player.get("current_hp", game.get("current_hp", 0)) or 0)
+    max_hp = int(player.get("max_hp", game.get("max_hp", current_hp)) or current_hp or 1)
+    current_block = int(player.get("block", 0) or 0)
+    incoming = max(0, sum(_monster_attack(monster) for monster in monsters) - current_block)
+    if incoming < 14 or current_hp / max(max_hp, 1) > 0.65:
+        return False
+
+    live_count = 0
+    total_hp = 0
+    for monster in monsters:
+        if monster.get("is_dead") or monster.get("is_gone"):
+            continue
+        live_count += 1
+        max_hp_monster = int(monster.get("max_hp", 0) or 0)
+        current_hp_monster = int(monster.get("current_hp", 0) or 0)
+        total_hp += max(max_hp_monster, current_hp_monster)
+    return live_count >= 2 and total_hp >= 65
 
 
 def _card_key(card: dict[str, Any]) -> str:
@@ -1717,6 +1766,7 @@ def _has_elite_tempo_potion(game: dict[str, Any]) -> bool:
     tempo_tokens = {
         "attack",
         "bronze",
+        "cultist",
         "distilledchaos",
         "duplication",
         "essenceofsteel",
@@ -1745,6 +1795,7 @@ def _has_elite_tempo_potion(game: dict[str, Any]) -> bool:
 def _has_high_impact_elite_potion(game: dict[str, Any]) -> bool:
     high_impact_tokens = {
         "attack",
+        "cultist",
         "distilledchaos",
         "duplication",
         "explosive",
