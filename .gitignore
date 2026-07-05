@@ -1,0 +1,10 @@
+_external/
+__pycache__/
+.pytest_cache/
+*.pyc
+ai_runs/
+ai_runs*/
+data/learned_memory.json
+data/campaign_progress.json
+data/campaign_*.json
+models/
