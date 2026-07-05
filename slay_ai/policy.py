@@ -65,6 +65,19 @@ SHOP_HIGH_IMPACT_POTION_TOKENS = {
     "strength",
     "weak",
 }
+DUPLICATION_DEFENSE_BLOCK_THRESHOLD = 8
+DUPLICATION_ATTACK_DAMAGE_THRESHOLD = 18
+DUPLICATION_HIGH_VALUE_CARDS = {
+    "Carnage",
+    "Disarm",
+    "Flame Barrier",
+    "Impervious",
+    "Perfected Strike",
+    "Power Through",
+    "Shockwave",
+    "Shrug It Off",
+    "Uppercut",
+}
 ACT1_BLOCK_STABILIZER_CARDS = {
     "Armaments",
     "Disarm",
@@ -205,6 +218,15 @@ class HeuristicPolicy:
                     [{"action": "use_potion", "potion_slot": slot}],
                     f"Long boss/elite fight; use {potion.get('name', potion.get('id'))}.",
                 )
+        for slot, potion in enumerate(game.get("potions", []), start=1):
+            if potion.get("is_empty") or not potion.get("can_use", True):
+                continue
+            key = _potion_key(potion)
+            if "duplication" in key and _has_duplication_potion_target(game, monsters, incoming_sensitive=False):
+                return Decision(
+                    [{"action": "use_potion", "potion_slot": slot}],
+                    f"Long boss/elite fight; use {potion.get('name', potion.get('id'))} before a high-impact card.",
+                )
         return None
 
     def _emergency_potion(
@@ -255,6 +277,15 @@ class HeuristicPolicy:
             if potion.get("is_empty") or not potion.get("can_use", True):
                 continue
             key = _potion_key(potion)
+            if defensive_danger and "duplication" in key and _has_duplication_potion_target(game, monsters, incoming_sensitive=True):
+                return Decision(
+                    [{"action": "use_potion", "potion_slot": slot}],
+                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))} before a high-impact card.",
+                )
+        for slot, potion in enumerate(potions, start=1):
+            if potion.get("is_empty") or not potion.get("can_use", True):
+                continue
+            key = _potion_key(potion)
             if any(
                 token in key
                 for token in (
@@ -263,6 +294,8 @@ class HeuristicPolicy:
                     "attack",
                     "distilledchaos",
                     "energy",
+                    "gambler",
+                    "gamblersbrew",
                     "snecko",
                     "swift",
                     "power",
@@ -1221,6 +1254,43 @@ def _has_empty_potion_slot(game: dict[str, Any]) -> bool:
 
 def _has_usable_potion(game: dict[str, Any]) -> bool:
     return any(not potion.get("is_empty") for potion in game.get("potions", []))
+
+
+def _has_duplication_potion_target(
+    game: dict[str, Any],
+    monsters: list[dict[str, Any]],
+    *,
+    incoming_sensitive: bool,
+) -> bool:
+    combat = game.get("combat_state", {})
+    player = combat.get("player", {})
+    hand = combat.get("hand", [])
+    try:
+        energy = int(player.get("current_energy", 0) or 0)
+    except (TypeError, ValueError):
+        energy = 0
+    try:
+        current_block = int(player.get("block", 0) or 0)
+    except (TypeError, ValueError):
+        current_block = 0
+    pressure = max(0, sum(_monster_attack(monster) for monster in monsters) - current_block)
+    long_fight = _is_long_fight(monsters)
+
+    for card in hand:
+        if not isinstance(card, dict) or not card.get("is_playable", True):
+            continue
+        if _card_energy_cost(card, energy) > energy:
+            continue
+        name = _card_key(card)
+        block = int(card.get("block", 0) or 0)
+        damage = int(card.get("damage", 0) or 0)
+        if pressure > 0 and block >= DUPLICATION_DEFENSE_BLOCK_THRESHOLD:
+            return True
+        if incoming_sensitive and pressure >= 12 and name in DUPLICATION_HIGH_VALUE_CARDS:
+            return True
+        if long_fight and (damage >= DUPLICATION_ATTACK_DAMAGE_THRESHOLD or name in DUPLICATION_HIGH_VALUE_CARDS):
+            return True
+    return False
 
 
 def _has_elite_tempo_potion(game: dict[str, Any]) -> bool:

@@ -1536,6 +1536,114 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
 
+    def test_combat_uses_duplication_potion_before_big_hexaghost_block_card(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 67,
+                "max_hp": 88,
+                "potions": [
+                    {"id": "DuplicationPotion", "name": "Duplication Potion", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 67, "max_hp": 88, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Bash", "id": "Bash", "type": "ATTACK", "cost": 2, "damage": 8, "is_playable": True, "has_target": True},
+                        {"name": "Pommel Strike", "id": "Pommel Strike", "type": "ATTACK", "cost": 1, "damage": 9, "is_playable": True, "has_target": True},
+                        {"name": "Shrug It Off", "id": "Shrug It Off", "type": "SKILL", "cost": 1, "block": 13, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Hexaghost", "id": "Hexaghost", "current_hp": 230, "max_hp": 250, "move": {"hits": 6, "damage": 6}},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+
+    def test_combat_does_not_spend_duplication_potion_on_low_impact_boss_hand(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 67,
+                "max_hp": 88,
+                "potions": [
+                    {"id": "DuplicationPotion", "name": "Duplication Potion", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 67, "max_hp": 88, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {"name": "Hexaghost", "id": "Hexaghost", "current_hp": 250, "max_hp": 250, "move": None},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions[0]["action"], "play_card")
+
+    def test_combat_uses_gamblers_brew_as_emergency_tempo(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 9,
+                "max_hp": 80,
+                "potions": [
+                    {"id": "GamblersBrew", "name": "Gambler's Brew", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 9,
+                    "player": {"current_hp": 9, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Hexaghost", "id": "Hexaghost", "current_hp": 102, "max_hp": 250, "move": {"hits": 6, "damage": 5}},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+
+    def test_combat_does_not_spend_gamblers_brew_when_safe(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 70,
+                "max_hp": 80,
+                "potions": [
+                    {"id": "GamblersBrew", "name": "Gambler's Brew", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 70, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {"name": "Cultist", "id": "Cultist", "current_hp": 40, "max_hp": 40, "move": {"damage": 6}},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions[0]["action"], "play_card")
+
     def test_combat_avoids_nonlethal_attack_when_sharp_hide_can_kill(self):
         state = {
             "in_game": True,
