@@ -32,6 +32,7 @@ EXHAUST_PAYOFF_UNSUPPORTED_PENALTY = 24.0
 EARLY_UNSUPPORTED_ENGINE_PENALTY = 24.0
 EARLY_DUPLICATE_EXHAUST_ENABLER_PENALTY = 16.0
 ACT1_LOW_HP_SURVIVAL_CARD_BONUS = 14.0
+ACT1_AOE_GAP_CARD_BONUS = 28.0
 ACT1_BOSS_PREP_DAMAGE_BONUS = 12.0
 ACT1_BOSS_PREP_DEFENSE_BONUS = 8.0
 ACT1_BOSS_PREP_SLOW_ENGINE_PENALTY = 14.0
@@ -850,6 +851,8 @@ class HeuristicPolicy:
             and name in ACT1_LOW_HP_SURVIVAL_CARDS
         ):
             score += ACT1_LOW_HP_SURVIVAL_CARD_BONUS
+        if self.character == "IRONCLAD" and _act1_deck_needs_aoe(game) and name in AOE_ATTACK_CARDS:
+            score += ACT1_AOE_GAP_CARD_BONUS
         if self.character == "IRONCLAD" and _act1_deck_needs_block_stabilizer(game):
             if name in ACT1_BLOCK_STABILIZER_CARDS:
                 score += 16
@@ -1138,6 +1141,18 @@ def _act1_deck_needs_block_stabilizer(game: dict[str, Any]) -> bool:
     if premium_block == 0:
         return True
     return floor >= 10 and total_block < max(5, int(len(names) * 0.30))
+
+
+def _act1_deck_needs_aoe(game: dict[str, Any]) -> bool:
+    if int(game.get("act", 1) or 1) != 1:
+        return False
+    floor = int(game.get("floor", 0) or 0)
+    if floor < 5 or floor > 15:
+        return False
+    names = _deck_card_names(game)
+    if not names:
+        return False
+    return not any(name in AOE_ATTACK_CARDS for name in names)
 
 
 def _act1_boss_prep_needed(game: dict[str, Any]) -> bool:
@@ -1517,17 +1532,33 @@ def _is_splitting_slime(monster: dict[str, Any]) -> bool:
     return "slime" in label and max_hp >= 30
 
 
+def _is_slime(monster: dict[str, Any]) -> bool:
+    label = f"{monster.get('id', '')} {monster.get('name', '')}".lower()
+    return "slime" in label
+
+
 def _choose_target(monsters: list[dict[str, Any]], damage: int) -> tuple[int | None, dict[str, Any] | None]:
     if not monsters:
         return None, None
+    live_monsters = [monster for monster in monsters if not (monster.get("is_dead") or monster.get("is_gone"))]
+    post_split_slimes = sum(1 for monster in live_monsters if _is_slime(monster)) >= 2
     ranked = []
     for index, monster in enumerate(monsters, start=1):
+        if monster.get("is_dead") or monster.get("is_gone"):
+            continue
         hp_with_block = int(monster.get("current_hp", 0)) + int(monster.get("block", 0))
+        if hp_with_block <= 0:
+            hp_with_block = int(monster.get("hp", 0)) + int(monster.get("block", 0))
         attack = _monster_attack(monster)
         killable = _attack_kills(monster, damage)
         stops_attack = _attack_stops_current_intent(monster, damage)
-        ranked.append((stops_attack, attack > 0, attack, killable, -hp_with_block, index, monster))
-    _, _, _, _, _, index, monster = max(ranked)
+        if post_split_slimes:
+            ranked.append((stops_attack, killable, attack > 0, -hp_with_block, attack, index, monster))
+        else:
+            ranked.append((stops_attack, attack > 0, attack, killable, -hp_with_block, index, monster))
+    if not ranked:
+        return None, None
+    *_, index, monster = max(ranked)
     return index, monster
 
 

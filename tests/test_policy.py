@@ -422,6 +422,81 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
         self.assertEqual(decision.learn_card_pick, "Dropkick")
 
+    def test_card_reward_probe78_prefers_first_act1_aoe_over_extra_block(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "CARD_REWARD",
+                "act": 1,
+                "floor": 6,
+                "class": "IRONCLAD",
+                "current_hp": 55,
+                "max_hp": 80,
+                "deck": [
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Bash"},
+                    {"id": "Anger"},
+                    {"id": "Hemokinesis"},
+                    {"id": "True Grit"},
+                    {"id": "Bloodletting"},
+                ],
+                "screen_state": {
+                    "cards": [
+                        {"name": "localized flame barrier", "id": "Flame Barrier", "type": "SKILL"},
+                        {"name": "localized cleave", "id": "Cleave", "type": "ATTACK"},
+                        {"name": "localized pommel strike", "id": "Pommel Strike", "type": "ATTACK"},
+                    ]
+                },
+            },
+        }
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        self.assertEqual(decision.learn_card_pick, "Cleave")
+
+    def test_card_reward_keeps_premium_block_when_act1_aoe_is_already_covered(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "CARD_REWARD",
+                "act": 1,
+                "floor": 6,
+                "class": "IRONCLAD",
+                "current_hp": 55,
+                "max_hp": 80,
+                "deck": [
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Bash"},
+                    {"id": "Cleave"},
+                ],
+                "screen_state": {
+                    "cards": [
+                        {"name": "localized flame barrier", "id": "Flame Barrier", "type": "SKILL"},
+                        {"name": "localized thunderclap", "id": "Thunderclap", "type": "ATTACK"},
+                        {"name": "localized pommel strike", "id": "Pommel Strike", "type": "ATTACK"},
+                    ]
+                },
+            },
+        }
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        self.assertEqual(decision.learn_card_pick, "Flame Barrier")
+
     def test_shop_room_enters_shop(self):
         state = {
             "in_game": True,
@@ -2721,6 +2796,28 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+
+    def test_combat_post_split_slimes_focuses_low_hp_attacker(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "combat_state": {
+                    "player": {"current_hp": 39, "max_hp": 80, "block": 6, "current_energy": 1},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 4, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Spike Slime", "id": "SpikeSlime_M", "current_hp": 20, "max_hp": 20, "move": {"damage": 10}},
+                        {"name": "Spike Slime", "id": "SpikeSlime_M", "current_hp": 12, "max_hp": 20, "move": {"damage": 10}},
+                        {"name": "Acid Slime", "id": "AcidSlime_L", "current_hp": 46, "max_hp": 54, "move": {"damage": 12}},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 2}])
 
     def test_combat_prioritizes_disarm_against_large_attack(self):
         state = {
