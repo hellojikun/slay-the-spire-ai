@@ -177,6 +177,9 @@ def classify_log(path: Path) -> tuple[LogClassification, list[dict[str, Any]]]:
     if failed_actions:
         base.category = INFRA_BLOCKED
         base.reason = "failed_action"
+    elif outcome.get("source") == "synthetic_after_main_menu":
+        base.category = DIAGNOSTIC_EXCLUDED
+        base.reason = "synthetic_after_main_menu"
     elif victory is None:
         base.category = DIAGNOSTIC_EXCLUDED
         base.reason = "no_terminal_outcome"

@@ -143,6 +143,53 @@ class TrainingManifestTests(unittest.TestCase):
 
         self.assertEqual([str(path) for path in paths], ["clean_a.jsonl", "clean_b.jsonl"])
 
+    def test_synthetic_main_menu_terminal_is_diagnostic(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            log = root / "main_menu.jsonl"
+            write_jsonl(
+                log,
+                [
+                    {
+                        "step": 1,
+                        "state": {
+                            "screen_type": "CARD_REWARD",
+                            "floor": 1,
+                            "class": "IRONCLAD",
+                            "ascension_level": 4,
+                            "deck": ["Strike_R", "Defend_R"],
+                        },
+                        "decision": {"learn_card_pick": "Perfected Strike"},
+                    },
+                    {
+                        "step": 2,
+                        "event": "synthetic_terminal_state",
+                        "source": "main_menu_after_in_game",
+                    },
+                    {
+                        "step": 2,
+                        "state": {
+                            "screen_type": "GAME_OVER",
+                            "floor": 1,
+                            "class": "IRONCLAD",
+                            "ascension_level": 4,
+                            "outcome": {"victory": False, "source": "synthetic_after_main_menu"},
+                        },
+                    },
+                ],
+            )
+
+            manifest, shadow = build_manifest([log])
+
+        self.assertEqual(manifest["summary"][CLEAN_TRAINABLE], 0)
+        self.assertEqual(manifest["summary"][DIAGNOSTIC_EXCLUDED], 1)
+        item = manifest["categories"][DIAGNOSTIC_EXCLUDED][0]
+        self.assertEqual(item["reason"], "synthetic_after_main_menu")
+        self.assertEqual(item["floor"], 1)
+        self.assertEqual(shadow["route_risk"], [])
+        self.assertEqual(shadow["potion_tempo"], [])
+        self.assertEqual(shadow["pre_boss_deck_quality"], [])
+
     def test_shadow_examples_can_be_enriched_with_static_knowledge(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
