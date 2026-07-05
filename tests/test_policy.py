@@ -77,7 +77,8 @@ class PolicyTests(unittest.TestCase):
                 },
             },
         }
-        decision = policy().decide(state)
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 3}])
         self.assertEqual(decision.learn_card_pick, "Perfected Strike")
 
@@ -1183,6 +1184,36 @@ class PolicyTests(unittest.TestCase):
         self.assertIsNotNone(result)
         assert result is not None
         self.assertNotEqual(result.first_action, {"action": "play_card", "card_index": 1, "target_index": 1})
+
+    def test_combat_local_search_ignores_spurious_attack_block_after_speed_potion(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 44,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 44, "max_hp": 88, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 15, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "block": 9, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 15, "is_playable": True},
+                        {"name": "Thunderclap", "id": "Thunderclap", "type": "ATTACK", "cost": 1, "damage": 4, "block": 9, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "block": 9, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Lagavulin", "id": "Lagavulin", "current_hp": 105, "max_hp": 109, "move": {"damage": 18}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions[0]["action"], "play_card")
+        self.assertIn(decision.actions[0]["card_index"], {1, 3})
 
     def test_combat_waits_for_hand_to_be_dealt(self):
         state = {
@@ -2449,6 +2480,50 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(route_eval["options"][0]["lookahead_adjustment"], -145.0)
         self.assertEqual(route_eval["options"][1]["lookahead_adjustment"], -145.0)
         self.assertLess(route_eval["options"][1]["base_score"], route_eval["options"][0]["base_score"])
+
+    def test_map_probe63_prefers_shop_buffer_before_forced_elite(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 3,
+            "current_hp": 84,
+            "max_hp": 88,
+            "gold": 149,
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "?", "x": 1, "y": 3},
+                    {"symbol": "$", "x": 2, "y": 3},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "?", "x": 1, "y": 3, "children": [{"x": 1, "y": 4}]},
+                        {"symbol": "$", "x": 2, "y": 3, "children": [{"x": 2, "y": 4}]},
+                    ],
+                    [
+                        {"symbol": "?", "x": 1, "y": 4, "children": [{"x": 1, "y": 5}]},
+                        {"symbol": "M", "x": 2, "y": 4, "children": [{"x": 2, "y": 5}]},
+                    ],
+                    [
+                        {"symbol": "E", "x": 1, "y": 5},
+                        {"symbol": "R", "x": 2, "y": 5, "children": [{"x": 2, "y": 6}]},
+                    ],
+                    [
+                        {"symbol": "E", "x": 2, "y": 6},
+                    ],
+                ],
+            },
+        }
+        state = {"in_game": True, "game_state": game}
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        route_eval = game["route_evaluation"]
+        self.assertLess(route_eval["options"][0]["lookahead_adjustment"], 0)
+        self.assertGreater(route_eval["options"][1]["lookahead_adjustment"], 0)
 
     def test_map_lookahead_avoids_low_hp_path_committed_to_elite(self):
         game = {

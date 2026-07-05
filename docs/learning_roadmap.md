@@ -13,7 +13,7 @@ This project should not wait for a perfect heuristic bot before adding learning.
 - `slay_ai.learn` can replay completed runs into `data/learned_memory.json`.
 - `slay_ai.train_card_model` can train `models/card_value_model.json`.
 - `StrategyMemory.card_score()` already combines base card scores, learned memory deltas, and model deltas.
-- As of 2026-07-05 after probe55, the cleaned training run loaded 227 card-pick examples and wrote 69 stable card-id deltas. `slay_ai.learn --reset` read 49 logs, applied 38 completed runs, and skipped 11 incomplete runs.
+- As of 2026-07-05 after probe63, the cleaned training run loaded 258 card-pick examples and wrote 70 stable card-id deltas. `slay_ai.learn --reset` read 53 logs, applied 42 completed runs, and skipped 11 incomplete runs. Probe64 is a clean synthetic lethal candidate for the next refresh, but it has not yet been folded into the learned memory.
 
 ## Project Phases
 
@@ -35,6 +35,7 @@ The current advisory agents agree on this boundary:
 - Use stable ids for features and labels: card ids, relic ids, potion ids, screen types, and commands.
 - Keep full combat learning for later; first improve combat with rules, one-turn local search, and encounter-specific evidence.
 - Do not expand learning authority while execution-layer logs are polluted by MCP/action races; fix and exclude diagnostic runs first.
+- After probe64, the next Stage 4 milestone is Slime Boss split/minion planning: split timing, post-split multi-target pressure, Slimed hand pollution, defensive floor, and potion/AoE tempo. This should be implemented as search/evaluator improvements before any broad learned combat controller.
 
 ## First Learning Stage
 
@@ -53,7 +54,7 @@ This produces:
 
 The trained model is intentionally lightweight JSON. It can be deleted or regenerated at any time if it looks polluted.
 
-Do not include `ai_runs_strategy_probe23` in the default training set; it is a known polluted terminal-loop log from before the main-menu synthetic game-over fix. Also do not include probe30 by default: `ai_runs_strategy_probe30` ended as `action_failed`, and `ai_runs_strategy_probe30_continue` is only a diagnostic continuation of that split episode. Do not include probe38 by default: it stopped at max steps in a shop loop and is execution-layer diagnostic only. Do not include the first probe39 attempt: it was manually stopped after repeated invalid `leave` action errors. Do not include probe43 by default: it was manually stopped after an F16 empty-hand wait loop and has no terminal outcome. Also exclude `ai_runs_strategy_probe43_continue_emptyhandfix` by default because it is a split continuation used only to validate the empty-hand fix. Do not include probe45 or its split continuations by default; they were Fiend Fire empty-hand diagnostics. Do not include probe46 by default; it was stopped after exposing the `GRID` `confirm` / MCP `proceed` preflight loop. Do not include probe50 or `ai_runs_strategy_probe50_continue_handselect_rewrite`; they are HAND_SELECT action-rewrite diagnostics. Do not include probe51; it ended as MCP unreachable/read_failed. Do not include probe52; it was manually stopped after exposing a Neow event GRID duplicate-card selection loop. Do not include probe60 or its split continuations by default; they were HAND_SELECT and Act 2 self-damage diagnostics. Probes31-37, probes40-42, probe44, probe47, probe48, probe49, probe53, probe54, probe55, probe61, probe62, and probe63 are clean completed failures or clean synthetic lethal failures and are candidates for the next learning refresh.
+Do not include `ai_runs_strategy_probe23` in the default training set; it is a known polluted terminal-loop log from before the main-menu synthetic game-over fix. Also do not include probe30 by default: `ai_runs_strategy_probe30` ended as `action_failed`, and `ai_runs_strategy_probe30_continue` is only a diagnostic continuation of that split episode. Do not include probe38 by default: it stopped at max steps in a shop loop and is execution-layer diagnostic only. Do not include the first probe39 attempt: it was manually stopped after repeated invalid `leave` action errors. Do not include probe43 by default: it was manually stopped after an F16 empty-hand wait loop and has no terminal outcome. Also exclude `ai_runs_strategy_probe43_continue_emptyhandfix` by default because it is a split continuation used only to validate the empty-hand fix. Do not include probe45 or its split continuations by default; they were Fiend Fire empty-hand diagnostics. Do not include probe46 by default; it was stopped after exposing the `GRID` `confirm` / MCP `proceed` preflight loop. Do not include probe50 or `ai_runs_strategy_probe50_continue_handselect_rewrite`; they are HAND_SELECT action-rewrite diagnostics. Do not include probe51; it ended as MCP unreachable/read_failed. Do not include probe52; it was manually stopped after exposing a Neow event GRID duplicate-card selection loop. Do not include probe60 or its split continuations by default; they were HAND_SELECT and Act 2 self-damage diagnostics. Probes31-37, probes40-42, probe44, probe47, probe48, probe49, probe53, probe54, probe55, probe61, probe62, probe63, and probe64 are clean completed failures or clean synthetic lethal failures and are candidates for the next learning refresh.
 
 ## Promotion Gates
 
@@ -76,5 +77,7 @@ Order of expansion:
 5. Shop purchase model.
 6. One-turn combat local search.
 7. Combat action sequence evaluator.
+
+Current route assessment: stay in Stage 4 until Slime Boss and early Act 2 pressure are less brittle. Stage 5 can grow in shadow mode beside this work, but it should not replace the heuristic/search controller until probes show stable improvement.
 
 Pure reinforcement learning is not a near-term target. The game is long, stochastic, and sparse-reward; the current MCP loop is too sample-limited for direct RL to beat the heuristic quickly.

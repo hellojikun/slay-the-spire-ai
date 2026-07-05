@@ -9,6 +9,7 @@ from .domain.monsters import monster_attack_damage
 
 
 AOE_ATTACK_CARDS = {"Cleave", "Immolate", "Reaper", "Thunderclap", "Whirlwind"}
+ATTACK_BLOCK_CARDS = {"Dash", "Iron Wave", "Just Lucky", "Wallop"}
 ENERGY_GAIN_CARDS = {"Seeing Red": 2}
 SELF_DAMAGE_CARDS = {"Hemokinesis": 2}
 END_TURN_BLOCK_POWERS = {"Metallicize": 3}
@@ -257,6 +258,8 @@ def _card_damage(card: dict[str, Any], x_energy: int) -> int:
 def _card_block(card: dict[str, Any]) -> int:
     block = max(0, _as_int(card.get("block", 0)))
     if block:
+        if str(card.get("type") or "").upper() == "ATTACK" and _card_key(card) not in ATTACK_BLOCK_CARDS:
+            return 0
         return block
     return END_TURN_BLOCK_POWERS.get(_card_key(card), 0)
 

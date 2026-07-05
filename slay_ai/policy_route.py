@@ -9,6 +9,8 @@ from .policy_decision import Decision
 
 
 ACT1_REST_OVER_ELITE_HP_RATIO = 0.72
+ACT1_FORCED_ELITE_NO_BUFFER_PENALTY = 22.0
+ACT1_FORCED_ELITE_BUFFER_BONUS = 18.0
 ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY = 35.0
 ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY = 18.0
 ROUTE_LOOKAHEAD_HORIZON = 4
@@ -200,9 +202,14 @@ def _route_lookahead_adjustment(
     if hp_ratio < 0.35 and features["forced_combat_within_2"]:
         adjustment -= 45
     nearest_rest = features.get("nearest_rest")
+    nearest_shop = features.get("nearest_shop")
+    if int(game.get("act", 1) or 1) == 1 and features["forced_elite_within_3"]:
+        if nearest_rest is None and nearest_shop is None:
+            adjustment -= ACT1_FORCED_ELITE_NO_BUFFER_PENALTY
+        elif (nearest_rest is not None and nearest_rest <= 2) or (nearest_shop is not None and nearest_shop <= 1):
+            adjustment += ACT1_FORCED_ELITE_BUFFER_BONUS
     if hp_ratio < 0.50 and nearest_rest is not None and nearest_rest <= 2:
         adjustment += 35
-    nearest_shop = features.get("nearest_shop")
     if hp_ratio < 0.50 and nearest_shop is not None and nearest_shop <= 2 and int(game.get("gold", 0) or 0) >= 80:
         adjustment += 25
 
