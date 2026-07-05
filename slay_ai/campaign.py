@@ -68,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
 
     client = MCPClient(args.endpoint)
     memory = StrategyMemory.load()
-    client.initialize()
+    client.ensure_initialized()
 
     print(f"Campaign targets: {', '.join(target.key for target in targets)}")
     print(f"Progress file: {args.progress_file}")

@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
+from .combat_math import monster_attack_damage
 from .combat_search import find_best_combat_sequence
 from .memory import StrategyMemory, normalize_card_name
 
@@ -56,6 +57,7 @@ REFLECT_DAMAGE_POWER_IDS = {"sharphide", "thorns"}
 SHOP_BUY_CARD_THRESHOLD = 54.0
 SHOP_PURGE_STRIKE_SCORE = 58.0
 SHOP_HIGH_IMPACT_POTION_SCORE = 50.0
+ACT1_REST_OVER_ELITE_HP_RATIO = 0.72
 SHOP_HIGH_IMPACT_POTION_TOKENS = {
     "attack",
     "block",
@@ -717,6 +719,14 @@ class HeuristicPolicy:
             and has_rest_choice
             and int(game.get("act", 1) or 1) == 1
             and floor >= 5
+            and hp_ratio < ACT1_REST_OVER_ELITE_HP_RATIO
+        ):
+            score -= 42
+        if (
+            symbol == "E"
+            and has_rest_choice
+            and int(game.get("act", 1) or 1) == 1
+            and floor >= 5
             and hp_ratio <= 0.95
             and not _has_elite_tempo_potion(game)
         ):
@@ -876,8 +886,7 @@ class HeuristicPolicy:
 
 
 def _monster_attack(monster: dict[str, Any]) -> int:
-    move = monster.get("move") or {}
-    return int(move.get("damage", 0)) * int(move.get("hits", 1))
+    return monster_attack_damage(monster)
 
 
 def _is_gremlin_nob_fight(monsters: list[dict[str, Any]]) -> bool:

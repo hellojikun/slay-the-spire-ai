@@ -823,6 +823,27 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
         self.assertIn("One-turn search", decision.reason)
 
+    def test_combat_local_search_counts_move_damage_hits(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "combat_state": {
+                    "player": {"current_energy": 2, "current_hp": 10, "max_hp": 80, "block": 0},
+                    "hand": [
+                        {"id": "Strike_R", "name": "Strike", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                        {"id": "Defend_R", "name": "Defend", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"id": "Defend_R", "name": "Defend", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "monsters": [{"name": "Hexaghost", "current_hp": 40, "move": {"damage": 8, "hits": 2}}],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+        self.assertIn("One-turn search", decision.reason)
+
     def test_combat_local_search_plays_energy_setup_before_x_cost_sequence(self):
         state = {
             "in_game": True,
@@ -921,7 +942,7 @@ class PolicyTests(unittest.TestCase):
             },
         }
         decision = policy().decide(state)
-        self.assertNotEqual(decision.actions, [{"action": "play_card", "card_index": 1}])
+        self.assertNotIn("One-turn search", decision.reason)
 
     def test_combat_local_search_does_not_open_with_reflect_lethal_attack(self):
         state = {
@@ -1963,6 +1984,27 @@ class PolicyTests(unittest.TestCase):
                     "next_nodes": [
                         {"symbol": "R", "x": 0, "y": 5},
                         {"symbol": "E", "x": 1, "y": 5},
+                    ]
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+
+    def test_map_probe54_low_hp_prefers_rest_over_elite_even_with_fire_potion(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "MAP",
+                "act": 1,
+                "floor": 5,
+                "current_hp": 47,
+                "max_hp": 72,
+                "potions": [{"id": "Fire Potion"}],
+                "screen_state": {
+                    "next_nodes": [
+                        {"symbol": "E", "x": 1, "y": 5},
+                        {"symbol": "R", "x": 3, "y": 5},
                     ]
                 },
             },

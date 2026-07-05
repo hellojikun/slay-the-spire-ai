@@ -4,19 +4,20 @@ This document records the multi-agent setup used for the Slay the Spire growing 
 
 ## Current Snapshot
 
-Updated 2026-07-05 after probe54 Stage 4 search validation.
+Updated 2026-07-05 after probe55 P0 stabilization.
 
 - Current unlock frontier: `IRONCLAD:A4`, `SILENT:A0`, `DEFECT:A0`, `WATCHER:A0`. A20 is the long-term upper target, not the current runnable claim.
-- Latest included probe: `ai_runs_strategy_probe54/20260705_102155_ironclad_a4.jsonl`.
+- Latest included probe: `ai_runs_strategy_probe55/20260705_110914_ironclad_a4.jsonl`.
 - Latest excluded diagnostic probes: `ai_runs_strategy_probe38/20260705_072307_ironclad_a4.jsonl` stopped at max steps due to a `SHOP_ROOM` / `SHOP_SCREEN` loop; the first probe39 attempt was aborted after proving `leave` is not a valid `execute_actions` action; probe43 and its continuation were split empty-hand diagnostics; probe45 and its two continuations were split Fiend Fire empty-hand diagnostics; probe46 (`ai_runs_strategy_probe46/20260705_085517_ironclad_a4.jsonl`) was stopped after exposing a `GRID` `confirm` / MCP `proceed` preflight loop; probe50 (`ai_runs_strategy_probe50/20260705_093533_ironclad_a4.jsonl`) and `ai_runs_strategy_probe50_continue_handselect_rewrite/20260705_093831_ironclad_a0.jsonl` are HAND_SELECT action-rewrite diagnostics; probe51 (`ai_runs_strategy_probe51/20260705_093933_ironclad_a4.jsonl`) ended as MCP unreachable/read_failed; probe52 (`ai_runs_strategy_probe52/20260705_095355_ironclad_a4.jsonl`) was manually stopped after exposing a Neow event GRID duplicate-card selection loop. Do not use these diagnostic logs in default training.
 - Latest execution fix: `SHOP_SCREEN` waits if inventory has not loaded, then uses MCP's valid `cancel` action for the leave button; runner remembers the floor after a shop cancel and forces the next same-floor `SHOP_ROOM` state to `proceed` instead of re-entering the shop.
 - Latest runner action fix: before executing actions, runner now checks `get_available_commands`; stale unavailable actions are skipped as `preflight_mismatch`, followed by settle and stable-state reread so the next loop can replan. Narrow rewrites handle stale `GRID` confirmations (`confirm` -> `proceed`) and single-card `HAND_SELECT` drops (`select_cards` -> `choose`) when MCP exposes the alternate command and records `executed_actions`, `rewrite_reason`, and `available_commands`.
-- Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections.
-- Latest route policy fix: when Act 1 floor >= 5 offers both rest and elite, exactly 95% HP without an elite-tempo potion now chooses rest instead of treating the elite as safe. After probe47, Act 1 floor >= 11 with moderate low HP, no high-impact elite potion, and `M` versus `?` no longer over-penalizes the monster route or over-trusts the event route.
+- Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections. Combat search, policy, and runner now share the same `move.damage * move.hits` incoming-damage calculation, with `intent_damage` and legacy fields as fallbacks.
+- Latest route policy fix: when Act 1 floor >= 5 offers both rest and elite, HP below 72% now prefers rest even with an elite-tempo potion. The older no-tempo rule still treats HP at or below 95% as risky. After probe47, Act 1 floor >= 11 with moderate low HP, no high-impact elite potion, and `M` versus `?` no longer over-penalizes the monster route or over-trusts the event route.
+- Latest MCP client fix: `MCPClient.initialize()` is idempotent for reused sessions, `campaign` and `runner` call `ensure_initialized()`, and invalid non-JSON HTTP responses are wrapped as `MCPError` with a short response preview.
 - Latest learning pipeline fix: `GAME_OVER` logs with missing `victory` now default to a completed loss in snapshots and offline learning, recovering older clean failures for `slay_ai.learn`.
-- Latest learning run: `slay_ai.train_card_model` loaded 221 card-pick examples and wrote 68 card deltas; `slay_ai.learn --reset` read 48 logs, applied 37 completed runs, and skipped 11 incomplete runs.
-- Latest validation: `python -m unittest discover -s tests` ran 137 tests OK after the one-turn search prototype and retraining; `python -m compileall slay_ai tests` OK.
-- Next live validation: inspect probe54 low-HP forced-elite path and calibrate route/deck evaluation; keep Stage 5 autonomous learning in shadow/tie-breaker mode only.
+- Latest learning run: `slay_ai.train_card_model` loaded 227 card-pick examples and wrote 69 card deltas; `slay_ai.learn --reset` read 49 logs, applied 38 completed runs, and skipped 11 incomplete runs.
+- Latest validation: `python -m unittest discover -s tests` ran 141 tests OK after the P0 stabilization patch and retraining; `python -m compileall slay_ai tests` OK.
+- Next live validation: add map observability/full-map lookahead for route path-commitment risk, then run another current-frontier Ironclad probe. Keep Stage 5 autonomous learning in shadow/tie-breaker mode only.
 
 ## Long-Lived Agents
 
@@ -1194,6 +1195,54 @@ Results:
 - `unittest discover`: 137 tests OK after retraining.
 - `compileall`: OK.
 
+2026-07-05: probe55 validated the probe54 low-HP rest-over-elite route patch enough for inclusion, then a review-driven P0 stabilization patch fixed MCP initialization and incoming-damage consistency.
+
+Probe55 command:
+
+```powershell
+python -m slay_ai.campaign --characters IRONCLAD --ascension 20 --attempts-per-target 1 --max-steps 420 --interval 0.08 --startup-timeout 20 --cooldown 0.5 --existing-save fail --progress-file data\campaign_strategy_probe55.json --log-dir ai_runs_strategy_probe55 --use-all-hardware
+```
+
+Probe55 results:
+
+- Target: `IRONCLAD:A4`.
+- Log: `ai_runs_strategy_probe55/20260705_110914_ironclad_a4.jsonl`.
+- Status: clean completed loss at F8 against Sentries.
+- Action results: 135 `ok`, no recoverable or unrecovered action failures.
+- `One-turn search` decisions: 15.
+- Route evidence: the F5 elite was chosen at 68/88 HP, above the new low-HP rest threshold. Later F7 had only an elite next node at 41/88 HP, so full-map route lookahead remains the next route/deck-evaluation bottleneck.
+
+Review-driven P0 fixes:
+
+- `MCPClient.initialize()` is now idempotent and cached; `campaign` and `runner` use `ensure_initialized()` so a reused MCP session is not initialized twice.
+- Invalid non-JSON MCP HTTP responses are wrapped as `MCPError` with a short body preview instead of leaking `JSONDecodeError`.
+- Added `slay_ai.combat_math` so `combat_search`, policy, and runner snapshots all compute incoming damage from `move.damage * move.hits`, with stable fallbacks for `intent_damage`, `move_damage`, and `attack`.
+- Regression tests cover idempotent initialization, invalid JSON wrapping, `move.damage * hits` local-search pressure, and runner snapshot incoming damage.
+
+Validation:
+
+```powershell
+python -m unittest discover -s tests
+python -m compileall slay_ai tests
+```
+
+Results:
+
+- `unittest discover`: 141 tests OK.
+- `compileall`: OK.
+
+Learning after probe55:
+
+```powershell
+python -m slay_ai.train_card_model ai_runs_live_probe ai_runs_probe ai_runs_strategy_probe3 ai_runs_strategy_probe3_continue ai_runs_strategy_probe4 ai_runs_strategy_probe5 ai_runs_strategy_probe6 ai_runs_strategy_probe7 ai_runs_strategy_probe8 ai_runs_strategy_probe8_continue_rewardfix ai_runs_strategy_probe9 ai_runs_strategy_probe10 ai_runs_strategy_probe11 ai_runs_strategy_probe12 ai_runs_strategy_probe13 ai_runs_strategy_probe14 ai_runs_strategy_probe15 ai_runs_strategy_probe16 ai_runs_strategy_probe17 ai_runs_strategy_probe18 ai_runs_strategy_probe20 ai_runs_strategy_probe21 ai_runs_strategy_probe22 ai_runs_strategy_probe24 ai_runs_strategy_probe25 ai_runs_strategy_probe26 ai_runs_strategy_probe27 ai_runs_strategy_probe28 ai_runs_strategy_probe29 ai_runs_strategy_probe31 ai_runs_strategy_probe32 ai_runs_strategy_probe33 ai_runs_strategy_probe34 ai_runs_strategy_probe35 ai_runs_strategy_probe36 ai_runs_strategy_probe37 ai_runs_strategy_probe40 ai_runs_strategy_probe41 ai_runs_strategy_probe42 ai_runs_strategy_probe44 ai_runs_strategy_probe47 ai_runs_strategy_probe48 ai_runs_strategy_probe49 ai_runs_strategy_probe53 ai_runs_strategy_probe54 ai_runs_strategy_probe55 ai_runs_subject_probe ai_runs_subject_probe2 --min-count 1 --max-delta 6
+python -m slay_ai.learn ai_runs_live_probe ai_runs_probe ai_runs_strategy_probe3 ai_runs_strategy_probe3_continue ai_runs_strategy_probe4 ai_runs_strategy_probe5 ai_runs_strategy_probe6 ai_runs_strategy_probe7 ai_runs_strategy_probe8 ai_runs_strategy_probe8_continue_rewardfix ai_runs_strategy_probe9 ai_runs_strategy_probe10 ai_runs_strategy_probe11 ai_runs_strategy_probe12 ai_runs_strategy_probe13 ai_runs_strategy_probe14 ai_runs_strategy_probe15 ai_runs_strategy_probe16 ai_runs_strategy_probe17 ai_runs_strategy_probe18 ai_runs_strategy_probe20 ai_runs_strategy_probe21 ai_runs_strategy_probe22 ai_runs_strategy_probe24 ai_runs_strategy_probe25 ai_runs_strategy_probe26 ai_runs_strategy_probe27 ai_runs_strategy_probe28 ai_runs_strategy_probe29 ai_runs_strategy_probe31 ai_runs_strategy_probe32 ai_runs_strategy_probe33 ai_runs_strategy_probe34 ai_runs_strategy_probe35 ai_runs_strategy_probe36 ai_runs_strategy_probe37 ai_runs_strategy_probe40 ai_runs_strategy_probe41 ai_runs_strategy_probe42 ai_runs_strategy_probe44 ai_runs_strategy_probe47 ai_runs_strategy_probe48 ai_runs_strategy_probe49 ai_runs_strategy_probe53 ai_runs_strategy_probe54 ai_runs_strategy_probe55 ai_runs_subject_probe ai_runs_subject_probe2 --reset
+```
+
+Results:
+
+- `slay_ai.train_card_model`: loaded 227 card-pick examples and wrote 69 card deltas.
+- `slay_ai.learn --reset`: read 49 logs, applied 38 completed runs, skipped 11 incomplete runs.
+
 ## Main Thread Operating Loop
 
 1. Run the current unlocked frontier, not an assumed A20 target. Use `slay_ai.unlocks` / campaign frontier mode to read local unlocks.
@@ -1222,8 +1271,8 @@ python -m compileall slay_ai tests
 Retrain the first-stage card-value model from accumulated run logs:
 
 ```powershell
-python -m slay_ai.train_card_model ai_runs_live_probe ai_runs_probe ai_runs_strategy_probe3 ai_runs_strategy_probe3_continue ai_runs_strategy_probe4 ai_runs_strategy_probe5 ai_runs_strategy_probe6 ai_runs_strategy_probe7 ai_runs_strategy_probe8 ai_runs_strategy_probe8_continue_rewardfix ai_runs_strategy_probe9 ai_runs_strategy_probe10 ai_runs_strategy_probe11 ai_runs_strategy_probe12 ai_runs_strategy_probe13 ai_runs_strategy_probe14 ai_runs_strategy_probe15 ai_runs_strategy_probe16 ai_runs_strategy_probe17 ai_runs_strategy_probe18 ai_runs_strategy_probe20 ai_runs_strategy_probe21 ai_runs_strategy_probe22 ai_runs_strategy_probe24 ai_runs_strategy_probe25 ai_runs_strategy_probe26 ai_runs_strategy_probe27 ai_runs_strategy_probe28 ai_runs_strategy_probe29 ai_runs_strategy_probe31 ai_runs_strategy_probe32 ai_runs_strategy_probe33 ai_runs_strategy_probe34 ai_runs_strategy_probe35 ai_runs_strategy_probe36 ai_runs_strategy_probe37 ai_runs_strategy_probe40 ai_runs_strategy_probe41 ai_runs_strategy_probe42 ai_runs_strategy_probe44 ai_runs_strategy_probe47 ai_runs_strategy_probe48 ai_runs_strategy_probe49 ai_runs_strategy_probe53 ai_runs_strategy_probe54 ai_runs_subject_probe ai_runs_subject_probe2 --min-count 1 --max-delta 6
-python -m slay_ai.learn ai_runs_live_probe ai_runs_probe ai_runs_strategy_probe3 ai_runs_strategy_probe3_continue ai_runs_strategy_probe4 ai_runs_strategy_probe5 ai_runs_strategy_probe6 ai_runs_strategy_probe7 ai_runs_strategy_probe8 ai_runs_strategy_probe8_continue_rewardfix ai_runs_strategy_probe9 ai_runs_strategy_probe10 ai_runs_strategy_probe11 ai_runs_strategy_probe12 ai_runs_strategy_probe13 ai_runs_strategy_probe14 ai_runs_strategy_probe15 ai_runs_strategy_probe16 ai_runs_strategy_probe17 ai_runs_strategy_probe18 ai_runs_strategy_probe20 ai_runs_strategy_probe21 ai_runs_strategy_probe22 ai_runs_strategy_probe24 ai_runs_strategy_probe25 ai_runs_strategy_probe26 ai_runs_strategy_probe27 ai_runs_strategy_probe28 ai_runs_strategy_probe29 ai_runs_strategy_probe31 ai_runs_strategy_probe32 ai_runs_strategy_probe33 ai_runs_strategy_probe34 ai_runs_strategy_probe35 ai_runs_strategy_probe36 ai_runs_strategy_probe37 ai_runs_strategy_probe40 ai_runs_strategy_probe41 ai_runs_strategy_probe42 ai_runs_strategy_probe44 ai_runs_strategy_probe47 ai_runs_strategy_probe48 ai_runs_strategy_probe49 ai_runs_strategy_probe53 ai_runs_strategy_probe54 ai_runs_subject_probe ai_runs_subject_probe2 --reset
+python -m slay_ai.train_card_model ai_runs_live_probe ai_runs_probe ai_runs_strategy_probe3 ai_runs_strategy_probe3_continue ai_runs_strategy_probe4 ai_runs_strategy_probe5 ai_runs_strategy_probe6 ai_runs_strategy_probe7 ai_runs_strategy_probe8 ai_runs_strategy_probe8_continue_rewardfix ai_runs_strategy_probe9 ai_runs_strategy_probe10 ai_runs_strategy_probe11 ai_runs_strategy_probe12 ai_runs_strategy_probe13 ai_runs_strategy_probe14 ai_runs_strategy_probe15 ai_runs_strategy_probe16 ai_runs_strategy_probe17 ai_runs_strategy_probe18 ai_runs_strategy_probe20 ai_runs_strategy_probe21 ai_runs_strategy_probe22 ai_runs_strategy_probe24 ai_runs_strategy_probe25 ai_runs_strategy_probe26 ai_runs_strategy_probe27 ai_runs_strategy_probe28 ai_runs_strategy_probe29 ai_runs_strategy_probe31 ai_runs_strategy_probe32 ai_runs_strategy_probe33 ai_runs_strategy_probe34 ai_runs_strategy_probe35 ai_runs_strategy_probe36 ai_runs_strategy_probe37 ai_runs_strategy_probe40 ai_runs_strategy_probe41 ai_runs_strategy_probe42 ai_runs_strategy_probe44 ai_runs_strategy_probe47 ai_runs_strategy_probe48 ai_runs_strategy_probe49 ai_runs_strategy_probe53 ai_runs_strategy_probe54 ai_runs_strategy_probe55 ai_runs_subject_probe ai_runs_subject_probe2 --min-count 1 --max-delta 6
+python -m slay_ai.learn ai_runs_live_probe ai_runs_probe ai_runs_strategy_probe3 ai_runs_strategy_probe3_continue ai_runs_strategy_probe4 ai_runs_strategy_probe5 ai_runs_strategy_probe6 ai_runs_strategy_probe7 ai_runs_strategy_probe8 ai_runs_strategy_probe8_continue_rewardfix ai_runs_strategy_probe9 ai_runs_strategy_probe10 ai_runs_strategy_probe11 ai_runs_strategy_probe12 ai_runs_strategy_probe13 ai_runs_strategy_probe14 ai_runs_strategy_probe15 ai_runs_strategy_probe16 ai_runs_strategy_probe17 ai_runs_strategy_probe18 ai_runs_strategy_probe20 ai_runs_strategy_probe21 ai_runs_strategy_probe22 ai_runs_strategy_probe24 ai_runs_strategy_probe25 ai_runs_strategy_probe26 ai_runs_strategy_probe27 ai_runs_strategy_probe28 ai_runs_strategy_probe29 ai_runs_strategy_probe31 ai_runs_strategy_probe32 ai_runs_strategy_probe33 ai_runs_strategy_probe34 ai_runs_strategy_probe35 ai_runs_strategy_probe36 ai_runs_strategy_probe37 ai_runs_strategy_probe40 ai_runs_strategy_probe41 ai_runs_strategy_probe42 ai_runs_strategy_probe44 ai_runs_strategy_probe47 ai_runs_strategy_probe48 ai_runs_strategy_probe49 ai_runs_strategy_probe53 ai_runs_strategy_probe54 ai_runs_strategy_probe55 ai_runs_subject_probe ai_runs_subject_probe2 --reset
 ```
 
 PowerShell wildcard arguments such as `ai_runs_strategy_probe*` may not expand the way these scripts expect. Prefer explicit directory arguments until script-side glob expansion is added.

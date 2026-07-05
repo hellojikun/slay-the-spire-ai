@@ -11,6 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from .combat_math import incoming_damage
 from .mcp_client import MCPClient, MCPError
 from .memory import StrategyMemory
 from .policy import Decision, HeuristicPolicy
@@ -114,7 +115,10 @@ def run_episode(
     if dry_run and (start or continue_run):
         return EpisodeResult("dry_run", log_path, 0)
 
-    client.initialize()
+    if hasattr(client, "ensure_initialized"):
+        client.ensure_initialized()
+    else:
+        client.initialize()
     launched_or_continued = False
     if start:
         start_args: dict[str, Any] = {"character": character, "ascension": ascension}
@@ -866,11 +870,7 @@ def _current_hp(game: dict[str, Any]) -> int:
 
 
 def _incoming_damage(combat: dict[str, Any]) -> int:
-    total = 0
-    for monster in combat.get("monsters", []):
-        move = monster.get("move") or {}
-        total += int(move.get("damage", 0) or 0) * int(move.get("hits", 1) or 1)
-    return total
+    return incoming_damage(combat)
 
 
 def _settle_delay_for_actions(actions: list[dict[str, Any]], interval: float, recoverable: bool = False) -> float:

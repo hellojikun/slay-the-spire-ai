@@ -16,6 +16,14 @@ Low-risk client fixes are still useful:
 - Add action-aware settle waits.
 - Probe protocol health separately from game-state health.
 - If the previous frame was a likely lethal combat state and MCP state reads are stuck, synthesize a terminal death state so the run is recorded as `game_over` rather than `read_failed`.
+- Keep `MCPClient.initialize()` idempotent when a campaign passes the same client into `run_episode()`, so a live `Mcp-Session-Id` is not initialized twice.
+- Wrap non-JSON HTTP responses as `MCPError` with a short response preview, so CLI entrypoints can handle MCP/proxy output failures consistently.
+
+Implemented client safeguards:
+
+- `MCPClient.initialize()` caches its result and returns it on later calls.
+- `MCPClient.ensure_initialized()` is the preferred call site for campaign and runner startup.
+- JSON-RPC response decoding errors are converted to `MCPError`.
 
 ## Watchdog
 

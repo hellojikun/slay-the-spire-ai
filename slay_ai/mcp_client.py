@@ -44,8 +44,12 @@ class MCPClient:
     def __post_init__(self) -> None:
         self._ids = itertools.count(1)
         self.session_id: str | None = None
+        self.initialized = False
+        self._initialize_result: dict[str, Any] | None = None
 
     def initialize(self) -> dict[str, Any]:
+        if self.initialized:
+            return self._initialize_result or {}
         result = self.rpc(
             "initialize",
             {
@@ -54,7 +58,12 @@ class MCPClient:
                 "clientInfo": {"name": "slay-ai", "version": "0.1.0"},
             },
         )
+        self.initialized = True
+        self._initialize_result = result
         return result
+
+    def ensure_initialized(self) -> dict[str, Any]:
+        return self.initialize()
 
     def list_tools(self) -> list[dict[str, Any]]:
         return self.rpc("tools/list").get("tools", [])
@@ -155,7 +164,11 @@ class MCPClient:
         except (error.URLError, RemoteDisconnected, TimeoutError, ConnectionError) as exc:
             raise MCPError(f"Cannot reach MCPTheSpire at {self.endpoint}: {exc}") from exc
 
-        data = json.loads(body or "{}")
+        try:
+            data = json.loads(body or "{}")
+        except json.JSONDecodeError as exc:
+            preview = (body or "")[:500].replace("\n", "\\n")
+            raise MCPError(f"Invalid JSON from MCPTheSpire: {preview}") from exc
         if "error" in data:
             err = data["error"]
             raise MCPError(f"{err.get('code')}: {err.get('message')}")

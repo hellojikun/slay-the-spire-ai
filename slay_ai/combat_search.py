@@ -5,6 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+from .combat_math import monster_attack_damage
+
 
 AOE_ATTACK_CARDS = {"Cleave", "Immolate", "Reaper", "Thunderclap", "Whirlwind"}
 ENERGY_GAIN_CARDS = {"Seeing Red": 2}
@@ -259,7 +261,7 @@ def _monster_state(monster: dict[str, Any]) -> _MonsterState:
     return _MonsterState(
         hp=max(0, _as_int(monster.get("current_hp", 0))),
         block=max(0, _as_int(monster.get("block", 0))),
-        attack=max(0, _as_int(monster.get("intent_damage", monster.get("move_damage", monster.get("attack", 0))))),
+        attack=max(0, monster_attack_damage(monster)),
     )
 
 

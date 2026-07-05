@@ -567,7 +567,7 @@ class RunnerTests(unittest.TestCase):
                 "max_hp": 46,
                 "block": 3,
                 "intent": "ATTACK",
-                "move": {"damage": 14},
+                "move": {"damage": 7, "hits": 2},
                 "powers": [{"id": "Weak", "amount": 1}],
             }
         ]
