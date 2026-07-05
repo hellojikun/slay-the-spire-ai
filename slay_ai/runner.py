@@ -23,7 +23,8 @@ from .core.state_reader import (
 from .domain.monsters import incoming_damage
 from .memory import StrategyMemory
 from .mcp.client import MCPClient, MCPError
-from .policy import Decision, HeuristicPolicy
+from .policy import HeuristicPolicy
+from .policy_decision import Decision
 
 
 ROOT = Path(__file__).resolve().parents[1]
