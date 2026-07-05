@@ -173,6 +173,16 @@
       "values": {"discounted_card_cost": 0}
     },
     {
+      "id": "Elixir",
+      "name": "Elixir",
+      "aliases": ["ElixirPotion"],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["exhaust", "status_cleanup", "hand_fix", "situational"],
+      "values": {"exhaust_hand_cards": true}
+    },
+    {
       "id": "Regeneration Potion",
       "name": "Regeneration Potion",
       "aliases": ["RegenPotion", "RegenerationPotion"],
