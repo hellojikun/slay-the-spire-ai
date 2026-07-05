@@ -546,7 +546,7 @@ class HeuristicPolicy:
 
         if best:
             return Decision([best[1]], best[2])
-        fallback = self._pressure_attack_fallback(hand, monsters, energy, incoming, current_block, current_hp)
+        fallback = self._pressure_attack_fallback(hand, monsters, energy, incoming, current_block, current_hp, hp_ratio)
         if fallback:
             return fallback
         return Decision([{"action": "end_turn"}], f"No valuable playable card. Incoming={incoming}, block={current_block}.")
@@ -674,6 +674,7 @@ class HeuristicPolicy:
         incoming: int,
         current_block: int,
         current_hp: int,
+        hp_ratio: float,
     ) -> Decision | None:
         if energy <= 0 or incoming <= current_block:
             return None
@@ -692,6 +693,8 @@ class HeuristicPolicy:
             reflect_buffer = current_block + _card_block_value(card)
             reflect_loss = max(0, reflect_damage - reflect_buffer)
             if reflect_damage and reflect_loss >= current_hp and not (target and _attack_kills(target, damage)):
+                continue
+            if _self_damage_fallback_too_risky(card, target, monsters, current_hp, incoming, current_block, hp_ratio):
                 continue
             score = float(damage)
             if reflect_damage:
@@ -1420,6 +1423,39 @@ def _x_cost_attack_spends_needed_block(
         other_cost = _card_energy_cost(other, energy)
         if 0 < other_cost <= energy:
             return True
+    return False
+
+
+def _self_damage_fallback_too_risky(
+    card: dict[str, Any],
+    target: dict[str, Any] | None,
+    monsters: list[dict[str, Any]],
+    current_hp: int,
+    incoming: int,
+    current_block: int,
+    hp_ratio: float,
+) -> bool:
+    self_damage = SELF_DAMAGE_HP_COST_CARDS.get(_card_key(card), 0)
+    if self_damage <= 0:
+        return False
+    if current_hp <= self_damage:
+        return True
+
+    damage = _card_damage_value(card)
+    target_killed = bool(target and _attack_kills(target, damage))
+    remaining_incoming = incoming
+    if target_killed and target is not None:
+        remaining_incoming = max(0, incoming - _monster_attack(target))
+    projected_loss = self_damage + max(0, remaining_incoming - current_block)
+    if projected_loss >= current_hp:
+        return True
+    if target_killed and all(monster is target or monster.get("is_dead") or monster.get("is_gone") for monster in monsters):
+        return False
+    remaining_hp = current_hp - projected_loss
+    if remaining_hp <= 4:
+        return True
+    if hp_ratio <= 0.20 and not target_killed:
+        return True
     return False
 
 

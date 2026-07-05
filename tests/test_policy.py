@@ -3327,6 +3327,41 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3, "target_index": 1}])
 
+    def test_combat_avoids_pressure_fallback_hemokinesis_from_probe87(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 12,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 11,
+                    "player": {"current_hp": 12, "max_hp": 80, "current_energy": 1, "block": 10},
+                    "hand": [
+                        {"name": "Bash", "id": "Bash", "type": "ATTACK", "cost": 2, "damage": 8, "is_playable": False, "has_target": True},
+                        {"name": "Hemokinesis", "id": "Hemokinesis", "type": "ATTACK", "cost": 1, "damage": 15, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "Hexaghost",
+                            "id": "Hexaghost",
+                            "current_hp": 69,
+                            "max_hp": 250,
+                            "move": {"hits": 2, "damage": 8},
+                            "powers": [{"id": "Strength", "amount": 2}],
+                        },
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "end_turn"}])
+
     def test_combat_can_play_hemokinesis_for_safe_lethal(self):
         state = {
             "in_game": True,
