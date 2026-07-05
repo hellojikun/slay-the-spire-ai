@@ -77,6 +77,7 @@ class _SearchState:
     energy: int
     block: int
     monsters: list[_MonsterState]
+    hand: tuple[_Candidate, ...] = ()
     damage_dealt: int = 0
     kills: int = 0
     self_damage: int = 0
@@ -94,7 +95,8 @@ def find_best_combat_sequence(game: dict[str, Any], *, max_depth: int = 5, max_b
     energy = max(0, _as_int(player.get("current_energy", 0)))
     block = max(0, _as_int(player.get("block", 0)))
     initial_incoming = _incoming(monsters)
-    initial_loss = max(0, initial_incoming - block)
+    initial_hand = tuple(_Candidate(index, card) for index, card in enumerate(hand, start=1))
+    initial_loss = max(0, initial_incoming - block) + _end_turn_status_damage(initial_hand)
     initial_total_attack = initial_incoming
 
     candidates = [
@@ -126,7 +128,12 @@ def find_best_combat_sequence(game: dict[str, Any], *, max_depth: int = 5, max_b
             visit(next_state, next_remaining, sequence + (candidate,))
 
     visit(
-        _SearchState(energy=energy, block=block, monsters=[_copy_monster(monster) for monster in monsters]),
+        _SearchState(
+            energy=energy,
+            block=block,
+            monsters=[_copy_monster(monster) for monster in monsters],
+            hand=initial_hand,
+        ),
         tuple(candidates),
         (),
     )
@@ -187,6 +194,7 @@ def _apply_card(state: _SearchState, candidate: _Candidate) -> None:
     cost = _card_cost(card, state.energy)
     if cost is None:
         return
+    state.hand = tuple(item for item in state.hand if item.hand_index != candidate.hand_index)
     spent = min(cost, state.energy)
     state.energy -= spent
     state.energy += _energy_gain(card)
@@ -315,7 +323,22 @@ def _is_weak_all(card: dict[str, Any]) -> bool:
 
 
 def _projected_total_loss(state: _SearchState) -> int:
-    return state.self_damage + max(0, _incoming(state.monsters) - state.block)
+    return state.self_damage + max(0, _incoming(state.monsters) - state.block) + _end_turn_status_damage(state.hand)
+
+
+def _end_turn_status_damage(hand: tuple[_Candidate, ...]) -> int:
+    return sum(_burn_damage(candidate.card) for candidate in hand)
+
+
+def _burn_damage(card: dict[str, Any]) -> int:
+    raw_key = str(card.get("id") or card.get("name") or "")
+    key = raw_key.lower().replace("+", "")
+    name = str(card.get("name") or "")
+    if key != "burn" and name.strip().lower().replace("+", "") != "burn":
+        return 0
+    if _as_int(card.get("upgrades", 0)) > 0 or "+" in name or "+" in raw_key:
+        return 4
+    return 2
 
 
 def _fight_ended(state: _SearchState) -> bool:
@@ -402,6 +425,7 @@ def _copy_state(state: _SearchState) -> _SearchState:
         energy=state.energy,
         block=state.block,
         monsters=[_copy_monster(monster) for monster in state.monsters],
+        hand=state.hand,
         damage_dealt=state.damage_dealt,
         kills=state.kills,
         self_damage=state.self_damage,

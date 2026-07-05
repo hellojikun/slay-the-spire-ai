@@ -1940,6 +1940,38 @@ Results:
 6. Continue or restart the game and verify the fix in a real run.
 7. Send Faraday strategy bottlenecks and Hegel execution/MCP bottlenecks as separate, scoped tasks.
 
+## Active Agent Roles
+
+2026-07-05 active long-running roles:
+
+- Main thread: integrates code, tests, commits, pushes, and keeps the project moving on the current evidence-backed bottleneck.
+- Archimedes `019f30f8-ed4d-7bd3-9519-b3bcfda8116d`: flow/run-data agent. Runs probes, classifies logs, updates manifest/shadow data, and reports failure chains. It must not edit code or commit.
+- Program optimization agent: requested but not currently spawned because the multi-agent tool returned `agent thread limit reached`. Until a slot is available, main thread owns code changes.
+- AI algorithm agent: requested but not currently spawned for the same thread-limit reason. Until a slot is available, main thread owns algorithm-roadmap updates and shadow-model design.
+
+Latest coordination command:
+
+```text
+send_input Archimedes: inspect probe81, report the F16 Hexaghost failure chain, prepare the probe82 command, and avoid starting a new run until the Burn/Burn+ fix is integrated.
+```
+
+2026-07-05 probe81 result:
+
+- Command family: current-frontier Ironclad A4 campaign probe, output in `ai_runs_strategy_probe81`.
+- Manifest: `data\training_manifest_probe81.json`.
+- Shadow data: `data\shadow_probe81`.
+- Category: 1 clean trainable completed failure.
+- Failure: F16 Hexaghost, HP 6, no potions, hand contained two `Burn+` cards. One-turn search selected `Uppercut -> Defend_R` and reported `loss 8->1`, but the game ended because unblocked attack plus end-turn Burn damage was lethal.
+- Flow-agent note: probe81 also shows resource pressure before the boss. The F11 Sentries fight consumed `SkillPotion` plus `Explosive Potion` and left the run at 40/80; F13 rested to 64/80, then F15 smith left the deck entering Hexaghost at 68/80 with no potions. Boss T2 `SkillPotion -> Disarm` was a positive decision, but output was too low and Hexaghost still had 64/250 HP at death.
+- Program fix: model end-turn Burn/Burn+ damage inside combat search projected loss before probe82.
+
+Probe82 should run only after the Burn/Burn+ search fix is committed and pushed:
+
+```powershell
+python -m slay_ai.campaign --characters IRONCLAD --ascension 20 --attempts-per-target 1 --max-steps 440 --interval 0.08 --startup-timeout 20 --cooldown 0.5 --existing-save fail --progress-file data\campaign_strategy_probe82.json --log-dir ai_runs_strategy_probe82 --use-all-hardware
+python -m slay_ai.training_manifest ai_runs_strategy_probe82 --output data\training_manifest_probe82.json --shadow-dir data\shadow_probe82 --knowledge-dir data\static_knowledge
+```
+
 ## Useful Commands
 
 Check current MCP screen:
