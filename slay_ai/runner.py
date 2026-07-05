@@ -184,6 +184,13 @@ def run_episode(
                     state = _recover_state_read(client, interval)
                 except MCPError as final_exc:
                     diagnostics = _probe_mcp_health(client)
+                    terminal_recovery_attempted = _diagnostics_show_game_over(diagnostics)
+                    terminal_recovery_succeeded = False
+                    post_recovery_diagnostics = None
+                    if terminal_recovery_attempted:
+                        terminal_recovery_succeeded = _recover_terminal_game_over_after_state_failure(client)
+                        if terminal_recovery_succeeded:
+                            post_recovery_diagnostics = _probe_mcp_health(client)
                     synthetic_state = _synthetic_terminal_state_after_read_failure(last_state, last_actions, diagnostics)
                     if synthetic_state is not None:
                         _write_event(
@@ -194,6 +201,9 @@ def run_episode(
                             previous_error=str(exc),
                             previous_actions=last_actions,
                             diagnostics=diagnostics,
+                            terminal_recovery_attempted=terminal_recovery_attempted,
+                            terminal_recovery_succeeded=terminal_recovery_succeeded,
+                            post_recovery_diagnostics=post_recovery_diagnostics,
                         )
                         _write_state_record(
                             log_path,
@@ -396,8 +406,37 @@ def _recover_terminal_game_over_before_start(client: MCPClient) -> bool:
         client.execute_actions([{"action": "proceed"}])
     except MCPError:
         return False
-    time.sleep(0.5)
+    _wait_for_terminal_commands_to_clear(client)
     return True
+
+
+def _recover_terminal_game_over_after_state_failure(client: MCPClient) -> bool:
+    try:
+        commands = client.call_tool("get_available_commands", {})
+    except MCPError:
+        return False
+    if commands.get("screen_type") != "GAME_OVER":
+        return False
+    available = _available_tool_names(commands)
+    if "proceed" not in available:
+        return False
+    try:
+        client.execute_actions([{"action": "proceed"}])
+    except MCPError:
+        return False
+    _wait_for_terminal_commands_to_clear(client)
+    return True
+
+
+def _wait_for_terminal_commands_to_clear(client: MCPClient, attempts: int = 6, delay: float = 0.5) -> None:
+    for _ in range(max(1, attempts)):
+        time.sleep(delay)
+        try:
+            commands = client.call_tool("get_available_commands", {})
+        except MCPError:
+            continue
+        if commands.get("screen_type") != "GAME_OVER" or not commands.get("in_game", True):
+            return
 
 
 def _return_to_menu_for_abandon(client: MCPClient, timeout: float = 15.0) -> None:

@@ -363,6 +363,33 @@ class NullWithGameOverCommandsClient(FakeClient):
         }
 
 
+class TerminalRecoveryAfterNullClient(NullWithGameOverCommandsClient):
+    def call_tool(self, name: str, arguments: dict | None = None) -> dict:
+        if name == "get_available_commands" and self.after_action:
+            return {"screen_type": "GAME_OVER", "available_tools": [{"tool": "proceed"}]}
+        return super().call_tool(name, arguments)
+
+
+class TerminalCommandsClearClient(FakeClient):
+    def __init__(self) -> None:
+        super().__init__([main_menu_state()])
+        self.proceeded = False
+        self.command_reads = 0
+
+    def call_tool(self, name: str, arguments: dict | None = None) -> dict:
+        if name != "get_available_commands":
+            return super().call_tool(name, arguments)
+        self.command_reads += 1
+        if self.proceeded:
+            return {"screen_type": "MAIN_MENU", "in_game": False, "available_tools": [{"tool": "start_game"}]}
+        return {"screen_type": "GAME_OVER", "in_game": True, "available_tools": [{"tool": "proceed"}]}
+
+    def execute_actions(self, actions: list[dict]) -> None:
+        super().execute_actions(actions)
+        if actions == [{"action": "proceed"}]:
+            self.proceeded = True
+
+
 class RunnerTests(unittest.TestCase):
     def test_start_recovers_terminal_game_over_before_new_run(self):
         with TemporaryDirectory() as tmp:
@@ -926,6 +953,46 @@ class RunnerTests(unittest.TestCase):
                 if line.strip()
             ]
             self.assertTrue(any(record.get("event") == "synthetic_terminal_state" for record in records))
+
+    def test_null_with_game_over_commands_auto_proceeds_terminal_screen(self):
+        with TemporaryDirectory() as tmp:
+            memory = StrategyMemory.load(learned_path=Path(tmp) / "learned.json")
+            client = TerminalRecoveryAfterNullClient()
+            with (
+                patch.object(runner.time, "sleep", return_value=None),
+                patch.object(runner, "_wait_for_end_turn_transition", return_value=0.0),
+            ):
+                result = runner.run_episode(
+                    client=client,
+                    memory=memory,
+                    max_steps=3,
+                    interval=0.01,
+                    log_dir=Path(tmp),
+                )
+
+            self.assertEqual(result.status, "game_over")
+            self.assertIn([{"action": "proceed"}], client.executed)
+            records = [
+                json.loads(line)
+                for line in result.log_path.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            ]
+            terminal_events = [
+                record for record in records if record.get("event") == "synthetic_terminal_state"
+            ]
+            self.assertTrue(terminal_events)
+            self.assertTrue(terminal_events[-1]["terminal_recovery_attempted"])
+            self.assertTrue(terminal_events[-1]["terminal_recovery_succeeded"])
+
+    def test_terminal_recovery_waits_until_game_over_clears(self):
+        client = TerminalCommandsClearClient()
+
+        with patch.object(runner.time, "sleep", return_value=None):
+            recovered = runner._recover_terminal_game_over_after_state_failure(client)
+
+        self.assertTrue(recovered)
+        self.assertEqual(client.executed, [[{"action": "proceed"}]])
+        self.assertGreaterEqual(client.command_reads, 2)
 
     def test_end_turn_waits_for_turn_transition(self):
         before = combat_state(turn=2, hand=[], energy=0)

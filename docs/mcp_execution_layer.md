@@ -31,18 +31,19 @@ Implemented client safeguards:
 
 ## 2026-07-05 A0 Execution Findings
 
-The current short-term milestone is stable A0 Act 1 boss completion before returning to ascension climbing. Probe91 (`runs/ai_runs_strategy_probe91_a0/20260705_201624_ironclad_a0.jsonl`) reached F19 after beating Slime Boss, but was manually stopped and classified as `diagnostic_excluded` / `no_terminal_outcome`. Probe94 (`runs/ai_runs_strategy_probe94_a0/20260705_204121_ironclad_a0.jsonl`) repeated the Act 1 clear, reached Act 2 F31, and is classified clean/trainable in `data/training_manifest_probe94_a0.json`.
+The current short-term milestone is stable A0 Act 1 boss completion before returning to ascension climbing. Probe91 (`runs/ai_runs_strategy_probe91_a0/20260705_201624_ironclad_a0.jsonl`) reached F19 after beating Slime Boss, but was manually stopped and classified as `diagnostic_excluded` / `no_terminal_outcome`. Probe94 (`runs/ai_runs_strategy_probe94_a0/20260705_204121_ironclad_a0.jsonl`) repeated the Act 1 clear, reached Act 2 F31, and is classified clean/trainable in `data/training_manifest_probe94_a0.json`. Probe95 (`runs/ai_runs_strategy_probe95_a0/20260705_205543_ironclad_a0.jsonl`) again cleared Act 1, reached Act 2 F21, and is classified clean/trainable in `data/training_manifest_probe95_a0.json`.
 
 Two MCP/execution issues are now P0 for stability:
 
 - CHEST states can report `room_phase=COMPLETE`, `screen_state.chest_open=false`, and `screen_state.rewards=[]`. In probe91, F9 and F17 both proceeded with only Burning Blood in the relic list, so this was a real skipped-relic failure, not merely missing log text. Probe94 live-validated the runner-side guard: F9, F17, and F26 all probed the chest before proceeding, and F9/F26 explicitly logged `Collect RELIC`.
 - Start/continue transitions can race against the live dungeon state. A new A0 run may already be inside combat after clearing a terminal/passive screen, and `--continue` may be called while already in dungeon. Runner now checks the current state before issuing MCP start/continue commands.
-- `GAME_OVER` can still leave MCP state tools broken even when protocol and available-command probes respond. Probe94 ended at F31 with `get_available_commands` reporting `GAME_OVER` + `proceed`, while `get_screen_state` and `get_game_state` returned `Internal error: null`; watchdog `--recover-terminal` recovered the terminal screen and the runner recorded a synthetic game-over.
+- `GAME_OVER` can still leave MCP state tools broken even when protocol and available-command probes respond. Probe94 ended at F31 with `get_available_commands` reporting `GAME_OVER` + `proceed`, while `get_screen_state` and `get_game_state` returned `Internal error: null`; watchdog `--recover-terminal` recovered the terminal screen and the runner recorded a synthetic game-over. Runner now performs the same terminal `proceed` recovery inside the read-failure path. Probe95 live-validated this: the synthetic terminal event records `terminal_recovery_attempted=true` and `terminal_recovery_succeeded=true`, and a follow-up watchdog showed MCP healthy at `MAIN_MENU`.
 
 Immediate runner-side fixes:
 
 - CHEST policy is split into `slay_ai.policy_chest` and treats `chest_open != true` with empty rewards as an unverified chest. It probes `choose 1` once per floor before allowing `proceed`.
 - CHEST snapshots now record `chest_open` and visible rewards, so future logs can prove whether MCP exposed a relic reward.
+- State-read terminal recovery now sends `proceed` when health diagnostics show a terminal `GAME_OVER` with `proceed`, then waits briefly for available commands to leave `GAME_OVER` before writing post-recovery diagnostics.
 
 Next MCP-side investigation:
 
