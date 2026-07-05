@@ -14,6 +14,7 @@ ACT1_FORCED_ELITE_NO_BUFFER_PENALTY = 32.0
 ACT1_HEALTHY_FORCED_ELITE_NO_BUFFER_PENALTY = 55.0
 ACT1_DEEP_FORCED_ELITE_NO_BUFFER_PENALTY = 24.0
 ACT1_FORCED_ELITE_BUFFER_BONUS = 18.0
+ACT1_ELITE_CHAIN_LOW_BUFFER_PENALTY = 38.0
 ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY = 35.0
 ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY = 18.0
 ACT2_LOW_HP_ROUTE_RISK_CAP = 95.0
@@ -215,6 +216,9 @@ def _route_lookahead_adjustment(
                 adjustment -= ACT1_FORCED_ELITE_NO_BUFFER_PENALTY
         elif (nearest_rest is not None and nearest_rest <= 2) or (nearest_shop is not None and nearest_shop <= 1):
             adjustment += ACT1_FORCED_ELITE_BUFFER_BONUS
+        elif str(choice_node.get("symbol", "")).upper() == "E" and hp_ratio < 0.80:
+            adjustment -= ACT1_ELITE_CHAIN_LOW_BUFFER_PENALTY
+            features["act1_elite_chain_penalty"] = -ACT1_ELITE_CHAIN_LOW_BUFFER_PENALTY
     elif int(game.get("act", 1) or 1) == 1 and features["forced_elite_within_5"]:
         if nearest_rest is None and nearest_shop is None:
             adjustment -= ACT1_DEEP_FORCED_ELITE_NO_BUFFER_PENALTY

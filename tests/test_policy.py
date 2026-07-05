@@ -3848,6 +3848,66 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(route_eval["options"][0]["lookahead"]["nearest_shop"], None)
         self.assertEqual(route_eval["options"][1]["lookahead"]["nearest_shop"], 0)
 
+    def test_map_probe83_avoids_injured_elite_chain_before_recovery(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 7,
+            "current_hp": 69,
+            "max_hp": 95,
+            "gold": 268,
+            "potions": [{"id": "Block Potion"}, {"id": "Fire Potion"}, {"id": "FearPotion"}],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+                {"id": "Bludgeon"},
+                {"id": "Pommel Strike"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "E", "x": 0, "y": 7},
+                    {"symbol": "M", "x": 1, "y": 7},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "E", "x": 0, "y": 7, "children": [{"x": 0, "y": 8}]},
+                        {"symbol": "M", "x": 1, "y": 7, "children": [{"x": 1, "y": 8}]},
+                    ],
+                    [
+                        {"symbol": "T", "x": 0, "y": 8, "children": [{"x": 0, "y": 9}]},
+                        {"symbol": "R", "x": 1, "y": 8},
+                    ],
+                    [
+                        {"symbol": "E", "x": 0, "y": 9, "children": [{"x": 0, "y": 10}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 10, "children": [{"x": 0, "y": 11}]},
+                    ],
+                    [
+                        {"symbol": "$", "x": 0, "y": 11},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        route_eval = game["route_evaluation"]
+        elite_lookahead = route_eval["options"][0]["lookahead"]
+        self.assertTrue(elite_lookahead["forced_elite_within_3"])
+        self.assertEqual(elite_lookahead["nearest_shop"], 4)
+        self.assertEqual(elite_lookahead["act1_elite_chain_penalty"], -38.0)
+
     def test_map_readiness_avoids_immediate_elite_without_core_tools(self):
         game = {
             "screen_type": "MAP",
