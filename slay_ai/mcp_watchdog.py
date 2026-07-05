@@ -11,7 +11,7 @@ import json
 import time
 from typing import Any
 
-from .mcp_client import MCPClient
+from .mcp.client import MCPClient
 
 
 def main(argv: list[str] | None = None) -> int:

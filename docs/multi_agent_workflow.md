@@ -4,7 +4,7 @@ This document records the multi-agent setup used for the Slay the Spire growing 
 
 ## Current Snapshot
 
-Updated 2026-07-05 after probe55 P0 stabilization.
+Updated 2026-07-05 after the first architecture split.
 
 - Current unlock frontier: `IRONCLAD:A4`, `SILENT:A0`, `DEFECT:A0`, `WATCHER:A0`. A20 is the long-term upper target, not the current runnable claim.
 - Latest included probe: `ai_runs_strategy_probe55/20260705_110914_ironclad_a4.jsonl`.
@@ -14,9 +14,10 @@ Updated 2026-07-05 after probe55 P0 stabilization.
 - Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections. Combat search, policy, and runner now share the same `move.damage * move.hits` incoming-damage calculation, with `intent_damage` and legacy fields as fallbacks.
 - Latest route policy fix: when Act 1 floor >= 5 offers both rest and elite, HP below 72% now prefers rest even with an elite-tempo potion. The older no-tempo rule still treats HP at or below 95% as risky. After probe47, Act 1 floor >= 11 with moderate low HP, no high-impact elite potion, and `M` versus `?` no longer over-penalizes the monster route or over-trusts the event route.
 - Latest MCP client fix: `MCPClient.initialize()` is idempotent for reused sessions, `campaign` and `runner` call `ensure_initialized()`, and invalid non-JSON HTTP responses are wrapped as `MCPError` with a short response preview.
+- Latest architecture refactor: MCP implementation now lives in `slay_ai.mcp.client`, with `slay_ai.mcp_client` kept as a compatibility shim. State reading/retry/stability checks now live in `slay_ai.core.state_reader`. Monster incoming-damage interpretation now lives in `slay_ai.domain.monsters`, with `slay_ai.combat_math` kept as a compatibility shim.
 - Latest learning pipeline fix: `GAME_OVER` logs with missing `victory` now default to a completed loss in snapshots and offline learning, recovering older clean failures for `slay_ai.learn`.
 - Latest learning run: `slay_ai.train_card_model` loaded 227 card-pick examples and wrote 69 card deltas; `slay_ai.learn --reset` read 49 logs, applied 38 completed runs, and skipped 11 incomplete runs.
-- Latest validation: `python -m unittest discover -s tests` ran 141 tests OK after the P0 stabilization patch and retraining; `python -m compileall slay_ai tests` OK.
+- Latest validation: `python -m unittest discover -s tests` ran 142 tests OK after the architecture split; `python -m compileall slay_ai tests` OK.
 - Next live validation: add map observability/full-map lookahead for route path-commitment risk, then run another current-frontier Ironclad probe. Keep Stage 5 autonomous learning in shadow/tie-breaker mode only.
 
 ## Long-Lived Agents
@@ -1242,6 +1243,38 @@ Results:
 
 - `slay_ai.train_card_model`: loaded 227 card-pick examples and wrote 69 card deltas.
 - `slay_ai.learn --reset`: read 49 logs, applied 38 completed runs, skipped 11 incomplete runs.
+
+2026-07-05: The first behavior-preserving architecture split was applied after the structure review.
+
+Scope:
+
+- Created `slay_ai.mcp.client` as the implementation home for `MCPClient`, `MCPError`, and `MCPProbe`.
+- Kept `slay_ai.mcp_client` as a compatibility shim for older scripts and docs.
+- Created `slay_ai.core.state_reader` for state read retries, stable-frame checks, transient null-state detection, and state-read recovery.
+- Created `slay_ai.domain.monsters` for shared monster incoming-damage interpretation.
+- Kept `slay_ai.combat_math` as a compatibility shim.
+- Updated `runner`, `campaign`, `mcp_watchdog`, `combat_search`, and `policy` imports to use the new package homes.
+
+Validation:
+
+```powershell
+python -m unittest tests.test_mcp_client tests.test_runner.RunnerTests.test_transient_null_state_read_retries tests.test_runner.RunnerTests.test_empty_hand_after_first_turn_is_not_stable tests.test_runner.RunnerTests.test_debug_monster_intent_before_actions_is_not_stable tests.test_policy.PolicyTests.test_combat_local_search_counts_move_damage_hits
+python -m unittest discover -s tests
+python -m compileall slay_ai tests
+```
+
+Results:
+
+- Focused MCP/state/domain tests: 8 tests OK.
+- `unittest discover`: 142 tests OK.
+- `compileall`: OK.
+
+Next architecture steps:
+
+1. Split policy by screen (`combat`, `card_reward`, `shop`, `route`, `rest`, `event`, `grid`) without behavior changes.
+2. Add character policy modules only after the screen split is stable.
+3. Move learning files under `learning/` and campaign helpers under `campaign/` after policy boundaries are clearer.
+4. Implement route full-map lookahead inside the future `policy/route.py` boundary.
 
 ## Main Thread Operating Loop
 

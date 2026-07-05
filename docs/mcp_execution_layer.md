@@ -24,6 +24,8 @@ Implemented client safeguards:
 - `MCPClient.initialize()` caches its result and returns it on later calls.
 - `MCPClient.ensure_initialized()` is the preferred call site for campaign and runner startup.
 - JSON-RPC response decoding errors are converted to `MCPError`.
+- The implementation now lives in `slay_ai.mcp.client`; `slay_ai.mcp_client` is only a compatibility import layer.
+- State read retry/stability logic now lives in `slay_ai.core.state_reader`.
 
 ## Watchdog
 

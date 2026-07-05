@@ -5,8 +5,8 @@ from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from slay_ai import runner
-from slay_ai.mcp_client import MCPError
 from slay_ai.memory import StrategyMemory
+from slay_ai.mcp.client import MCPError
 
 
 def map_state() -> dict:

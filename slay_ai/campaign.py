@@ -11,8 +11,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from .mcp_client import MCPClient, MCPError
 from .memory import StrategyMemory
+from .mcp.client import MCPClient, MCPError
 from .runner import EpisodeResult, ROOT, run_episode
 from .unlocks import DEFAULT_GAME_DIR, read_unlocks
 

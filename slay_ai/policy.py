@@ -6,8 +6,8 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
-from .combat_math import monster_attack_damage
 from .combat_search import find_best_combat_sequence
+from .domain.monsters import monster_attack_damage
 from .memory import StrategyMemory, normalize_card_name
 
 
