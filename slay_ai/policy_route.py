@@ -9,6 +9,8 @@ from .policy_decision import Decision
 
 
 ACT1_REST_OVER_ELITE_HP_RATIO = 0.72
+ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY = 35.0
+ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY = 18.0
 ROUTE_LOOKAHEAD_HORIZON = 4
 ROUTE_PATH_CAP = 128
 ROUTE_CHILD_KEYS = ("children", "next_nodes", "edges", "connected_nodes", "connections", "links")
@@ -36,12 +38,23 @@ def decide_route(game: dict[str, Any], memory: StrategyMemory) -> Decision:
         return Decision([], "No map choices visible.")
     has_rest_choice = any(str(node.get("symbol", "")) == "R" for node in nodes)
     has_shop_choice = any(str(node.get("symbol", "")) == "$" for node in nodes)
+    has_question_choice = any(str(node.get("symbol", "")) == "?" for node in nodes)
     has_safe_choice = has_rest_choice or has_shop_choice or any(str(node.get("symbol", "")) == "?" for node in nodes)
     route_context = _build_route_context(game)
     ranked: list[tuple[float, int, dict[str, Any], dict[str, Any]]] = []
     route_options = []
     for index, node in enumerate(nodes, start=1):
-        base_score = _map_node_score(memory, game, node, hp_ratio, floor, has_rest_choice, has_safe_choice, has_shop_choice)
+        base_score = _map_node_score(
+            memory,
+            game,
+            node,
+            hp_ratio,
+            floor,
+            has_rest_choice,
+            has_safe_choice,
+            has_shop_choice,
+            has_question_choice,
+        )
         lookahead_adjustment, lookahead_features = _route_lookahead_adjustment(game, node, hp_ratio, route_context)
         score = base_score + lookahead_adjustment
         option_record = {
@@ -83,14 +96,16 @@ def _map_node_score(
     has_rest_choice: bool,
     has_safe_choice: bool,
     has_shop_choice: bool,
+    has_question_choice: bool,
 ) -> float:
     symbol = str(node.get("symbol", ""))
     score = memory.route_score(symbol, hp_ratio, floor)
+    act = int(game.get("act", 1) or 1)
     late_event_risk = _act1_late_event_risk_state(game, hp_ratio, floor, has_rest_choice, has_shop_choice)
     if (
         symbol == "E"
         and has_rest_choice
-        and int(game.get("act", 1) or 1) == 1
+        and act == 1
         and floor >= 5
         and hp_ratio < ACT1_REST_OVER_ELITE_HP_RATIO
     ):
@@ -98,7 +113,7 @@ def _map_node_score(
     if (
         symbol == "E"
         and has_rest_choice
-        and int(game.get("act", 1) or 1) == 1
+        and act == 1
         and floor >= 5
         and hp_ratio <= 0.95
         and not _has_elite_tempo_potion(game)
@@ -108,7 +123,7 @@ def _map_node_score(
         symbol == "E"
         and has_safe_choice
         and not has_rest_choice
-        and int(game.get("act", 1) or 1) == 1
+        and act == 1
         and floor >= 9
         and hp_ratio < 0.88
         and not _has_high_impact_elite_potion(game)
@@ -117,7 +132,7 @@ def _map_node_score(
     if (
         symbol == "M"
         and has_safe_choice
-        and int(game.get("act", 1) or 1) == 1
+        and act == 1
         and floor >= 5
         and hp_ratio < 0.45
     ):
@@ -125,7 +140,7 @@ def _map_node_score(
     elif (
         symbol == "M"
         and has_safe_choice
-        and int(game.get("act", 1) or 1) == 1
+        and act == 1
         and floor >= 2
         and hp_ratio < 0.75
     ):
@@ -133,7 +148,7 @@ def _map_node_score(
     if (
         symbol == "M"
         and has_shop_choice
-        and int(game.get("act", 1) or 1) == 1
+        and act == 1
         and floor >= 4
         and hp_ratio < 0.85
     ):
@@ -141,12 +156,16 @@ def _map_node_score(
     elif (
         symbol == "M"
         and any(str(node.get("symbol", "")) == "?" for node in game.get("screen_state", {}).get("next_nodes", []))
-        and int(game.get("act", 1) or 1) == 1
+        and act == 1
         and floor >= 3
         and hp_ratio < 0.90
         and _act1_deck_lacks_premium_block(game)
     ):
         score -= 12 if late_event_risk else 30
+    if symbol == "M" and has_question_choice and act >= 2 and hp_ratio < 0.35:
+        score -= ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY
+    elif symbol == "M" and has_question_choice and act >= 2 and hp_ratio < 0.45:
+        score -= ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY
     if (
         symbol == "?"
         and late_event_risk

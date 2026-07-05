@@ -35,6 +35,7 @@ LOW_HP_ENGINE_COMBAT_PENALTY = 20.0
 SLOW_ENGINE_CARDS = {"Burning Pact", "Havoc"}
 SELF_DAMAGE_RISK_CARDS = {"Bloodletting", "Combust", "Offering"}
 IMMEDIATE_SELF_DAMAGE_ENGINE_CARDS = {"Bloodletting", "Offering"}
+SELF_DAMAGE_HP_COST_CARDS = {"Hemokinesis": 2}
 ACT2_MULTI_ENEMY_SELF_DAMAGE_SETUP_PENALTY = 9.0
 REPEAT_SELF_DAMAGE_ENGINE_PENALTY = 18.0
 ENERGY_SETUP_CARDS = {"Seeing Red"}
@@ -525,6 +526,7 @@ class HeuristicPolicy:
         block = int(card.get("block", 0))
         score = 0.0
         target_index: int | None = None
+        target: dict[str, Any] | None = None
         pressure = max(0, incoming - current_block)
         dangerous_pressure = _dangerous_pressure(pressure, current_hp, hp_ratio)
 
@@ -610,6 +612,15 @@ class HeuristicPolicy:
             score -= LOW_HP_ENGINE_COMBAT_PENALTY
         if name in SELF_DAMAGE_RISK_CARDS and (dangerous_pressure or hp_ratio < 0.45):
             score -= LOW_HP_ENGINE_COMBAT_PENALTY
+        self_damage_cost = SELF_DAMAGE_HP_COST_CARDS.get(name, 0)
+        if self_damage_cost:
+            kills_target = bool(target and _attack_kills(target, damage))
+            if current_hp <= self_damage_cost:
+                score -= 200
+            elif hp_ratio < 0.25 and not kills_target:
+                score -= 28
+            elif hp_ratio < 0.45 and not kills_target:
+                score -= 16
         if name in {"Feed", "Hand of Greed"} and target_index is not None:
             score += 5
 

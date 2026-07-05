@@ -10,6 +10,7 @@ from .domain.monsters import monster_attack_damage
 
 AOE_ATTACK_CARDS = {"Cleave", "Immolate", "Reaper", "Thunderclap", "Whirlwind"}
 ENERGY_GAIN_CARDS = {"Seeing Red": 2}
+SELF_DAMAGE_CARDS = {"Hemokinesis": 2}
 END_TURN_BLOCK_POWERS = {"Metallicize": 3}
 UNSUPPORTED_SEQUENCE_CARDS = {
     "Armaments",
@@ -60,6 +61,7 @@ class _SearchState:
     monsters: list[_MonsterState]
     damage_dealt: int = 0
     kills: int = 0
+    self_damage: int = 0
 
 
 def find_best_combat_sequence(game: dict[str, Any], *, max_depth: int = 5, max_branch: int = 7) -> SearchResult | None:
@@ -115,7 +117,7 @@ def find_best_combat_sequence(game: dict[str, Any], *, max_depth: int = 5, max_b
 
     score, sequence, final_state = best
     final_incoming = _incoming(final_state.monsters)
-    projected_loss = max(0, final_incoming - final_state.block)
+    projected_loss = _projected_total_loss(final_state)
     attacks_removed = max(0, initial_total_attack - final_incoming)
     avoided_lethal = initial_loss >= hp and projected_loss < hp
     first = sequence[0]
@@ -169,6 +171,7 @@ def _apply_card(state: _SearchState, candidate: _Candidate) -> None:
     state.energy -= spent
     state.energy += _energy_gain(card)
     state.block += _card_block(card)
+    state.self_damage += _self_damage(card)
 
     damage = _card_damage(card, spent if _is_x_cost(card) else state.energy)
     if damage <= 0:
@@ -191,7 +194,7 @@ def _apply_card(state: _SearchState, candidate: _Candidate) -> None:
 
 def _score_state(state: _SearchState, hp: int, initial_loss: int, initial_total_attack: int) -> float:
     final_incoming = _incoming(state.monsters)
-    projected_loss = max(0, final_incoming - state.block)
+    projected_loss = _projected_total_loss(state)
     loss_reduction = initial_loss - projected_loss
     attacks_removed = max(0, initial_total_attack - final_incoming)
     score = state.damage_dealt * 0.75 + state.kills * 18.0 + attacks_removed * 1.5 + loss_reduction * 4.0
@@ -201,6 +204,11 @@ def _score_state(state: _SearchState, hp: int, initial_loss: int, initial_total_
         score += 20
     if projected_loss >= hp:
         score -= 500
+    remaining_hp = hp - projected_loss
+    if 0 < remaining_hp <= 3 and not _fight_ended(state):
+        score -= 80
+    elif 3 < remaining_hp <= 5 and not _fight_ended(state):
+        score -= 35
     score -= max(0, state.energy) * 0.05
     return score
 
@@ -257,6 +265,18 @@ def _energy_gain(card: dict[str, Any]) -> int:
     return ENERGY_GAIN_CARDS.get(_card_key(card), 0)
 
 
+def _self_damage(card: dict[str, Any]) -> int:
+    return SELF_DAMAGE_CARDS.get(_card_key(card), 0)
+
+
+def _projected_total_loss(state: _SearchState) -> int:
+    return state.self_damage + max(0, _incoming(state.monsters) - state.block)
+
+
+def _fight_ended(state: _SearchState) -> bool:
+    return all(not monster.alive for monster in state.monsters)
+
+
 def _monster_state(monster: dict[str, Any]) -> _MonsterState:
     return _MonsterState(
         hp=max(0, _as_int(monster.get("current_hp", 0))),
@@ -307,6 +327,7 @@ def _copy_state(state: _SearchState) -> _SearchState:
         monsters=[_copy_monster(monster) for monster in state.monsters],
         damage_dealt=state.damage_dealt,
         kills=state.kills,
+        self_damage=state.self_damage,
     )
 
 

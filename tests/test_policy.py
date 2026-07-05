@@ -4,6 +4,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from slay_ai.campaign import build_targets, load_progress
+from slay_ai.combat_search import find_best_combat_sequence
 from slay_ai.learn import read_log
 from slay_ai.memory import StrategyMemory
 from slay_ai.policy import HeuristicPolicy
@@ -1158,6 +1159,31 @@ class PolicyTests(unittest.TestCase):
         self.assertNotIn("One-turn search", decision.reason)
         self.assertNotEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
 
+    def test_combat_local_search_counts_hemokinesis_self_damage(self):
+        game = {
+            "screen_type": "NONE",
+            "room_phase": "COMBAT",
+            "current_hp": 2,
+            "max_hp": 80,
+            "combat_state": {
+                "turn": 2,
+                "player": {"current_hp": 2, "max_hp": 80, "current_energy": 2, "block": 0},
+                "hand": [
+                    {"name": "Hemokinesis", "id": "Hemokinesis", "type": "ATTACK", "cost": 1, "damage": 14, "is_playable": True},
+                    {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                ],
+                "monsters": [
+                    {"name": "Red Slaver", "id": "SlaverRed", "current_hp": 19, "max_hp": 48, "move": None},
+                ],
+            },
+        }
+
+        result = find_best_combat_sequence(game)
+
+        self.assertIsNotNone(result)
+        assert result is not None
+        self.assertNotEqual(result.first_action, {"action": "play_card", "card_index": 1, "target_index": 1})
+
     def test_combat_waits_for_hand_to_be_dealt(self):
         state = {
             "in_game": True,
@@ -2092,6 +2118,56 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "end_turn"}])
 
+    def test_combat_avoids_nonlethal_hemokinesis_at_two_hp(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 2,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 2, "max_hp": 80, "current_energy": 1, "block": 13},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                        {"name": "Headbutt", "id": "Headbutt", "type": "ATTACK", "cost": 1, "damage": 9, "is_playable": True},
+                        {"name": "Hemokinesis", "id": "Hemokinesis", "type": "ATTACK", "cost": 1, "damage": 15, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Red Slaver", "id": "SlaverRed", "current_hp": 37, "max_hp": 48, "move": {"damage": 9}},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3, "target_index": 1}])
+
+    def test_combat_can_play_hemokinesis_for_safe_lethal(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 10,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 10, "max_hp": 80, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                        {"name": "Hemokinesis", "id": "Hemokinesis", "type": "ATTACK", "cost": 1, "damage": 14, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Lagavulin", "id": "Lagavulin", "current_hp": 14, "max_hp": 109, "move": None},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2, "target_index": 1}])
+
     def test_combat_uses_attack_fallback_when_no_defense_under_pressure(self):
         state = {
             "in_game": True,
@@ -2326,6 +2402,53 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+
+    def test_map_act2_extreme_low_hp_prefers_question_over_probe61_monster(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 20,
+            "current_hp": 21,
+            "max_hp": 80,
+            "gold": 280,
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "?", "x": 1, "y": 3},
+                    {"symbol": "M", "x": 2, "y": 3},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "?", "x": 1, "y": 3, "children": [{"x": 1, "y": 4}]},
+                        {"symbol": "M", "x": 2, "y": 3, "children": [{"x": 2, "y": 4}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 1, "y": 4, "children": [{"x": 1, "y": 5}]},
+                        {"symbol": "M", "x": 2, "y": 4, "children": [{"x": 2, "y": 5}]},
+                    ],
+                    [
+                        {"symbol": "E", "x": 1, "y": 5, "children": [{"x": 1, "y": 6}]},
+                        {"symbol": "E", "x": 2, "y": 5, "children": [{"x": 2, "y": 6}]},
+                    ],
+                    [
+                        {"symbol": "R", "x": 1, "y": 6},
+                        {"symbol": "R", "x": 2, "y": 6},
+                    ],
+                ],
+            },
+        }
+        state = {"in_game": True, "game_state": game}
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        route_eval = game["route_evaluation"]
+        self.assertEqual(route_eval["map_status"], "success")
+        self.assertEqual(route_eval["options"][0]["lookahead_adjustment"], -145.0)
+        self.assertEqual(route_eval["options"][1]["lookahead_adjustment"], -145.0)
+        self.assertLess(route_eval["options"][1]["base_score"], route_eval["options"][0]["base_score"])
 
     def test_map_lookahead_avoids_low_hp_path_committed_to_elite(self):
         game = {
