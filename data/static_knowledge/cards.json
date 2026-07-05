@@ -1,0 +1,346 @@
+{
+  "version": 1,
+  "scope": "Act 1 Ironclad seed plus common cross-character tags for current probes",
+  "sources": [
+    {
+      "name": "MCP/CommunicationMod state ids",
+      "url": "https://github.com/ForgottenArbiter/CommunicationMod"
+    },
+    {
+      "name": "Slay the Spire Cards wiki",
+      "url": "https://slay-the-spire.fandom.com/wiki/Cards"
+    }
+  ],
+  "cards": [
+    {
+      "id": "Strike_R",
+      "name": "Strike",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "BASIC",
+      "cost": 1,
+      "tags": ["damage", "starter", "low_value"],
+      "values": {"base_damage": 6, "upgraded_damage": 9}
+    },
+    {
+      "id": "Defend_R",
+      "name": "Defend",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "BASIC",
+      "cost": 1,
+      "tags": ["block", "starter", "low_value"],
+      "values": {"base_block": 5, "upgraded_block": 8}
+    },
+    {
+      "id": "Bash",
+      "name": "Bash",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "BASIC",
+      "cost": 2,
+      "tags": ["damage", "vulnerable", "starter", "boss_damage"],
+      "values": {"base_damage": 8, "upgraded_damage": 10, "vulnerable": 2, "upgraded_vulnerable": 3}
+    },
+    {
+      "id": "Anger",
+      "name": "Anger",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": ["damage", "zero_cost", "deck_growth", "frontload"],
+      "values": {"base_damage": 6, "upgraded_damage": 8}
+    },
+    {
+      "id": "Battle Trance",
+      "name": "Battle Trance",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": ["draw", "zero_cost", "tempo", "no_more_draw"],
+      "values": {"draw": 3, "upgraded_draw": 4}
+    },
+    {
+      "id": "Burning Pact",
+      "name": "Burning Pact",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["draw", "exhaust_synergy", "requires_exhaust", "tempo"],
+      "values": {"draw": 2, "upgraded_draw": 3}
+    },
+    {
+      "id": "Carnage",
+      "name": "Carnage",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": ["damage", "frontload", "ethereal", "boss_damage"],
+      "values": {"base_damage": 20, "upgraded_damage": 28}
+    },
+    {
+      "id": "Cleave",
+      "name": "Cleave",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": ["damage", "aoe", "frontload", "sentries"],
+      "values": {"base_damage": 8, "upgraded_damage": 11}
+    },
+    {
+      "id": "Clothesline",
+      "name": "Clothesline",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 2,
+      "tags": ["damage", "weak", "defensive_attack", "boss_damage"],
+      "values": {"base_damage": 12, "upgraded_damage": 14, "weak": 2, "upgraded_weak": 3}
+    },
+    {
+      "id": "Dark Embrace",
+      "name": "Dark Embrace",
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": ["scaling", "draw", "exhaust_synergy", "slow_engine"],
+      "values": {}
+    },
+    {
+      "id": "Disarm",
+      "name": "Disarm",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["strength_down", "boss_defense", "elite_defense", "exhaust"],
+      "values": {"strength_down": 2, "upgraded_strength_down": 3}
+    },
+    {
+      "id": "Flame Barrier",
+      "name": "Flame Barrier",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": ["block", "thorns", "multi_hit_defense", "boss_defense"],
+      "values": {"base_block": 12, "upgraded_block": 16}
+    },
+    {
+      "id": "Hemokinesis",
+      "name": "Hemokinesis",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["damage", "self_damage", "frontload"],
+      "values": {"base_damage": 15, "upgraded_damage": 20, "self_damage": 2}
+    },
+    {
+      "id": "Immolate",
+      "name": "Immolate",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": ["damage", "aoe", "frontload", "status_added", "sentries", "slime_boss"],
+      "values": {"base_damage": 21, "upgraded_damage": 28}
+    },
+    {
+      "id": "Impervious",
+      "name": "Impervious",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": ["block", "exhaust", "boss_defense", "panic_block"],
+      "values": {"base_block": 30, "upgraded_block": 40}
+    },
+    {
+      "id": "Inflame",
+      "name": "Inflame",
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["scaling", "strength", "boss_damage"],
+      "values": {"strength": 2, "upgraded_strength": 3}
+    },
+    {
+      "id": "Intimidate",
+      "name": "Intimidate",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": ["weak", "aoe_debuff", "zero_cost", "defense"],
+      "values": {"weak": 1, "upgraded_weak": 2}
+    },
+    {
+      "id": "Iron Wave",
+      "name": "Iron Wave",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": ["damage", "block", "hybrid"],
+      "values": {"base_damage": 5, "upgraded_damage": 7, "base_block": 5, "upgraded_block": 7}
+    },
+    {
+      "id": "Offering",
+      "name": "Offering",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": ["draw", "energy", "self_damage", "exhaust", "tempo", "panic_button"],
+      "values": {"draw": 3, "upgraded_draw": 5, "energy": 2, "self_damage": 6}
+    },
+    {
+      "id": "Pommel Strike",
+      "name": "Pommel Strike",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": ["damage", "draw", "frontload"],
+      "values": {"base_damage": 9, "upgraded_damage": 10, "draw": 1, "upgraded_draw": 2}
+    },
+    {
+      "id": "Perfected Strike",
+      "name": "Perfected Strike",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 2,
+      "tags": ["damage", "strike_synergy", "frontload", "boss_damage"],
+      "values": {"base_damage": 6, "upgraded_damage": 6, "damage_per_strike": 2, "upgraded_damage_per_strike": 3}
+    },
+    {
+      "id": "Power Through",
+      "name": "Power Through",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["block", "status_added", "panic_block"],
+      "values": {"base_block": 15, "upgraded_block": 20}
+    },
+    {
+      "id": "Pummel",
+      "name": "Pummel",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["damage", "multi_hit", "strength_scaling", "exhaust", "frontload"],
+      "values": {"base_damage": 8, "upgraded_damage": 10, "hits": 4}
+    },
+    {
+      "id": "Reckless Charge",
+      "name": "Reckless Charge",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": ["damage", "zero_cost", "status_added", "frontload"],
+      "values": {"base_damage": 7, "upgraded_damage": 10}
+    },
+    {
+      "id": "Seeing Red",
+      "name": "Seeing Red",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["energy", "exhaust", "tempo"],
+      "values": {"energy": 2}
+    },
+    {
+      "id": "Shockwave",
+      "name": "Shockwave",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": ["weak", "vulnerable", "strength_down", "aoe_debuff", "boss_defense", "boss_damage", "exhaust"],
+      "values": {"weak": 3, "vulnerable": 3, "strength_down": 3, "upgraded_weak": 5, "upgraded_vulnerable": 5, "upgraded_strength_down": 5}
+    },
+    {
+      "id": "Shrug It Off",
+      "name": "Shrug It Off",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": ["block", "draw", "premium_defense"],
+      "values": {"base_block": 8, "upgraded_block": 11, "draw": 1}
+    },
+    {
+      "id": "Spot Weakness",
+      "name": "Spot Weakness",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": ["scaling", "strength", "requires_enemy_attack", "boss_damage"],
+      "values": {"strength": 3, "upgraded_strength": 4}
+    },
+    {
+      "id": "Thunderclap",
+      "name": "Thunderclap",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": ["damage", "aoe", "vulnerable", "frontload"],
+      "values": {"base_damage": 4, "upgraded_damage": 7, "vulnerable": 1}
+    },
+    {
+      "id": "True Grit",
+      "name": "True Grit",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": ["block", "exhaust_synergy", "upgrade_priority"],
+      "values": {"base_block": 7, "upgraded_block": 9}
+    },
+    {
+      "id": "Uppercut",
+      "name": "Uppercut",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": ["damage", "weak", "vulnerable", "defensive_attack", "boss_damage"],
+      "values": {"base_damage": 13, "upgraded_damage": 17, "weak": 1, "vulnerable": 1, "upgraded_weak": 2, "upgraded_vulnerable": 2}
+    },
+    {
+      "id": "Whirlwind",
+      "name": "Whirlwind",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": -1,
+      "tags": ["damage", "aoe", "x_cost", "sentries", "slime_boss"],
+      "values": {"base_damage_per_energy": 5, "upgraded_damage_per_energy": 8}
+    },
+    {
+      "id": "Wild Strike",
+      "name": "Wild Strike",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": ["damage", "frontload", "status_added"],
+      "values": {"base_damage": 12, "upgraded_damage": 17}
+    }
+  ]
+}

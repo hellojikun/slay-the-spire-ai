@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "scope": "Potion tempo seed for current Act 1 and early Act 2 bottlenecks",
+  "sources": [
+    {
+      "name": "Slay the Spire Potions wiki",
+      "url": "https://slay-the-spire.fandom.com/wiki/Potions"
+    },
+    {
+      "name": "MCP/CommunicationMod state ids",
+      "url": "https://github.com/ForgottenArbiter/CommunicationMod"
+    }
+  ],
+  "potions": [
+    {
+      "id": "Block Potion",
+      "name": "Block Potion",
+      "aliases": ["BlockPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["defense", "emergency", "lethal_prevention"],
+      "values": {"block": 12}
+    },
+    {
+      "id": "Dexterity Potion",
+      "name": "Dexterity Potion",
+      "aliases": ["DexterityPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["defense", "scaling", "boss_defense"],
+      "values": {"dexterity": 2}
+    },
+    {
+      "id": "Fire Potion",
+      "name": "Fire Potion",
+      "aliases": ["FirePotion"],
+      "rarity": "COMMON",
+      "requires_target": true,
+      "combat_only": true,
+      "roles": ["offense", "lethal", "frontload", "elite_tempo"],
+      "values": {"damage": 20}
+    },
+    {
+      "id": "Explosive Potion",
+      "name": "Explosive Potion",
+      "aliases": ["ExplosivePotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["offense", "aoe", "frontload", "sentries", "slime_boss"],
+      "values": {"damage": 10}
+    },
+    {
+      "id": "Fear Potion",
+      "name": "Fear Potion",
+      "aliases": ["FearPotion"],
+      "rarity": "COMMON",
+      "requires_target": true,
+      "combat_only": true,
+      "roles": ["offense", "vulnerable", "boss_damage", "elite_tempo"],
+      "values": {"vulnerable": 3}
+    },
+    {
+      "id": "Strength Potion",
+      "name": "Strength Potion",
+      "aliases": ["StrengthPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["offense", "scaling", "boss_damage"],
+      "values": {"strength": 2}
+    },
+    {
+      "id": "Energy Potion",
+      "name": "Energy Potion",
+      "aliases": ["EnergyPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["tempo", "offense", "defense", "burst_turn"],
+      "values": {"energy": 2}
+    },
+    {
+      "id": "Swift Potion",
+      "name": "Swift Potion",
+      "aliases": ["SwiftPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["draw", "tempo", "emergency", "hand_fix"],
+      "values": {"draw": 3}
+    },
+    {
+      "id": "Skill Potion",
+      "name": "Skill Potion",
+      "aliases": ["SkillPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["card_generation", "defense", "emergency", "hand_fix"],
+      "values": {"generated_options": 3}
+    },
+    {
+      "id": "Attack Potion",
+      "name": "Attack Potion",
+      "aliases": ["AttackPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["card_generation", "offense", "frontload", "hand_fix"],
+      "values": {"generated_options": 3}
+    },
+    {
+      "id": "Duplication Potion",
+      "name": "Duplication Potion",
+      "aliases": ["DuplicationPotion"],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["tempo", "offense", "defense", "burst_turn", "boss_damage"],
+      "values": {}
+    },
+    {
+      "id": "Gambler's Brew",
+      "name": "Gambler's Brew",
+      "aliases": ["GamblersBrew", "Gambler's Brew"],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["draw", "tempo", "emergency", "hand_fix"],
+      "values": {}
+    },
+    {
+      "id": "Liquid Memories",
+      "name": "Liquid Memories",
+      "aliases": ["LiquidMemories"],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["recursion", "tempo", "emergency", "hand_fix", "lethal_prevention"],
+      "values": {"discounted_card_cost": 0}
+    },
+    {
+      "id": "Regeneration Potion",
+      "name": "Regeneration Potion",
+      "aliases": ["RegenPotion", "RegenerationPotion"],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["healing", "boss_defense", "elite_tempo"],
+      "values": {"healing_over_time": 15}
+    },
+    {
+      "id": "Weak Potion",
+      "name": "Weak Potion",
+      "aliases": ["WeakPotion"],
+      "rarity": "COMMON",
+      "requires_target": true,
+      "combat_only": true,
+      "roles": ["defense", "weak", "multi_hit_defense", "boss_defense"],
+      "values": {"weak": 3}
+    },
+    {
+      "id": "Ancient Potion",
+      "name": "Ancient Potion",
+      "aliases": ["AncientPotion"],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["artifact", "boss_defense", "debuff_prevention"],
+      "values": {"artifact": 1}
+    },
+    {
+      "id": "Smoke Bomb",
+      "name": "Smoke Bomb",
+      "aliases": ["SmokeBomb"],
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": ["escape", "route_recovery", "emergency"],
+      "values": {}
+    },
+    {
+      "id": "Blood Potion",
+      "name": "Blood Potion",
+      "aliases": ["BloodPotion"],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": false,
+      "roles": ["healing", "route_recovery", "ironclad_only"],
+      "values": {"heal_percent_max_hp": 20}
+    }
+  ]
+}

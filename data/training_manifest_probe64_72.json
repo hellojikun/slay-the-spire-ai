@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-05T15:43:13",
+  "generated_at": "2026-07-05T16:00:37",
   "summary": {
     "total_logs": 9,
     "clean_trainable": 9,
@@ -152,5 +152,13 @@
     ],
     "diagnostic_excluded": [],
     "infra_blocked": []
+  },
+  "static_knowledge": {
+    "dir": "data\\static_knowledge",
+    "source_counts": {
+      "cards": 33,
+      "monsters": 19,
+      "potions": 18
+    }
   }
 }

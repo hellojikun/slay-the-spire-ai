@@ -361,6 +361,19 @@ class HeuristicPolicy:
             if potion.get("is_empty") or not potion.get("can_use", True):
                 continue
             key = _potion_key(potion)
+            if defensive_danger and "liquidmemories" in key:
+                target_card = _liquid_memories_target(game, monsters, incoming, current_block, current_hp)
+            else:
+                target_card = None
+            if target_card:
+                return Decision(
+                    [{"action": "use_potion", "potion_slot": slot}],
+                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))} to recover {target_card.get('name', target_card.get('id'))}.",
+                )
+        for slot, potion in enumerate(potions, start=1):
+            if potion.get("is_empty") or not potion.get("can_use", True):
+                continue
+            key = _potion_key(potion)
             if defensive_danger and "skill" in key:
                 return Decision(
                     [{"action": "use_potion", "potion_slot": slot}],
@@ -1635,6 +1648,69 @@ def _has_duplication_potion_target(
         if long_fight and (damage >= DUPLICATION_ATTACK_DAMAGE_THRESHOLD or name in DUPLICATION_HIGH_VALUE_CARDS):
             return True
     return False
+
+
+def _liquid_memories_target(
+    game: dict[str, Any],
+    monsters: list[dict[str, Any]],
+    incoming: int,
+    current_block: int,
+    current_hp: int,
+) -> dict[str, Any] | None:
+    pressure = max(0, incoming - current_block)
+    if pressure <= 0:
+        return None
+    combat = game.get("combat_state", {})
+    discard_pile = combat.get("discard_pile") or combat.get("discardPile") or []
+    if not isinstance(discard_pile, list):
+        return None
+
+    best: tuple[float, dict[str, Any]] | None = None
+    for card in discard_pile:
+        if not isinstance(card, dict):
+            continue
+        score = _liquid_memories_card_score(card, monsters, pressure, current_hp)
+        if score <= 0:
+            continue
+        if best is None or score > best[0]:
+            best = (score, card)
+    return best[1] if best and best[0] >= 16 else None
+
+
+def _liquid_memories_card_score(
+    card: dict[str, Any],
+    monsters: list[dict[str, Any]],
+    pressure: int,
+    current_hp: int,
+) -> float:
+    name = _card_key(card)
+    block = _card_block_value(card)
+    damage = _card_damage_value(card)
+    score = 0.0
+
+    if block > 0:
+        needed_to_survive = max(0, pressure - max(current_hp - 1, 0))
+        score += min(block, pressure) * 1.3
+        if needed_to_survive > 0 and block >= needed_to_survive:
+            score += 18
+        elif block >= 8:
+            score += 10
+
+    if name in {"Disarm", "Shockwave", "Intimidate", "Piercing Wail", "Dark Shackles"}:
+        score += 18 + min(pressure, 18)
+
+    if damage > 0:
+        _, target = _choose_target(monsters, damage)
+        if target and _attack_stops_current_intent(target, damage):
+            score += 22
+        elif target and _attack_kills(target, damage):
+            score += 14
+        elif pressure >= current_hp and damage >= 18:
+            score += 10
+
+    if name in DUPLICATION_HIGH_VALUE_CARDS:
+        score += 6
+    return score
 
 
 def _has_elite_tempo_potion(game: dict[str, Any]) -> bool:

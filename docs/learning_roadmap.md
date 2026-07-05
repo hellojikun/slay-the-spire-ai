@@ -14,6 +14,8 @@ This project should not wait for a perfect heuristic bot before adding learning.
 - `slay_ai.train_card_model` can train `models/card_value_model.json`.
 - `StrategyMemory.card_score()` already combines base card scores, learned memory deltas, and model deltas.
 - As of 2026-07-05 after probe72, `slay_ai.training_manifest` can classify logs into `clean_trainable`, `diagnostic_excluded`, and `infra_blocked` before any offline learning step. The probe64-72 manifest classified 9 logs as clean, 0 diagnostic, and 0 infra-blocked, then extracted 128 route-risk rows, 484 potion-tempo rows, and 7 pre-boss deck-quality rows for shadow-model work.
+- `slay_ai.static_knowledge` now validates seed card/monster/potion facts under `data/static_knowledge/` and lets `training_manifest --knowledge-dir` enrich shadow samples with deck, potion, and enemy features. This is a feature layer, not a label source.
+- `slay_ai.readiness.act1_readiness()` now provides a read-only Act 1 readiness gate for shadow evaluation: HP, output, defense, AOE, debuffs, potion tempo, boss readiness, and elite readiness. It is not wired to take over route choices yet.
 - `slay_ai.learn` and `slay_ai.train_card_model` accept `--manifest`, so training can consume only the clean bucket from a generated manifest. A probe64-72 card-model refresh loaded 67 card-pick examples and wrote 60 local comparison deltas.
 
 ## Project Phases
@@ -44,6 +46,7 @@ The current advisory agents agree on this boundary:
 - After probe70, the next Stage 4 priority is search sequence commitment. The search often finds a full defensive line, but the runner/policy commits only one card and later replans can drift back to attacks. This should be fixed before training a combat action model from these traces.
 - After probe71, search sequence commitment is live-validated: the run produced 17 continued search-sequence actions and still had 0 `action_failed` records. The route remains correct, but the next Stage 4 priority moves to boss/high-pressure evaluator calibration and deck/resource quality. Do not promote a learned combat controller yet; use learning first as a shadow value model for card rewards, route risk, shop/potion value, and post-sequence state quality.
 - After probe72, the run ended earlier at F11 despite clean execution and live Weak search behavior. This confirms the direction is not "more heuristic exceptions forever"; the next useful work is clean-data labeling plus route risk, potion tempo, and boss-prep deck quality models while keeping heuristics/search as the controller.
+- In the multi-agent parallelization round, program work added a scoped Liquid Memories high-pressure use rule, AI work added an Act 1 readiness scorer, and main-thread infrastructure added static card/monster/potion features to shadow data. These should be evaluated in shadow and targeted probes before broad model authority increases.
 
 ## Clean Training Manifests
 
@@ -51,11 +54,13 @@ Before replaying logs into memory or model training, build a manifest and option
 
 ```powershell
 python -m slay_ai.training_manifest ai_runs_strategy_probe64 ai_runs_strategy_probe65 ai_runs_strategy_probe66 ai_runs_strategy_probe67 ai_runs_strategy_probe68 ai_runs_strategy_probe69 ai_runs_strategy_probe70 ai_runs_strategy_probe71 ai_runs_strategy_probe72 --output data\training_manifest_probe64_72.json --shadow-dir data\shadow_probe64_72
+python -m slay_ai.training_manifest ai_runs_strategy_probe64 ai_runs_strategy_probe65 ai_runs_strategy_probe66 ai_runs_strategy_probe67 ai_runs_strategy_probe68 ai_runs_strategy_probe69 ai_runs_strategy_probe70 ai_runs_strategy_probe71 ai_runs_strategy_probe72 --output data\training_manifest_probe64_72.json --shadow-dir data\shadow_probe64_72 --knowledge-dir data\static_knowledge
 python -m slay_ai.train_card_model --manifest data\training_manifest_probe64_72.json --model-path models\card_value_model_probe64_72.json --min-count 1 --max-delta 6
 python -m slay_ai.learn --manifest data\training_manifest_probe64_72.json --reset
 ```
 
 The manifest is the gate between execution evidence and learning. Completed clean failures are trainable; action failures and manual diagnostics stay visible but out of default training.
+The static knowledge directory adds compact factual features such as `deck_tag_aoe`, `deck_tag_weak`, `potion_role_emergency`, `enemy_boss_count`, and `enemy_max_expected_attack`; these features help shadow models reason about Act 1 readiness without treating wiki/mod data as outcomes.
 
 ## First Learning Stage
 
@@ -91,14 +96,16 @@ Before increasing learning authority beyond card score deltas:
 Order of expansion:
 
 1. Clean manifest and stable trainable datasets.
-2. Card reward value model.
-3. Route risk shadow model based on HP, floor, path commitment, deck strength, potions, relics, and buffers.
-4. Potion tempo shadow model for elite, boss, and lethal-risk turns.
-5. Pre-boss/post-combat deck quality labels.
-6. Rest versus smith threshold calibration.
-7. Shop purchase model.
-8. One-turn combat local search and evaluator calibration.
-9. Combat action sequence learning, only after search labels are stable.
+2. Static card/monster/potion feature tables.
+3. Card reward value model.
+4. Act 1 readiness shadow gate for boss/elite preparation.
+5. Route risk shadow model based on HP, floor, path commitment, deck strength, potions, relics, and buffers.
+6. Potion tempo shadow model for elite, boss, and lethal-risk turns.
+7. Pre-boss/post-combat deck quality labels.
+8. Rest versus smith threshold calibration.
+9. Shop purchase model.
+10. One-turn combat local search and evaluator calibration.
+11. Combat action sequence learning, only after search labels are stable.
 
 Current route assessment: stay in Stage 4 until Slime Boss split/minion pressure, Hexaghost/boss high-pressure survival, deck/resource quality before boss fights, and early Act 2 low-HP survival are less brittle. Stage 5 can grow in shadow mode beside this work, but it should not replace the heuristic/search controller until probes show stable improvement.
 

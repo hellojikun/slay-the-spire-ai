@@ -27,15 +27,29 @@ Keep these advisory agents available across the project unless the user explicit
 
 | Agent | Role | Current id | Responsibility |
 | --- | --- | --- | --- |
-| Harvey | Game AI model advisor | `019f2e94-552b-7301-9cc5-21eed1fc2949` | Learning-loop design, model promotion gates, route/resource labels, and staged autonomy advice. |
-| Mill | Game mod / MCP script senior engineer | `019f2f5c-fae1-7cb2-bea6-b8574085839d` | MCPTheSpire execution layer, action protocol, command races, runner stability, observability. |
-| Halley | Overall architecture / work-mode reviewer | `019f2f5d-0f0e-7612-86d2-d4bb3aeee828` | Periodic audit of iteration quality, agent division of labor, architectural priorities, and goal alignment. |
-| Archimedes | Independent AI route reviewer | `019f30f8-ed4d-7bd3-9519-b3bcfda8116d` | Project roadmap, search-vs-learning tradeoffs, and high-level bottleneck review after run logs. |
+| Archimedes | Flow / run-data agent | `019f30f8-ed4d-7bd3-9519-b3bcfda8116d` | Run frontier probes, accumulate climb logs, classify whether failures are clean/diagnostic/infra, and report concrete bottlenecks. Does not edit code. |
+| Mill | Program optimization agent | `019f2f5c-fae1-7cb2-bea6-b8574085839d` | MCP/runner/policy reliability and immediate script fixes that unblock live runs. Current focus: potion tempo and Liquid Memories. |
+| Harvey | AI upgrade / algorithm agent | `019f2e94-552b-7301-9cc5-21eed1fc2949` | Static features, readiness gates, shadow models, training data design, and model promotion gates. |
+| Halley | Architecture / coordination agent | `019f2f5d-0f0e-7612-86d2-d4bb3aeee828` | Audit agent division of labor, merge order, conflict risk, and alignment with four-character A20. |
 | Turing | Code development worker | spawn on demand | Evidence-backed policy, memory, campaign, and test changes outside the MCP execution layer. |
 
 If context compaction or tool state makes an agent's actual status uncertain, first call codex_app.list_threads / codex_app.read_thread and reuse the canonical thread in this table. Start a fresh long-lived agent only if the canonical thread is missing or unusable, then update this table immediately.
 
 ## Current Activation Log
+
+2026-07-05 multi-agent parallelization round:
+
+- User direction: make multi-agent collaboration real and parallel because Act 1 has been blocked too long.
+- Long-lived agent roles were reassigned:
+  - Archimedes runs the process and accumulates logs with `ai_runs_parallel_flow` / `data\campaign_parallel_flow.json`.
+  - Mill owns program-level fixes, starting with potion tempo / Liquid Memories.
+  - Harvey owns AI-upgrade work, starting with Act 1 readiness gates and shadow model features.
+  - Halley owns coordination and merge-risk review.
+- Main thread owns integration, static knowledge infrastructure, tests, commits, and pushes.
+- Static knowledge work started in main thread: `data/static_knowledge/cards.json`, `monsters.json`, `potions.json`, `slay_ai.static_knowledge`, and `training_manifest --knowledge-dir` enrich route/potion/pre-boss shadow rows.
+- AI-upgrade agent delivered `slay_ai.readiness.act1_readiness`, a read-only Act 1 readiness scorer that returns scores, gaps, risk flags, features, and recommendations without changing policy behavior.
+- Program agent delivered a scoped Liquid Memories potion-tempo fix: under `defensive_danger`, the policy may use Liquid Memories only when discard contains a high-impact block/control/lethal/intent-stop target.
+- Validation after integration: `python -m unittest discover -s tests` ran 190 tests OK; `python -m compileall slay_ai tests` OK; `git diff --check` OK.
 
 2026-07-05 probe72 clean manifest, Weak modeling, and route assessment round:
 

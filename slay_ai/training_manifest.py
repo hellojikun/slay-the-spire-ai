@@ -9,10 +9,18 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
+from .static_knowledge import StaticKnowledge
+
 
 CLEAN_TRAINABLE = "clean_trainable"
 DIAGNOSTIC_EXCLUDED = "diagnostic_excluded"
 INFRA_BLOCKED = "infra_blocked"
+STARTER_DECKS = {
+    "IRONCLAD": ["Strike_R", "Strike_R", "Strike_R", "Strike_R", "Strike_R", "Defend_R", "Defend_R", "Defend_R", "Defend_R", "Bash"],
+    "SILENT": ["Strike_G", "Strike_G", "Strike_G", "Strike_G", "Strike_G", "Defend_G", "Defend_G", "Defend_G", "Defend_G", "Defend_G", "Neutralize", "Survivor"],
+    "DEFECT": ["Strike_B", "Strike_B", "Strike_B", "Strike_B", "Defend_B", "Defend_B", "Defend_B", "Defend_B", "Zap", "Dualcast"],
+    "WATCHER": ["Strike_P", "Strike_P", "Strike_P", "Strike_P", "Defend_P", "Defend_P", "Defend_P", "Defend_P", "Eruption", "Vigilance"],
+}
 
 
 @dataclass
@@ -37,10 +45,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("logs", nargs="*", type=Path, default=[Path("ai_runs")])
     parser.add_argument("--output", type=Path, default=Path("data") / "training_log_manifest.json")
     parser.add_argument("--shadow-dir", type=Path, help="Optional directory for route/potion/pre-boss JSONL examples.")
+    parser.add_argument(
+        "--knowledge-dir",
+        type=Path,
+        help="Optional static knowledge directory for enriched shadow features.",
+    )
     parser.add_argument("--print-clean", action="store_true", help="Print clean trainable log paths, one per line.")
     args = parser.parse_args(argv)
 
-    manifest, shadow_examples = build_manifest(args.logs)
+    knowledge = StaticKnowledge.load(args.knowledge_dir) if args.knowledge_dir else None
+    manifest, shadow_examples = build_manifest(args.logs, knowledge=knowledge, knowledge_dir=args.knowledge_dir)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     if args.shadow_dir:
@@ -61,7 +75,12 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
-def build_manifest(paths: Iterable[Path]) -> tuple[dict[str, Any], dict[str, list[dict[str, Any]]]]:
+def build_manifest(
+    paths: Iterable[Path],
+    *,
+    knowledge: StaticKnowledge | None = None,
+    knowledge_dir: Path | None = None,
+) -> tuple[dict[str, Any], dict[str, list[dict[str, Any]]]]:
     categories: dict[str, list[dict[str, Any]]] = {
         CLEAN_TRAINABLE: [],
         DIAGNOSTIC_EXCLUDED: [],
@@ -78,9 +97,9 @@ def build_manifest(paths: Iterable[Path]) -> tuple[dict[str, Any], dict[str, lis
         categories[classification.category].append(asdict(classification))
         if classification.category != CLEAN_TRAINABLE:
             continue
-        shadow_examples["route_risk"].extend(_route_risk_examples(path, records, classification))
-        shadow_examples["potion_tempo"].extend(_potion_tempo_examples(path, records, classification))
-        shadow_examples["pre_boss_deck_quality"].extend(_pre_boss_examples(path, records, classification))
+        shadow_examples["route_risk"].extend(_route_risk_examples(path, records, classification, knowledge))
+        shadow_examples["potion_tempo"].extend(_potion_tempo_examples(path, records, classification, knowledge))
+        shadow_examples["pre_boss_deck_quality"].extend(_pre_boss_examples(path, records, classification, knowledge))
 
     summary = {
         "total_logs": sum(len(items) for items in categories.values()),
@@ -95,6 +114,11 @@ def build_manifest(paths: Iterable[Path]) -> tuple[dict[str, Any], dict[str, lis
         "summary": summary,
         "categories": categories,
     }
+    if knowledge is not None:
+        manifest["static_knowledge"] = {
+            "dir": str(knowledge_dir) if knowledge_dir is not None else None,
+            "source_counts": knowledge.source_counts,
+        }
     return manifest, shadow_examples
 
 
@@ -208,7 +232,12 @@ def _latest_outcome(records: list[dict[str, Any]]) -> dict[str, Any]:
     return outcome
 
 
-def _route_risk_examples(path: Path, records: list[dict[str, Any]], final: LogClassification) -> list[dict[str, Any]]:
+def _route_risk_examples(
+    path: Path,
+    records: list[dict[str, Any]],
+    final: LogClassification,
+    knowledge: StaticKnowledge | None = None,
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for record in records:
         state = record.get("state") or {}
@@ -222,8 +251,7 @@ def _route_risk_examples(path: Path, records: list[dict[str, Any]], final: LogCl
         selected = _first_choice_index(decision.get("actions") or [])
         selected_option = next((option for option in options if _safe_int(option.get("choice_index")) == selected), {})
         lookahead = selected_option.get("lookahead") or {}
-        rows.append(
-            {
+        row = {
                 "source_log": str(path),
                 "step": record.get("step"),
                 "character": state.get("class"),
@@ -241,12 +269,21 @@ def _route_risk_examples(path: Path, records: list[dict[str, Any]], final: LogCl
                 "final_floor": final.floor,
                 "victory": final.victory,
                 "floor_delta": final.floor - _safe_int(state.get("floor")),
-            }
-        )
+        }
+        if knowledge is not None:
+            deck_features = knowledge.deck_features(_deck_items_for_knowledge(state, records, record.get("step"), knowledge))
+            row.update(deck_features)
+            row.update(knowledge.potion_features(state.get("potions") or []))
+        rows.append(row)
     return rows
 
 
-def _potion_tempo_examples(path: Path, records: list[dict[str, Any]], final: LogClassification) -> list[dict[str, Any]]:
+def _potion_tempo_examples(
+    path: Path,
+    records: list[dict[str, Any]],
+    final: LogClassification,
+    knowledge: StaticKnowledge | None = None,
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for record in records:
         state = record.get("state") or {}
@@ -255,8 +292,7 @@ def _potion_tempo_examples(path: Path, records: list[dict[str, Any]], final: Log
         incoming = _safe_int(combat.get("incoming_damage"))
         if not combat or not potions or incoming <= 0:
             continue
-        rows.append(
-            {
+        row = {
                 "source_log": str(path),
                 "step": record.get("step"),
                 "character": state.get("class"),
@@ -275,20 +311,27 @@ def _potion_tempo_examples(path: Path, records: list[dict[str, Any]], final: Log
                 "died_same_floor": bool(final.victory is False and final.floor == _safe_int(state.get("floor"))),
                 "final_floor": final.floor,
                 "victory": final.victory,
-            }
-        )
+        }
+        if knowledge is not None:
+            row.update(knowledge.potion_features(potions))
+            row.update(knowledge.monster_features(combat.get("monsters") or []))
+        rows.append(row)
     return rows
 
 
-def _pre_boss_examples(path: Path, records: list[dict[str, Any]], final: LogClassification) -> list[dict[str, Any]]:
+def _pre_boss_examples(
+    path: Path,
+    records: list[dict[str, Any]],
+    final: LogClassification,
+    knowledge: StaticKnowledge | None = None,
+) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for record in records:
         state = record.get("state") or {}
         if not state.get("boss_available"):
             continue
         deck = state.get("deck") or []
-        rows.append(
-            {
+        row = {
                 "source_log": str(path),
                 "step": record.get("step"),
                 "character": state.get("class"),
@@ -305,8 +348,16 @@ def _pre_boss_examples(path: Path, records: list[dict[str, Any]], final: LogClas
                 "gold": state.get("gold"),
                 "final_floor": final.floor,
                 "victory": final.victory,
-            }
-        )
+        }
+        if knowledge is not None:
+            deck_features = knowledge.deck_features(_deck_items_for_knowledge(state, records, record.get("step"), knowledge))
+            row.update(deck_features)
+            if deck_features.get("deck_known_cards", 0) > 0:
+                row["attack_cards"] = deck_features.get("deck_attack_cards", row["attack_cards"])
+                row["block_cards"] = deck_features.get("deck_tag_block", row["block_cards"])
+                row["draw_cards"] = deck_features.get("deck_tag_draw", row["draw_cards"])
+            row.update(knowledge.potion_features(state.get("potions") or []))
+        rows.append(row)
     return rows
 
 
@@ -335,6 +386,28 @@ def _count_named_cards(deck: Any, names: set[str]) -> int:
         if key in normalized:
             count += 1
     return count
+
+
+def _deck_items_for_knowledge(
+    state: dict[str, Any],
+    records: list[dict[str, Any]],
+    step: Any,
+    knowledge: StaticKnowledge,
+) -> list[Any]:
+    deck = state.get("deck") or []
+    if isinstance(deck, list) and knowledge.deck_features(deck).get("deck_known_cards", 0) > 0:
+        return deck
+    character = str(state.get("class") or "").upper()
+    reconstructed = list(STARTER_DECKS.get(character, []))
+    current_step = _safe_int(step)
+    for record in records:
+        record_step = _safe_int(record.get("step"))
+        if current_step and record_step > current_step:
+            break
+        pick = (record.get("decision") or {}).get("learn_card_pick")
+        if pick:
+            reconstructed.append(pick)
+    return reconstructed if reconstructed else (deck if isinstance(deck, list) else [])
 
 
 def _optional_int(value: Any) -> int | None:

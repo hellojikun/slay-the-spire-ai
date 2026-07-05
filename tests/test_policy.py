@@ -2244,6 +2244,100 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
         self.assertIn("look for defense", decision.reason)
 
+    def test_combat_uses_liquid_memories_for_discarded_block_under_lethal_pressure(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 18,
+                "max_hp": 80,
+                "potions": [
+                    {"id": "LiquidMemories", "name": "Liquid Memories", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 5,
+                    "player": {"current_hp": 18, "max_hp": 80, "current_energy": 1, "block": 8},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True},
+                    ],
+                    "discard_pile": [
+                        {"name": "Flame Barrier", "id": "Flame Barrier", "type": "SKILL", "cost": 2, "block": 12},
+                    ],
+                    "monsters": [
+                        {"name": "Gremlin Nob", "id": "GremlinNob", "current_hp": 34, "max_hp": 83, "move": {"damage": 30}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+        self.assertIn("recover Flame Barrier", decision.reason)
+
+    def test_combat_does_not_spend_liquid_memories_without_impactful_discard(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 16,
+                "max_hp": 80,
+                "potions": [
+                    {"id": "LiquidMemories", "name": "Liquid Memories", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 4,
+                    "player": {"current_hp": 16, "max_hp": 80, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "discard_pile": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6},
+                    ],
+                    "monsters": [
+                        {"name": "Jaw Worm", "id": "JawWorm", "current_hp": 40, "max_hp": 44, "move": {"damage": 18}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions[0]["action"], "play_card")
+
+    def test_combat_does_not_spend_liquid_memories_when_safe(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 70,
+                "max_hp": 80,
+                "potions": [
+                    {"id": "LiquidMemories", "name": "Liquid Memories", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 70, "max_hp": 80, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "discard_pile": [
+                        {"name": "Flame Barrier", "id": "Flame Barrier", "type": "SKILL", "cost": 2, "block": 12},
+                    ],
+                    "monsters": [
+                        {"name": "Cultist", "id": "Cultist", "current_hp": 40, "max_hp": 48, "move": {"damage": 6}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions[0]["action"], "play_card")
+
     def test_combat_does_not_spend_gamblers_brew_when_safe(self):
         state = {
             "in_game": True,

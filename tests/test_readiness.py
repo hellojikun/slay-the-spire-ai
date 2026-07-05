@@ -1,0 +1,167 @@
+import unittest
+
+from slay_ai.readiness import act1_readiness
+
+
+def starting_ironclad_deck() -> list[dict[str, str]]:
+    return [
+        {"id": "Strike_R"},
+        {"id": "Strike_R"},
+        {"id": "Strike_R"},
+        {"id": "Strike_R"},
+        {"id": "Strike_R"},
+        {"id": "Defend_R"},
+        {"id": "Defend_R"},
+        {"id": "Defend_R"},
+        {"id": "Defend_R"},
+        {"id": "Bash"},
+    ]
+
+
+class FakeKnowledge:
+    def card_for(self, card):
+        card_id = card.get("id") if isinstance(card, dict) else card
+        if card_id == "CustomBlock":
+            return {
+                "id": "CustomBlock",
+                "name": "Custom Block",
+                "type": "SKILL",
+                "tags": ["block", "premium_block"],
+                "values": {"base_block": 16},
+            }
+        return None
+
+    def potion_for(self, potion):
+        potion_id = potion.get("id") if isinstance(potion, dict) else potion
+        if potion_id == "CustomTempoPotion":
+            return {
+                "id": "CustomTempoPotion",
+                "name": "Custom Tempo Potion",
+                "roles": ["elite_tempo"],
+                "values": {"damage": 20},
+            }
+        return None
+
+
+class ReadinessTests(unittest.TestCase):
+    def test_low_hp_starting_deck_is_not_elite_ready(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "act": 1,
+                "floor": 7,
+                "class": "IRONCLAD",
+                "current_hp": 32,
+                "max_hp": 88,
+                "deck": starting_ironclad_deck(),
+                "potions": [],
+                "screen_state": {
+                    "next_nodes": [
+                        {"symbol": "E", "x": 1, "y": 7},
+                        {"symbol": "?", "x": 2, "y": 7},
+                    ]
+                },
+            },
+        }
+
+        result = act1_readiness(state)
+
+        self.assertLess(result["scores"]["elite"], 55)
+        self.assertIn("defense_density_low", result["gaps"])
+        self.assertIn("premium_block_missing", result["gaps"])
+        self.assertIn("elite_not_ready", result["risk_flags"])
+        self.assertIn("elite_low_hp_no_tempo_potion", result["risk_flags"])
+
+    def test_boss_ready_deck_scores_well_with_block_and_potions(self):
+        deck = starting_ironclad_deck() + [
+            {"id": "Shrug It Off"},
+            {"id": "Flame Barrier"},
+            {"id": "Carnage"},
+            {"id": "Thunderclap"},
+            {"id": "Uppercut"},
+            {"id": "Cleave"},
+        ]
+        state = {
+            "game_state": {
+                "act": 1,
+                "floor": 15,
+                "class": "IRONCLAD",
+                "current_hp": 76,
+                "max_hp": 88,
+                "deck": deck,
+                "potions": [{"id": "FirePotion"}, {"id": "DexterityPotion"}],
+                "screen_state": {"boss_available": True},
+            }
+        }
+
+        result = act1_readiness(state)
+
+        self.assertGreaterEqual(result["scores"]["boss"], 65)
+        self.assertGreaterEqual(result["scores"]["defense"], 60)
+        self.assertGreaterEqual(result["scores"]["potion"], 50)
+        self.assertNotIn("boss_not_ready", result["risk_flags"])
+        self.assertNotIn("boss_lacks_premium_block", result["risk_flags"])
+
+    def test_counts_aoe_weak_and_vulnerable_sources(self):
+        deck = starting_ironclad_deck() + [
+            {"id": "Cleave"},
+            {"id": "Thunderclap"},
+            {"id": "Clothesline"},
+            {"id": "Uppercut"},
+        ]
+        result = act1_readiness(
+            {
+                "act": 1,
+                "floor": 8,
+                "current_hp": 70,
+                "max_hp": 88,
+                "deck": deck,
+                "potions": [],
+            }
+        )
+
+        features = result["features"]
+        self.assertEqual(features["aoe_cards"], 2)
+        self.assertEqual(features["weak_sources"], 2)
+        self.assertEqual(features["vulnerable_sources"], 3)
+        self.assertGreaterEqual(result["scores"]["aoe"], 50)
+        self.assertGreaterEqual(result["scores"]["debuff"], 60)
+
+    def test_optional_knowledge_enriches_custom_cards_and_potions(self):
+        state = {
+            "game_state": {
+                "act": 1,
+                "floor": 6,
+                "current_hp": 60,
+                "max_hp": 80,
+                "deck": starting_ironclad_deck() + [{"id": "CustomBlock"}],
+                "potions": [{"id": "CustomTempoPotion"}],
+                "screen_state": {"next_nodes": [{"symbol": "E", "x": 1, "y": 6}]},
+            }
+        }
+
+        result = act1_readiness(state, knowledge=FakeKnowledge())
+
+        self.assertGreaterEqual(result["features"]["premium_block_cards"], 1)
+        self.assertGreaterEqual(result["features"]["potion_damage_value"], 20)
+        self.assertGreaterEqual(result["features"]["high_impact_potions"], 1)
+        self.assertNotIn("elite_low_hp_no_tempo_potion", result["risk_flags"])
+
+    def test_act2_context_is_flagged_but_still_scores(self):
+        result = act1_readiness(
+            {
+                "act": 2,
+                "floor": 20,
+                "current_hp": 45,
+                "max_hp": 80,
+                "deck": starting_ironclad_deck(),
+                "potions": [],
+            }
+        )
+
+        self.assertIn("non_act1_context", result["risk_flags"])
+        self.assertIn("overall", result["scores"])
+
+
+if __name__ == "__main__":
+    unittest.main()
