@@ -199,6 +199,24 @@ class FakeClient:
         return {"available_tools": [{"tool": tool} for tool in self.available_tools]}
 
 
+class StartBlockedByGameOverClient(FakeClient):
+    def __init__(self) -> None:
+        super().__init__([map_state()])
+        self.start_calls = 0
+        self.tool_calls: list[str] = []
+
+    def call_tool(self, name: str, arguments: dict | None = None) -> dict | str:
+        self.tool_calls.append(name)
+        if name == "start_game":
+            self.start_calls += 1
+            if self.start_calls == 1:
+                raise MCPError("Error: Invalid command: start. Possible commands: [proceed]")
+            return "Started"
+        if name == "get_available_commands":
+            return {"screen_type": "GAME_OVER", "available_tools": [{"tool": "proceed"}]}
+        return super().call_tool(name, arguments)
+
+
 class MapObservationErrorClient(FakeClient):
     def __init__(self) -> None:
         super().__init__([map_state()])
@@ -294,6 +312,25 @@ class NullWithGameOverCommandsClient(FakeClient):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_start_recovers_terminal_game_over_before_new_run(self):
+        with TemporaryDirectory() as tmp:
+            memory = StrategyMemory.load(learned_path=Path(tmp) / "learned.json")
+            client = StartBlockedByGameOverClient()
+            with patch.object(runner.time, "sleep", return_value=None):
+                result = runner.run_episode(
+                    client=client,
+                    memory=memory,
+                    start=True,
+                    max_steps=0,
+                    interval=0.01,
+                    log_dir=Path(tmp),
+                )
+
+        self.assertEqual(result.status, "max_steps")
+        self.assertEqual(client.start_calls, 2)
+        self.assertEqual(client.executed, [[{"action": "proceed"}]])
+        self.assertIn("get_available_commands", client.tool_calls)
+
     def test_action_settle_delay_uses_slowest_action_type(self):
         self.assertGreaterEqual(
             runner._settle_delay_for_actions([{"action": "choose", "choice_index": 1}], 0.05),

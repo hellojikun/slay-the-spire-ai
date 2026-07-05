@@ -13,6 +13,18 @@ ATTACK_BLOCK_CARDS = {"Dash", "Iron Wave", "Just Lucky", "Wallop"}
 ENERGY_GAIN_CARDS = {"Seeing Red": 2}
 SELF_DAMAGE_CARDS = {"Hemokinesis": 2}
 END_TURN_BLOCK_POWERS = {"Metallicize": 3}
+WEAK_CARDS = {
+    "Blind": 2,
+    "Clothesline": 2,
+    "Go for the Eyes": 1,
+    "Intimidate": 1,
+    "Leg Sweep": 2,
+    "Neutralize": 1,
+    "Shockwave": 3,
+    "Sucker Punch": 1,
+    "Uppercut": 1,
+}
+WEAK_ALL_CARDS = {"Blind", "Intimidate", "Shockwave"}
 UNSUPPORTED_SEQUENCE_CARDS = {
     "Armaments",
     "Burning Pact",
@@ -50,6 +62,9 @@ class _MonsterState:
     hp: int
     block: int
     attack: int
+    attack_hits: int = 1
+    has_weak: bool = False
+    artifact: int = 0
     mode_shift: int | None = None
 
     @property
@@ -153,13 +168,14 @@ def _is_supported_candidate(card: dict[str, Any], current_energy: int) -> bool:
     cost = _card_cost(card, current_energy)
     if cost is None or cost > current_energy:
         return False
-    return _card_damage(card, current_energy) > 0 or _card_block(card) > 0 or _energy_gain(card) > 0
+    return _card_damage(card, current_energy) > 0 or _card_block(card) > 0 or _energy_gain(card) > 0 or _card_weak(card) > 0
 
 
 def _candidate_sort_key(candidate: _Candidate) -> tuple[int, int, int, int]:
     card = candidate.card
     return (
         _energy_gain(card),
+        _card_weak(card),
         _card_block(card),
         _card_damage(card, 3),
         -max(0, _as_int(card.get("cost", 0))),
@@ -178,22 +194,34 @@ def _apply_card(state: _SearchState, candidate: _Candidate) -> None:
     state.self_damage += _self_damage(card)
 
     damage = _card_damage(card, spent if _is_x_cost(card) else state.energy)
-    if damage <= 0:
+    weak = _card_weak(card)
+    if damage > 0:
+        if _is_aoe(card):
+            for monster in state.monsters:
+                if monster.alive:
+                    state.damage_dealt += _deal_damage(monster, damage)
+                    if not monster.alive:
+                        state.kills += 1
+            if weak and _is_weak_all(card):
+                _apply_weak_to_all(state.monsters)
+            return
+        target = _choose_target(state.monsters, damage)
+        if target is None:
+            return
+        before_alive = target.alive
+        state.damage_dealt += _deal_damage(target, damage)
+        if before_alive and not target.alive:
+            state.kills += 1
+        elif weak:
+            _apply_weak(target)
         return
-    if _is_aoe(card):
-        for monster in state.monsters:
-            if monster.alive:
-                state.damage_dealt += _deal_damage(monster, damage)
-                if not monster.alive:
-                    state.kills += 1
-        return
-    target = _choose_target(state.monsters, damage)
-    if target is None:
-        return
-    before_alive = target.alive
-    state.damage_dealt += _deal_damage(target, damage)
-    if before_alive and not target.alive:
-        state.kills += 1
+    if weak:
+        if _is_weak_all(card):
+            _apply_weak_to_all(state.monsters)
+            return
+        target = _choose_target(state.monsters, 0)
+        if target is not None:
+            _apply_weak(target)
 
 
 def _score_state(state: _SearchState, hp: int, initial_loss: int, initial_total_attack: int) -> float:
@@ -221,7 +249,8 @@ def _action_for(candidate: _Candidate, monsters: list[_MonsterState]) -> dict[st
     card = candidate.card
     action: dict[str, Any] = {"action": "play_card", "card_index": candidate.hand_index}
     damage = _card_damage(card, 3)
-    if damage > 0 and not _is_aoe(card):
+    needs_single_target = not _is_aoe(card) and not _is_weak_all(card) and (damage > 0 or _card_weak(card) > 0)
+    if needs_single_target:
         target = _choose_target(monsters, damage)
         if target is not None:
             action["target_index"] = monsters.index(target) + 1
@@ -277,6 +306,14 @@ def _self_damage(card: dict[str, Any]) -> int:
     return SELF_DAMAGE_CARDS.get(_card_key(card), 0)
 
 
+def _card_weak(card: dict[str, Any]) -> int:
+    return WEAK_CARDS.get(_card_key(card), 0)
+
+
+def _is_weak_all(card: dict[str, Any]) -> bool:
+    return _card_key(card) in WEAK_ALL_CARDS
+
+
 def _projected_total_loss(state: _SearchState) -> int:
     return state.self_damage + max(0, _incoming(state.monsters) - state.block)
 
@@ -286,10 +323,14 @@ def _fight_ended(state: _SearchState) -> bool:
 
 
 def _monster_state(monster: dict[str, Any]) -> _MonsterState:
+    attack, hits = _monster_attack_parts(monster)
     return _MonsterState(
         hp=max(0, _as_int(monster.get("current_hp", 0))),
         block=max(0, _as_int(monster.get("block", 0))),
-        attack=max(0, monster_attack_damage(monster)),
+        attack=attack,
+        attack_hits=hits,
+        has_weak=_power_amount(monster, "weak") > 0,
+        artifact=_power_amount(monster, "artifact"),
         mode_shift=_mode_shift_amount(monster),
     )
 
@@ -329,6 +370,29 @@ def _deal_damage(monster: _MonsterState, damage: int) -> int:
     return blocked + hp_damage
 
 
+def _apply_weak_to_all(monsters: list[_MonsterState]) -> None:
+    for monster in monsters:
+        _apply_weak(monster)
+
+
+def _apply_weak(monster: _MonsterState) -> None:
+    if not monster.alive or monster.attack <= 0 or monster.has_weak:
+        return
+    if monster.artifact > 0:
+        monster.artifact -= 1
+        return
+    monster.attack = _weakened_attack(monster.attack, monster.attack_hits)
+    monster.has_weak = True
+
+
+def _weakened_attack(attack: int, hits: int) -> int:
+    if attack <= 0:
+        return 0
+    if hits > 1 and attack % hits == 0:
+        return int((attack // hits) * 0.75) * hits
+    return int(attack * 0.75)
+
+
 def _damage_kills(monster: _MonsterState, damage: int) -> bool:
     return damage >= monster.hp + monster.block
 
@@ -345,16 +409,44 @@ def _copy_state(state: _SearchState) -> _SearchState:
 
 
 def _copy_monster(monster: _MonsterState) -> _MonsterState:
-    return _MonsterState(hp=monster.hp, block=monster.block, attack=monster.attack, mode_shift=monster.mode_shift)
+    return _MonsterState(
+        hp=monster.hp,
+        block=monster.block,
+        attack=monster.attack,
+        attack_hits=monster.attack_hits,
+        has_weak=monster.has_weak,
+        artifact=monster.artifact,
+        mode_shift=monster.mode_shift,
+    )
+
+
+def _monster_attack_parts(monster: dict[str, Any]) -> tuple[int, int]:
+    move = monster.get("move")
+    if isinstance(move, dict) and "damage" in move:
+        damage = max(0, _as_int(move.get("damage", 0)))
+        hits = max(1, _as_int(move.get("hits", 1)))
+        return damage * hits, hits
+    if "damage" in monster:
+        damage = max(0, _as_int(monster.get("damage", 0)))
+        hits = max(1, _as_int(monster.get("hits", 1)))
+        return damage * hits, hits
+    return max(0, monster_attack_damage(monster)), 1
 
 
 def _mode_shift_amount(monster: dict[str, Any]) -> int | None:
+    amount = _power_amount(monster, "modeshift")
+    if amount > 0:
+        return amount
+    return None
+
+
+def _power_amount(monster: dict[str, Any], power_id: str) -> int:
+    expected = power_id.replace(" ", "").lower()
     for power in monster.get("powers", []) or []:
         key = str(power.get("id") or power.get("name") or "").replace(" ", "").lower()
-        if key == "modeshift":
-            amount = _as_int(power.get("amount", 0))
-            return amount if amount > 0 else None
-    return None
+        if key == expected:
+            return max(0, _as_int(power.get("amount", 0)))
+    return 0
 
 
 def _as_int(value: Any) -> int:

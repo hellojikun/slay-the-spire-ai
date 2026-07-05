@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .memory import LEARNED_MEMORY, StrategyMemory
+from .training_manifest import clean_log_paths_from_manifest
 
 
 @dataclass
@@ -25,6 +26,7 @@ class LearnedLog:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Update learned memory from ai_runs JSONL logs.")
     parser.add_argument("logs", nargs="*", type=Path, default=[Path("ai_runs")])
+    parser.add_argument("--manifest", type=Path, help="Use clean_trainable log paths from a training manifest.")
     parser.add_argument("--learned-path", type=Path, default=LEARNED_MEMORY)
     parser.add_argument("--reset", action="store_true", help="Ignore existing learned memory before replaying logs.")
     args = parser.parse_args(argv)
@@ -38,7 +40,7 @@ def main(argv: list[str] | None = None) -> int:
             "recent_outcomes": [],
         }
 
-    logs = list(_iter_log_files(args.logs))
+    logs = clean_log_paths_from_manifest(args.manifest) if args.manifest else list(_iter_log_files(args.logs))
     learned = [read_log(path) for path in logs]
     applied = 0
     skipped = 0

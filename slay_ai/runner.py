@@ -137,9 +137,11 @@ def run_episode(
         try:
             message = client.call_tool("start_game", start_args)
         except MCPError as exc:
-            if "Possible commands" not in str(exc) or existing_save == "fail":
+            if "Possible commands" in str(exc) and _recover_terminal_game_over_before_start(client):
+                message = client.call_tool("start_game", start_args)
+            elif "Possible commands" not in str(exc) or existing_save == "fail":
                 raise
-            if existing_save == "continue":
+            elif existing_save == "continue":
                 if _is_in_game(client):
                     message = "Continuing current in-dungeon run"
                 else:
@@ -348,6 +350,23 @@ def _is_in_game(client: MCPClient) -> bool:
         return bool(client.get_screen_state().get("in_game"))
     except MCPError:
         return False
+
+
+def _recover_terminal_game_over_before_start(client: MCPClient) -> bool:
+    try:
+        commands = client.call_tool("get_available_commands", {})
+    except MCPError:
+        return False
+    if commands.get("screen_type") != "GAME_OVER":
+        return False
+    if "proceed" not in _available_tool_names(commands):
+        return False
+    try:
+        client.execute_actions([{"action": "proceed"}])
+    except MCPError:
+        return False
+    time.sleep(0.5)
+    return True
 
 
 def _return_to_menu_for_abandon(client: MCPClient, timeout: float = 15.0) -> None:

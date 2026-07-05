@@ -52,6 +52,14 @@ python -m slay_ai.campaign --ladder --ascension 20 --attempts-per-target 50
 python -m slay_ai.learn ai_runs --reset
 ```
 
+先清洗日志再训练/学习：
+
+```powershell
+python -m slay_ai.training_manifest ai_runs_strategy_probe64 ai_runs_strategy_probe65 ai_runs_strategy_probe66 ai_runs_strategy_probe67 ai_runs_strategy_probe68 ai_runs_strategy_probe69 ai_runs_strategy_probe70 ai_runs_strategy_probe71 ai_runs_strategy_probe72 --output data\training_manifest_probe64_72.json --shadow-dir data\shadow_probe64_72
+python -m slay_ai.train_card_model --manifest data\training_manifest_probe64_72.json --model-path models\card_value_model_probe64_72.json --min-count 1 --max-delta 6
+python -m slay_ai.learn --manifest data\training_manifest_probe64_72.json --reset
+```
+
 ## 目录
 
 - `slay_ai/mcp_client.py`：最小 MCP JSON-RPC 客户端。
@@ -60,6 +68,7 @@ python -m slay_ai.learn ai_runs --reset
 - `slay_ai/runner.py`：主循环、日志和命令行入口。
 - `slay_ai/campaign.py`：四角色 / 指定进阶的循环挑战器。
 - `slay_ai/learn.py`：离线读取 JSONL 对局日志并更新记忆。
+- `slay_ai/training_manifest.py`：把日志分成 clean/diagnostic/infra，并导出路线、药水、boss 前卡组质量的影子训练样本。
 - `data/default_memory.json`：第一版卡牌、遗物、路线、战斗权重。
 - `tests/test_policy.py`：无需启动游戏即可跑的策略测试。
 
@@ -72,7 +81,7 @@ python -m slay_ai.learn ai_runs --reset
 - 卡牌奖励选择的轻量统计。
 - 根据本局拿过的牌和结局微调卡牌 `delta`，下一局选牌会受影响。
 
-`python -m slay_ai.learn ai_runs` 可以把历史日志再次喂给学习记忆。`--reset` 会先清空旧学习结果再重放日志。
+`python -m slay_ai.learn ai_runs` 可以把历史日志再次喂给学习记忆。`--reset` 会先清空旧学习结果再重放日志。更推荐先用 `slay_ai.training_manifest` 生成清单，再让 `learn` 和 `train_card_model` 通过 `--manifest` 只读取 `clean_trainable` 日志，避免诊断日志污染模型。
 
 ## 硬件资源
 

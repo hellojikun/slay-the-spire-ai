@@ -18,6 +18,7 @@ from typing import Any, Iterable
 
 from .memory import normalize_card_name
 from .model import MODEL_PATH, CardValueModel
+from .training_manifest import clean_log_paths_from_manifest
 
 
 @dataclass
@@ -34,13 +35,14 @@ class CardExample:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Train card-value deltas from ai_runs JSONL logs.")
     parser.add_argument("logs", nargs="*", type=Path, default=[Path("ai_runs")])
+    parser.add_argument("--manifest", type=Path, help="Use clean_trainable log paths from a training manifest.")
     parser.add_argument("--model-path", type=Path, default=MODEL_PATH)
     parser.add_argument("--min-count", type=int, default=1)
     parser.add_argument("--max-delta", type=float, default=10.0)
     parser.add_argument("--backend", choices=["auto", "stats"], default="auto")
     args = parser.parse_args(argv)
 
-    examples = load_examples(args.logs)
+    examples = load_examples(clean_log_paths_from_manifest(args.manifest) if args.manifest else args.logs)
     model = train_stats_model(examples, args.model_path, min_count=args.min_count, max_delta=args.max_delta)
     model.metadata.update(hardware_metadata(args.backend))
     model.save()

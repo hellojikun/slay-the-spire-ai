@@ -13,7 +13,8 @@ This project should not wait for a perfect heuristic bot before adding learning.
 - `slay_ai.learn` can replay completed runs into `data/learned_memory.json`.
 - `slay_ai.train_card_model` can train `models/card_value_model.json`.
 - `StrategyMemory.card_score()` already combines base card scores, learned memory deltas, and model deltas.
-- As of 2026-07-05 after probe63, the cleaned training run loaded 258 card-pick examples and wrote 70 stable card-id deltas. `slay_ai.learn --reset` read 53 logs, applied 42 completed runs, and skipped 11 incomplete runs. Probes64-71 are clean failure candidates for the next refresh, but they have not yet been folded into the learned memory.
+- As of 2026-07-05 after probe72, `slay_ai.training_manifest` can classify logs into `clean_trainable`, `diagnostic_excluded`, and `infra_blocked` before any offline learning step. The probe64-72 manifest classified 9 logs as clean, 0 diagnostic, and 0 infra-blocked, then extracted 128 route-risk rows, 484 potion-tempo rows, and 7 pre-boss deck-quality rows for shadow-model work.
+- `slay_ai.learn` and `slay_ai.train_card_model` accept `--manifest`, so training can consume only the clean bucket from a generated manifest. A probe64-72 card-model refresh loaded 67 card-pick examples and wrote 60 local comparison deltas.
 
 ## Project Phases
 
@@ -42,6 +43,19 @@ The current advisory agents agree on this boundary:
 - After probe69, low-HP Skill Potion handling has a regression test and live execution remained clean, but Slime Boss split/minion pressure is again the dominant Act 1 bottleneck. The next model/search milestone should be high-pressure card-order plus potion search, not a wider list of one-off potion names.
 - After probe70, the next Stage 4 priority is search sequence commitment. The search often finds a full defensive line, but the runner/policy commits only one card and later replans can drift back to attacks. This should be fixed before training a combat action model from these traces.
 - After probe71, search sequence commitment is live-validated: the run produced 17 continued search-sequence actions and still had 0 `action_failed` records. The route remains correct, but the next Stage 4 priority moves to boss/high-pressure evaluator calibration and deck/resource quality. Do not promote a learned combat controller yet; use learning first as a shadow value model for card rewards, route risk, shop/potion value, and post-sequence state quality.
+- After probe72, the run ended earlier at F11 despite clean execution and live Weak search behavior. This confirms the direction is not "more heuristic exceptions forever"; the next useful work is clean-data labeling plus route risk, potion tempo, and boss-prep deck quality models while keeping heuristics/search as the controller.
+
+## Clean Training Manifests
+
+Before replaying logs into memory or model training, build a manifest and optional shadow datasets:
+
+```powershell
+python -m slay_ai.training_manifest ai_runs_strategy_probe64 ai_runs_strategy_probe65 ai_runs_strategy_probe66 ai_runs_strategy_probe67 ai_runs_strategy_probe68 ai_runs_strategy_probe69 ai_runs_strategy_probe70 ai_runs_strategy_probe71 ai_runs_strategy_probe72 --output data\training_manifest_probe64_72.json --shadow-dir data\shadow_probe64_72
+python -m slay_ai.train_card_model --manifest data\training_manifest_probe64_72.json --model-path models\card_value_model_probe64_72.json --min-count 1 --max-delta 6
+python -m slay_ai.learn --manifest data\training_manifest_probe64_72.json --reset
+```
+
+The manifest is the gate between execution evidence and learning. Completed clean failures are trainable; action failures and manual diagnostics stay visible but out of default training.
 
 ## First Learning Stage
 
@@ -60,7 +74,7 @@ This produces:
 
 The trained model is intentionally lightweight JSON. It can be deleted or regenerated at any time if it looks polluted.
 
-Do not include `ai_runs_strategy_probe23` in the default training set; it is a known polluted terminal-loop log from before the main-menu synthetic game-over fix. Also do not include probe30 by default: `ai_runs_strategy_probe30` ended as `action_failed`, and `ai_runs_strategy_probe30_continue` is only a diagnostic continuation of that split episode. Do not include probe38 by default: it stopped at max steps in a shop loop and is execution-layer diagnostic only. Do not include the first probe39 attempt: it was manually stopped after repeated invalid `leave` action errors. Do not include probe43 by default: it was manually stopped after an F16 empty-hand wait loop and has no terminal outcome. Also exclude `ai_runs_strategy_probe43_continue_emptyhandfix` by default because it is a split continuation used only to validate the empty-hand fix. Do not include probe45 or its split continuations by default; they were Fiend Fire empty-hand diagnostics. Do not include probe46 by default; it was stopped after exposing the `GRID` `confirm` / MCP `proceed` preflight loop. Do not include probe50 or `ai_runs_strategy_probe50_continue_handselect_rewrite`; they are HAND_SELECT action-rewrite diagnostics. Do not include probe51; it ended as MCP unreachable/read_failed. Do not include probe52; it was manually stopped after exposing a Neow event GRID duplicate-card selection loop. Do not include probe60 or its split continuations by default; they were HAND_SELECT and Act 2 self-damage diagnostics. Probes31-37, probes40-42, probe44, probe47, probe48, probe49, probe53, probe54, probe55, probe61, probe62, probe63, probe64, probe65, probe66, probe67, probe68, probe69, probe70, and probe71 are clean completed failures or clean synthetic lethal failures and are candidates for the next learning refresh.
+Do not include `ai_runs_strategy_probe23` in the default training set; it is a known polluted terminal-loop log from before the main-menu synthetic game-over fix. Also do not include probe30 by default: `ai_runs_strategy_probe30` ended as `action_failed`, and `ai_runs_strategy_probe30_continue` is only a diagnostic continuation of that split episode. Do not include probe38 by default: it stopped at max steps in a shop loop and is execution-layer diagnostic only. Do not include the first probe39 attempt: it was manually stopped after repeated invalid `leave` action errors. Do not include probe43 by default: it was manually stopped after an F16 empty-hand wait loop and has no terminal outcome. Also exclude `ai_runs_strategy_probe43_continue_emptyhandfix` by default because it is a split continuation used only to validate the empty-hand fix. Do not include probe45 or its split continuations by default; they were Fiend Fire empty-hand diagnostics. Do not include probe46 by default; it was stopped after exposing the `GRID` `confirm` / MCP `proceed` preflight loop. Do not include probe50 or `ai_runs_strategy_probe50_continue_handselect_rewrite`; they are HAND_SELECT action-rewrite diagnostics. Do not include probe51; it ended as MCP unreachable/read_failed. Do not include probe52; it was manually stopped after exposing a Neow event GRID duplicate-card selection loop. Do not include probe60 or its split continuations by default; they were HAND_SELECT and Act 2 self-damage diagnostics. Probes31-37, probes40-42, probe44, probe47, probe48, probe49, probe53, probe54, probe55, probe61, probe62, probe63, probe64, probe65, probe66, probe67, probe68, probe69, probe70, probe71, and probe72 are clean completed failures or clean synthetic lethal failures and are candidates for manifest-gated learning.
 
 ## Promotion Gates
 
@@ -76,13 +90,15 @@ Before increasing learning authority beyond card score deltas:
 
 Order of expansion:
 
-1. Card reward value model.
-2. Potion use model for elite, boss, and lethal-risk turns.
-3. Rest versus smith threshold calibration.
-4. Route risk model based on HP, deck, potions, relics, and next-node options.
-5. Shop purchase model.
-6. One-turn combat local search.
-7. Combat action sequence evaluator.
+1. Clean manifest and stable trainable datasets.
+2. Card reward value model.
+3. Route risk shadow model based on HP, floor, path commitment, deck strength, potions, relics, and buffers.
+4. Potion tempo shadow model for elite, boss, and lethal-risk turns.
+5. Pre-boss/post-combat deck quality labels.
+6. Rest versus smith threshold calibration.
+7. Shop purchase model.
+8. One-turn combat local search and evaluator calibration.
+9. Combat action sequence learning, only after search labels are stable.
 
 Current route assessment: stay in Stage 4 until Slime Boss split/minion pressure, Hexaghost/boss high-pressure survival, deck/resource quality before boss fights, and early Act 2 low-HP survival are less brittle. Stage 5 can grow in shadow mode beside this work, but it should not replace the heuristic/search controller until probes show stable improvement.
 

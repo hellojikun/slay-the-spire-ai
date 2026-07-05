@@ -1183,6 +1183,50 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 5}])
         self.assertIn("One-turn search", decision.reason)
 
+    def test_combat_search_models_probe71_clothesline_weak_under_lethal_hexaghost(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 17,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 9,
+                    "player": {"current_hp": 17, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Clothesline", "id": "Clothesline", "type": "ATTACK", "cost": 2, "damage": 12, "is_playable": True, "has_target": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "True Grit", "id": "True Grit", "type": "SKILL", "cost": 1, "block": 7, "is_playable": True},
+                        {"name": "Wild Strike", "id": "Wild Strike", "type": "ATTACK", "cost": 1, "damage": 12, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "Hexaghost",
+                            "id": "Hexaghost",
+                            "current_hp": 66,
+                            "max_hp": 250,
+                            "move": {"hits": 6, "damage": 5},
+                            "powers": [{"id": "Strength", "amount": 2}],
+                        }
+                    ],
+                },
+            },
+        }
+
+        result = find_best_combat_sequence(state["game_state"])
+        self.assertIsNotNone(result)
+        assert result is not None
+        self.assertLess(result.projected_loss, 17)
+        self.assertEqual(result.first_card_key, "Clothesline")
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+        self.assertIn("One-turn search", decision.reason)
+
     def test_combat_commits_defensive_search_sequence_across_state_reads(self):
         bot = policy()
         monsters = [
