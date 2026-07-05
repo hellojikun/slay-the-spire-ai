@@ -31,12 +31,13 @@ Implemented client safeguards:
 
 ## 2026-07-05 A0 Execution Findings
 
-The current short-term milestone is stable A0 Act 1 boss completion before returning to ascension climbing. Probe91 (`runs/ai_runs_strategy_probe91_a0/20260705_201624_ironclad_a0.jsonl`) reached F19 after beating Slime Boss, but was manually stopped and classified as `diagnostic_excluded` / `no_terminal_outcome`.
+The current short-term milestone is stable A0 Act 1 boss completion before returning to ascension climbing. Probe91 (`runs/ai_runs_strategy_probe91_a0/20260705_201624_ironclad_a0.jsonl`) reached F19 after beating Slime Boss, but was manually stopped and classified as `diagnostic_excluded` / `no_terminal_outcome`. Probe94 (`runs/ai_runs_strategy_probe94_a0/20260705_204121_ironclad_a0.jsonl`) repeated the Act 1 clear, reached Act 2 F31, and is classified clean/trainable in `data/training_manifest_probe94_a0.json`.
 
 Two MCP/execution issues are now P0 for stability:
 
-- CHEST states can report `room_phase=COMPLETE`, `screen_state.chest_open=false`, and `screen_state.rewards=[]`. In probe91, F9 and F17 both proceeded with only Burning Blood in the relic list, so this is a real skipped-relic failure, not merely missing log text.
+- CHEST states can report `room_phase=COMPLETE`, `screen_state.chest_open=false`, and `screen_state.rewards=[]`. In probe91, F9 and F17 both proceeded with only Burning Blood in the relic list, so this was a real skipped-relic failure, not merely missing log text. Probe94 live-validated the runner-side guard: F9, F17, and F26 all probed the chest before proceeding, and F9/F26 explicitly logged `Collect RELIC`.
 - Start/continue transitions can race against the live dungeon state. A new A0 run may already be inside combat after clearing a terminal/passive screen, and `--continue` may be called while already in dungeon. Runner now checks the current state before issuing MCP start/continue commands.
+- `GAME_OVER` can still leave MCP state tools broken even when protocol and available-command probes respond. Probe94 ended at F31 with `get_available_commands` reporting `GAME_OVER` + `proceed`, while `get_screen_state` and `get_game_state` returned `Internal error: null`; watchdog `--recover-terminal` recovered the terminal screen and the runner recorded a synthetic game-over.
 
 Immediate runner-side fixes:
 
@@ -45,10 +46,10 @@ Immediate runner-side fixes:
 
 Next MCP-side investigation:
 
-1. Inspect MCPTheSpire CHEST serialization and command mapping for cases where the room is complete but the chest is not open.
-2. Confirm whether the correct command is `choose`, `proceed`, `click`, or a missing service-side `open_chest` action.
-3. Add service-side fields for `available_choices`, `choice_count`, and chest/reward identifiers so Python can reject stale empty-choice states before losing a relic.
-4. Consider a narrow custom MCP patch if CHEST reward visibility remains impossible to recover from runner-side probing.
+1. Patch or wrap MCPTheSpire terminal/GameOver serialization so `get_screen_state` and `get_game_state` return a null-safe terminal object instead of `Internal error: null`.
+2. Add service-side fields for `available_choices`, `choice_count`, and chest/reward identifiers so Python can reject stale empty-choice states before losing a relic.
+3. Keep the runner-side CHEST probe guard even after a service patch; it is now live-validated and low risk.
+4. Consider a narrow custom MCP patch if terminal-state or CHEST reward visibility remains impossible to recover from runner-side probing.
 
 ## Watchdog
 
