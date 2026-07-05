@@ -25,7 +25,7 @@ class LearnedLog:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Update learned memory from ai_runs JSONL logs.")
-    parser.add_argument("logs", nargs="*", type=Path, default=[Path("ai_runs")])
+    parser.add_argument("logs", nargs="*", type=Path, default=[Path("runs") / "ai_runs"])
     parser.add_argument("--manifest", type=Path, help="Use clean_trainable log paths from a training manifest.")
     parser.add_argument("--learned-path", type=Path, default=LEARNED_MEMORY)
     parser.add_argument("--reset", action="store_true", help="Ignore existing learned memory before replaying logs.")

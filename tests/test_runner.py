@@ -22,6 +22,17 @@ def map_state() -> dict:
     }
 
 
+def target_a0_combat_state() -> dict:
+    state = combat_state(1)
+    game = state["game_state"]
+    game["class"] = "IRONCLAD"
+    game["ascension_level"] = 0
+    game["current_hp"] = 80
+    game["max_hp"] = 80
+    game["floor"] = 1
+    return state
+
+
 def game_over_state() -> dict:
     return {
         "in_game": True,
@@ -217,6 +228,47 @@ class StartBlockedByGameOverClient(FakeClient):
         return super().call_tool(name, arguments)
 
 
+class StartBlockedByPassiveProceedClient(StartBlockedByGameOverClient):
+    def call_tool(self, name: str, arguments: dict | None = None) -> dict | str:
+        self.tool_calls.append(name)
+        if name == "start_game":
+            self.start_calls += 1
+            if self.start_calls == 1:
+                raise MCPError("Error: Invalid command: start. Possible commands: [proceed, key, click, wait, save, state]")
+            return "Started"
+        if name == "get_available_commands":
+            return {
+                "available_tools": [
+                    {"tool": "proceed"},
+                    {"tool": "key"},
+                    {"tool": "click"},
+                    {"tool": "wait"},
+                    {"tool": "save"},
+                    {"tool": "state"},
+                ]
+            }
+        return FakeClient.call_tool(self, name, arguments)
+
+
+class StartBlockedThenTargetRunClient(StartBlockedByPassiveProceedClient):
+    def __init__(self) -> None:
+        FakeClient.__init__(self, [target_a0_combat_state()])
+        self.start_calls = 0
+        self.tool_calls: list[str] = []
+
+
+class InDungeonContinueClient(FakeClient):
+    def __init__(self) -> None:
+        super().__init__([target_a0_combat_state()])
+        self.tool_calls: list[str] = []
+
+    def call_tool(self, name: str, arguments: dict | None = None) -> dict | str:
+        self.tool_calls.append(name)
+        if name == "continue_game":
+            raise MCPError("continue_game should not be called while already in game")
+        return super().call_tool(name, arguments)
+
+
 class MapObservationErrorClient(FakeClient):
     def __init__(self) -> None:
         super().__init__([map_state()])
@@ -331,6 +383,62 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(client.executed, [[{"action": "proceed"}]])
         self.assertIn("get_available_commands", client.tool_calls)
 
+    def test_start_recovers_passive_proceed_screen_before_new_run(self):
+        with TemporaryDirectory() as tmp:
+            memory = StrategyMemory.load(learned_path=Path(tmp) / "learned.json")
+            client = StartBlockedByPassiveProceedClient()
+            with patch.object(runner.time, "sleep", return_value=None):
+                result = runner.run_episode(
+                    client=client,
+                    memory=memory,
+                    start=True,
+                    max_steps=0,
+                    interval=0.01,
+                    log_dir=Path(tmp),
+                )
+
+        self.assertEqual(result.status, "max_steps")
+        self.assertEqual(client.start_calls, 2)
+        self.assertEqual(client.executed, [[{"action": "proceed"}]])
+        self.assertIn("get_available_commands", client.tool_calls)
+
+    def test_start_does_not_restart_after_recovery_enters_target_run(self):
+        with TemporaryDirectory() as tmp:
+            memory = StrategyMemory.load(learned_path=Path(tmp) / "learned.json")
+            client = StartBlockedThenTargetRunClient()
+            with patch.object(runner.time, "sleep", return_value=None):
+                result = runner.run_episode(
+                    client=client,
+                    memory=memory,
+                    start=True,
+                    max_steps=0,
+                    interval=0.01,
+                    log_dir=Path(tmp),
+                    ascension=0,
+                )
+
+        self.assertEqual(result.status, "max_steps")
+        self.assertEqual(client.start_calls, 1)
+        self.assertEqual(client.executed, [[{"action": "proceed"}]])
+        self.assertIn("get_available_commands", client.tool_calls)
+
+    def test_continue_uses_current_in_dungeon_run(self):
+        with TemporaryDirectory() as tmp:
+            memory = StrategyMemory.load(learned_path=Path(tmp) / "learned.json")
+            client = InDungeonContinueClient()
+            with patch.object(runner.time, "sleep", return_value=None):
+                result = runner.run_episode(
+                    client=client,
+                    memory=memory,
+                    continue_run=True,
+                    max_steps=0,
+                    interval=0.01,
+                    log_dir=Path(tmp),
+                )
+
+        self.assertEqual(result.status, "max_steps")
+        self.assertNotIn("continue_game", client.tool_calls)
+
     def test_action_settle_delay_uses_slowest_action_type(self):
         self.assertGreaterEqual(
             runner._settle_delay_for_actions([{"action": "choose", "choice_index": 1}], 0.05),
@@ -412,6 +520,30 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(result.rewrite_reason, "Preflight action rewrite: grid confirm->proceed.")
         self.assertEqual(result.available_commands, ["proceed"])
         self.assertGreater(result.settle_ms, 800)
+
+    def test_preflight_rewrites_completed_chest_choose_to_proceed_when_choose_unavailable(self):
+        before = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "CHEST",
+                "room_phase": "COMPLETE",
+                "floor": 9,
+            },
+        }
+        client = FakeClient([before], available_tools=["proceed"])
+        with patch.object(runner.time, "sleep", return_value=None):
+            result = runner._execute_actions_with_settle(
+                client,
+                [{"action": "choose", "choice_index": 1}],
+                interval=0.01,
+                before_state=before,
+            )
+
+        self.assertEqual(client.executed, [[{"action": "proceed"}]])
+        self.assertEqual(result.status, "ok")
+        self.assertEqual(result.executed_actions, [{"action": "proceed"}])
+        self.assertEqual(result.rewrite_reason, "Preflight action rewrite: chest choose->proceed.")
+        self.assertEqual(result.available_commands, ["proceed"])
 
     def test_preflight_does_not_rewrite_grid_confirm_when_selection_incomplete(self):
         before = grid_state(confirm_up=False, selected_cards=[])

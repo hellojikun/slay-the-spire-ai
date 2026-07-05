@@ -43,7 +43,7 @@ class LogClassification:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Classify JSONL logs before offline learning.")
-    parser.add_argument("logs", nargs="*", type=Path, default=[Path("ai_runs")])
+    parser.add_argument("logs", nargs="*", type=Path, default=[Path("runs") / "ai_runs"])
     parser.add_argument("--output", type=Path, default=Path("data") / "training_log_manifest.json")
     parser.add_argument("--shadow-dir", type=Path, help="Optional directory for route/potion/pre-boss JSONL examples.")
     parser.add_argument(

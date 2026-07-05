@@ -748,6 +748,46 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "proceed"}])
 
+    def test_chest_complete_without_reward_details_probes_once_then_proceeds(self):
+        p = policy()
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "CHEST",
+                "room_phase": "COMPLETE",
+                "floor": 9,
+                "screen_state": {"chest_open": False, "rewards": []},
+                "relics": [{"id": "Burning Blood"}, {"id": "Champion Belt"}],
+            },
+        }
+
+        first = p.decide(state)
+        second = p.decide(state)
+
+        self.assertEqual(first.actions, [{"action": "choose", "choice_index": 1}])
+        self.assertIn("without reward details", first.reason)
+        self.assertEqual(second.actions, [{"action": "proceed"}])
+
+    def test_chest_collects_visible_relic_reward(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "CHEST",
+                "room_phase": "COMPLETE",
+                "floor": 12,
+                "screen_state": {
+                    "rewards": [
+                        {"reward_type": "RELIC", "id": "Lantern"},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        self.assertEqual(decision.reason, "Collect chest RELIC.")
+
     def test_combat_blocks_when_under_pressure(self):
         state = {
             "in_game": True,

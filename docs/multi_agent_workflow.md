@@ -4,9 +4,12 @@ This document records the multi-agent setup used for the Slay the Spire growing 
 
 ## Current Snapshot
 
-Updated 2026-07-05 after the probe88 no-terminal diagnostic run and current sub-agent capacity check.
+Updated 2026-07-05 after the A0 Act 1 boss milestone probe, CHEST skipped-relic fix, and run-log directory migration.
 
 - Current unlock frontier: `IRONCLAD:A4`, `SILENT:A0`, `DEFECT:A0`, `WATCHER:A0`. A20 is the long-term upper target, not the current runnable claim.
+- Current short-term milestone: stabilize A0 Act 1 boss completion before resuming ascension climbing. Probe91 (`runs/ai_runs_strategy_probe91_a0/20260705_201624_ironclad_a0.jsonl`) reached F19 after beating Slime Boss, but was manually stopped and remains `diagnostic_excluded` / `no_terminal_outcome`; it is single-run milestone evidence, not yet stability proof.
+- Run-log layout: all root `ai_runs*` directories were moved under `runs/`. New runner/campaign/learn/train/manifest defaults use `runs/ai_runs`; named probes should use `runs/ai_runs_strategy_probeXX...`.
+- CHEST issue: probe91 showed F9 and F17 CHEST states with `chest_open=false`, empty rewards, and only Burning Blood in the relic list. `slay_ai.policy_chest` now probes such unverified chests before proceeding, and runner snapshots log CHEST `chest_open` plus visible rewards.
 - Latest included probes: `ai_runs_strategy_probe85/20260705_185143_ironclad_a4.jsonl` ended as a clean F5 hallway game-over after 120 ok actions, 0 recovered actions, and 0 failed actions. It was dispatched before the probe84 route fix could be validated, so treat it as clean data rather than rest-to-forced-elite validation. The death was Acid Slime + Cultist with `ElixirPotion` in inventory; static knowledge now recognizes Elixir as exhaust/status-cleanup/hand-fix/situational instead of unknown. `ai_runs_strategy_probe84/20260705_184019_ironclad_a4.jsonl` ended as a clean F16 Guardian game-over after 213 ok actions, 1 recovered preflight mismatch, and 0 failed actions. The probe83 elite-chain fix partially worked because F9 avoided a low-buffer elite after the run was injured, but the route still entered a forced late Act 1 Sentries fight before Guardian with no potion and weak boss readiness. `ai_runs_strategy_probe83/20260705_182602_ironclad_a4.jsonl` ended as a clean F16 Hexaghost game-over after 239 ok actions, 0 recovered actions, and 0 failed actions.
 - Probe86 update: `ai_runs_strategy_probe86/20260705_190452_ironclad_a4.jsonl` ended as a clean F16 Hexaghost game-over after 275 action records, 3 recovered actions, and 0 failed actions. It validated that F10/F11 route scoring can avoid injured Act 1 elite commitments, then exposed a boss-combat gap: low-HP Hexaghost/Burn+ turns needed `Second Wind` cleanup before more attacks.
 - Probe87 update: `ai_runs_strategy_probe87/20260705_192443_ironclad_a4.jsonl` ended as a clean F16 Hexaghost game-over after 231 ok actions, 0 recovered actions, and 0 failed actions. The run reached Hexaghost with 70/80 HP and three potions, so the immediate bottleneck is now boss combat evaluation. The death chain was nonlethal low-HP `Hemokinesis` fallback at T11, which reduced survival margin enough for the following `Burn+` turn to become lethal.
@@ -27,8 +30,8 @@ Updated 2026-07-05 after the probe88 no-terminal diagnostic run and current sub-
 - Latest probe86 learning run: `data\training_manifest_probe86.json` classified 1 clean log, 0 diagnostic logs, and 0 infra-blocked logs, with 15 route-risk rows, 41 potion-tempo rows, and 1 pre-boss deck-quality row. Static knowledge coverage remains 33 cards, 19 monsters, and 22 potions.
 - Latest probe87 learning run: `data\training_manifest_probe87.json` classified 1 clean log, 0 diagnostic logs, and 0 infra-blocked logs, with 15 route-risk rows, 53 potion-tempo rows, and 1 pre-boss deck-quality row. Static knowledge coverage remains 33 cards, 19 monsters, and 22 potions.
 - Latest probe88 manifest: `data\training_manifest_probe88.json` classified 0 clean logs, 1 diagnostic log, and 0 infra-blocked logs, with zero shadow rows.
-- Latest validation: `python -m unittest discover -s tests` passed 223 tests, `python -m compileall slay_ai tests` passed, and `git diff --check` passed apart from CRLF warnings.
-- Next live validation: run probe89 after the probe88 manifest-quality fix, preferably after confirming the game is at a stable main menu/new-run state. Active bottlenecks are no-terminal probe completion, synthetic main-menu returns, Hexaghost output/resource pressure, boss potion sequencing, final-turn lethal planning under Burn/Dazed hands, Guardian Mode Shift planning, Slime Boss split/minion pressure, early forced-elite route risk, late forced-elite-before-boss risk, Act 2 low-HP route/resource planning, and runner target/settle races.
+- Latest validation: `python -m unittest discover -s tests` passed 229 tests, `python -m compileall slay_ai tests` passed, and `git diff --check` passed apart from CRLF warnings.
+- Next live validation: run A0 probe92 under `runs/ai_runs_strategy_probe92_a0` to verify that unverified CHEST states open/collect relics and that Act 1 boss completion repeats cleanly. Active bottlenecks are CHEST reward visibility, no-terminal probe completion, synthetic main-menu returns, action/state freshness, Slime Boss split/minion pressure, boss potion sequencing, and runner target/settle races.
 
 ## Long-Lived Agents
 
@@ -1946,6 +1949,14 @@ Next architecture steps:
 2. Add character policy modules only after the screen split is stable.
 3. Move learning files under `learning/` and campaign helpers under `campaign/` after policy boundaries are clearer.
 4. Implement route full-map lookahead inside the route policy boundary.
+
+2026-07-05: Run-log layout and CHEST policy were split as the next low-risk structure step.
+
+Scope:
+
+- Moved root `ai_runs*` directories under `runs/` and changed runner/campaign/learning defaults to `runs/ai_runs`.
+- Added `slay_ai.policy_chest.ChestPolicy` and delegated CHEST decisions out of the large `policy.py`.
+- Kept CLI `--log-dir` and manifest positional log paths configurable, so historical or external logs can still be passed explicitly.
 
 2026-07-05: Route/map policy was extracted from the large policy file without intended behavior changes.
 

@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 ai_runs/
 ai_runs*/
+runs/ai_runs*/
 data/learned_memory.json
 data/campaign_progress.json
 data/campaign_*.json

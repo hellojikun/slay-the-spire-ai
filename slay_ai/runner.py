@@ -71,7 +71,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--interval", type=float, default=0.15)
     parser.add_argument("--startup-timeout", type=float, default=15.0)
     parser.add_argument("--dry-run", action="store_true", help="Print one decision without executing it.")
-    parser.add_argument("--log-dir", type=Path, default=ROOT / "ai_runs")
+    parser.add_argument("--log-dir", type=Path, default=ROOT / "runs" / "ai_runs")
     args = parser.parse_args(argv)
 
     try:
@@ -111,7 +111,7 @@ def run_episode(
     interval: float = 0.15,
     startup_timeout: float = 15.0,
     dry_run: bool = False,
-    log_dir: Path = ROOT / "ai_runs",
+    log_dir: Path = ROOT / "runs" / "ai_runs",
     echo: bool = False,
     client: MCPClient | None = None,
     memory: StrategyMemory | None = None,
@@ -138,7 +138,10 @@ def run_episode(
             message = client.call_tool("start_game", start_args)
         except MCPError as exc:
             if "Possible commands" in str(exc) and _recover_terminal_game_over_before_start(client):
-                message = client.call_tool("start_game", start_args)
+                if _current_run_matches_start(client, character, ascension):
+                    message = "Continuing target run after clearing terminal screen"
+                else:
+                    message = client.call_tool("start_game", start_args)
             elif "Possible commands" not in str(exc) or existing_save == "fail":
                 raise
             elif existing_save == "continue":
@@ -156,7 +159,10 @@ def run_episode(
             print(message)
         launched_or_continued = True
     elif continue_run:
-        message = client.call_tool("continue_game", {})
+        if _is_in_game(client):
+            message = "Continuing current in-dungeon run"
+        else:
+            message = client.call_tool("continue_game", {})
         if echo:
             print(message)
         launched_or_continued = True
@@ -347,9 +353,31 @@ def _wait_for_game_ready(client: MCPClient, timeout: float = 15.0) -> None:
 
 def _is_in_game(client: MCPClient) -> bool:
     try:
-        return bool(client.get_screen_state().get("in_game"))
+        if hasattr(client, "get_screen_state"):
+            state = client.get_screen_state()
+        else:
+            state = client.get_game_state()
+        return bool(state.get("in_game"))
     except MCPError:
         return False
+
+
+def _current_run_matches_start(client: MCPClient, character: str, ascension: int) -> bool:
+    try:
+        if hasattr(client, "get_screen_state"):
+            state = client.get_screen_state()
+        else:
+            state = client.get_game_state()
+    except MCPError:
+        return False
+    if not state.get("in_game"):
+        return False
+    game = state.get("game_state", {})
+    try:
+        current_ascension = int(game.get("ascension_level"))
+    except (TypeError, ValueError):
+        return False
+    return str(game.get("class", "")).upper() == character.upper() and current_ascension == int(ascension)
 
 
 def _recover_terminal_game_over_before_start(client: MCPClient) -> bool:
@@ -357,10 +385,13 @@ def _recover_terminal_game_over_before_start(client: MCPClient) -> bool:
         commands = client.call_tool("get_available_commands", {})
     except MCPError:
         return False
+    available = _available_tool_names(commands)
+    if "proceed" not in available:
+        return False
     if commands.get("screen_type") != "GAME_OVER":
-        return False
-    if "proceed" not in _available_tool_names(commands):
-        return False
+        passive_commands = {"proceed", "key", "click", "wait", "save", "state"}
+        if available - passive_commands:
+            return False
     try:
         client.execute_actions([{"action": "proceed"}])
     except MCPError:
@@ -517,6 +548,8 @@ def _rewrite_actions_for_available_commands(
         return hand_select_rewrite, "Preflight action rewrite: hand select->choose."
     if _can_rewrite_grid_confirm_to_proceed(actions, available, before_state):
         return [{"action": "proceed"}], "Preflight action rewrite: grid confirm->proceed."
+    if _can_rewrite_chest_choose_to_proceed(actions, available, before_state):
+        return [{"action": "proceed"}], "Preflight action rewrite: chest choose->proceed."
     return actions, None
 
 
@@ -576,6 +609,23 @@ def _can_rewrite_grid_confirm_to_proceed(
         return False
     screen_state = game.get("screen_state") or {}
     return bool(screen_state.get("confirm_up") or _grid_selection_complete_for_runner(screen_state))
+
+
+def _can_rewrite_chest_choose_to_proceed(
+    actions: list[dict[str, Any]],
+    available: set[str],
+    before_state: dict[str, Any] | None,
+) -> bool:
+    if len(actions) != 1:
+        return False
+    if str(actions[0].get("action", "")).lower() != "choose":
+        return False
+    if "proceed" not in available or "choose" in available:
+        return False
+    if before_state is None:
+        return False
+    game = before_state.get("game_state", {})
+    return game.get("screen_type") == "CHEST" and game.get("room_phase") == "COMPLETE"
 
 
 def _grid_selection_complete_for_runner(screen_state: dict[str, Any]) -> bool:
@@ -972,6 +1022,18 @@ def _snapshot_state(state: dict[str, Any]) -> dict[str, Any]:
             {"name": relic.get("name"), "id": relic.get("id")}
             for relic in screen_state.get("relics", [])
         ]
+    if game.get("screen_type") == "CHEST":
+        snapshot["chest"] = {
+            "chest_open": screen_state.get("chest_open"),
+            "rewards": [
+                {
+                    "reward_type": reward.get("reward_type"),
+                    "name": reward.get("name"),
+                    "id": reward.get("id"),
+                }
+                for reward in screen_state.get("rewards", [])
+            ],
+        }
     if game.get("screen_type") == "SHOP_SCREEN":
         snapshot["shop"] = {
             "cards": [

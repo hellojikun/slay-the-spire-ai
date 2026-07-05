@@ -9,6 +9,7 @@ from typing import Any
 from .combat_search import find_best_combat_sequence
 from .domain.monsters import monster_attack_damage
 from .memory import StrategyMemory, normalize_card_name
+from .policy_chest import ChestPolicy
 from .policy_decision import Decision
 from .policy_route import decide_route
 
@@ -165,6 +166,7 @@ class HeuristicPolicy:
         self.memory = memory
         self.character = character
         self._pending_search_sequence: _PendingSearchSequence | None = None
+        self._chest_policy = ChestPolicy()
 
     def decide(self, state: dict[str, Any]) -> Decision:
         if not state.get("in_game"):
@@ -197,9 +199,7 @@ class HeuristicPolicy:
         if screen == "SHOP_SCREEN":
             return self._shop_screen(game)
         if screen == "CHEST":
-            if game.get("screen_state", {}).get("chest_open") or game.get("room_phase") == "COMPLETE":
-                return Decision([{"action": "proceed"}], "Chest is open; proceed.")
-            return Decision([{"action": "choose", "choice_index": 1}], "Open chest.")
+            return self._chest_policy.decide(game)
         if screen == "GAME_OVER":
             return Decision([], "Run is over; record outcome.", should_stop=True)
         if game.get("room_phase") == "COMPLETE":

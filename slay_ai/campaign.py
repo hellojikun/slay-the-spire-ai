@@ -54,7 +54,7 @@ def main(argv: list[str] | None = None) -> int:
         default="fail",
         help="What to do when a fresh attempt is blocked by an existing save.",
     )
-    parser.add_argument("--log-dir", type=Path, default=ROOT / "ai_runs")
+    parser.add_argument("--log-dir", type=Path, default=ROOT / "runs" / "ai_runs")
     parser.add_argument("--progress-file", type=Path, default=ROOT / "data" / "campaign_progress.json")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--use-all-hardware", action="store_true", help="Record full-resource intent; game control remains one MCP instance.")

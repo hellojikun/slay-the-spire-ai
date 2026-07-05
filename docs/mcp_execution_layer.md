@@ -26,6 +26,29 @@ Implemented client safeguards:
 - JSON-RPC response decoding errors are converted to `MCPError`.
 - The implementation now lives in `slay_ai.mcp.client`; `slay_ai.mcp_client` is only a compatibility import layer.
 - State read retry/stability logic now lives in `slay_ai.core.state_reader`.
+- Runner startup now treats an already in-dungeon state as a valid continuation instead of calling MCP `continue_game` or retrying `start_game` into a live combat.
+- Runner preflight can rewrite a completed CHEST `choose` probe to `proceed` when MCP exposes only `proceed`, keeping the bot from crashing while still making the skipped-relic case visible in logs.
+
+## 2026-07-05 A0 Execution Findings
+
+The current short-term milestone is stable A0 Act 1 boss completion before returning to ascension climbing. Probe91 (`runs/ai_runs_strategy_probe91_a0/20260705_201624_ironclad_a0.jsonl`) reached F19 after beating Slime Boss, but was manually stopped and classified as `diagnostic_excluded` / `no_terminal_outcome`.
+
+Two MCP/execution issues are now P0 for stability:
+
+- CHEST states can report `room_phase=COMPLETE`, `screen_state.chest_open=false`, and `screen_state.rewards=[]`. In probe91, F9 and F17 both proceeded with only Burning Blood in the relic list, so this is a real skipped-relic failure, not merely missing log text.
+- Start/continue transitions can race against the live dungeon state. A new A0 run may already be inside combat after clearing a terminal/passive screen, and `--continue` may be called while already in dungeon. Runner now checks the current state before issuing MCP start/continue commands.
+
+Immediate runner-side fixes:
+
+- CHEST policy is split into `slay_ai.policy_chest` and treats `chest_open != true` with empty rewards as an unverified chest. It probes `choose 1` once per floor before allowing `proceed`.
+- CHEST snapshots now record `chest_open` and visible rewards, so future logs can prove whether MCP exposed a relic reward.
+
+Next MCP-side investigation:
+
+1. Inspect MCPTheSpire CHEST serialization and command mapping for cases where the room is complete but the chest is not open.
+2. Confirm whether the correct command is `choose`, `proceed`, `click`, or a missing service-side `open_chest` action.
+3. Add service-side fields for `available_choices`, `choice_count`, and chest/reward identifiers so Python can reject stale empty-choice states before losing a relic.
+4. Consider a narrow custom MCP patch if CHEST reward visibility remains impossible to recover from runner-side probing.
 
 ## Watchdog
 
