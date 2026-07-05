@@ -199,6 +199,34 @@ class FakeClient:
         return {"available_tools": [{"tool": tool} for tool in self.available_tools]}
 
 
+class MapObservationErrorClient(FakeClient):
+    def __init__(self) -> None:
+        super().__init__([map_state()])
+        self.includes: list[list[str] | None] = []
+
+    def get_game_state(self, include: list[str] | None = None) -> dict:
+        self.includes.append(include)
+        if include == ["player", "screen", "map"]:
+            raise MCPError("Internal error: null")
+        return self.states[0]
+
+
+class MapObservationSuccessClient(FakeClient):
+    def __init__(self) -> None:
+        super().__init__([map_state()])
+
+    def get_game_state(self, include: list[str] | None = None) -> dict:
+        if include == ["player", "screen", "map"]:
+            return {
+                "in_game": True,
+                "game_state": {
+                    "screen_type": "MAP",
+                    "map": [[{"symbol": "M", "x": 1, "y": 1}]],
+                },
+            }
+        return self.states[0]
+
+
 class NullAfterActionClient(FakeClient):
     def __init__(self) -> None:
         super().__init__([lethal_combat_state()])
@@ -468,6 +496,27 @@ class RunnerTests(unittest.TestCase):
             state = runner._read_game_state(client, attempts=3, delay=0.01)
         self.assertEqual(state["game_state"]["screen_type"], "GAME_OVER")
         self.assertEqual(client.calls, 3)
+
+    def test_map_observation_error_is_attached_without_failing_state_read(self):
+        client = MapObservationErrorClient()
+        with patch.object(runner.time, "sleep", return_value=None):
+            state = runner._read_stable_game_state(client, attempts=1, delay=0.01)
+
+        observation = state["game_state"]["map_observation"]
+        self.assertEqual(observation["status"], "error")
+        self.assertIn("Internal error", observation["error"])
+        self.assertIn(["player", "screen", "map"], client.includes)
+
+    def test_map_observation_success_is_compacted_in_snapshot(self):
+        client = MapObservationSuccessClient()
+        with patch.object(runner.time, "sleep", return_value=None):
+            state = runner._read_stable_game_state(client, attempts=1, delay=0.01)
+
+        snapshot = runner._snapshot_state(state)
+
+        self.assertEqual(snapshot["map_observation"]["status"], "success")
+        self.assertEqual(snapshot["map_observation"]["node_count"], 1)
+        self.assertNotIn("map", snapshot["map_observation"])
 
     def test_empty_hand_after_first_turn_is_not_stable(self):
         state = {

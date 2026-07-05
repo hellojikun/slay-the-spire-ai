@@ -2032,6 +2032,73 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
 
+    def test_map_lookahead_avoids_low_hp_path_committed_to_elite(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 5,
+            "current_hp": 30,
+            "max_hp": 88,
+            "gold": 90,
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 0, "y": 5},
+                    {"symbol": "?", "x": 2, "y": 5},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 0, "y": 5, "children": [{"x": 0, "y": 6}]},
+                        {"symbol": "?", "x": 2, "y": 5, "children": [{"x": 2, "y": 6}]},
+                    ],
+                    [
+                        {"symbol": "T", "x": 0, "y": 6, "children": [{"x": 0, "y": 7}]},
+                        {"symbol": "R", "x": 2, "y": 6},
+                    ],
+                    [
+                        {"symbol": "E", "x": 0, "y": 7},
+                    ],
+                ],
+            },
+        }
+        state = {"in_game": True, "game_state": game}
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        route_eval = game["route_evaluation"]
+        self.assertEqual(route_eval["map_status"], "success")
+        self.assertEqual(route_eval["node_count"], 5)
+        self.assertEqual(route_eval["edge_count"], 3)
+        self.assertLess(route_eval["options"][0]["lookahead_adjustment"], 0)
+        self.assertTrue(route_eval["options"][0]["lookahead"]["forced_elite_within_3"])
+        self.assertEqual(route_eval["options"][1]["lookahead"]["nearest_rest"], 1)
+
+    def test_map_observation_error_keeps_immediate_route_fallback(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 7,
+            "current_hp": 70,
+            "max_hp": 88,
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 2, "y": 7},
+                    {"symbol": "?", "x": 3, "y": 7},
+                ]
+            },
+            "map_observation": {"status": "error", "error": "Internal error: null"},
+        }
+        state = {"in_game": True, "game_state": game}
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        self.assertEqual(game["route_evaluation"]["map_status"], "error")
+        self.assertEqual(game["route_evaluation"]["horizon"], 0)
+
     def test_map_injured_act1_prefers_question_over_monster_without_tempo_potion(self):
         state = {
             "in_game": True,

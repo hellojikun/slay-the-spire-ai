@@ -909,6 +909,10 @@ def _snapshot_state(state: dict[str, Any]) -> dict[str, Any]:
             for node in screen_state.get("next_nodes", [])
         ]
         snapshot["boss_available"] = screen_state.get("boss_available")
+        if game.get("map_observation"):
+            snapshot["map_observation"] = _snapshot_map_observation(game.get("map_observation"))
+        if game.get("route_evaluation"):
+            snapshot["route_evaluation"] = game.get("route_evaluation")
     if game.get("screen_type") == "REST":
         snapshot["rest_options"] = screen_state.get("rest_options", [])
     if game.get("screen_type") == "GRID":
@@ -986,6 +990,29 @@ def _snapshot_state(state: dict[str, Any]) -> dict[str, Any]:
             "score": screen_state.get("score"),
             "source": screen_state.get("source"),
         }
+    return snapshot
+
+
+def _snapshot_map_observation(observation: Any) -> dict[str, Any]:
+    if not isinstance(observation, dict):
+        return {"status": "invalid", "type": type(observation).__name__}
+    snapshot: dict[str, Any] = {
+        "status": observation.get("status"),
+        "source": observation.get("source"),
+        "include": observation.get("include"),
+        "latency_ms": observation.get("latency_ms"),
+        "node_count": observation.get("node_count"),
+    }
+    if observation.get("error") is not None:
+        snapshot["error"] = observation.get("error")
+    if observation.get("failures") is not None:
+        snapshot["failures"] = observation.get("failures")
+    if observation.get("reason") is not None:
+        snapshot["reason"] = observation.get("reason")
+    if observation.get("screen_type") is not None:
+        snapshot["screen_type"] = observation.get("screen_type")
+    if observation.get("keys") is not None:
+        snapshot["keys"] = observation.get("keys")
     return snapshot
 
 

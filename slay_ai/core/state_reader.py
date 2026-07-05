@@ -9,6 +9,9 @@ from ..mcp.client import MCPClient, MCPError
 
 
 BASE_GAME_STATE_INCLUDE = ["player", "deck", "relics", "potions", "combat", "screen"]
+MAP_GAME_STATE_INCLUDE = ["player", "screen", "map"]
+MAP_OBSERVATION_TIMEOUT = 2.5
+MAP_OBSERVATION_FAILURE_LIMIT = 2
 
 
 def read_game_state(client: MCPClient, attempts: int = 8, delay: float = 0.25) -> dict[str, Any]:
@@ -30,10 +33,79 @@ def read_stable_game_state(client: MCPClient, attempts: int = 12, delay: float =
     state = read_game_state(client, attempts=attempts, delay=delay)
     for _ in range(attempts):
         if looks_stable(client, state):
-            return state
+            return augment_map_state(client, state)
         time.sleep(delay)
         state = read_game_state(client, attempts=2, delay=delay)
-    return state
+    return augment_map_state(client, state)
+
+
+def augment_map_state(client: MCPClient, state: dict[str, Any]) -> dict[str, Any]:
+    game = state.get("game_state", {})
+    if not state.get("in_game") or game.get("screen_type") != "MAP":
+        return state
+    failures = int(getattr(client, "_map_observation_failures", 0) or 0)
+    if failures >= MAP_OBSERVATION_FAILURE_LIMIT:
+        return _state_with_map_observation(
+            state,
+            {
+                "status": "disabled",
+                "source": "get_game_state_map",
+                "include": MAP_GAME_STATE_INCLUDE,
+                "failures": failures,
+                "reason": "map observation disabled after repeated failures",
+            },
+        )
+    started = time.monotonic()
+    old_timeout = getattr(client, "timeout", None)
+    try:
+        if isinstance(old_timeout, (int, float)):
+            client.timeout = min(float(old_timeout), MAP_OBSERVATION_TIMEOUT)
+        map_state = client.get_game_state(MAP_GAME_STATE_INCLUDE)
+    except MCPError as exc:
+        setattr(client, "_map_observation_failures", failures + 1)
+        return _state_with_map_observation(
+            state,
+            {
+                "status": "error",
+                "source": "get_game_state_map",
+                "include": MAP_GAME_STATE_INCLUDE,
+                "latency_ms": _elapsed_ms(started),
+                "error": str(exc),
+                "failures": failures + 1,
+            },
+        )
+    finally:
+        if isinstance(old_timeout, (int, float)):
+            client.timeout = old_timeout
+
+    if _map_screen_type(map_state) not in {None, "MAP"}:
+        setattr(client, "_map_observation_failures", failures + 1)
+        return _state_with_map_observation(
+            state,
+            {
+                "status": "stale",
+                "source": "get_game_state_map",
+                "include": MAP_GAME_STATE_INCLUDE,
+                "latency_ms": _elapsed_ms(started),
+                "screen_type": _map_screen_type(map_state),
+                "failures": failures + 1,
+            },
+        )
+
+    payload = _extract_map_payload(map_state)
+    setattr(client, "_map_observation_failures", 0)
+    observation: dict[str, Any] = {
+        "status": "success" if payload is not None else "unavailable",
+        "source": "get_game_state_map",
+        "include": MAP_GAME_STATE_INCLUDE,
+        "latency_ms": _elapsed_ms(started),
+        "node_count": _count_map_nodes(payload),
+    }
+    if payload is not None:
+        observation["map"] = payload
+    else:
+        observation["keys"] = _top_level_keys(map_state)
+    return _state_with_map_observation(state, observation)
 
 
 def looks_stable(client: MCPClient, state: dict[str, Any]) -> bool:
@@ -101,6 +173,71 @@ def combat_has_current_turn_activity(combat: dict[str, Any]) -> bool:
 def recover_state_read(client: MCPClient, interval: float) -> dict[str, Any]:
     time.sleep(max(interval, 0.5))
     return read_stable_game_state(client, attempts=24, delay=0.2)
+
+
+def _state_with_map_observation(state: dict[str, Any], observation: dict[str, Any]) -> dict[str, Any]:
+    updated = dict(state)
+    updated_game = dict(state.get("game_state", {}))
+    updated_game["map_observation"] = observation
+    updated["game_state"] = updated_game
+    return updated
+
+
+def _extract_map_payload(state: dict[str, Any]) -> Any | None:
+    if not isinstance(state, dict):
+        return None
+    game = state.get("game_state")
+    if isinstance(game, dict):
+        for key in ("map", "map_state", "map_nodes"):
+            if key in game and game.get(key) is not None:
+                return game[key]
+    for key in ("map", "map_state", "map_nodes"):
+        if key in state and state.get(key) is not None:
+            return state[key]
+    return None
+
+
+def _map_screen_type(state: dict[str, Any]) -> str | None:
+    if not isinstance(state, dict):
+        return None
+    game = state.get("game_state")
+    if isinstance(game, dict) and game.get("screen_type") is not None:
+        return str(game.get("screen_type"))
+    if state.get("screen_type") is not None:
+        return str(state.get("screen_type"))
+    return None
+
+
+def _count_map_nodes(payload: Any) -> int:
+    count = 0
+
+    def visit(value: Any) -> None:
+        nonlocal count
+        if isinstance(value, dict):
+            if "x" in value and "y" in value:
+                count += 1
+            for child in value.values():
+                visit(child)
+        elif isinstance(value, list):
+            for item in value:
+                visit(item)
+
+    visit(payload)
+    return count
+
+
+def _top_level_keys(value: Any) -> list[str]:
+    if not isinstance(value, dict):
+        return []
+    keys = [str(key) for key in value.keys()]
+    game = value.get("game_state")
+    if isinstance(game, dict):
+        keys.extend(f"game_state.{key}" for key in game.keys())
+    return sorted(keys)[:20]
+
+
+def _elapsed_ms(started: float) -> int:
+    return int((time.monotonic() - started) * 1000)
 
 
 def is_transient_state_error(exc: MCPError) -> bool:

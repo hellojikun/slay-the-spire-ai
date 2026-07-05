@@ -4,7 +4,7 @@ This document records the multi-agent setup used for the Slay the Spire growing 
 
 ## Current Snapshot
 
-Updated 2026-07-05 after route policy extraction.
+Updated 2026-07-05 after map observation and route lookahead.
 
 - Current unlock frontier: `IRONCLAD:A4`, `SILENT:A0`, `DEFECT:A0`, `WATCHER:A0`. A20 is the long-term upper target, not the current runnable claim.
 - Latest included probe: `ai_runs_strategy_probe55/20260705_110914_ironclad_a4.jsonl`.
@@ -12,13 +12,13 @@ Updated 2026-07-05 after route policy extraction.
 - Latest execution fix: `SHOP_SCREEN` waits if inventory has not loaded, then uses MCP's valid `cancel` action for the leave button; runner remembers the floor after a shop cancel and forces the next same-floor `SHOP_ROOM` state to `proceed` instead of re-entering the shop.
 - Latest runner action fix: before executing actions, runner now checks `get_available_commands`; stale unavailable actions are skipped as `preflight_mismatch`, followed by settle and stable-state reread so the next loop can replan. Narrow rewrites handle stale `GRID` confirmations (`confirm` -> `proceed`) and single-card `HAND_SELECT` drops (`select_cards` -> `choose`) when MCP exposes the alternate command and records `executed_actions`, `rewrite_reason`, and `available_commands`.
 - Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections. Combat search, policy, and runner now share the same `move.damage * move.hits` incoming-damage calculation, with `intent_damage` and legacy fields as fallbacks.
-- Latest route policy fix: when Act 1 floor >= 5 offers both rest and elite, HP below 72% now prefers rest even with an elite-tempo potion. The older no-tempo rule still treats HP at or below 95% as risky. After probe47, Act 1 floor >= 11 with moderate low HP, no high-impact elite potion, and `M` versus `?` no longer over-penalizes the monster route or over-trusts the event route.
+- Latest route policy fix: route decisions now attach a best-effort full-map observation only on `MAP` screens, with a 2.5s timeout and per-episode failure disable after repeated MCP errors. When the map payload can be parsed, `policy_route` evaluates a bounded 4-layer lookahead and applies path-commitment risk for low-HP forced elite/combat routes while logging base score, lookahead adjustment, final score, node count, and edge count. If map observation fails, route policy falls back to the old immediate `next_nodes` scoring.
 - Latest MCP client fix: `MCPClient.initialize()` is idempotent for reused sessions, `campaign` and `runner` call `ensure_initialized()`, and invalid non-JSON HTTP responses are wrapped as `MCPError` with a short response preview.
 - Latest architecture refactor: MCP implementation now lives in `slay_ai.mcp.client`, with `slay_ai.mcp_client` kept as a compatibility shim. State reading/retry/stability checks now live in `slay_ai.core.state_reader`. Monster incoming-damage interpretation now lives in `slay_ai.domain.monsters`, with `slay_ai.combat_math` kept as a compatibility shim. Route/map policy now lives in `slay_ai.policy_route`; `Decision` now lives in `slay_ai.policy_decision`.
 - Latest learning pipeline fix: `GAME_OVER` logs with missing `victory` now default to a completed loss in snapshots and offline learning, recovering older clean failures for `slay_ai.learn`.
 - Latest learning run: `slay_ai.train_card_model` loaded 227 card-pick examples and wrote 69 card deltas; `slay_ai.learn --reset` read 49 logs, applied 38 completed runs, and skipped 11 incomplete runs.
-- Latest validation: `python -m unittest discover -s tests` ran 142 tests OK after route extraction; `python -m compileall slay_ai tests` OK.
-- Next live validation: add map observability/full-map lookahead for route path-commitment risk, then run another current-frontier Ironclad probe. Keep Stage 5 autonomous learning in shadow/tie-breaker mode only.
+- Latest validation: `python -m unittest discover -s tests` ran 146 tests OK after map lookahead; `python -m compileall slay_ai tests` OK.
+- Next live validation: run another current-frontier Ironclad probe and inspect MAP records for `map_observation.status`, `route_evaluation`, and whether low-HP paths still commit into forced elites. Keep Stage 5 autonomous learning in shadow/tie-breaker mode only.
 
 ## Long-Lived Agents
 
@@ -34,6 +34,20 @@ Keep these advisory agents available across the project unless the user explicit
 If context compaction or tool state makes an agent's actual status uncertain, first call codex_app.list_threads / codex_app.read_thread and reuse the canonical thread in this table. Start a fresh long-lived agent only if the canonical thread is missing or unusable, then update this table immediately.
 
 ## Current Activation Log
+
+2026-07-05 map-lookahead review round:
+
+- Harvey / Faraday recommended prioritizing map observation plus 3-4 layer path-commitment risk before four-character policy splits or larger learning authority. Rationale: recent probe54/55 failures were route commitments into forced elite risk, and this affects every character.
+- Mill / Hegel recommended keeping `map` out of the default state include, using a best-effort MAP-only request, preserving current `next_nodes` choice indices for actions, logging observation status, and adding timeout/failure fallback because `get_game_state(..., "map")` can return `Internal error:null`.
+- Halley / Descartes recommended doing this inside the existing `policy_route.py` boundary rather than continuing broad policy refactors, with tests proving old immediate route fallback remains intact when full-map data is missing.
+
+Main-thread commands for this review round:
+
+```text
+multi_agent_v1.send_input(Harvey, "Evaluate whether to prioritize map observation + 3-4 layer route lookahead or four-character/light-model work.")
+multi_agent_v1.send_input(Mill, "Evaluate MCP get_game_state map boundaries, best-effort fallback, logging, and failure handling.")
+multi_agent_v1.send_input(Halley, "Evaluate architecture fit for map observation + route risk versus continuing policy splits.")
+```
 
 2026-07-05: the first same-directory `fork_thread` attempt is deprecated. Those forked threads inherited too much active context and some began trying to create further sub-agents. Do not reuse these deprecated ids as long-lived agents: `019f2e87-0fb4-7660-a04c-698631fb1273`, `019f2e87-b470-7460-9ad5-af23949fef82`, `019f2e87-d1f1-7e92-970f-4860eb0ddbfe`, `019f2e88-9657-7bd3-9d9d-1b514b2d3c91`, `019f2e88-c96a-7c53-af23-eddae11c858a`, `019f2e89-1184-7fc2-94ed-4ba1f424d420`.
 
