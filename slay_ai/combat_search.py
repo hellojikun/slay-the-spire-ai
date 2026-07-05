@@ -66,6 +66,7 @@ class _MonsterState:
     has_weak: bool = False
     artifact: int = 0
     mode_shift: int | None = None
+    rage_on_skill: int = 0
 
     @property
     def alive(self) -> bool:
@@ -78,6 +79,7 @@ class _SearchState:
     block: int
     monsters: list[_MonsterState]
     hand: tuple[_Candidate, ...] = ()
+    player_vulnerable: bool = False
     damage_dealt: int = 0
     kills: int = 0
     self_damage: int = 0
@@ -133,6 +135,7 @@ def find_best_combat_sequence(game: dict[str, Any], *, max_depth: int = 5, max_b
             block=block,
             monsters=[_copy_monster(monster) for monster in monsters],
             hand=initial_hand,
+            player_vulnerable=_power_amount(player, "vulnerable") > 0,
         ),
         tuple(candidates),
         (),
@@ -200,6 +203,8 @@ def _apply_card(state: _SearchState, candidate: _Candidate) -> None:
     state.energy += _energy_gain(card)
     state.block += _card_block(card)
     state.self_damage += _self_damage(card)
+    if _is_skill(card):
+        _apply_skill_reactive_attack_gain(state)
 
     damage = _card_damage(card, spent if _is_x_cost(card) else state.energy)
     weak = _card_weak(card)
@@ -275,6 +280,10 @@ def _is_aoe(card: dict[str, Any]) -> bool:
 
 def _is_x_cost(card: dict[str, Any]) -> bool:
     return _as_int(card.get("cost", 0)) == -1
+
+
+def _is_skill(card: dict[str, Any]) -> bool:
+    return str(card.get("type") or "").upper() == "SKILL"
 
 
 def _card_cost(card: dict[str, Any], current_energy: int) -> int | None:
@@ -355,6 +364,7 @@ def _monster_state(monster: dict[str, Any]) -> _MonsterState:
         has_weak=_power_amount(monster, "weak") > 0,
         artifact=_power_amount(monster, "artifact"),
         mode_shift=_mode_shift_amount(monster),
+        rage_on_skill=_rage_on_skill_amount(monster),
     )
 
 
@@ -408,6 +418,22 @@ def _apply_weak(monster: _MonsterState) -> None:
     monster.has_weak = True
 
 
+def _apply_skill_reactive_attack_gain(state: _SearchState) -> None:
+    for monster in state.monsters:
+        if not monster.alive or monster.attack <= 0 or monster.rage_on_skill <= 0:
+            continue
+        monster.attack += _scaled_attack_gain(monster.rage_on_skill, monster.has_weak, state.player_vulnerable)
+
+
+def _scaled_attack_gain(raw_gain: int, has_weak: bool, player_vulnerable: bool) -> int:
+    multiplier = 1.0
+    if has_weak:
+        multiplier *= 0.75
+    if player_vulnerable:
+        multiplier *= 1.5
+    return max(0, int(raw_gain * multiplier))
+
+
 def _weakened_attack(attack: int, hits: int) -> int:
     if attack <= 0:
         return 0
@@ -426,6 +452,7 @@ def _copy_state(state: _SearchState) -> _SearchState:
         block=state.block,
         monsters=[_copy_monster(monster) for monster in state.monsters],
         hand=state.hand,
+        player_vulnerable=state.player_vulnerable,
         damage_dealt=state.damage_dealt,
         kills=state.kills,
         self_damage=state.self_damage,
@@ -441,6 +468,7 @@ def _copy_monster(monster: _MonsterState) -> _MonsterState:
         has_weak=monster.has_weak,
         artifact=monster.artifact,
         mode_shift=monster.mode_shift,
+        rage_on_skill=monster.rage_on_skill,
     )
 
 
@@ -462,6 +490,14 @@ def _mode_shift_amount(monster: dict[str, Any]) -> int | None:
     if amount > 0:
         return amount
     return None
+
+
+def _rage_on_skill_amount(monster: dict[str, Any]) -> int:
+    for power_id in ("anger", "rage", "enrage"):
+        amount = _power_amount(monster, power_id)
+        if amount > 0:
+            return amount
+    return 0
 
 
 def _power_amount(monster: dict[str, Any], power_id: str) -> int:

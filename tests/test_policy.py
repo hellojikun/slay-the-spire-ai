@@ -1580,6 +1580,59 @@ class PolicyTests(unittest.TestCase):
 
         self.assertNotIn("One-turn search", decision.reason)
 
+    def test_combat_search_counts_probe82_gremlin_nob_rage_from_skills(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 6,
+                "act": 1,
+                "current_hp": 20,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 4,
+                    "player": {
+                        "current_hp": 20,
+                        "max_hp": 80,
+                        "current_energy": 3,
+                        "block": 0,
+                        "powers": [{"amount": 1, "id": "Vulnerable"}],
+                    },
+                    "hand": [
+                        {"name": "Headbutt", "id": "Headbutt", "type": "ATTACK", "cost": 1, "damage": 9, "is_playable": True, "has_target": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Cleave", "id": "Cleave", "type": "ATTACK", "cost": 1, "damage": 8, "is_playable": True, "has_target": None},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "Gremlin Nob",
+                            "id": "GremlinNob",
+                            "current_hp": 34,
+                            "max_hp": 85,
+                            "move": {"damage": 24},
+                            "powers": [{"amount": 1, "id": "Vulnerable"}, {"amount": 2, "id": "Anger"}],
+                        }
+                    ],
+                },
+            },
+        }
+
+        result = find_best_combat_sequence(state["game_state"])
+
+        self.assertIsNotNone(result)
+        assert result is not None
+        self.assertEqual(result.sequence_card_keys, ("Defend_R", "Defend_R", "Headbutt"))
+        self.assertEqual(result.initial_loss, 24)
+        self.assertEqual(result.projected_loss, 20)
+        self.assertFalse(result.avoided_lethal)
+
+        decision = policy().decide(state)
+
+        self.assertNotIn("One-turn search", decision.reason)
+
     def test_combat_commits_defensive_search_sequence_across_state_reads(self):
         bot = policy()
         monsters = [
