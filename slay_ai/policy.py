@@ -34,6 +34,9 @@ ACT1_LOW_HP_SURVIVAL_CARD_BONUS = 14.0
 LOW_HP_ENGINE_COMBAT_PENALTY = 20.0
 SLOW_ENGINE_CARDS = {"Burning Pact", "Havoc"}
 SELF_DAMAGE_RISK_CARDS = {"Bloodletting", "Combust", "Offering"}
+IMMEDIATE_SELF_DAMAGE_ENGINE_CARDS = {"Bloodletting", "Offering"}
+ACT2_MULTI_ENEMY_SELF_DAMAGE_SETUP_PENALTY = 9.0
+REPEAT_SELF_DAMAGE_ENGINE_PENALTY = 18.0
 ENERGY_SETUP_CARDS = {"Seeing Red"}
 SEARCH_PROTECTED_SINGLE_CARDS = {
     "Battle Trance",
@@ -349,6 +352,19 @@ class HeuristicPolicy:
             score, target_index, reason = self._score_combat_card(
                 card, monsters, incoming, current_block, current_hp, hp_ratio, energy
             )
+            self_damage_penalty = _self_damage_engine_penalty(
+                card,
+                game,
+                hand,
+                monsters,
+                incoming,
+                current_block,
+                current_hp,
+                hp_ratio,
+            )
+            if self_damage_penalty:
+                score -= self_damage_penalty
+                reason = f"Play {card.get('name')} with score {score:.1f}."
             if _single_target_x_cost_penalty_applies(card, hand, index, monsters, energy):
                 score -= min(18.0, 4.0 * max(energy, 1))
                 reason = f"Play {card.get('name')} with score {score:.1f}."
@@ -1054,6 +1070,63 @@ def _x_cost_attack_spends_needed_block(
         if 0 < other_cost <= energy:
             return True
     return False
+
+
+def _self_damage_engine_penalty(
+    card: dict[str, Any],
+    game: dict[str, Any],
+    hand: list[dict[str, Any]],
+    monsters: list[dict[str, Any]],
+    incoming: int,
+    current_block: int,
+    current_hp: int,
+    hp_ratio: float,
+) -> float:
+    name = _card_key(card)
+    if name not in IMMEDIATE_SELF_DAMAGE_ENGINE_CARDS:
+        return 0.0
+    live_monsters = [monster for monster in monsters if not (monster.get("is_dead") or monster.get("is_gone"))]
+    if not live_monsters:
+        return 0.0
+
+    penalty = 0.0
+    combat = game.get("combat_state", {})
+    if hp_ratio < 0.70 and _combat_has_current_turn_activity(combat):
+        penalty += REPEAT_SELF_DAMAGE_ENGINE_PENALTY
+
+    act = int(game.get("act", 0) or 0)
+    floor = int(game.get("floor", 0) or 0)
+    pressure = max(0, incoming - current_block)
+    has_safe_play = any(_is_safe_non_self_damage_play(other) for other in hand)
+    if (
+        hp_ratio < 0.70
+        and pressure <= 0
+        and len(live_monsters) >= 3
+        and (act >= 2 or floor >= 17)
+        and has_safe_play
+    ):
+        penalty += ACT2_MULTI_ENEMY_SELF_DAMAGE_SETUP_PENALTY
+        if current_hp > 0 and current_hp <= 55:
+            penalty += 4.0
+    return penalty
+
+
+def _combat_has_current_turn_activity(combat: dict[str, Any]) -> bool:
+    for key in ("cards_played_this_turn", "cards_discarded_this_turn", "cards_exhausted_this_turn"):
+        value = combat.get(key)
+        if isinstance(value, (int, float)) and value > 0:
+            return True
+        if isinstance(value, (list, tuple, set, dict)) and bool(value):
+            return True
+    return False
+
+
+def _is_safe_non_self_damage_play(card: dict[str, Any]) -> bool:
+    if not card.get("is_playable", True):
+        return False
+    if _card_key(card) in SELF_DAMAGE_RISK_CARDS:
+        return False
+    return int(card.get("damage", 0) or 0) > 0 or int(card.get("block", 0) or 0) > 0
 
 
 def _dangerous_pressure(pressure: int, current_hp: int, hp_ratio: float) -> bool:

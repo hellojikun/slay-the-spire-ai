@@ -4,21 +4,21 @@ This document records the multi-agent setup used for the Slay the Spire growing 
 
 ## Current Snapshot
 
-Updated 2026-07-05 after probe60 HAND_SELECT multi-card rewrite and Guardian continuation validation.
+Updated 2026-07-05 after the probe61 self-damage engine risk fix and clean-start validation.
 
 - Current unlock frontier: `IRONCLAD:A4`, `SILENT:A0`, `DEFECT:A0`, `WATCHER:A0`. A20 is the long-term upper target, not the current runnable claim.
-- Latest included probe: `ai_runs_strategy_probe59/20260705_121759_ironclad_a4.jsonl`.
-- Latest excluded diagnostic probes: `ai_runs_strategy_probe38/20260705_072307_ironclad_a4.jsonl` stopped at max steps due to a `SHOP_ROOM` / `SHOP_SCREEN` loop; the first probe39 attempt was aborted after proving `leave` is not a valid `execute_actions` action; probe43 and its continuation were split empty-hand diagnostics; probe45 and its two continuations were split Fiend Fire empty-hand diagnostics; probe46 (`ai_runs_strategy_probe46/20260705_085517_ironclad_a4.jsonl`) was stopped after exposing a `GRID` `confirm` / MCP `proceed` preflight loop; probe50 (`ai_runs_strategy_probe50/20260705_093533_ironclad_a4.jsonl`) and `ai_runs_strategy_probe50_continue_handselect_rewrite/20260705_093831_ironclad_a0.jsonl` are HAND_SELECT action-rewrite diagnostics; probe51 (`ai_runs_strategy_probe51/20260705_093933_ironclad_a4.jsonl`) ended as MCP unreachable/read_failed; probe52 (`ai_runs_strategy_probe52/20260705_095355_ironclad_a4.jsonl`) was manually stopped after exposing a Neow event GRID duplicate-card selection loop; probe60 (`ai_runs_strategy_probe60/20260705_124621_ironclad_a4.jsonl`) was manually stopped after exposing a multi-card `HAND_SELECT` rewrite gap, and `ai_runs_strategy_probe60_continue_handselect_multichoose/20260705_125224_ironclad_a0.jsonl` is a partial continuation validation. Do not use these diagnostic logs in default training.
+- Latest included probe: `ai_runs_strategy_probe61/20260705_130722_ironclad_a4.jsonl` is a clean completed failure candidate for the next learning refresh: it reached F21 Act 2 and ended as a synthetic game over after likely lethal MCP null-state transition.
+- Latest excluded diagnostic probes: `ai_runs_strategy_probe38/20260705_072307_ironclad_a4.jsonl` stopped at max steps due to a `SHOP_ROOM` / `SHOP_SCREEN` loop; the first probe39 attempt was aborted after proving `leave` is not a valid `execute_actions` action; probe43 and its continuation were split empty-hand diagnostics; probe45 and its two continuations were split Fiend Fire empty-hand diagnostics; probe46 (`ai_runs_strategy_probe46/20260705_085517_ironclad_a4.jsonl`) was stopped after exposing a `GRID` `confirm` / MCP `proceed` preflight loop; probe50 (`ai_runs_strategy_probe50/20260705_093533_ironclad_a4.jsonl`) and `ai_runs_strategy_probe50_continue_handselect_rewrite/20260705_093831_ironclad_a0.jsonl` are HAND_SELECT action-rewrite diagnostics; probe51 (`ai_runs_strategy_probe51/20260705_093933_ironclad_a4.jsonl`) ended as MCP unreachable/read_failed; probe52 (`ai_runs_strategy_probe52/20260705_095355_ironclad_a4.jsonl`) was manually stopped after exposing a Neow event GRID duplicate-card selection loop; probe60 (`ai_runs_strategy_probe60/20260705_124621_ironclad_a4.jsonl`) was manually stopped after exposing a multi-card `HAND_SELECT` rewrite gap, `ai_runs_strategy_probe60_continue_handselect_multichoose/20260705_125224_ironclad_a0.jsonl` is a partial continuation validation, and `ai_runs_strategy_probe60_continue_act2/20260705_125715_ironclad_a0.jsonl` is a split continuation used only to diagnose Act 2 Byrds self-damage overuse. Do not use these diagnostic logs in default training.
 - Latest execution fix: `SHOP_SCREEN` waits if inventory has not loaded, then uses MCP's valid `cancel` action for the leave button; runner remembers the floor after a shop cancel and forces the next same-floor `SHOP_ROOM` state to `proceed` instead of re-entering the shop.
 - Latest runner action fix: before executing actions, runner now checks `get_available_commands`; stale unavailable actions are skipped as `preflight_mismatch`, followed by settle and stable-state reread so the next loop can replan. Narrow rewrites handle stale `GRID` confirmations (`confirm` -> `proceed`) and `HAND_SELECT` drops when MCP exposes `choose` instead of `select_cards`; single-card drops become one `choose`, and multi-card drops become ordered `choose` actions plus `proceed` when available. The runner records `executed_actions`, `rewrite_reason`, and `available_commands`.
-- Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections. Combat search, policy, and runner share the same `move.damage * move.hits` incoming-damage calculation. After probe56/probe57, combat potion policy now uses Duplication Potion in boss/elite or dangerous turns when the current hand has a high-impact defensive or offensive card, and treats Gambler's Brew as an emergency tempo potion in low-HP/high-incoming turns. After probe58, shop potion scoring now treats Duplication, Energy, Gambler's Brew, Regen, and Swift potions as high-impact buys when potion slots are empty. After probe59, local search may accept modest already-blocking follow-up block sequences, and X-cost attacks preserve block energy under dangerous pressure unless they remove the attack threat.
+- Latest policy fix: Stage 4 has started with a conservative one-turn combat local search. It enumerates bounded pure numeric card sequences, returns only the first action, and falls back to the old single-card heuristic for unsupported hand-changing cards, Gremlin Nob nonlethal skill sequences, protected control cards, reflect-risk attacks, or still-lethal projections. Combat search, policy, and runner share the same `move.damage * move.hits` incoming-damage calculation. After probe56/probe57, combat potion policy now uses Duplication Potion in boss/elite or dangerous turns when the current hand has a high-impact defensive or offensive card, and treats Gambler's Brew as an emergency tempo potion in low-HP/high-incoming turns. After probe58, shop potion scoring now treats Duplication, Energy, Gambler's Brew, Regen, and Swift potions as high-impact buys when potion slots are empty. After probe59, local search may accept modest already-blocking follow-up block sequences, and X-cost attacks preserve block energy under dangerous pressure unless they remove the attack threat. After the probe60 Act 2 continuation, immediate self-damage engine cards such as `Offering` and `Bloodletting` now receive extra risk penalties in Act 2 multi-enemy setup turns and after current-turn activity at unsafe HP, while high-HP Offering remains legal.
 - Latest route policy fix: route decisions now attach a best-effort full-map observation only on `MAP` screens, with a 2.5s timeout and per-episode failure disable after repeated MCP errors. When the map payload can be parsed, `policy_route` evaluates a bounded 4-layer lookahead and applies path-commitment risk for low-HP forced elite/combat routes while logging base score, lookahead adjustment, final score, node count, and edge count. If map observation fails, route policy falls back to the old immediate `next_nodes` scoring.
 - Latest MCP client fix: `MCPClient.initialize()` is idempotent for reused sessions, `campaign` and `runner` call `ensure_initialized()`, and invalid non-JSON HTTP responses are wrapped as `MCPError` with a short response preview.
 - Latest architecture refactor: MCP implementation now lives in `slay_ai.mcp.client`, with `slay_ai.mcp_client` kept as a compatibility shim. State reading/retry/stability checks now live in `slay_ai.core.state_reader`. Monster incoming-damage interpretation now lives in `slay_ai.domain.monsters`, with `slay_ai.combat_math` kept as a compatibility shim. Route/map policy now lives in `slay_ai.policy_route`; `Decision` now lives in `slay_ai.policy_decision`.
 - Latest learning pipeline fix: `GAME_OVER` logs with missing `victory` now default to a completed loss in snapshots and offline learning, recovering older clean failures for `slay_ai.learn`.
 - Latest learning run: `slay_ai.train_card_model` loaded 258 card-pick examples and wrote 70 card deltas; `slay_ai.learn --reset` read 53 logs, applied 42 completed runs, and skipped 11 incomplete runs.
-- Latest validation: `python -m unittest discover -s tests` ran 154 tests OK after the Slime Boss pressure and HAND_SELECT rewrite fixes; `python -m compileall slay_ai tests` OK. Probe60 continuation verified the multi-card HAND_SELECT rewrite, beat Guardian, entered Act 2, and reached F18 MAP before the 80-step continuation limit.
-- Next live validation: run a fresh current-frontier Ironclad probe from a clean start and inspect Act 1 boss outcomes, HAND_SELECT rewrites, and whether dangerous X-cost attacks now preserve block energy. Also keep checking `map_observation.status` and `route_evaluation`; Stage 5 autonomous learning remains shadow/tie-breaker only.
+- Latest validation: `python -m unittest discover -s tests` ran 157 tests OK after the self-damage engine risk fix; `python -m compileall slay_ai tests` OK. Probe61 clean-start validation reached F21 Act 2, confirming the new risk gate did not break the runner loop or early Ironclad path.
+- Next live validation: inspect probe61's low-HP Act 2 route and combat states, especially F20/F21 hallway pressure after the deck survived Guardian. The next likely Stage 4 work is stronger low-HP route refusal, defensive search calibration under high incoming, and candidate-score logging for route/combat alternatives. Stage 5 autonomous learning remains shadow/tie-breaker only.
 
 ## Long-Lived Agents
 
@@ -34,6 +34,40 @@ Keep these advisory agents available across the project unless the user explicit
 If context compaction or tool state makes an agent's actual status uncertain, first call codex_app.list_threads / codex_app.read_thread and reuse the canonical thread in this table. Start a fresh long-lived agent only if the canonical thread is missing or unusable, then update this table immediately.
 
 ## Current Activation Log
+
+2026-07-05 probe61 self-damage engine risk round:
+
+- Trigger evidence: `ai_runs_strategy_probe60_continue_act2/20260705_125715_ironclad_a0.jsonl` resumed the Guardian continuation into Act 2 and died on F20 Byrds. The critical state was Act 2 floor 20, HP 49/80, three Byrds on `BUFF`, incoming 0, and two `Offering` cards in hand. The policy played `Offering` twice before building defense, dropping to 37 HP before the Byrds' multi-hit turns.
+- Agent route review conclusion: Harvey, Mill, and Halley agreed the overall route is correct: keep heuristic control, keep learned models as shadow/tie-breakers, continue evidence-driven probes, and interleave thin-slice refactors instead of pausing for a project-wide relocation.
+- Fix: `policy.py` now penalizes immediate self-damage engine cards (`Offering`, `Bloodletting`) in Act 2 multi-enemy setup turns when HP is below the safety threshold and a safe non-self-damage play exists. It also penalizes unsafe current-turn repeated self-damage activity. Tests preserve the counter-case where high-HP `Offering` remains playable.
+- Validation:
+
+```powershell
+python -m unittest tests.test_policy.PolicyTests.test_combat_avoids_offering_in_probe60_byrds_setup tests.test_policy.PolicyTests.test_combat_avoids_second_offering_after_turn_activity tests.test_policy.PolicyTests.test_combat_can_play_offering_when_safe tests.test_policy.PolicyTests.test_combat_can_play_burning_pact_when_safe tests.test_policy.PolicyTests.test_combat_avoids_combust_under_low_hp_pressure
+python -m unittest discover -s tests
+python -m compileall slay_ai tests
+```
+
+- MCP recovery before clean validation:
+
+```powershell
+python -m slay_ai.mcp_watchdog --json
+@'
+from slay_ai.mcp.client import MCPClient
+client = MCPClient(timeout=10)
+client.ensure_initialized()
+print(client.execute_actions([{"action": "proceed"}]))
+'@ | python -
+python -m slay_ai.mcp_watchdog --json
+```
+
+- Probe61 command:
+
+```powershell
+python -m slay_ai.campaign --characters IRONCLAD --ascension 20 --attempts-per-target 1 --max-steps 440 --interval 0.08 --startup-timeout 20 --cooldown 0.5 --existing-save fail --progress-file data\campaign_strategy_probe61.json --log-dir ai_runs_strategy_probe61 --use-all-hardware
+```
+
+- Probe61 result: target was still `IRONCLAD:A4`. It reached F21 Act 2 and ended as a synthetic game over at step 370 after likely lethal MCP null-state transition. It beat Guardian at low HP, reached F18 with 80/80 HP after the chest, then exposed a new bottleneck: low-HP Act 2 hallway routing and high-pressure defense/search calibration. The run had recoverable action races but no unrecovered action failure.
 
 2026-07-05 probe60 Slime Boss pressure and HAND_SELECT multi-choose round:
 

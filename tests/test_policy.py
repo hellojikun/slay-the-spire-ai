@@ -738,6 +738,95 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(len(decision.actions), 1)
         self.assertEqual(decision.actions[0]["action"], "play_card")
 
+    def test_combat_avoids_offering_in_probe60_byrds_setup(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "act": 2,
+                "floor": 20,
+                "current_hp": 49,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 49, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "has_target": True, "is_playable": True},
+                        {"name": "Shrug It Off", "id": "Shrug It Off", "type": "SKILL", "cost": 1, "block": 11, "is_playable": True},
+                        {"name": "Offering", "id": "Offering", "type": "SKILL", "cost": 0, "exhausts": True, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Offering", "id": "Offering", "type": "SKILL", "cost": 0, "exhausts": True, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 28, "max_hp": 28, "intent": "BUFF", "move": None, "powers": [{"id": "Flight", "amount": 3}]},
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 31, "max_hp": 31, "intent": "BUFF", "move": None, "powers": [{"id": "Flight", "amount": 3}]},
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 28, "max_hp": 28, "intent": "BUFF", "move": None, "powers": [{"id": "Flight", "amount": 3}]},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+
+    def test_combat_avoids_second_offering_after_turn_activity(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "act": 2,
+                "floor": 20,
+                "current_hp": 49,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 1,
+                    "cards_played_this_turn": 1,
+                    "player": {"current_hp": 49, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Offering", "id": "Offering", "type": "SKILL", "cost": 0, "exhausts": True, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 28, "max_hp": 28, "intent": "BUFF", "move": None},
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 31, "max_hp": 31, "intent": "BUFF", "move": None},
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 28, "max_hp": 28, "intent": "BUFF", "move": None},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertNotEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+
+    def test_combat_can_play_offering_when_safe(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "act": 2,
+                "floor": 20,
+                "current_hp": 80,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 80, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "has_target": True, "is_playable": True},
+                        {"name": "Shrug It Off", "id": "Shrug It Off", "type": "SKILL", "cost": 1, "block": 11, "is_playable": True},
+                        {"name": "Offering", "id": "Offering", "type": "SKILL", "cost": 0, "exhausts": True, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 28, "max_hp": 28, "intent": "BUFF", "move": None},
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 31, "max_hp": 31, "intent": "BUFF", "move": None},
+                        {"name": "Byrd", "id": "Byrd", "current_hp": 28, "max_hp": 28, "intent": "BUFF", "move": None},
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3}])
+
     def test_combat_prefers_strike_over_single_target_x_cost_when_energy_would_be_wasted(self):
         state = {
             "in_game": True,
