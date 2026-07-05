@@ -299,6 +299,15 @@ class HeuristicPolicy:
             if potion.get("is_empty") or not potion.get("can_use", True):
                 continue
             key = _potion_key(potion)
+            if defensive_danger and "skill" in key:
+                return Decision(
+                    [{"action": "use_potion", "potion_slot": slot}],
+                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))} to look for defense.",
+                )
+        for slot, potion in enumerate(potions, start=1):
+            if potion.get("is_empty") or not potion.get("can_use", True):
+                continue
+            key = _potion_key(potion)
             if any(
                 token in key
                 for token in (

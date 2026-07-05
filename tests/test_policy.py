@@ -1975,6 +1975,41 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
 
+    def test_combat_uses_skill_potion_under_probe68_snecko_lethal_pressure(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "act": 2,
+                "floor": 21,
+                "current_hp": 10,
+                "max_hp": 80,
+                "potions": [
+                    {"id": "SkillPotion", "name": "Skill Potion", "can_use": True},
+                    {"id": "LiquidMemories", "name": "Liquid Memories", "can_use": True},
+                ],
+                "combat_state": {
+                    "turn": 3,
+                    "player": {"current_hp": 10, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Carnage", "id": "Carnage", "type": "ATTACK", "cost": 2, "damage": 20, "is_playable": True, "has_target": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Demon Form", "id": "Demon Form", "type": "POWER", "cost": 2, "is_playable": True},
+                        {"name": "Reaper", "id": "Reaper", "type": "ATTACK", "cost": 3, "damage": 4, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {"name": "Snecko", "id": "Snecko", "current_hp": 78, "max_hp": 115, "move": {"damage": 27}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "use_potion", "potion_slot": 1}])
+        self.assertIn("look for defense", decision.reason)
+
     def test_combat_does_not_spend_gamblers_brew_when_safe(self):
         state = {
             "in_game": True,
