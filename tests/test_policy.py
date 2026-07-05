@@ -1580,6 +1580,73 @@ class PolicyTests(unittest.TestCase):
 
         self.assertNotIn("One-turn search", decision.reason)
 
+    def test_combat_uses_second_wind_to_clear_hexaghost_burn_from_probe86(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 15,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 13,
+                    "player": {"current_hp": 15, "max_hp": 88, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Anger", "id": "Anger", "type": "ATTACK", "cost": 0, "damage": 6, "is_playable": True, "has_target": True},
+                        {"name": "Second Wind", "id": "Second Wind", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Burn+", "id": "Burn", "type": "STATUS", "cost": -2, "is_playable": False},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "Hexaghost",
+                            "id": "Hexaghost",
+                            "current_hp": 43,
+                            "max_hp": 250,
+                            "move": None,
+                            "powers": [{"id": "Strength", "amount": 2}],
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+
+    def test_combat_does_not_spend_second_wind_on_plain_status_without_burn_pressure(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 4,
+                "act": 1,
+                "current_hp": 65,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 65, "max_hp": 80, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Anger", "id": "Anger", "type": "ATTACK", "cost": 0, "damage": 6, "is_playable": True, "has_target": True},
+                        {"name": "Second Wind", "id": "Second Wind", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Dazed", "id": "Dazed", "type": "STATUS", "cost": -2, "is_playable": False},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {"name": "Cultist", "id": "Cultist", "current_hp": 35, "max_hp": 54, "move": None}
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+
     def test_combat_search_counts_probe82_gremlin_nob_rage_from_skills(self):
         state = {
             "in_game": True,

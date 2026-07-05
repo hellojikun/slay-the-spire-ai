@@ -512,7 +512,7 @@ class HeuristicPolicy:
             if _zero_energy_x_attack(card, energy):
                 continue
             score, target_index, reason = self._score_combat_card(
-                card, monsters, incoming, current_block, current_hp, hp_ratio, energy
+                card, hand, monsters, incoming, current_block, current_hp, hp_ratio, energy
             )
             self_damage_penalty = _self_damage_engine_penalty(
                 card,
@@ -714,6 +714,7 @@ class HeuristicPolicy:
     def _score_combat_card(
         self,
         card: dict[str, Any],
+        hand: list[dict[str, Any]],
         monsters: list[dict[str, Any]],
         incoming: int,
         current_block: int,
@@ -781,6 +782,10 @@ class HeuristicPolicy:
                 score += block * 0.35
             if _is_gremlin_nob_fight(monsters) and pressure < max(current_hp, 1):
                 score -= 14
+
+        second_wind_cleanup = _second_wind_burn_cleanup_bonus(card, hand, monsters, current_hp, hp_ratio, pressure)
+        if second_wind_cleanup:
+            score += second_wind_cleanup
 
         if name in {"Disarm", "Shockwave", "Intimidate", "Piercing Wail", "Dark Shackles"}:
             pressure = max(0, incoming - current_block)
@@ -1488,6 +1493,71 @@ def _card_block_value(card: dict[str, Any]) -> int:
     if str(card.get("type") or "").upper() == "ATTACK" and _card_key(card) not in ATTACK_BLOCK_CARDS:
         return 0
     return block
+
+
+def _second_wind_burn_cleanup_bonus(
+    card: dict[str, Any],
+    hand: list[dict[str, Any]],
+    monsters: list[dict[str, Any]],
+    current_hp: int,
+    hp_ratio: float,
+    pressure: int,
+) -> float:
+    if _card_key(card) != "Second Wind":
+        return 0.0
+    burn_damage = sum(_burn_end_turn_damage(other) for other in hand if other is not card)
+    if burn_damage <= 0:
+        return 0.0
+    boss_burn_pressure = _is_hexaghost_fight(monsters) and (
+        hp_ratio <= 0.55 or pressure > 0 or current_hp <= burn_damage + 30
+    )
+    lethalish_burn_pressure = current_hp > 0 and current_hp <= burn_damage + max(12, pressure)
+    if not (boss_burn_pressure or hp_ratio <= 0.35 or lethalish_burn_pressure):
+        return 0.0
+
+    status_count = sum(
+        1
+        for other in hand
+        if other is not card and str(other.get("type") or "").upper() == "STATUS"
+    )
+    collateral_count = sum(1 for other in hand if other is not card and _second_wind_collateral_card(other))
+    bonus = burn_damage * 4.0 + status_count * 2.0
+    if boss_burn_pressure:
+        bonus += 8.0
+    if hp_ratio <= 0.25:
+        bonus += 6.0
+    if lethalish_burn_pressure:
+        bonus += 6.0
+    bonus -= collateral_count * 5.0
+    return max(0.0, bonus)
+
+
+def _second_wind_collateral_card(card: dict[str, Any]) -> bool:
+    ctype = str(card.get("type") or "").upper()
+    if ctype in {"ATTACK", "STATUS"}:
+        return False
+    return _card_key(card) != "Second Wind"
+
+
+def _burn_end_turn_damage(card: dict[str, Any]) -> int:
+    raw_key = str(card.get("id") or card.get("name") or "")
+    key = raw_key.lower().replace("+", "")
+    name = str(card.get("name") or "")
+    if key != "burn" and name.strip().lower().replace("+", "") != "burn":
+        return 0
+    if int(card.get("upgrades", 0) or 0) > 0 or "+" in name or "+" in raw_key:
+        return 4
+    return 2
+
+
+def _is_hexaghost_fight(monsters: list[dict[str, Any]]) -> bool:
+    for monster in monsters:
+        if monster.get("is_dead") or monster.get("is_gone"):
+            continue
+        label = f"{monster.get('id', '')} {monster.get('name', '')}".replace(" ", "").lower()
+        if "hexaghost" in label:
+            return True
+    return False
 
 
 def _dangerous_pressure(pressure: int, current_hp: int, hp_ratio: float) -> bool:
