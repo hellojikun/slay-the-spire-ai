@@ -889,6 +889,83 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3}])
 
+    def test_combat_avoids_probe64_shallow_slime_boss_split_without_followup(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 76,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 4,
+                    "player": {"current_hp": 76, "max_hp": 88, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Pommel Strike", "id": "Pommel Strike", "type": "ATTACK", "cost": 1, "damage": 13, "is_playable": True, "has_target": True},
+                        {"name": "Slimed", "id": "Slimed", "type": "STATUS", "cost": 1, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Slime Boss", "id": "SlimeBoss", "current_hp": 80, "max_hp": 140, "move": None},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "end_turn"}])
+
+    def test_combat_allows_slime_split_to_stop_current_attack(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 47,
+                "max_hp": 88,
+                "combat_state": {
+                    "player": {"current_hp": 47, "max_hp": 88, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 8, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {"name": "Acid Slime", "id": "AcidSlime_L", "current_hp": 38, "max_hp": 70, "move": {"damage": 12}},
+                        {"name": "Louse", "current_hp": 12, "max_hp": 12, "move": {"damage": 6}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+
+    def test_combat_does_not_play_zero_energy_x_attack(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 82,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 3,
+                    "player": {"current_hp": 82, "max_hp": 88, "current_energy": 0, "block": 22},
+                    "hand": [
+                        {"name": "Whirlwind", "id": "Whirlwind", "type": "ATTACK", "cost": -1, "damage": 5, "is_playable": True, "has_target": False},
+                        {"name": "Slimed", "id": "Slimed", "type": "STATUS", "cost": 1, "is_playable": False},
+                    ],
+                    "monsters": [
+                        {"name": "Slime Boss", "id": "SlimeBoss", "current_hp": 98, "max_hp": 140, "move": {"damage": 28}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "end_turn"}])
+
     def test_combat_plays_seeing_red_before_probe48_hexaghost_x_cost_setup(self):
         state = {
             "in_game": True,
@@ -2104,6 +2181,35 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+
+    def test_combat_avoids_dark_embrace_before_block_under_probe65_pressure(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 43,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 5,
+                    "player": {"current_hp": 43, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Battle Trance", "id": "Battle Trance", "type": "SKILL", "cost": 0, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                        {"name": "True Grit", "id": "True Grit", "type": "SKILL", "cost": 1, "block": 7, "is_playable": True},
+                        {"name": "Dark Embrace", "id": "Dark Embrace", "type": "POWER", "cost": 2, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 14, "max_hp": 28, "move": {"damage": 12}},
+                        {"name": "Blue Slaver", "id": "SlaverBlue", "current_hp": 31, "max_hp": 47, "move": {"damage": 8}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3}])
 
     def test_combat_can_play_burning_pact_when_safe(self):
         state = {

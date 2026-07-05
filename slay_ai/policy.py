@@ -32,12 +32,14 @@ EARLY_UNSUPPORTED_ENGINE_PENALTY = 24.0
 EARLY_DUPLICATE_EXHAUST_ENABLER_PENALTY = 16.0
 ACT1_LOW_HP_SURVIVAL_CARD_BONUS = 14.0
 LOW_HP_ENGINE_COMBAT_PENALTY = 20.0
-SLOW_ENGINE_CARDS = {"Burning Pact", "Havoc"}
+SLOW_ENGINE_CARDS = {"Burning Pact", "Dark Embrace", "Havoc"}
 SELF_DAMAGE_RISK_CARDS = {"Bloodletting", "Combust", "Offering"}
 IMMEDIATE_SELF_DAMAGE_ENGINE_CARDS = {"Bloodletting", "Offering"}
 SELF_DAMAGE_HP_COST_CARDS = {"Hemokinesis": 2}
 ACT2_MULTI_ENEMY_SELF_DAMAGE_SETUP_PENALTY = 9.0
 REPEAT_SELF_DAMAGE_ENGINE_PENALTY = 18.0
+SHALLOW_SLIME_SPLIT_PENALTY = 36.0
+SHALLOW_SLIME_SPLIT_RATIO = 0.42
 ENERGY_SETUP_CARDS = {"Seeing Red"}
 SEARCH_PROTECTED_SINGLE_CARDS = {
     "Battle Trance",
@@ -351,6 +353,8 @@ class HeuristicPolicy:
             cost = _card_energy_cost(card, energy)
             if cost > energy:
                 continue
+            if _zero_energy_x_attack(card, energy):
+                continue
             score, target_index, reason = self._score_combat_card(
                 card, monsters, incoming, current_block, current_hp, hp_ratio, energy
             )
@@ -562,6 +566,8 @@ class HeuristicPolicy:
                     score -= 120
                 elif hp_ratio < 0.35:
                     score -= reflect_damage * 2 + reflect_loss * 10
+            if target and _bad_shallow_slime_split(card, target, damage, incoming, current_block, energy):
+                score -= SHALLOW_SLIME_SPLIT_PENALTY
 
         if block:
             if pressure > 0:
@@ -976,6 +982,10 @@ def _card_energy_cost(card: dict[str, Any], current_energy: int) -> int:
     return max(cost, 0)
 
 
+def _zero_energy_x_attack(card: dict[str, Any], current_energy: int) -> bool:
+    return int(card.get("cost", 0) or 0) < 0 and current_energy <= 0 and int(card.get("damage", 0) or 0) > 0
+
+
 def _energy_setup_has_payoff(
     card: dict[str, Any],
     hand: list[dict[str, Any]],
@@ -1200,6 +1210,34 @@ def _attack_stops_current_intent(monster: dict[str, Any], damage: int) -> bool:
     block = int(monster.get("block", 0))
     hp_loss = max(0, damage - block)
     return hp > max_hp / 2 and hp - hp_loss <= max_hp / 2
+
+
+def _bad_shallow_slime_split(
+    card: dict[str, Any],
+    monster: dict[str, Any],
+    damage: int,
+    incoming: int,
+    current_block: int,
+    energy: int,
+) -> bool:
+    if damage <= 0 or not _is_splitting_slime(monster):
+        return False
+    if incoming > current_block:
+        return False
+    if _attack_kills(monster, damage):
+        return False
+    hp = int(monster.get("current_hp", 0) or 0)
+    max_hp = int(monster.get("max_hp", 0) or 0)
+    block = int(monster.get("block", 0) or 0)
+    if max_hp <= 0 or hp <= max_hp / 2:
+        return False
+    hp_after = hp - max(0, damage - block)
+    if hp_after > max_hp / 2 or hp_after <= 0:
+        return False
+    if hp_after / max_hp < SHALLOW_SLIME_SPLIT_RATIO:
+        return False
+    remaining_energy = max(0, energy - _card_energy_cost(card, energy))
+    return remaining_energy <= 0
 
 
 def _is_splitting_slime(monster: dict[str, Any]) -> bool:
