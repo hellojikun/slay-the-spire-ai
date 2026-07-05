@@ -1083,6 +1083,42 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
         self.assertIn("One-turn search", decision.reason)
 
+    def test_combat_local_search_triggers_guardian_mode_shift_to_stop_attack(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 40,
+                "max_hp": 88,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_energy": 1, "current_hp": 40, "max_hp": 88, "block": 0},
+                    "hand": [
+                        {"id": "Reckless Charge", "name": "Reckless Charge", "type": "ATTACK", "cost": 0, "damage": 7, "is_playable": True, "has_target": True},
+                        {"id": "Strike_R", "name": "Strike", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                        {"id": "Defend_R", "name": "Defend", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 222,
+                            "max_hp": 240,
+                            "block": 1,
+                            "move": {"damage": 36},
+                            "powers": [{"id": "Mode Shift", "amount": 12}],
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+        self.assertIn("One-turn search", decision.reason)
+
     def test_combat_local_search_continues_block_after_probe59_impervious(self):
         state = {
             "in_game": True,

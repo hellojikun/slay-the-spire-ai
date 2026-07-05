@@ -1203,6 +1203,8 @@ def _attack_stops_current_intent(monster: dict[str, Any], damage: int) -> bool:
         return False
     if _attack_kills(monster, damage):
         return True
+    if _attack_triggers_guardian_mode_shift(monster, damage):
+        return True
     if not _is_splitting_slime(monster):
         return False
     hp = int(monster.get("current_hp", 0))
@@ -1210,6 +1212,16 @@ def _attack_stops_current_intent(monster: dict[str, Any], damage: int) -> bool:
     block = int(monster.get("block", 0))
     hp_loss = max(0, damage - block)
     return hp > max_hp / 2 and hp - hp_loss <= max_hp / 2
+
+
+def _attack_triggers_guardian_mode_shift(monster: dict[str, Any], damage: int) -> bool:
+    if damage <= 0:
+        return False
+    mode_shift = _monster_power_amount(monster, {"modeshift"})
+    if mode_shift <= 0:
+        return False
+    block = int(monster.get("block", 0) or 0)
+    return max(0, damage - block) >= mode_shift
 
 
 def _bad_shallow_slime_split(

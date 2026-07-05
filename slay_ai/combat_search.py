@@ -49,6 +49,7 @@ class _MonsterState:
     hp: int
     block: int
     attack: int
+    mode_shift: int | None = None
 
     @property
     def alive(self) -> bool:
@@ -285,6 +286,7 @@ def _monster_state(monster: dict[str, Any]) -> _MonsterState:
         hp=max(0, _as_int(monster.get("current_hp", 0))),
         block=max(0, _as_int(monster.get("block", 0))),
         attack=max(0, monster_attack_damage(monster)),
+        mode_shift=_mode_shift_amount(monster),
     )
 
 
@@ -316,6 +318,10 @@ def _deal_damage(monster: _MonsterState, damage: int) -> int:
     monster.block -= blocked
     hp_damage = min(monster.hp, max(0, damage - blocked))
     monster.hp -= hp_damage
+    if monster.mode_shift is not None and monster.attack > 0 and hp_damage > 0:
+        monster.mode_shift = max(0, monster.mode_shift - hp_damage)
+        if monster.mode_shift <= 0:
+            monster.attack = 0
     return blocked + hp_damage
 
 
@@ -335,7 +341,16 @@ def _copy_state(state: _SearchState) -> _SearchState:
 
 
 def _copy_monster(monster: _MonsterState) -> _MonsterState:
-    return _MonsterState(hp=monster.hp, block=monster.block, attack=monster.attack)
+    return _MonsterState(hp=monster.hp, block=monster.block, attack=monster.attack, mode_shift=monster.mode_shift)
+
+
+def _mode_shift_amount(monster: dict[str, Any]) -> int | None:
+    for power in monster.get("powers", []) or []:
+        key = str(power.get("id") or power.get("name") or "").replace(" ", "").lower()
+        if key == "modeshift":
+            amount = _as_int(power.get("amount", 0))
+            return amount if amount > 0 else None
+    return None
 
 
 def _as_int(value: Any) -> int:
