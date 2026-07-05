@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 import re
 from typing import Any
 
@@ -127,19 +128,30 @@ ATTACK_DUPLICATE_SOFT_CAPS = {
 }
 
 
+@dataclass
+class _PendingSearchSequence:
+    floor: int
+    turn: int
+    card_keys: tuple[str, ...]
+    reason: str
+
+
 class HeuristicPolicy:
     def __init__(self, memory: StrategyMemory, character: str = "IRONCLAD") -> None:
         self.memory = memory
         self.character = character
+        self._pending_search_sequence: _PendingSearchSequence | None = None
 
     def decide(self, state: dict[str, Any]) -> Decision:
         if not state.get("in_game"):
+            self._clear_pending_search_sequence()
             return Decision([], "Game is at main menu; use --start or --continue.")
 
         game = state.get("game_state", {})
         screen = str(game.get("screen_type", "NONE"))
         if screen == "NONE" and game.get("room_phase") == "COMBAT":
             return self._combat(game)
+        self._clear_pending_search_sequence()
         if screen == "COMBAT_REWARD":
             return self._combat_reward(game)
         if screen == "CARD_REWARD":
@@ -181,11 +193,13 @@ class HeuristicPolicy:
         hp_ratio = _hp_ratio(player)
 
         if not monsters:
+            self._clear_pending_search_sequence()
             if game.get("room_phase") == "COMPLETE":
                 return Decision([{"action": "proceed"}], "Combat complete; proceed.")
             return Decision([{"action": "wait", "ms": 250}], "Combat is ending; wait for reward transition.")
 
         if not hand and monsters:
+            self._clear_pending_search_sequence()
             turn = int(combat.get("turn", 1) or 1)
             if 0 < energy < 3:
                 return Decision([{"action": "end_turn"}], "Hand is empty after spending energy; end the turn.")
@@ -197,16 +211,64 @@ class HeuristicPolicy:
 
         potion_action = self._emergency_potion(game, monsters, incoming, current_block, hp_ratio)
         if potion_action:
+            self._clear_pending_search_sequence()
             return potion_action
         potion_action = self._strategic_combat_potion(game, monsters)
         if potion_action:
+            self._clear_pending_search_sequence()
             return potion_action
+
+        pending_action = self._pending_search_action(game, incoming, current_block)
+        if pending_action:
+            return pending_action
 
         search_action = self._combat_local_search_action(game)
         if search_action:
             return search_action
 
         return self.best_single_combat_action(game)
+
+    def _clear_pending_search_sequence(self) -> None:
+        self._pending_search_sequence = None
+
+    def _pending_search_action(self, game: dict[str, Any], incoming: int, current_block: int) -> Decision | None:
+        pending = self._pending_search_sequence
+        if pending is None:
+            return None
+        combat = game.get("combat_state", {})
+        player = combat.get("player", {})
+        if pending.floor != int(game.get("floor", 0) or 0) or pending.turn != int(combat.get("turn", 1) or 1):
+            self._clear_pending_search_sequence()
+            return None
+        if not pending.card_keys:
+            self._clear_pending_search_sequence()
+            return None
+        energy = int(player.get("current_energy", 0) or 0)
+        next_key = pending.card_keys[0]
+        match = _find_playable_card_by_key(combat.get("hand", []), next_key, energy)
+        if match is None:
+            self._clear_pending_search_sequence()
+            return None
+        index, card = match
+        damage = _card_damage_value(card)
+        block = _card_block_value(card)
+        if block > 0 and damage <= 0 and current_block >= incoming:
+            self._clear_pending_search_sequence()
+            return None
+        monsters = combat.get("monsters", [])
+        action = {"action": "play_card", "card_index": index}
+        if damage > 0 and _card_key(card) not in AOE_ATTACK_CARDS:
+            target_index, _ = _choose_target(monsters, damage)
+            if target_index is not None:
+                action["target_index"] = target_index
+        if damage > 0 and _search_first_attack_has_reflect_risk(card, action, monsters, player):
+            self._clear_pending_search_sequence()
+            return None
+        remaining = pending.card_keys[1:]
+        self._pending_search_sequence = (
+            _PendingSearchSequence(pending.floor, pending.turn, remaining, pending.reason) if remaining else None
+        )
+        return Decision([action], f"Continue one-turn search: play {card.get('name', next_key)} from {pending.reason}.")
 
     def _strategic_combat_potion(self, game: dict[str, Any], monsters: list[dict[str, Any]]) -> Decision | None:
         combat = game.get("combat_state", {})
@@ -420,11 +482,12 @@ class HeuristicPolicy:
         first_card = _card_for_action(game, result.first_action)
         if first_card and _search_first_attack_has_reflect_risk(first_card, result.first_action, monsters, player):
             return None
+        result_first_card_key = normalize_card_name(result.first_card_key)
         if (
             result.projected_loss >= result.initial_loss
             and result.kills <= 0
             and result.attacks_removed <= 0
-            and result.first_card_key not in ENERGY_SETUP_CARDS
+            and result_first_card_key not in ENERGY_SETUP_CARDS
         ):
             return None
 
@@ -447,18 +510,40 @@ class HeuristicPolicy:
             return None
         if (
             single_action.get("action") == "play_card"
-            and single_card_key != result.first_card_key
+            and single_card_key != result_first_card_key
             and not result.avoided_lethal
             and not modest_block_sequence
             and not pressure_block_sequence
             and result.projected_loss > result.initial_loss - 6
             and result.kills <= 0
             and result.attacks_removed <= 0
-            and result.first_card_key not in ENERGY_SETUP_CARDS
+            and result_first_card_key not in ENERGY_SETUP_CARDS
         ):
             return None
 
+        self._remember_search_sequence(game, result.sequence_card_keys, result.reason, loss_reduction)
         return Decision([result.first_action], f"One-turn search: {result.reason}.")
+
+    def _remember_search_sequence(
+        self,
+        game: dict[str, Any],
+        sequence_card_keys: tuple[str, ...],
+        reason: str,
+        loss_reduction: int,
+    ) -> None:
+        self._clear_pending_search_sequence()
+        remaining = tuple(normalize_card_name(key) for key in sequence_card_keys[1:])
+        if loss_reduction <= 0 or not remaining:
+            return
+        if not _sequence_has_block_followup(game.get("combat_state", {}).get("hand", []), remaining):
+            return
+        combat = game.get("combat_state", {})
+        self._pending_search_sequence = _PendingSearchSequence(
+            floor=int(game.get("floor", 0) or 0),
+            turn=int(combat.get("turn", 1) or 1),
+            card_keys=remaining,
+            reason=reason,
+        )
 
     def _energy_setup_action(
         self,
@@ -1041,6 +1126,30 @@ def _card_has_immediate_value(card: dict[str, Any], incoming: int, current_block
     if name in {"Battle Trance", "Burning Pact", "Disarm", "Offering", "Shockwave", "Shrug It Off"}:
         return True
     return card.get("type") == "POWER"
+
+
+def _find_playable_card_by_key(hand: list[dict[str, Any]], card_key: str, energy: int) -> tuple[int, dict[str, Any]] | None:
+    for index, card in enumerate(hand, start=1):
+        if _card_key(card) != card_key:
+            continue
+        if not card.get("is_playable", True):
+            continue
+        if _card_energy_cost(card, energy) > energy:
+            continue
+        return index, card
+    return None
+
+
+def _sequence_has_block_followup(hand: list[dict[str, Any]], card_keys: tuple[str, ...]) -> bool:
+    remaining = list(card_keys)
+    for card in hand:
+        key = _card_key(card)
+        if key not in remaining:
+            continue
+        if _card_block_value(card) > 0:
+            return True
+        remaining.remove(key)
+    return False
 
 
 def _single_target_x_cost_penalty_applies(

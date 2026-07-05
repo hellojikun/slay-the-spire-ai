@@ -28,6 +28,7 @@ UNSUPPORTED_SEQUENCE_CARDS = {
 class SearchResult:
     first_action: dict[str, Any]
     sequence: tuple[dict[str, Any], ...]
+    sequence_card_keys: tuple[str, ...]
     score: float
     initial_loss: int
     projected_loss: int
@@ -132,6 +133,7 @@ def find_best_combat_sequence(game: dict[str, Any], *, max_depth: int = 5, max_b
     return SearchResult(
         first_action=first_action,
         sequence=sequence_actions,
+        sequence_card_keys=tuple(_card_key(candidate.card) for candidate in sequence),
         score=score,
         initial_loss=initial_loss,
         projected_loss=projected_loss,

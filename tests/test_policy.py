@@ -1183,6 +1183,132 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 5}])
         self.assertIn("One-turn search", decision.reason)
 
+    def test_combat_commits_defensive_search_sequence_across_state_reads(self):
+        bot = policy()
+        monsters = [
+            {"name": "Hexaghost", "id": "Hexaghost", "current_hp": 250, "max_hp": 250, "move": {"hits": 6, "damage": 6}},
+        ]
+        first_state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "current_hp": 65,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 65, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Power Through", "id": "Power Through", "type": "SKILL", "cost": 1, "block": 15, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": monsters,
+                },
+            },
+        }
+        second_state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "current_hp": 65,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 65, "max_hp": 80, "current_energy": 2, "block": 15},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": monsters,
+                },
+            },
+        }
+        third_state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "current_hp": 65,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 65, "max_hp": 80, "current_energy": 1, "block": 20},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": monsters,
+                },
+            },
+        }
+
+        first = bot.decide(first_state)
+        second = bot.decide(second_state)
+        third = bot.decide(third_state)
+
+        self.assertEqual(first.actions, [{"action": "play_card", "card_index": 1}])
+        self.assertIn("One-turn search", first.reason)
+        self.assertEqual(second.actions, [{"action": "play_card", "card_index": 1}])
+        self.assertIn("Continue one-turn search", second.reason)
+        self.assertEqual(third.actions, [{"action": "play_card", "card_index": 1}])
+        self.assertIn("Continue one-turn search", third.reason)
+
+    def test_combat_search_sequence_commitment_clears_on_new_turn(self):
+        bot = policy()
+        monsters = [
+            {"name": "Hexaghost", "id": "Hexaghost", "current_hp": 250, "max_hp": 250, "move": {"hits": 6, "damage": 6}},
+        ]
+        first_state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "current_hp": 65,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 65, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Power Through", "id": "Power Through", "type": "SKILL", "cost": 1, "block": 15, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "monsters": monsters,
+                },
+            },
+        }
+        next_turn_state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "current_hp": 65,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 3,
+                    "player": {"current_hp": 65, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "monsters": [{"name": "Hexaghost", "id": "Hexaghost", "current_hp": 250, "max_hp": 250, "move": None}],
+                },
+            },
+        }
+
+        bot.decide(first_state)
+        decision = bot.decide(next_turn_state)
+
+        self.assertNotIn("Continue one-turn search", decision.reason)
+
     def test_combat_local_search_continues_block_after_probe59_impervious(self):
         state = {
             "in_game": True,
