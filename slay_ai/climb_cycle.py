@@ -39,6 +39,7 @@ from .train_external_priors import external_prior_runtime_output_risk
 from .train_external_priors import load_examples_with_stats as load_external_prior_examples_with_stats
 from .train_external_priors import train_external_card_prior_model
 from .train_external_structure_priors import train_external_structure_priors
+from .train_decision_multitask_model import train_decision_multitask_model
 from .train_potion_tempo_model import load_examples_with_stats as load_potion_examples_with_stats
 from .train_potion_tempo_model import train_stats_model as train_potion_model
 from .train_route_risk_model import load_examples_with_stats as load_route_examples_with_stats
@@ -519,10 +520,15 @@ def _train_from_offline_batch(
         prior_scale=external_prior_scale,
     )
     summary["external_priors"] = external_summary
-    summary["external_structure_priors"] = _train_external_structure_priors_from_inputs(
+    external_structure_summary = _train_external_structure_priors_from_inputs(
         external_prior_inputs or [],
         cycle_dir=cycle_dir,
         model_dir=external_prior_model_dir,
+    )
+    summary["external_structure_priors"] = external_structure_summary
+    summary["external_structure_decision_model"] = _train_external_structure_decision_model(
+        external_structure_summary,
+        cycle_dir=cycle_dir,
     )
     summary["card_external_prior_blend"] = _blend_card_model_with_external_prior(
         card_summary,
@@ -1047,6 +1053,90 @@ def _train_external_structure_priors_from_inputs(
     }
 
 
+def _train_external_structure_decision_model(
+    structure_summary: dict[str, Any],
+    *,
+    cycle_dir: Path,
+) -> dict[str, Any]:
+    if structure_summary.get("status") != "trained":
+        return {
+            "status": "skipped",
+            "reason": "external_structure_priors_not_trained",
+            "source_quality": EXTERNAL_PRIOR_GRADE,
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+        }
+    rows = structure_summary.get("rows") if isinstance(structure_summary.get("rows"), dict) else {}
+    row_paths = [Path(str(path)) for path in rows.values() if path]
+    existing_rows = [path for path in row_paths if path.exists()]
+    if not existing_rows:
+        return {
+            "status": "skipped",
+            "reason": "external_structure_rows_missing",
+            "source_quality": EXTERNAL_PRIOR_GRADE,
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+            "structure_summary_path": structure_summary.get("summary_path"),
+        }
+    output_dir = cycle_dir / "training" / "external_structure_decision_model"
+    model_path = output_dir / "decision_multitask_model.pt"
+    summary_output = output_dir / "decision_multitask_training_summary.json"
+    prediction_output = output_dir / "decision_multitask_predictions.jsonl"
+    try:
+        result = train_decision_multitask_model(
+            existing_rows,
+            model_path=model_path,
+            summary_output=summary_output,
+            prediction_output=prediction_output,
+            epochs=20,
+            hidden_dim=48,
+            batch_size=128,
+            device_name="auto",
+        )
+    except (ImportError, RuntimeError, SystemExit, ValueError) as exc:
+        return {
+            "status": "skipped",
+            "reason": "external_structure_decision_training_failed",
+            "error": str(exc),
+            "source_quality": EXTERNAL_PRIOR_GRADE,
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+            "structure_summary_path": structure_summary.get("summary_path"),
+        }
+    trained = result["summary"]
+    return {
+        "status": "trained",
+        "source_quality": EXTERNAL_PRIOR_GRADE,
+        "model_kind": trained.get("model_kind"),
+        "model_path": str(model_path),
+        "summary_path": str(summary_output),
+        "prediction_path": str(prediction_output),
+        "examples": trained.get("examples", 0),
+        "task_counts": trained.get("task_counts", {}),
+        "row_counts": trained.get("row_counts", {}),
+        "train_loss": trained.get("train_loss"),
+        "val_loss": trained.get("val_loss"),
+        "evaluation": trained.get("evaluation", {}),
+        "runtime_authority": False,
+        "runtime_default_enabled": False,
+        "runtime_authority_level": "shadow",
+        "does_not_control_live_mcp": True,
+        "direct_mcp_control": False,
+        "requires_audited_promotion": True,
+        "forbidden_uses": trained.get("forbidden_uses", []),
+        "training_source": trained.get("training_source", {}),
+        "structure_summary_path": structure_summary.get("summary_path"),
+    }
+
 def _replay_learned_memory(manifest_path: Path, *, learned_path: Path, reset: bool) -> dict[str, Any]:
     training_source = resolve_training_source([], manifest_path)
     logs = [Path(path) for path in training_source["resolved_logs"]]
@@ -1437,6 +1527,11 @@ def _run_review_markdown_v2(
         if isinstance(training_summary.get("external_priors"), dict)
         else {}
     )
+    external_decision = (
+        training_summary.get("external_structure_decision_model")
+        if isinstance(training_summary.get("external_structure_decision_model"), dict)
+        else {}
+    )
     external_blend = (
         training_summary.get("card_external_prior_blend")
         if isinstance(training_summary.get("card_external_prior_blend"), dict)
@@ -1450,6 +1545,9 @@ def _run_review_markdown_v2(
             f"examples={combat_value.get('examples', 0)}；runtime_authority={combat_value.get('runtime_authority', False)}。",
             f"- 本轮外部数据 prior 状态：`{external_priors.get('status')}` "
             f"examples={external_priors.get('examples', 0)}；runtime_authority={external_priors.get('runtime_authority', False)}。",
+            f"- External structure decision shadow: `{external_decision.get('status')}` "
+            f"examples={external_decision.get('examples', 0)}; runtime_authority={external_decision.get('runtime_authority', False)}; "
+            f"direct_mcp_control={external_decision.get('direct_mcp_control', False)}.",
             f"- 本轮外部融合候选状态：`{external_blend.get('status')}` "
             f"deltas={external_blend.get('deltas', 0)}；runtime_authority={external_blend.get('runtime_authority', False)}。",
             "",
@@ -1714,6 +1812,8 @@ def _cycle_status_line(summary: dict[str, Any]) -> str:
         parts.append(f"card={training['card_model'].get('status')}")
     if training.get("combat_value_model"):
         parts.append(f"combat_value={training['combat_value_model'].get('status')}")
+    if training.get("external_structure_decision_model"):
+        parts.append(f"external_decision={training['external_structure_decision_model'].get('status')}")
     if training.get("card_external_prior_blend"):
         parts.append(f"external_blend={training['card_external_prior_blend'].get('status')}")
     return " ".join(parts)
@@ -1728,6 +1828,11 @@ def _training_status_line(summary: dict[str, Any]) -> str:
     external_structure = (
         summary.get("external_structure_priors")
         if isinstance(summary.get("external_structure_priors"), dict)
+        else {}
+    )
+    external_decision = (
+        summary.get("external_structure_decision_model")
+        if isinstance(summary.get("external_structure_decision_model"), dict)
         else {}
     )
     external_blend = (
@@ -1745,6 +1850,7 @@ def _training_status_line(summary: dict[str, Any]) -> str:
         f"external_prior={external.get('status')} examples={external.get('examples', 0)} "
         f"external_structure={external_structure.get('status')} rows="
         f"{external_structure.get('reward_decision_rows', 0) + external_structure.get('purge_rows', 0) + external_structure.get('deck_cycle_rows', 0)} "
+        f"external_decision={external_decision.get('status')} examples={external_decision.get('examples', 0)} "
         f"external_blend={external_blend.get('status')}"
     )
 

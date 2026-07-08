@@ -117,6 +117,64 @@ class ImportExternalRunsTests(unittest.TestCase):
         self.assertEqual(result.card_prior_rows[0]["picked"], "Pommel Strike")
         self.assertEqual(result.card_prior_rows[0]["options"], ["Pommel Strike", "Anger", "Flex"])
 
+    def test_reads_gzipped_jsonl_stream(self):
+        with TemporaryDirectory() as tmp:
+            path = Path(tmp) / "runs.jsonl.gz"
+            payload = [
+                {
+                    "character": "IRONCLAD",
+                    "ascension": 0,
+                    "victory": True,
+                    "floor_reached": 57,
+                    "card_choices": [{"picked": "Pommel Strike", "not_picked": ["Clash"]}],
+                },
+                {
+                    "character": "SILENT",
+                    "ascension": 1,
+                    "victory": False,
+                    "floor_reached": 11,
+                    "card_choices": [{"picked": "Backflip", "not_picked": ["Dodge and Roll"]}],
+                },
+            ]
+            with gzip.open(path, "wt", encoding="utf-8") as handle:
+                for record in payload:
+                    handle.write(json.dumps(record) + "\n")
+
+            records = list(iter_external_records(path))
+
+        self.assertEqual([record["character"] for record in records], ["IRONCLAD", "SILENT"])
+
+    def test_limit_runs_stops_streaming_array_before_invalid_tail(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw = root / "runs.json"
+            one = {
+                "character": "IRONCLAD",
+                "ascension": 0,
+                "victory": True,
+                "floor_reached": 57,
+                "card_choices": [{"picked": "Shrug It Off", "not_picked": ["Flex"]}],
+            }
+            two = {
+                "character": "IRONCLAD",
+                "ascension": 0,
+                "victory": False,
+                "floor_reached": 12,
+                "card_choices": [{"picked": "Pommel Strike", "not_picked": ["Clash"]}],
+            }
+            raw.write_text("[" + json.dumps(one) + "," + json.dumps(two) + ", not-json", encoding="utf-8")
+
+            result = import_external_runs(
+                [raw],
+                source_id="limited_stream",
+                output_dir=root / "out",
+                limit_runs=2,
+            )
+
+        self.assertEqual(result.manifest["sample_method"], "stream_first_n")
+        self.assertEqual(result.manifest["summary"]["accepted_runs"], 2)
+        self.assertEqual(result.manifest["summary"]["seen_runs"], 2)
+        self.assertEqual(len(result.card_prior_rows), 2)
     def test_cli_writes_manifest(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)

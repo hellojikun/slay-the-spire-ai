@@ -1,0 +1,123 @@
+{
+  "accepted_rows": 155,
+  "example_count": 2,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 35,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 70,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        76
+      ],
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Pommel Strike",
+        "Defend_R",
+        "Slimed",
+        "Strike_R",
+        "Defend_R"
+      ],
+      "incoming": 35,
+      "initial_loss": 35,
+      "kills": 0,
+      "label_first_card_key": "Pommel Strike",
+      "label_sequence_card_keys": [
+        "Pommel Strike"
+      ],
+      "label_target_index": 1,
+      "line": 77,
+      "loss_delta": 35,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_eval_smoke\\offline\\shadow_cycle_20260709_external_decision_eval_smoke\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 180,
+      "turn": 3
+    },
+    {
+      "act": 1,
+      "attacks_removed": 4,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 34,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        99
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Defend_R",
+        "Clothesline",
+        "Strike_R"
+      ],
+      "incoming": 10,
+      "initial_loss": 4,
+      "kills": 0,
+      "label_first_card_key": "Clothesline",
+      "label_sequence_card_keys": [
+        "Clothesline"
+      ],
+      "label_target_index": 1,
+      "line": 155,
+      "loss_delta": 4,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_eval_smoke\\offline\\shadow_cycle_20260709_external_decision_eval_smoke\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 213,
+      "turn": 11
+    }
+  ],
+  "excluded_rows": 2,
+  "exclusion_reasons": {
+    "missed_single_card_search": 2
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260709_external_decision_eval_smoke\\offline\\shadow_cycle_20260709_external_decision_eval_smoke"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260709_external_decision_eval_smoke\\offline\\shadow_cycle_20260709_external_decision_eval_smoke\\combat_search_labels.jsonl"
+  ],
+  "rows": 157,
+  "source_quality": {
+    "usable_with_recoveries": 157
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=157 excluded=2 missed_single_card_search=2",
+  "version": 1,
+  "warnings": []
+}

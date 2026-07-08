@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "name": "cycle_20260709_external_decision_shadow_smoke",
+  "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\artifact_manifest_cycle_20260709_external_decision_shadow_smoke.json",
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "input_count": 3,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 3,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\training_manifest_cycle_20260709_external_decision_shadow_smoke.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\shadow_cycle_20260709_external_decision_shadow_smoke",
+    "advice_dir": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\shadow_advice_cycle_20260709_external_decision_shadow_smoke",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\run_diagnosis_cycle_20260709_external_decision_shadow_smoke.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\act1_boss_gate_cycle_20260709_external_decision_shadow_smoke.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\static_knowledge_gaps_cycle_20260709_external_decision_shadow_smoke.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\combat_label_audit_cycle_20260709_external_decision_shadow_smoke.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\combat_label_replay_audit_cycle_20260709_external_decision_shadow_smoke.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\offline_batch_cycle_20260709_external_decision_shadow_smoke.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\artifact_manifest_cycle_20260709_external_decision_shadow_smoke.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\shadow_advice_cycle_20260709_external_decision_shadow_smoke",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 939418
+    },
+    "combat_label_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\combat_label_audit_cycle_20260709_external_decision_shadow_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 3625,
+      "sha256": "eeeed4c55b7dab3e7c1eee972be5bb6838ca5640666f7353a781e96e5dddf15a"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\combat_label_replay_audit_cycle_20260709_external_decision_shadow_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 4678,
+      "sha256": "58a1a9a76a7ffbd2ca0a3f544b2cb4d296ad4e73cde1a17f48571679cb2cc9bd"
+    },
+    "diagnosis_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\run_diagnosis_cycle_20260709_external_decision_shadow_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 872808,
+      "sha256": "b082e34eb3e0611ea6a957a1081e0b6850474cf408c807911f403c5384c43aac"
+    },
+    "gate_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\act1_boss_gate_cycle_20260709_external_decision_shadow_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17657,
+      "sha256": "a4f4e4109ad98ef44096966ad4ae51256c60bd62cadfebafb9ac440155535f2f"
+    },
+    "handoff_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 617155
+    },
+    "handoff_index_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 51017,
+      "sha256": "3bb821ba25ecaf46f48d4ece075413b9a30694388a2daa547f4e571517a2cf1e"
+    },
+    "manifest_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\training_manifest_cycle_20260709_external_decision_shadow_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 260292,
+      "sha256": "338b19245b6acb211a14cde98a06a089054bc6d8acb84360991621faf6c942f8"
+    },
+    "next_handoff_prompt_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 48133,
+      "sha256": "0360548583ff0a679024ccd6b50f479c2087c7dda45dd43cef1cc8d1b93f1218"
+    },
+    "shadow_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\shadow_cycle_20260709_external_decision_shadow_smoke",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 2416103
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\static_knowledge_gaps_cycle_20260709_external_decision_shadow_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1862,
+      "sha256": "ca7b95886e4c2f5b1b49b8e8b849689d714a2192c4401fab0ae87fbbc6d87232"
+    },
+    "summary_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\offline_batch_cycle_20260709_external_decision_shadow_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 488789,
+      "sha256": "31a016fac4df2c781befc1fa49b6fb2b05d9c3301fa4ad2841d518171dacd3ed"
+    },
+    "ai_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 150345,
+      "sha256": "1d712285ec1b57ebb000c9075fcf1869891d691a87b40cdf956c2ba6db8c59ef"
+    },
+    "engineering_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 91724,
+      "sha256": "9a2cb8ac1e9b8659545d8da24028829a95297c817c6e09098c1e2f78964a7a18"
+    },
+    "main_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 110506,
+      "sha256": "75fb7f733e63e08af3f30cfd809563ae81edc4514db60ca1687bd04454824949"
+    },
+    "runner_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 91738,
+      "sha256": "a81cbd48cc95376363e8e37f59ce0763c2a83967e87a83943057a53c9f9610d7"
+    },
+    "ai_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 18941,
+      "sha256": "8811a3e943f6f643a66ac67ea772dc2d639cc77743edf2a4ca2b35c696a99908"
+    },
+    "engineering_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 18125,
+      "sha256": "8aec9dea5e12a0f7cb548e244ee61d03e72d22a3ab7a3412c23d85c8108453cf"
+    },
+    "main_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 18492,
+      "sha256": "1dc4514becb012bb9ebcad18170991f69f467693d1f96c4f5205ee0ec108746c"
+    },
+    "runner_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_shadow_smoke\\offline\\handoff_cycle_20260709_external_decision_shadow_smoke\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 18134,
+      "sha256": "45c0961429263e9f0b68f41ffb4600468957150c19073f72e5b2cb837b4d2e8c"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

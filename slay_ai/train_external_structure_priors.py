@@ -40,6 +40,7 @@ class ExternalStructureSource:
     resolved_files: list[Path]
     manifest_paths: list[Path]
     warnings: list[str]
+    filters: dict[str, Any]
 
 
 @dataclass
@@ -116,20 +117,37 @@ def train_external_structure_priors(
     deck_rows: list[dict[str, Any]] = []
     accepted_runs = 0
     skipped_runs = 0
+    seen_runs = 0
     skip_reasons: dict[str, int] = {}
+    limit_runs = _source_limit_runs(source)
+    stop_after_limit = False
 
     for file_path in source.resolved_files:
+        if stop_after_limit:
+            break
         for index, record in enumerate(iter_external_records(file_path), start=1):
+            if limit_runs is not None and seen_runs >= limit_runs:
+                stop_after_limit = True
+                break
+            seen_runs += 1
             run, reason = normalize_external_structure_run(record, file_path, index)
+            if reason is None and run is not None:
+                reason = _filter_external_structure_run(run, source)
             if reason:
                 skipped_runs += 1
                 _count(skip_reasons, reason)
+                if limit_runs is not None and seen_runs >= limit_runs:
+                    stop_after_limit = True
+                    break
                 continue
             assert run is not None
             accepted_runs += 1
             reward_rows.extend(card_reward_decision_rows(run, source))
             purge_rows.extend(card_purge_rows(run, source))
             deck_rows.append(deck_cycle_row(run, source, card_tags))
+            if limit_runs is not None and seen_runs >= limit_runs:
+                stop_after_limit = True
+                break
 
     reward_path = output_rows_dir / CARD_REWARD_DECISIONS_FILE
     purge_path = output_rows_dir / CARD_PURGE_PRIORS_FILE
@@ -146,6 +164,7 @@ def train_external_structure_priors(
         "version": 1,
         "status": "trained" if accepted_runs else "skipped",
         "runs": accepted_runs,
+        "seen_runs": seen_runs,
         "skipped_runs": skipped_runs,
         "skip_reasons": skip_reasons,
         "reward_decision_rows": len(reward_rows),
@@ -183,6 +202,7 @@ def resolve_external_structure_source(
     warnings: list[str] = []
     manifest_source_uri = source_uri
     manifest_source_weight: float | None = None
+    manifest_filters: dict[str, Any] = {}
 
     for path in input_paths:
         if not path.exists():
@@ -196,6 +216,8 @@ def resolve_external_structure_source(
                 source_ids.append(str(payload["source_id"]))
             if payload.get("source_weight") is not None:
                 manifest_source_weight = float(payload["source_weight"])
+            if isinstance(payload.get("filters"), dict) and not manifest_filters:
+                manifest_filters = dict(payload["filters"])
             for file_text in payload.get("resolved_files") or []:
                 candidate = Path(file_text)
                 if not candidate.is_absolute() and not candidate.exists():
@@ -217,6 +239,8 @@ def resolve_external_structure_source(
                 source_ids.append(nested.source_id)
                 manifest_source_uri = manifest_source_uri or nested.source_uri
                 manifest_source_weight = nested.source_weight
+                if nested.filters and not manifest_filters:
+                    manifest_filters = dict(nested.filters)
             else:
                 resolved_files.extend(iter_external_files([path]))
             continue
@@ -234,6 +258,7 @@ def resolve_external_structure_source(
         resolved_files=resolved_unique,
         manifest_paths=list(dict.fromkeys(manifest_paths)),
         warnings=warnings,
+        filters=manifest_filters,
     )
 
 
@@ -270,6 +295,30 @@ def normalize_external_structure_run(
         None,
     )
 
+
+def _source_limit_runs(source: ExternalStructureSource) -> int | None:
+    value = source.filters.get("limit_runs") if isinstance(source.filters, dict) else None
+    if value is None:
+        return None
+    try:
+        limit = int(value)
+    except (TypeError, ValueError):
+        return None
+    return max(0, limit)
+
+
+def _filter_external_structure_run(run: NormalizedExternalRun, source: ExternalStructureSource) -> str | None:
+    filters = source.filters if isinstance(source.filters, dict) else {}
+    characters = {_normalize_character(character) for character in filters.get("characters") or []}
+    if characters and run.character not in characters:
+        return "filtered_character"
+    ascension_min = _int_or_none(filters.get("ascension_min"))
+    ascension_max = _int_or_none(filters.get("ascension_max"))
+    if ascension_min is not None and run.ascension < ascension_min:
+        return "filtered_ascension"
+    if ascension_max is not None and run.ascension > ascension_max:
+        return "filtered_ascension"
+    return None
 
 def extract_card_choices_with_skip(record: dict[str, Any]) -> list[dict[str, Any]]:
     raw = _first_value(record, "card_choices", "cardChoices", "card_rewards", "cardRewards", "card_reward_choices")
@@ -477,6 +526,7 @@ def training_source_payload(source: ExternalStructureSource) -> dict[str, Any]:
         "resolved_files": [str(path) for path in source.resolved_files],
         "resolved_file_count": len(source.resolved_files),
         "warnings": source.warnings,
+        "filters": source.filters,
         "forbidden_uses": FORBIDDEN_USES,
     }
 

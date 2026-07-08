@@ -15,6 +15,7 @@ POTION_TEMPO_MODEL_PATH = ROOT / "models" / "potion_tempo_model.json"
 ROUTE_RISK_MODEL_PATH = ROOT / "models" / "route_risk_model.json"
 COMBAT_SEARCH_MODEL_PATH = ROOT / "models" / "combat_search_model.json"
 COMBAT_VALUE_MODEL_PATH = ROOT / "models" / "combat_value_model.pt"
+DECISION_MULTITASK_MODEL_PATH = ROOT / "models" / "decision_multitask_model.pt"
 
 
 @dataclass

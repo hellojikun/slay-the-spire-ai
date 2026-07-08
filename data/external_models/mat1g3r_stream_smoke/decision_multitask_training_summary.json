@@ -1,0 +1,219 @@
+{
+  "version": 1,
+  "trained_at": "2026-07-09T01:21:03",
+  "model_kind": "decision_multitask_shadow",
+  "backend": "pytorch_multitask_mlp",
+  "training_source": {
+    "mode": "external_decision_multitask",
+    "source_category": "external_run_history",
+    "source_quality_policy": "external_prior",
+    "source_id": "mat1g3r_stream_smoke",
+    "source_uri": "https://github.com/MaT1g3R/Slay-the-Spire-data",
+    "source_weight": 0.05,
+    "inputs": [
+      "data\\external\\sts_runs\\mat1g3r_stream_smoke"
+    ],
+    "manifest_paths": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\external\\sts_runs\\mat1g3r_stream_smoke\\external_manifest.json"
+    ],
+    "summary_paths": [],
+    "reward_files": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\external\\sts_runs\\mat1g3r_stream_smoke\\card_reward_decisions.jsonl"
+    ],
+    "purge_files": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\external\\sts_runs\\mat1g3r_stream_smoke\\card_purge_priors.jsonl"
+    ],
+    "deck_files": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\external\\sts_runs\\mat1g3r_stream_smoke\\deck_cycle_priors.jsonl"
+    ],
+    "warnings": [],
+    "forbidden_uses": [
+      "clean_trainable",
+      "pristine",
+      "gate",
+      "learned_memory",
+      "runtime_authority"
+    ]
+  },
+  "training_source_quality": "external_prior",
+  "source_validation_grade": "external_prior",
+  "runtime_authority": false,
+  "runtime_default_enabled": false,
+  "runtime_authority_level": "shadow",
+  "does_not_control_live_mcp": true,
+  "direct_mcp_control": false,
+  "requires_audited_promotion": true,
+  "forbidden_uses": [
+    "clean_trainable",
+    "pristine",
+    "gate",
+    "learned_memory",
+    "runtime_authority"
+  ],
+  "heads": [
+    "take_skip",
+    "purge_remove",
+    "deck_cycle_quality"
+  ],
+  "target_definitions": {
+    "take_skip": "binary label: take=1 skip=0 from adapted card rewards",
+    "purge_remove": "binary label: removed=1 weak_keep_candidate=0",
+    "deck_cycle_quality": "bounded outcome quality from victory/final_floor, predicted from deck-cycle features"
+  },
+  "weak_negative_sampling": {
+    "purge_keep_from_reward_options": true,
+    "weak_negative_weight": 0.25,
+    "max_purge_negatives_per_run": 64,
+    "quality": "weak_external_keep_candidate_not_pristine"
+  },
+  "examples": 311,
+  "train_examples": 249,
+  "validation_examples": 62,
+  "weighted_examples": 8.4625,
+  "task_counts": {
+    "take_skip": 106,
+    "purge_remove": 200,
+    "deck_cycle_quality": 5
+  },
+  "row_counts": {
+    "card_reward_decisions": 106,
+    "card_purge_priors": 11,
+    "deck_cycle_priors": 5
+  },
+  "device": "cpu",
+  "torch_version": "2.11.0+cu128",
+  "cuda_available": true,
+  "cuda_runtime": "12.8",
+  "epochs": 3,
+  "hidden_dim": 32,
+  "batch_size": 64,
+  "learning_rate": 0.005,
+  "weight_decay": 0.0001,
+  "min_categorical_count": 1,
+  "seed": 11,
+  "train_loss": 0.4980410411953926,
+  "val_loss": 0.4512726962566376,
+  "evaluation": {
+    "all": {
+      "take_skip": {
+        "examples": 106,
+        "positive_examples": 76,
+        "predicted_positive": 106,
+        "accuracy": 0.717,
+        "precision": 0.717,
+        "recall": 1.0,
+        "true_positive": 76,
+        "false_positive": 30,
+        "true_negative": 0,
+        "false_negative": 0,
+        "mean_prediction": 0.5445,
+        "mean_target": 0.717
+      },
+      "purge_remove": {
+        "examples": 200,
+        "positive_examples": 11,
+        "predicted_positive": 11,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 11,
+        "false_positive": 0,
+        "true_negative": 189,
+        "false_negative": 0,
+        "mean_prediction": 0.4114,
+        "mean_target": 0.055
+      },
+      "deck_cycle_quality": {
+        "examples": 5,
+        "mae": 0.2495,
+        "max_absolute_error": 0.5022,
+        "mean_prediction": 0.5521,
+        "mean_target": 0.5736
+      }
+    },
+    "train": {
+      "take_skip": {
+        "examples": 87,
+        "positive_examples": 62,
+        "predicted_positive": 87,
+        "accuracy": 0.7126,
+        "precision": 0.7126,
+        "recall": 1.0,
+        "true_positive": 62,
+        "false_positive": 25,
+        "true_negative": 0,
+        "false_negative": 0,
+        "mean_prediction": 0.5454,
+        "mean_target": 0.7126
+      },
+      "purge_remove": {
+        "examples": 158,
+        "positive_examples": 5,
+        "predicted_positive": 5,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5,
+        "false_positive": 0,
+        "true_negative": 153,
+        "false_negative": 0,
+        "mean_prediction": 0.4085,
+        "mean_target": 0.0316
+      },
+      "deck_cycle_quality": {
+        "examples": 4,
+        "mae": 0.2216,
+        "max_absolute_error": 0.5022,
+        "mean_prediction": 0.5303,
+        "mean_target": 0.467
+      }
+    },
+    "validation": {
+      "take_skip": {
+        "examples": 19,
+        "positive_examples": 14,
+        "predicted_positive": 19,
+        "accuracy": 0.7368,
+        "precision": 0.7368,
+        "recall": 1.0,
+        "true_positive": 14,
+        "false_positive": 5,
+        "true_negative": 0,
+        "false_negative": 0,
+        "mean_prediction": 0.5404,
+        "mean_target": 0.7368
+      },
+      "purge_remove": {
+        "examples": 42,
+        "positive_examples": 6,
+        "predicted_positive": 6,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 6,
+        "false_positive": 0,
+        "true_negative": 36,
+        "false_negative": 0,
+        "mean_prediction": 0.422,
+        "mean_target": 0.1429
+      },
+      "deck_cycle_quality": {
+        "examples": 1,
+        "mae": 0.3609,
+        "max_absolute_error": 0.3609,
+        "mean_prediction": 0.6391,
+        "mean_target": 1.0
+      }
+    }
+  },
+  "requested_backend": "cpu",
+  "torch_available": true,
+  "cuda_device_count": 1,
+  "cuda_devices": [
+    "NVIDIA GeForce RTX 4080 SUPER"
+  ],
+  "path": "data\\external_models\\mat1g3r_stream_smoke\\decision_multitask_model.pt",
+  "input_dim": 179,
+  "numeric_features": 23,
+  "categorical_features": 156
+}

@@ -101,5 +101,78 @@ class TrainExternalStructurePriorsTests(unittest.TestCase):
         self.assertIn("act1", model["card_reward"]["floor_skip_rates"])
 
 
+    def test_manifest_filters_and_limit_are_applied_to_structure_rows(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            raw = root / "raw" / "runs.jsonl"
+            rows_dir = root / "rows"
+            model_dir = root / "models"
+            write_jsonl(
+                raw,
+                [
+                    {
+                        "character_chosen": "IRONCLAD",
+                        "ascension_level": 0,
+                        "victory": True,
+                        "floor_reached": 57,
+                        "card_choices": [
+                            {"floor": 1, "picked": "Pommel Strike", "not_picked": ["Clash"]}
+                        ],
+                        "master_deck": ["Strike_R", "Defend_R", "Bash", "Pommel Strike"],
+                    },
+                    {
+                        "character_chosen": "IRONCLAD",
+                        "ascension_level": 0,
+                        "victory": True,
+                        "floor_reached": 57,
+                        "card_choices": [
+                            {"floor": 2, "picked": "Battle Trance", "not_picked": ["Flex"]}
+                        ],
+                        "master_deck": ["Strike_R", "Defend_R", "Bash", "Battle Trance"],
+                    },
+                    {
+                        "character_chosen": "SILENT",
+                        "ascension_level": 0,
+                        "victory": True,
+                        "floor_reached": 57,
+                        "card_choices": [
+                            {"floor": 3, "picked": "Backflip", "not_picked": ["Slice"]}
+                        ],
+                        "master_deck": ["Strike_G", "Defend_G", "Backflip"],
+                    },
+                ],
+            )
+            manifest = root / "external_manifest.json"
+            manifest.write_text(
+                json.dumps(
+                    {
+                        "manifest_type": "external_prior_manifest",
+                        "source_id": "limited_manifest",
+                        "source_weight": 0.25,
+                        "resolved_files": [str(raw)],
+                        "filters": {
+                            "characters": ["IRONCLAD"],
+                            "ascension_min": 0,
+                            "ascension_max": 0,
+                            "limit_runs": 1,
+                        },
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            summary = train_external_structure_priors(
+                [manifest],
+                rows_dir=rows_dir,
+                model_dir=model_dir,
+                backend="stats",
+            )
+            reward_rows = read_jsonl(rows_dir / CARD_REWARD_DECISIONS_FILE)
+
+        self.assertEqual(summary["seen_runs"], 1)
+        self.assertEqual(summary["runs"], 1)
+        self.assertEqual(summary["reward_decision_rows"], 1)
+        self.assertEqual(reward_rows[0]["picked"], "Pommel Strike")
+        self.assertEqual(summary["training_source"]["filters"]["limit_runs"], 1)
 if __name__ == "__main__":
     unittest.main()

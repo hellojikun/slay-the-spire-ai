@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "status": "trained",
+  "source_quality": "external_prior",
+  "model_kind": "external_card_prior",
+  "model_path": "data\\climb_cycles\\cycle_20260709_external_decision_eval_smoke\\training\\external_models\\mat1g3r_stream_smoke\\card_prior_model.json",
+  "examples": 76,
+  "deltas": 89,
+  "min_count": 1,
+  "max_delta": 4.0,
+  "prior_scale": 0.35,
+  "runtime_authority": false,
+  "runtime_default_enabled": false,
+  "does_not_control_live_mcp": true,
+  "training_source": {
+    "mode": "external_prior_rows",
+    "source_category": "external_run_history",
+    "source_quality_policy": "external_prior",
+    "source_ids": [
+      "mat1g3r_stream_smoke"
+    ],
+    "source_id": "mat1g3r_stream_smoke",
+    "inputs": [
+      "data\\external\\sts_runs\\mat1g3r_stream_smoke\\external_manifest.json"
+    ],
+    "missing_inputs": [],
+    "manifest_paths": [
+      "data\\external\\sts_runs\\mat1g3r_stream_smoke\\external_manifest.json"
+    ],
+    "resolved_files": [
+      "data\\external\\sts_runs\\mat1g3r_stream_smoke\\card_reward_priors.jsonl"
+    ],
+    "resolved_file_count": 1,
+    "warnings": [],
+    "forbidden_uses": [
+      "clean_trainable",
+      "pristine",
+      "gate",
+      "learned_memory",
+      "runtime_authority"
+    ]
+  },
+  "load_quality": {
+    "files": 1,
+    "rows": 76,
+    "accepted": 76,
+    "skipped": 0,
+    "skip_reasons": {},
+    "source_datasets": {
+      "mat1g3r_stream_smoke": 76
+    },
+    "has_reward_options_count": 76,
+    "picked_only_count": 0,
+    "source_weight_total": 3.8
+  },
+  "forbidden_uses": [
+    "clean_trainable",
+    "pristine",
+    "gate",
+    "learned_memory",
+    "runtime_authority"
+  ]
+}
