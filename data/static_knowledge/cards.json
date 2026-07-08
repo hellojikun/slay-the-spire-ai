@@ -9,38 +9,2482 @@
     {
       "name": "Slay the Spire Cards wiki",
       "url": "https://slay-the-spire.fandom.com/wiki/Cards"
+    },
+    {
+      "name": "Spire Archive STS1 parsed game data",
+      "url": "https://github.com/nkhoit/spire-archive"
     }
   ],
   "cards": [
     {
-      "id": "Strike_R",
-      "name": "Strike",
-      "character": "IRONCLAD",
-      "type": "ATTACK",
-      "rarity": "BASIC",
-      "cost": 1,
-      "tags": ["damage", "starter", "low_value"],
-      "values": {"base_damage": 6, "upgraded_damage": 9}
+      "id": "Apotheosis",
+      "name": "Apotheosis",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "神化"
+      ]
     },
     {
-      "id": "Defend_R",
-      "name": "Defend",
-      "character": "IRONCLAD",
+      "id": "Apparition",
+      "name": "Apparition",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "SPECIAL",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust",
+        "ethereal"
+      ],
+      "values": {},
+      "aliases": [
+        "GHOSTLY",
+        "灵体"
+      ]
+    },
+    {
+      "id": "Bandage Up",
+      "name": "Bandage Up",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 4,
+        "upgraded_magic_number": 6
+      },
+      "aliases": [
+        "包扎"
+      ]
+    },
+    {
+      "id": "Bite",
+      "name": "Bite",
+      "aliases": [
+        "撕咬",
+        "噬咬",
+        "閸ｎ剙鎸?"
+      ],
+      "type": "ATTACK",
+      "rarity": "SPECIAL",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "healing",
+        "sustain",
+        "event_card"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 8,
+        "healing": 2,
+        "upgraded_healing": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "character": "COLORLESS"
+    },
+    {
+      "id": "Blind",
+      "name": "Blind",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 2
+      },
+      "aliases": [
+        "致盲"
+      ]
+    },
+    {
+      "id": "Burn",
+      "name": "Burn",
+      "aliases": [
+        "灼伤",
+        "鐏间激"
+      ],
+      "type": "STATUS",
+      "rarity": "STATUS",
+      "cost": -2,
+      "tags": [
+        "status",
+        "unplayable",
+        "self_damage",
+        "deck_clog"
+      ],
+      "values": {
+        "self_damage": 2,
+        "upgraded_self_damage": 4,
+        "magic_number": 2,
+        "upgraded_magic_number": 4
+      },
+      "character": "COLORLESS"
+    },
+    {
+      "id": "Chrysalis",
+      "name": "Chrysalis",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "结茧"
+      ]
+    },
+    {
+      "id": "Dark Shackles",
+      "name": "Dark Shackles",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 9,
+        "upgraded_magic_number": 15
+      },
+      "aliases": [
+        "黑暗镣铐"
+      ]
+    },
+    {
+      "id": "Dazed",
+      "name": "Dazed",
+      "aliases": [
+        "晕眩",
+        "鏅曠湬"
+      ],
+      "type": "STATUS",
+      "rarity": "STATUS",
+      "cost": -2,
+      "tags": [
+        "status",
+        "unplayable",
+        "ethereal",
+        "deck_clog"
+      ],
+      "values": {},
+      "character": "COLORLESS"
+    },
+    {
+      "id": "Deep Breath",
+      "name": "Deep Breath",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "深呼吸"
+      ]
+    },
+    {
+      "id": "Discovery",
+      "name": "Discovery",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "发现"
+      ]
+    },
+    {
+      "id": "Dramatic Entrance",
+      "name": "Dramatic Entrance",
+      "character": "COLORLESS",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "exhaust",
+        "innate",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 12
+      },
+      "aliases": [
+        "闪亮登场"
+      ]
+    },
+    {
+      "id": "Enlightenment",
+      "name": "Enlightenment",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "开悟"
+      ]
+    },
+    {
+      "id": "Finesse",
+      "name": "Finesse",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 2,
+        "upgraded_block": 4
+      },
+      "aliases": [
+        "妙计"
+      ]
+    },
+    {
+      "id": "Flash of Steel",
+      "name": "Flash of Steel",
+      "character": "COLORLESS",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "亮剑"
+      ]
+    },
+    {
+      "id": "Forethought",
+      "name": "Forethought",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "预谋"
+      ]
+    },
+    {
+      "id": "Good Instincts",
+      "name": "Good Instincts",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 6,
+        "upgraded_block": 9
+      },
+      "aliases": [
+        "优秀直觉"
+      ]
+    },
+    {
+      "id": "HandOfGreed",
+      "name": "Hand of Greed",
+      "aliases": [
+        "Hand Of Greed",
+        "Hand of Greed",
+        "贪婪之手",
+        "璐┆涔嬫墜"
+      ],
+      "character": "COLORLESS",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "damage",
+        "frontload",
+        "gold_on_kill",
+        "economy"
+      ],
+      "values": {
+        "base_damage": 20,
+        "upgraded_damage": 25,
+        "gold_on_kill": 25,
+        "magic_number": 20,
+        "upgraded_magic_number": 25
+      }
+    },
+    {
+      "id": "Impatience",
+      "name": "Impatience",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "急躁"
+      ]
+    },
+    {
+      "id": "J.A.X.",
+      "name": "J.A.X.",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "SPECIAL",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      }
+    },
+    {
+      "id": "Jack of All Trades",
+      "name": "Jack of All Trades",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "花样百出"
+      ]
+    },
+    {
+      "id": "Madness",
+      "name": "Madness",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "疯狂"
+      ]
+    },
+    {
+      "id": "Magnetism",
+      "name": "Magnetism",
+      "aliases": [
+        "磁力",
+        "纾佸姏"
+      ],
+      "character": "COLORLESS",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "card_generation",
+        "scaling",
+        "slow_engine"
+      ],
+      "values": {
+        "colorless_cards_per_turn": 1,
+        "magic_number": 1
+      }
+    },
+    {
+      "id": "Master of Strategy",
+      "name": "Master of Strategy",
+      "aliases": [
+        "战略大师"
+      ],
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "draw",
+        "zero_cost",
+        "tempo",
+        "exhaust"
+      ],
+      "values": {
+        "draw": 3,
+        "upgraded_draw": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      }
+    },
+    {
+      "id": "Mayhem",
+      "name": "Mayhem",
+      "character": "COLORLESS",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "乱战"
+      ]
+    },
+    {
+      "id": "Metamorphosis",
+      "name": "Metamorphosis",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "羽化"
+      ]
+    },
+    {
+      "id": "Mind Blast",
+      "name": "Mind Blast",
+      "character": "COLORLESS",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage",
+        "innate"
+      ],
+      "values": {
+        "base_damage": 0
+      },
+      "aliases": [
+        "心灵震慑"
+      ]
+    },
+    {
+      "id": "Panacea",
+      "name": "Panacea",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "万能药"
+      ]
+    },
+    {
+      "id": "Panache",
+      "name": "Panache",
+      "character": "COLORLESS",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "power",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 10,
+        "upgraded_magic_number": 14
+      },
+      "aliases": [
+        "神气制胜"
+      ]
+    },
+    {
+      "id": "Panic Button",
+      "name": "Panic Button",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 30,
+        "upgraded_block": 40,
+        "magic_number": 2
+      },
+      "aliases": [
+        "应急按钮"
+      ]
+    },
+    {
+      "id": "Purity",
+      "name": "Purity",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "净化"
+      ]
+    },
+    {
+      "id": "Ritual Dagger",
+      "name": "Ritual Dagger",
+      "character": "COLORLESS",
+      "type": "ATTACK",
+      "rarity": "SPECIAL",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "仪式匕首"
+      ]
+    },
+    {
+      "id": "Sadistic Nature",
+      "name": "Sadistic Nature",
+      "character": "COLORLESS",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "power",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 5,
+        "upgraded_magic_number": 7
+      },
+      "aliases": [
+        "残虐天性"
+      ]
+    },
+    {
+      "id": "Secret Technique",
+      "name": "Secret Technique",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "秘密技法"
+      ]
+    },
+    {
+      "id": "Secret Weapon",
+      "name": "Secret Weapon",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "秘密武器"
+      ]
+    },
+    {
+      "id": "Slimed",
+      "name": "Slimed",
+      "aliases": [
+        "黏液",
+        "粘液",
+        "绮樻恫",
+        "榛忄恫"
+      ],
+      "type": "STATUS",
+      "rarity": "STATUS",
+      "cost": 1,
+      "tags": [
+        "status",
+        "exhaust",
+        "deck_clog"
+      ],
+      "values": {},
+      "character": "COLORLESS"
+    },
+    {
+      "id": "Swift Strike",
+      "name": "Swift Strike",
+      "character": "COLORLESS",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10
+      },
+      "aliases": [
+        "迅捷打击"
+      ]
+    },
+    {
+      "id": "The Bomb",
+      "name": "The Bomb",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 40,
+        "upgraded_magic_number": 50
+      },
+      "aliases": [
+        "炸弹"
+      ]
+    },
+    {
+      "id": "Thinking Ahead",
+      "name": "Thinking Ahead",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "深谋远虑"
+      ]
+    },
+    {
+      "id": "Transmutation",
+      "name": "Transmutation",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": -1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "转化"
+      ]
+    },
+    {
+      "id": "Trip",
+      "name": "Trip",
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 2
+      },
+      "aliases": [
+        "绊倒"
+      ]
+    },
+    {
+      "id": "Violence",
+      "name": "Violence",
+      "aliases": [
+        "暴力",
+        "鏆村姏"
+      ],
+      "character": "COLORLESS",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "draw",
+        "attack_fetch",
+        "zero_cost",
+        "tempo",
+        "burst_turn"
+      ],
+      "values": {
+        "draw_attacks": 3,
+        "upgraded_draw_attacks": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      }
+    },
+    {
+      "id": "Void",
+      "name": "Void",
+      "character": "COLORLESS",
+      "type": "STATUS",
+      "rarity": "COMMON",
+      "cost": -2,
+      "tags": [
+        "status",
+        "ethereal"
+      ],
+      "values": {},
+      "aliases": [
+        "虚空"
+      ]
+    },
+    {
+      "id": "Wound",
+      "name": "Wound",
+      "aliases": [
+        "浼ゅ彛",
+        "伤口"
+      ],
+      "type": "STATUS",
+      "rarity": "STATUS",
+      "cost": -2,
+      "tags": [
+        "status",
+        "unplayable",
+        "deck_clog"
+      ],
+      "values": {},
+      "character": "COLORLESS"
+    },
+    {
+      "id": "Ascender's Bane",
+      "name": "Ascender's Bane",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "SPECIAL",
+      "cost": -2,
+      "tags": [
+        "curse",
+        "ethereal"
+      ],
+      "values": {},
+      "aliases": [
+        "进阶之灾"
+      ]
+    },
+    {
+      "id": "Clumsy",
+      "name": "Clumsy",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse",
+        "ethereal"
+      ],
+      "values": {},
+      "aliases": [
+        "笨拙"
+      ]
+    },
+    {
+      "id": "Curse of the Bell",
+      "name": "Curse of the Bell",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "SPECIAL",
+      "cost": -2,
+      "tags": [
+        "curse"
+      ],
+      "values": {},
+      "aliases": [
+        "铃铛的诅咒"
+      ]
+    },
+    {
+      "id": "Decay",
+      "name": "Decay",
+      "aliases": [
+        "腐朽",
+        "鑵愭溄"
+      ],
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse",
+        "unplayable",
+        "self_damage",
+        "deck_clog"
+      ],
+      "values": {
+        "self_damage": 2
+      },
+      "character": "CURSE"
+    },
+    {
+      "id": "Doubt",
+      "name": "Doubt",
+      "aliases": [
+        "鐤戣檻",
+        "疑虑"
+      ],
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse",
+        "unplayable",
+        "weak",
+        "deck_clog"
+      ],
+      "values": {
+        "weak_self_end_turn": 1
+      },
+      "character": "CURSE"
+    },
+    {
+      "id": "Injury",
+      "name": "Injury",
+      "aliases": [
+        "鍙椾激",
+        "受伤"
+      ],
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse",
+        "unplayable",
+        "deck_clog"
+      ],
+      "values": {},
+      "character": "CURSE"
+    },
+    {
+      "id": "Necronomicurse",
+      "name": "Necronomicurse",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "SPECIAL",
+      "cost": -2,
+      "tags": [
+        "curse"
+      ],
+      "values": {},
+      "aliases": [
+        "死灵诅咒"
+      ]
+    },
+    {
+      "id": "Normality",
+      "name": "Normality",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse"
+      ],
+      "values": {},
+      "aliases": [
+        "凡庸"
+      ]
+    },
+    {
+      "id": "Pain",
+      "name": "Pain",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse"
+      ],
+      "values": {},
+      "aliases": [
+        "疼痛"
+      ]
+    },
+    {
+      "id": "Parasite",
+      "name": "Parasite",
+      "aliases": [
+        "寄生",
+        "鐎靛嫮鏁?",
+        "瀵勭敓"
+      ],
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse",
+        "unplayable",
+        "max_hp_loss",
+        "deck_clog"
+      ],
+      "values": {
+        "max_hp_loss_on_remove": 3
+      },
+      "character": "CURSE"
+    },
+    {
+      "id": "Pride",
+      "name": "Pride",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "SPECIAL",
+      "cost": 1,
+      "tags": [
+        "curse",
+        "exhaust",
+        "innate"
+      ],
+      "values": {},
+      "aliases": [
+        "傲慢"
+      ]
+    },
+    {
+      "id": "Regret",
+      "name": "Regret",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse"
+      ],
+      "values": {},
+      "aliases": [
+        "悔恨"
+      ]
+    },
+    {
+      "id": "Shame",
+      "name": "Shame",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse"
+      ],
+      "values": {},
+      "aliases": [
+        "羞耻"
+      ]
+    },
+    {
+      "id": "Writhe",
+      "name": "Writhe",
+      "character": "CURSE",
+      "type": "CURSE",
+      "rarity": "CURSE",
+      "cost": -2,
+      "tags": [
+        "curse",
+        "innate"
+      ],
+      "values": {},
+      "aliases": [
+        "苦恼"
+      ]
+    },
+    {
+      "id": "Aggregate",
+      "name": "Aggregate",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 4,
+        "upgraded_magic_number": -1
+      },
+      "aliases": [
+        "汇集"
+      ]
+    },
+    {
+      "id": "All for One",
+      "name": "All for One",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 14
+      },
+      "aliases": [
+        "万物一心"
+      ]
+    },
+    {
+      "id": "Amplify",
+      "name": "Amplify",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "增幅"
+      ]
+    },
+    {
+      "id": "Auto-Shields",
+      "name": "Auto-Shields",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 11,
+        "upgraded_block": 15
+      },
+      "aliases": [
+        "自动护盾"
+      ]
+    },
+    {
+      "id": "Ball Lightning",
+      "name": "Ball Lightning",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10,
+        "magic_number": 1
+      },
+      "aliases": [
+        "球状闪电"
+      ]
+    },
+    {
+      "id": "Barrage",
+      "name": "Barrage",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "弹幕齐射"
+      ]
+    },
+    {
+      "id": "Beam Cell",
+      "name": "Beam Cell",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 4,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "光束射线"
+      ]
+    },
+    {
+      "id": "Biased Cognition",
+      "name": "Biased Cognition",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 4,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "偏差认知"
+      ]
+    },
+    {
+      "id": "Blizzard",
+      "name": "Blizzard",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 0,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "暴雪"
+      ]
+    },
+    {
+      "id": "Boot Sequence",
+      "name": "Boot Sequence",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "exhaust",
+        "innate",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 10,
+        "upgraded_block": 13
+      },
+      "aliases": [
+        "启动流程"
+      ]
+    },
+    {
+      "id": "Buffer",
+      "name": "Buffer",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "缓冲"
+      ]
+    },
+    {
+      "id": "Bullseye",
+      "name": "Bullseye",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 11,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "LOCKON",
+        "瞄准靶心"
+      ]
+    },
+    {
+      "id": "Capacitor",
+      "name": "Capacitor",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "扩容"
+      ]
+    },
+    {
+      "id": "Chaos",
+      "name": "Chaos",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "混沌"
+      ]
+    },
+    {
+      "id": "Charge Battery",
+      "name": "Charge Battery",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 7,
+        "upgraded_block": 10
+      },
+      "aliases": [
+        "CONSERVE_BATTERY",
+        "充电"
+      ]
+    },
+    {
+      "id": "Chill",
+      "name": "Chill",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "innate",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "冰寒"
+      ]
+    },
+    {
+      "id": "Claw",
+      "name": "Claw",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 5,
+        "magic_number": 2
+      },
+      "aliases": [
+        "GASH",
+        "爪击"
+      ]
+    },
+    {
+      "id": "Cold Snap",
+      "name": "Cold Snap",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 9,
+        "magic_number": 1
+      },
+      "aliases": [
+        "寒流"
+      ]
+    },
+    {
+      "id": "Compile Driver",
+      "name": "Compile Driver",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10,
+        "magic_number": 1
+      },
+      "aliases": [
+        "编译冲击"
+      ]
+    },
+    {
+      "id": "Consume",
+      "name": "Consume",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "耗尽"
+      ]
+    },
+    {
+      "id": "Coolheaded",
+      "name": "Coolheaded",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "冷静头脑"
+      ]
+    },
+    {
+      "id": "Core Surge",
+      "name": "Core Surge",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage",
+        "exhaust"
+      ],
+      "values": {
+        "base_damage": 11,
+        "upgraded_damage": 15,
+        "magic_number": 1
+      },
+      "aliases": [
+        "核心电涌"
+      ]
+    },
+    {
+      "id": "Creative AI",
+      "name": "Creative AI",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "创造性AI"
+      ]
+    },
+    {
+      "id": "Darkness",
+      "name": "Darkness",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "漆黑"
+      ]
+    },
+    {
+      "id": "Defragment",
+      "name": "Defragment",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "碎片整理"
+      ]
+    },
+    {
+      "id": "Doom and Gloom",
+      "name": "Doom and Gloom",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 14,
+        "magic_number": 1
+      },
+      "aliases": [
+        "愁云惨淡"
+      ]
+    },
+    {
+      "id": "Double Energy",
+      "name": "Double Energy",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "双倍能量"
+      ]
+    },
+    {
+      "id": "Dualcast",
+      "name": "Dualcast",
+      "character": "DEFECT",
       "type": "SKILL",
       "rarity": "BASIC",
       "cost": 1,
-      "tags": ["block", "starter", "low_value"],
-      "values": {"base_block": 5, "upgraded_block": 8}
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "双重释放"
+      ]
     },
     {
-      "id": "Bash",
-      "name": "Bash",
-      "character": "IRONCLAD",
-      "type": "ATTACK",
-      "rarity": "BASIC",
+      "id": "Echo Form",
+      "name": "Echo Form",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "power",
+        "ethereal"
+      ],
+      "values": {},
+      "aliases": [
+        "回响形态"
+      ]
+    },
+    {
+      "id": "Electrodynamics",
+      "name": "Electrodynamics",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "RARE",
       "cost": 2,
-      "tags": ["damage", "vulnerable", "starter", "boss_damage"],
-      "values": {"base_damage": 8, "upgraded_damage": 10, "vulnerable": 2, "upgraded_vulnerable": 3}
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "电动力学"
+      ]
+    },
+    {
+      "id": "Equilibrium",
+      "name": "Equilibrium",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 13,
+        "upgraded_block": 16,
+        "magic_number": 1
+      },
+      "aliases": [
+        "UNDO",
+        "均衡"
+      ]
+    },
+    {
+      "id": "FTL",
+      "name": "FTL",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 5,
+        "upgraded_damage": 6,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "超越光速"
+      ]
+    },
+    {
+      "id": "Fission",
+      "name": "Fission",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "裂变"
+      ]
+    },
+    {
+      "id": "Force Field",
+      "name": "Force Field",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 4,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 12,
+        "upgraded_block": 16
+      },
+      "aliases": [
+        "力场"
+      ]
+    },
+    {
+      "id": "Fusion",
+      "name": "Fusion",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "聚变"
+      ]
+    },
+    {
+      "id": "Genetic Algorithm",
+      "name": "Genetic Algorithm",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "遗传算法"
+      ]
+    },
+    {
+      "id": "Glacier",
+      "name": "Glacier",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 7,
+        "upgraded_block": 10,
+        "magic_number": 2
+      },
+      "aliases": [
+        "冰川"
+      ]
+    },
+    {
+      "id": "Go for the Eyes",
+      "name": "Go for the Eyes",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 4,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "眼部攻击"
+      ]
+    },
+    {
+      "id": "Heatsinks",
+      "name": "Heatsinks",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "散热片"
+      ]
+    },
+    {
+      "id": "Hello World",
+      "name": "Hello World",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power",
+        "innate"
+      ],
+      "values": {},
+      "aliases": [
+        "你好，世界"
+      ]
+    },
+    {
+      "id": "Hologram",
+      "name": "Hologram",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block",
+        "exhaust"
+      ],
+      "values": {
+        "base_block": 3,
+        "upgraded_block": 5
+      },
+      "aliases": [
+        "全息影像"
+      ]
+    },
+    {
+      "id": "Hyperbeam",
+      "name": "Hyperbeam",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 26,
+        "upgraded_damage": 34,
+        "magic_number": 3
+      },
+      "aliases": [
+        "超能光束"
+      ]
+    },
+    {
+      "id": "Impulse",
+      "name": "Impulse",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Leap",
+      "name": "Leap",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 9,
+        "upgraded_block": 12
+      },
+      "aliases": [
+        "飞跃"
+      ]
+    },
+    {
+      "id": "Loop",
+      "name": "Loop",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "循环"
+      ]
+    },
+    {
+      "id": "Machine Learning",
+      "name": "Machine Learning",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "power",
+        "innate"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "机器学习"
+      ]
+    },
+    {
+      "id": "Melter",
+      "name": "Melter",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 14
+      },
+      "aliases": [
+        "熔化"
+      ]
+    },
+    {
+      "id": "Meteor Strike",
+      "name": "Meteor Strike",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 5,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 24,
+        "upgraded_damage": 30,
+        "magic_number": 3
+      },
+      "aliases": [
+        "陨石打击"
+      ]
+    },
+    {
+      "id": "Multi-Cast",
+      "name": "Multi-Cast",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": -1,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "多重释放"
+      ]
+    },
+    {
+      "id": "Overclock",
+      "name": "Overclock",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "STEAM_POWER",
+        "超频"
+      ]
+    },
+    {
+      "id": "Rainbow",
+      "name": "Rainbow",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "彩虹"
+      ]
+    },
+    {
+      "id": "Reboot",
+      "name": "Reboot",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 4,
+        "upgraded_magic_number": 6
+      },
+      "aliases": [
+        "重启"
+      ]
+    },
+    {
+      "id": "Rebound",
+      "name": "Rebound",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 9,
+        "upgraded_damage": 12
+      },
+      "aliases": [
+        "弹回"
+      ]
+    },
+    {
+      "id": "Recursion",
+      "name": "Recursion",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "REDO",
+        "递归"
+      ]
+    },
+    {
+      "id": "Recycle",
+      "name": "Recycle",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "回收"
+      ]
+    },
+    {
+      "id": "Reinforced Body",
+      "name": "Reinforced Body",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": -1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 7,
+        "upgraded_block": 9
+      },
+      "aliases": [
+        "硬化机体"
+      ]
+    },
+    {
+      "id": "Reprogram",
+      "name": "Reprogram",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "重编程"
+      ]
+    },
+    {
+      "id": "Rip and Tear",
+      "name": "Rip and Tear",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 9,
+        "magic_number": 2
+      },
+      "aliases": [
+        "狂乱撕扯"
+      ]
+    },
+    {
+      "id": "Scrape",
+      "name": "Scrape",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10,
+        "magic_number": 4,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "刮削"
+      ]
+    },
+    {
+      "id": "Seek",
+      "name": "Seek",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "搜寻"
+      ]
+    },
+    {
+      "id": "Self Repair",
+      "name": "Self Repair",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 7,
+        "upgraded_magic_number": 10
+      },
+      "aliases": [
+        "自我修复"
+      ]
+    },
+    {
+      "id": "Skim",
+      "name": "Skim",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "快速检索"
+      ]
+    },
+    {
+      "id": "Stack",
+      "name": "Stack",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 0,
+        "upgraded_block": 3
+      },
+      "aliases": [
+        "堆栈"
+      ]
+    },
+    {
+      "id": "Static Discharge",
+      "name": "Static Discharge",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "静电释放"
+      ]
+    },
+    {
+      "id": "Steam Barrier",
+      "name": "Steam Barrier",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 6,
+        "upgraded_block": 8
+      },
+      "aliases": [
+        "STEAM",
+        "蒸汽护壁"
+      ]
+    },
+    {
+      "id": "Storm",
+      "name": "Storm",
+      "character": "DEFECT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power",
+        "innate"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "雷暴"
+      ]
+    },
+    {
+      "id": "Streamline",
+      "name": "Streamline",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 15,
+        "upgraded_damage": 20,
+        "magic_number": 1
+      },
+      "aliases": [
+        "精简改良"
+      ]
+    },
+    {
+      "id": "Sunder",
+      "name": "Sunder",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 3,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 24,
+        "upgraded_damage": 32
+      },
+      "aliases": [
+        "分离"
+      ]
+    },
+    {
+      "id": "Sweeping Beam",
+      "name": "Sweeping Beam",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 9,
+        "magic_number": 1
+      },
+      "aliases": [
+        "扫荡射线"
+      ]
+    },
+    {
+      "id": "TURBO",
+      "name": "TURBO",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "内核加速"
+      ]
+    },
+    {
+      "id": "Tempest",
+      "name": "Tempest",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": -1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "暴风雨"
+      ]
+    },
+    {
+      "id": "Thunder Strike",
+      "name": "Thunder Strike",
+      "character": "DEFECT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 9,
+        "magic_number": 0
+      },
+      "aliases": [
+        "雷霆打击"
+      ]
+    },
+    {
+      "id": "White Noise",
+      "name": "White Noise",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "白噪声"
+      ]
+    },
+    {
+      "id": "Zap",
+      "name": "Zap",
+      "character": "DEFECT",
+      "type": "SKILL",
+      "rarity": "BASIC",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "电击"
+      ]
     },
     {
       "id": "Anger",
@@ -49,28 +2493,264 @@
       "type": "ATTACK",
       "rarity": "COMMON",
       "cost": 0,
-      "tags": ["damage", "zero_cost", "deck_growth", "frontload"],
-      "values": {"base_damage": 6, "upgraded_damage": 8}
+      "tags": [
+        "damage",
+        "zero_cost",
+        "deck_growth",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 8
+      },
+      "aliases": [
+        "愤怒"
+      ]
+    },
+    {
+      "id": "Armaments",
+      "name": "Armaments",
+      "aliases": [
+        "姝﹁",
+        "武装"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "block",
+        "upgrade",
+        "deck_quality"
+      ],
+      "values": {
+        "base_block": 5,
+        "upgraded_block": 5
+      }
+    },
+    {
+      "id": "Barricade",
+      "name": "Barricade",
+      "aliases": [
+        "澹佸瀿",
+        "壁垒"
+      ],
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "block_retention",
+        "scaling",
+        "slow_engine"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Bash",
+      "name": "Bash",
+      "aliases": [
+        "痛击",
+        "鐥涘嚮"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "BASIC",
+      "cost": 2,
+      "tags": [
+        "damage",
+        "vulnerable",
+        "starter",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 10,
+        "vulnerable": 2,
+        "upgraded_vulnerable": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      }
     },
     {
       "id": "Battle Trance",
       "name": "Battle Trance",
+      "aliases": [
+        "战斗专注",
+        "鎴樻枟涓撴敞"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 0,
-      "tags": ["draw", "zero_cost", "tempo", "no_more_draw"],
-      "values": {"draw": 3, "upgraded_draw": 4}
+      "tags": [
+        "draw",
+        "zero_cost",
+        "tempo",
+        "no_more_draw"
+      ],
+      "values": {
+        "draw": 3,
+        "upgraded_draw": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      }
+    },
+    {
+      "id": "Berserk",
+      "name": "Berserk",
+      "aliases": [
+        "狂暴"
+      ],
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "energy",
+        "scaling",
+        "power",
+        "self_debuff",
+        "risky_power"
+      ],
+      "values": {
+        "energy_per_turn": 1,
+        "vulnerable_self": 2,
+        "upgraded_vulnerable_self": 1,
+        "magic_number": 2,
+        "upgraded_magic_number": -1
+      }
+    },
+    {
+      "id": "Blood for Blood",
+      "name": "Blood for Blood",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 4,
+      "tags": [
+        "damage",
+        "self_damage_synergy",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 18,
+        "upgraded_damage": 22
+      },
+      "aliases": [
+        "以血还血"
+      ]
+    },
+    {
+      "id": "Bloodletting",
+      "name": "Bloodletting",
+      "aliases": [
+        "鏀捐",
+        "放血"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "energy",
+        "tempo",
+        "self_damage",
+        "unsafe_low_hp"
+      ],
+      "values": {
+        "energy": 2,
+        "upgraded_energy": 3,
+        "self_damage": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      }
+    },
+    {
+      "id": "Bludgeon",
+      "name": "Bludgeon",
+      "aliases": [
+        "閲嶉敜",
+        "重锤"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "damage",
+        "frontload",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 32,
+        "upgraded_damage": 42
+      }
+    },
+    {
+      "id": "Body Slam",
+      "name": "Body Slam",
+      "aliases": [
+        "全身撞击",
+        "鍏ㄨ韩鎾炲嚮"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "block_synergy"
+      ],
+      "values": {
+        "base_damage": 0
+      }
+    },
+    {
+      "id": "Brutality",
+      "name": "Brutality",
+      "aliases": [
+        "娈嬫毚",
+        "残暴"
+      ],
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "draw",
+        "self_damage",
+        "scaling",
+        "slow_engine"
+      ],
+      "values": {
+        "draw_per_turn": 1,
+        "self_damage_per_turn": 1
+      }
     },
     {
       "id": "Burning Pact",
       "name": "Burning Pact",
+      "aliases": [
+        "燃烧契约",
+        "鐕冪儳濂戠害"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["draw", "exhaust_synergy", "requires_exhaust", "tempo"],
-      "values": {"draw": 2, "upgraded_draw": 3}
+      "tags": [
+        "draw",
+        "exhaust_synergy",
+        "requires_exhaust",
+        "tempo"
+      ],
+      "values": {
+        "draw": 2,
+        "upgraded_draw": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      }
     },
     {
       "id": "Carnage",
@@ -79,48 +2759,445 @@
       "type": "ATTACK",
       "rarity": "UNCOMMON",
       "cost": 2,
-      "tags": ["damage", "frontload", "ethereal", "boss_damage"],
-      "values": {"base_damage": 20, "upgraded_damage": 28}
+      "tags": [
+        "damage",
+        "frontload",
+        "ethereal",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 20,
+        "upgraded_damage": 28
+      },
+      "aliases": [
+        "残杀"
+      ]
+    },
+    {
+      "id": "Clash",
+      "name": "Clash",
+      "aliases": [
+        "浜ら攱",
+        "交锋"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "damage",
+        "zero_cost",
+        "conditional",
+        "status_anti_synergy"
+      ],
+      "values": {
+        "base_damage": 14,
+        "upgraded_damage": 18
+      }
     },
     {
       "id": "Cleave",
       "name": "Cleave",
+      "aliases": [
+        "顺劈斩"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "COMMON",
       "cost": 1,
-      "tags": ["damage", "aoe", "frontload", "sentries"],
-      "values": {"base_damage": 8, "upgraded_damage": 11}
+      "tags": [
+        "damage",
+        "aoe",
+        "frontload",
+        "sentries"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 11
+      }
     },
     {
       "id": "Clothesline",
       "name": "Clothesline",
+      "aliases": [
+        "金刚臂"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "COMMON",
       "cost": 2,
-      "tags": ["damage", "weak", "defensive_attack", "boss_damage"],
-      "values": {"base_damage": 12, "upgraded_damage": 14, "weak": 2, "upgraded_weak": 3}
+      "tags": [
+        "damage",
+        "weak",
+        "defensive_attack",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 12,
+        "upgraded_damage": 14,
+        "weak": 2,
+        "upgraded_weak": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      }
+    },
+    {
+      "id": "Combust",
+      "name": "Combust",
+      "aliases": [
+        "鐕冪儳",
+        "自燃"
+      ],
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "aoe",
+        "self_damage",
+        "scaling",
+        "long_fight"
+      ],
+      "values": {
+        "damage_all_per_turn": 5,
+        "upgraded_damage_all_per_turn": 7,
+        "self_damage": 1,
+        "magic_number": 5,
+        "upgraded_magic_number": 7
+      }
+    },
+    {
+      "id": "Corruption",
+      "name": "Corruption",
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "exhaust_synergy",
+        "skill_discount",
+        "scaling",
+        "slow_engine"
+      ],
+      "values": {
+        "magic_number": 3
+      },
+      "aliases": [
+        "腐化"
+      ]
     },
     {
       "id": "Dark Embrace",
       "name": "Dark Embrace",
+      "aliases": [
+        "黑暗之拥"
+      ],
       "character": "IRONCLAD",
       "type": "POWER",
       "rarity": "RARE",
       "cost": 2,
-      "tags": ["scaling", "draw", "exhaust_synergy", "slow_engine"],
+      "tags": [
+        "scaling",
+        "draw",
+        "exhaust_synergy",
+        "slow_engine"
+      ],
       "values": {}
+    },
+    {
+      "id": "Defend_R",
+      "name": "Defend",
+      "aliases": [
+        "防御",
+        "闃插尽",
+        "DEFEND_B",
+        "DEFEND_G",
+        "DEFEND_P"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "BASIC",
+      "cost": 1,
+      "tags": [
+        "block",
+        "starter",
+        "low_value"
+      ],
+      "values": {
+        "base_block": 5,
+        "upgraded_block": 8
+      }
+    },
+    {
+      "id": "Demon Form",
+      "name": "Demon Form",
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "strength",
+        "scaling",
+        "power",
+        "slow_engine"
+      ],
+      "values": {
+        "strength_per_turn": 2,
+        "upgraded_strength_per_turn": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "恶魔形态"
+      ]
     },
     {
       "id": "Disarm",
       "name": "Disarm",
+      "aliases": [
+        "缂存",
+        "缴械"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["strength_down", "boss_defense", "elite_defense", "exhaust"],
-      "values": {"strength_down": 2, "upgraded_strength_down": 3}
+      "tags": [
+        "strength_down",
+        "boss_defense",
+        "elite_defense",
+        "exhaust"
+      ],
+      "values": {
+        "strength_down": 2,
+        "upgraded_strength_down": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      }
+    },
+    {
+      "id": "Double Tap",
+      "name": "Double Tap",
+      "aliases": [
+        "DoubleTap",
+        "鍙屽彂",
+        "双发"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "attack_synergy",
+        "burst_turn",
+        "damage_multiplier"
+      ],
+      "values": {
+        "double_next_attack_count": 1,
+        "upgraded_double_next_attack_count": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      }
+    },
+    {
+      "id": "Dropkick",
+      "name": "Dropkick",
+      "aliases": [
+        "飞身踢"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "vulnerable_synergy",
+        "draw",
+        "energy"
+      ],
+      "values": {
+        "base_damage": 5,
+        "upgraded_damage": 8,
+        "conditional_draw": 1,
+        "conditional_energy": 1
+      }
+    },
+    {
+      "id": "Dual Wield",
+      "name": "Dual Wield",
+      "aliases": [
+        "鍙屾寔",
+        "双持"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "card_generation",
+        "attack_synergy",
+        "power_synergy"
+      ],
+      "values": {
+        "copies": 1,
+        "upgraded_copies": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      }
+    },
+    {
+      "id": "Entrench",
+      "name": "Entrench",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "block_scaling",
+        "block_synergy"
+      ],
+      "values": {},
+      "aliases": [
+        "巩固"
+      ]
+    },
+    {
+      "id": "Evolve",
+      "name": "Evolve",
+      "aliases": [
+        "杩涘寲",
+        "进化"
+      ],
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "draw",
+        "status_synergy",
+        "sentries",
+        "slime_boss"
+      ],
+      "values": {
+        "draw_on_status": 1,
+        "upgraded_draw_on_status": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      }
+    },
+    {
+      "id": "Exhume",
+      "name": "Exhume",
+      "aliases": [
+        "鍙戞帢",
+        "发掘"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "exhaust_recursion",
+        "hand_fix"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Feed",
+      "name": "Feed",
+      "aliases": [
+        "狂宴"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "max_hp",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 12,
+        "max_hp_on_kill": 3,
+        "upgraded_max_hp_on_kill": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      }
+    },
+    {
+      "id": "Feel No Pain",
+      "name": "Feel No Pain",
+      "aliases": [
+        "无惧疼痛"
+      ],
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "block",
+        "exhaust_synergy",
+        "scaling",
+        "power"
+      ],
+      "values": {
+        "block_on_exhaust": 3,
+        "upgraded_block_on_exhaust": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      }
+    },
+    {
+      "id": "Fiend Fire",
+      "name": "Fiend Fire",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "damage",
+        "exhaust",
+        "exhaust_hand",
+        "burst_turn",
+        "frontload"
+      ],
+      "values": {
+        "base_damage_per_card": 7,
+        "upgraded_damage_per_card": 10,
+        "exhaust_hand_cards": true,
+        "base_damage": 7,
+        "upgraded_damage": 10
+      },
+      "aliases": [
+        "恶魔之焰"
+      ]
+    },
+    {
+      "id": "Fire Breathing",
+      "name": "Fire Breathing",
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "aoe",
+        "status_synergy",
+        "curse_synergy",
+        "sentries",
+        "slime_boss"
+      ],
+      "values": {
+        "damage_on_status_or_curse_draw": 6,
+        "upgraded_damage_on_status_or_curse_draw": 10,
+        "magic_number": 6,
+        "upgraded_magic_number": 10
+      },
+      "aliases": [
+        "火焰吐息"
+      ]
     },
     {
       "id": "Flame Barrier",
@@ -129,8 +3206,130 @@
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 2,
-      "tags": ["block", "thorns", "multi_hit_defense", "boss_defense"],
-      "values": {"base_block": 12, "upgraded_block": 16}
+      "tags": [
+        "block",
+        "thorns",
+        "multi_hit_defense",
+        "boss_defense"
+      ],
+      "values": {
+        "base_block": 12,
+        "upgraded_block": 16,
+        "magic_number": 4,
+        "upgraded_magic_number": 6
+      },
+      "aliases": [
+        "火焰屏障"
+      ]
+    },
+    {
+      "id": "Flex",
+      "name": "Flex",
+      "aliases": [
+        "活动肌肉",
+        "娲诲姩鑲岃倝"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "strength",
+        "temporary_strength",
+        "zero_cost",
+        "burst_turn"
+      ],
+      "values": {
+        "strength": 2,
+        "upgraded_strength": 4,
+        "magic_number": 2,
+        "upgraded_magic_number": 4
+      }
+    },
+    {
+      "id": "Ghostly Armor",
+      "name": "Ghostly Armor",
+      "aliases": [
+        "幽灵铠甲",
+        "骞界伒閾犵敳"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "block",
+        "premium_defense",
+        "ethereal"
+      ],
+      "values": {
+        "base_block": 10,
+        "upgraded_block": 13
+      }
+    },
+    {
+      "id": "Havoc",
+      "name": "Havoc",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "card_play",
+        "exhaust",
+        "random"
+      ],
+      "values": {
+        "play_top_cards": 1
+      },
+      "aliases": [
+        "破灭"
+      ]
+    },
+    {
+      "id": "Headbutt",
+      "name": "Headbutt",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "deck_top",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 9,
+        "upgraded_damage": 12
+      },
+      "aliases": [
+        "头槌"
+      ]
+    },
+    {
+      "id": "Heavy Blade",
+      "name": "Heavy Blade",
+      "aliases": [
+        "閲嶅垉",
+        "重刃"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 2,
+      "tags": [
+        "damage",
+        "strength",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 14,
+        "upgraded_damage": 14,
+        "strength_multiplier": 3,
+        "upgraded_strength_multiplier": 5,
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      }
     },
     {
       "id": "Hemokinesis",
@@ -139,28 +3338,88 @@
       "type": "ATTACK",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["damage", "self_damage", "frontload"],
-      "values": {"base_damage": 15, "upgraded_damage": 20, "self_damage": 2}
+      "tags": [
+        "damage",
+        "self_damage",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 15,
+        "upgraded_damage": 20,
+        "self_damage": 2,
+        "magic_number": 2
+      },
+      "aliases": [
+        "御血术"
+      ]
     },
     {
       "id": "Immolate",
       "name": "Immolate",
+      "aliases": [
+        "燔祭",
+        "鐕旂キ"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "RARE",
       "cost": 2,
-      "tags": ["damage", "aoe", "frontload", "status_added", "sentries", "slime_boss"],
-      "values": {"base_damage": 21, "upgraded_damage": 28}
+      "tags": [
+        "damage",
+        "aoe",
+        "frontload",
+        "status_added",
+        "sentries",
+        "slime_boss"
+      ],
+      "values": {
+        "base_damage": 21,
+        "upgraded_damage": 28
+      }
     },
     {
       "id": "Impervious",
       "name": "Impervious",
+      "aliases": [
+        "宀跨劧涓嶅姩",
+        "岿然不动"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "RARE",
       "cost": 2,
-      "tags": ["block", "exhaust", "boss_defense", "panic_block"],
-      "values": {"base_block": 30, "upgraded_block": 40}
+      "tags": [
+        "block",
+        "exhaust",
+        "boss_defense",
+        "panic_block"
+      ],
+      "values": {
+        "base_block": 30,
+        "upgraded_block": 40
+      }
+    },
+    {
+      "id": "Infernal Blade",
+      "name": "Infernal Blade",
+      "aliases": [
+        "鍦扮嫳涔嬪垉",
+        "地狱之刃"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "generated_attack",
+        "tempo",
+        "zero_cost_upgrade"
+      ],
+      "values": {
+        "generated_attack_count": 1,
+        "generated_attack_cost_this_turn": 0,
+        "upgraded_cost": 0
+      }
     },
     {
       "id": "Inflame",
@@ -169,8 +3428,20 @@
       "type": "POWER",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["scaling", "strength", "boss_damage"],
-      "values": {"strength": 2, "upgraded_strength": 3}
+      "tags": [
+        "scaling",
+        "strength",
+        "boss_damage"
+      ],
+      "values": {
+        "strength": 2,
+        "upgraded_strength": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "燃烧"
+      ]
     },
     {
       "id": "Intimidate",
@@ -179,8 +3450,21 @@
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 0,
-      "tags": ["weak", "aoe_debuff", "zero_cost", "defense"],
-      "values": {"weak": 1, "upgraded_weak": 2}
+      "tags": [
+        "weak",
+        "aoe_debuff",
+        "zero_cost",
+        "defense"
+      ],
+      "values": {
+        "weak": 1,
+        "upgraded_weak": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "威吓"
+      ]
     },
     {
       "id": "Iron Wave",
@@ -189,38 +3473,162 @@
       "type": "ATTACK",
       "rarity": "COMMON",
       "cost": 1,
-      "tags": ["damage", "block", "hybrid"],
-      "values": {"base_damage": 5, "upgraded_damage": 7, "base_block": 5, "upgraded_block": 7}
+      "tags": [
+        "damage",
+        "block",
+        "hybrid"
+      ],
+      "values": {
+        "base_damage": 5,
+        "upgraded_damage": 7,
+        "base_block": 5,
+        "upgraded_block": 7
+      },
+      "aliases": [
+        "铁斩波"
+      ]
+    },
+    {
+      "id": "Juggernaut",
+      "name": "Juggernaut",
+      "aliases": [
+        "势不可当",
+        "鍔夸笉鍙尅"
+      ],
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "block_synergy",
+        "damage",
+        "scaling",
+        "slow"
+      ],
+      "values": {
+        "damage_on_block_gain": 5,
+        "upgraded_damage_on_block_gain": 7,
+        "magic_number": 5,
+        "upgraded_magic_number": 7
+      }
+    },
+    {
+      "id": "Limit Break",
+      "name": "Limit Break",
+      "aliases": [
+        "绐佺牬鏋侀檺",
+        "突破极限"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "strength",
+        "scaling",
+        "boss_damage"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Metallicize",
+      "name": "Metallicize",
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "block",
+        "scaling",
+        "power"
+      ],
+      "values": {
+        "end_turn_block": 3,
+        "upgraded_end_turn_block": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "金属化"
+      ]
     },
     {
       "id": "Offering",
       "name": "Offering",
+      "aliases": [
+        "祭品"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "RARE",
       "cost": 0,
-      "tags": ["draw", "energy", "self_damage", "exhaust", "tempo", "panic_button"],
-      "values": {"draw": 3, "upgraded_draw": 5, "energy": 2, "self_damage": 6}
-    },
-    {
-      "id": "Pommel Strike",
-      "name": "Pommel Strike",
-      "character": "IRONCLAD",
-      "type": "ATTACK",
-      "rarity": "COMMON",
-      "cost": 1,
-      "tags": ["damage", "draw", "frontload"],
-      "values": {"base_damage": 9, "upgraded_damage": 10, "draw": 1, "upgraded_draw": 2}
+      "tags": [
+        "draw",
+        "energy",
+        "self_damage",
+        "exhaust",
+        "tempo",
+        "panic_button"
+      ],
+      "values": {
+        "draw": 3,
+        "upgraded_draw": 5,
+        "energy": 2,
+        "self_damage": 6,
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      }
     },
     {
       "id": "Perfected Strike",
       "name": "Perfected Strike",
+      "aliases": [
+        "瀹岀編鎵撳嚮",
+        "完美打击"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "COMMON",
       "cost": 2,
-      "tags": ["damage", "strike_synergy", "frontload", "boss_damage"],
-      "values": {"base_damage": 6, "upgraded_damage": 6, "damage_per_strike": 2, "upgraded_damage_per_strike": 3}
+      "tags": [
+        "damage",
+        "strike_synergy",
+        "frontload",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 6,
+        "damage_per_strike": 2,
+        "upgraded_damage_per_strike": 3,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      }
+    },
+    {
+      "id": "Pommel Strike",
+      "name": "Pommel Strike",
+      "aliases": [
+        "剑柄打击",
+        "鍓戞焺鎵撳嚮"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "draw",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 9,
+        "upgraded_damage": 10,
+        "draw": 1,
+        "upgraded_draw": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      }
     },
     {
       "id": "Power Through",
@@ -229,8 +3637,18 @@
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["block", "status_added", "panic_block"],
-      "values": {"base_block": 15, "upgraded_block": 20}
+      "tags": [
+        "block",
+        "status_added",
+        "panic_block"
+      ],
+      "values": {
+        "base_block": 15,
+        "upgraded_block": 20
+      },
+      "aliases": [
+        "硬撑"
+      ]
     },
     {
       "id": "Pummel",
@@ -239,18 +3657,181 @@
       "type": "ATTACK",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["damage", "multi_hit", "strength_scaling", "exhaust", "frontload"],
-      "values": {"base_damage": 8, "upgraded_damage": 10, "hits": 4}
+      "tags": [
+        "damage",
+        "multi_hit",
+        "strength_scaling",
+        "exhaust",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 10,
+        "hits": 4,
+        "magic_number": 4,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "连续拳"
+      ]
+    },
+    {
+      "id": "Rage",
+      "name": "Rage",
+      "aliases": [
+        "狂怒"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "block",
+        "zero_cost",
+        "attack_spam"
+      ],
+      "values": {
+        "block_per_attack": 3,
+        "upgraded_block_per_attack": 5,
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      }
+    },
+    {
+      "id": "Rampage",
+      "name": "Rampage",
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "scaling",
+        "single_card_scaling"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 8,
+        "self_damage_increase": 5,
+        "upgraded_self_damage_increase": 8,
+        "magic_number": 5,
+        "upgraded_magic_number": 8
+      },
+      "aliases": [
+        "暴走"
+      ]
+    },
+    {
+      "id": "Reaper",
+      "name": "Reaper",
+      "aliases": [
+        "姝讳骸鏀跺壊",
+        "死亡收割"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "damage",
+        "aoe",
+        "healing",
+        "sustain",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 5
+      }
     },
     {
       "id": "Reckless Charge",
       "name": "Reckless Charge",
+      "aliases": [
+        "无谋冲锋",
+        "鏃犺皨鍐查攱"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "UNCOMMON",
       "cost": 0,
-      "tags": ["damage", "zero_cost", "status_added", "frontload"],
-      "values": {"base_damage": 7, "upgraded_damage": 10}
+      "tags": [
+        "damage",
+        "zero_cost",
+        "status_added",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10
+      }
+    },
+    {
+      "id": "Rupture",
+      "name": "Rupture",
+      "character": "IRONCLAD",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "strength",
+        "self_damage_synergy",
+        "scaling"
+      ],
+      "values": {
+        "strength": 1,
+        "upgraded_strength": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "撕裂"
+      ]
+    },
+    {
+      "id": "Searing Blow",
+      "name": "Searing Blow",
+      "aliases": [
+        "鐏肩儹鏀诲嚮",
+        "灼热攻击"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "damage",
+        "upgrade_scaling",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 12,
+        "upgraded_damage": 16
+      }
+    },
+    {
+      "id": "Second Wind",
+      "name": "Second Wind",
+      "aliases": [
+        "閲嶆尟绮剧",
+        "重振精神"
+      ],
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "block",
+        "exhaust",
+        "status_cleanup",
+        "panic_block"
+      ],
+      "values": {
+        "block_per_exhaust": 5,
+        "upgraded_block_per_exhaust": 7,
+        "base_block": 5,
+        "upgraded_block": 7
+      }
     },
     {
       "id": "Seeing Red",
@@ -259,78 +3840,326 @@
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["energy", "exhaust", "tempo"],
-      "values": {"energy": 2}
+      "tags": [
+        "energy",
+        "exhaust",
+        "tempo"
+      ],
+      "values": {
+        "energy": 2
+      },
+      "aliases": [
+        "盛怒"
+      ]
+    },
+    {
+      "id": "Sentinel",
+      "name": "Sentinel",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "block",
+        "exhaust_payoff",
+        "energy"
+      ],
+      "values": {
+        "base_block": 5,
+        "upgraded_block": 8,
+        "energy_on_exhaust": 2,
+        "upgraded_energy_on_exhaust": 3
+      },
+      "aliases": [
+        "哨卫"
+      ]
+    },
+    {
+      "id": "Sever Soul",
+      "name": "Sever Soul",
+      "aliases": [
+        "断魂斩"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "damage",
+        "exhaust",
+        "hand_exhaust",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 16,
+        "upgraded_damage": 22,
+        "exhaust_non_attack_hand_cards": true
+      }
     },
     {
       "id": "Shockwave",
       "name": "Shockwave",
+      "aliases": [
+        "震荡波"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 2,
-      "tags": ["weak", "vulnerable", "strength_down", "aoe_debuff", "boss_defense", "boss_damage", "exhaust"],
-      "values": {"weak": 3, "vulnerable": 3, "strength_down": 3, "upgraded_weak": 5, "upgraded_vulnerable": 5, "upgraded_strength_down": 5}
+      "tags": [
+        "weak",
+        "vulnerable",
+        "strength_down",
+        "aoe_debuff",
+        "boss_defense",
+        "boss_damage",
+        "exhaust"
+      ],
+      "values": {
+        "weak": 3,
+        "vulnerable": 3,
+        "strength_down": 3,
+        "upgraded_weak": 5,
+        "upgraded_vulnerable": 5,
+        "upgraded_strength_down": 5,
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      }
     },
     {
       "id": "Shrug It Off",
       "name": "Shrug It Off",
+      "aliases": [
+        "鑰歌偐鏃犺",
+        "耸肩无视"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "COMMON",
       "cost": 1,
-      "tags": ["block", "draw", "premium_defense"],
-      "values": {"base_block": 8, "upgraded_block": 11, "draw": 1}
+      "tags": [
+        "block",
+        "draw",
+        "premium_defense"
+      ],
+      "values": {
+        "base_block": 8,
+        "upgraded_block": 11,
+        "draw": 1
+      }
     },
     {
       "id": "Spot Weakness",
       "name": "Spot Weakness",
+      "aliases": [
+        "瑙傚療寮辩偣",
+        "观察弱点"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "UNCOMMON",
       "cost": 1,
-      "tags": ["scaling", "strength", "requires_enemy_attack", "boss_damage"],
-      "values": {"strength": 3, "upgraded_strength": 4}
+      "tags": [
+        "scaling",
+        "strength",
+        "requires_enemy_attack",
+        "boss_damage"
+      ],
+      "values": {
+        "strength": 3,
+        "upgraded_strength": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      }
+    },
+    {
+      "id": "Strike_R",
+      "name": "Strike",
+      "aliases": [
+        "打击",
+        "鎵撳嚮",
+        "STRIKE_B",
+        "STRIKE_G",
+        "STRIKE_P"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "BASIC",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "starter",
+        "low_value"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 9
+      }
+    },
+    {
+      "id": "Sword Boomerang",
+      "name": "Sword Boomerang",
+      "aliases": [
+        "飞剑回旋镖"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "multi_hit",
+        "strength"
+      ],
+      "values": {
+        "base_damage": 9,
+        "upgraded_damage": 12,
+        "hits": 3,
+        "upgraded_hits": 4,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      }
     },
     {
       "id": "Thunderclap",
       "name": "Thunderclap",
+      "aliases": [
+        "闂數闇归洺",
+        "闪电霹雳"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "COMMON",
       "cost": 1,
-      "tags": ["damage", "aoe", "vulnerable", "frontload"],
-      "values": {"base_damage": 4, "upgraded_damage": 7, "vulnerable": 1}
+      "tags": [
+        "damage",
+        "aoe",
+        "vulnerable",
+        "frontload"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 7,
+        "vulnerable": 1
+      }
     },
     {
       "id": "True Grit",
       "name": "True Grit",
+      "aliases": [
+        "纭拺",
+        "坚毅"
+      ],
       "character": "IRONCLAD",
       "type": "SKILL",
       "rarity": "COMMON",
       "cost": 1,
-      "tags": ["block", "exhaust_synergy", "upgrade_priority"],
-      "values": {"base_block": 7, "upgraded_block": 9}
+      "tags": [
+        "block",
+        "exhaust_synergy",
+        "upgrade_priority"
+      ],
+      "values": {
+        "base_block": 7,
+        "upgraded_block": 9
+      }
+    },
+    {
+      "id": "Twin Strike",
+      "name": "Twin Strike",
+      "aliases": [
+        "鍙岄噸鎵撳嚮",
+        "双重打击"
+      ],
+      "character": "IRONCLAD",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "damage",
+        "multi_hit",
+        "strength"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 14,
+        "hits": 2
+      }
     },
     {
       "id": "Uppercut",
       "name": "Uppercut",
+      "aliases": [
+        "上勾拳"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "UNCOMMON",
       "cost": 2,
-      "tags": ["damage", "weak", "vulnerable", "defensive_attack", "boss_damage"],
-      "values": {"base_damage": 13, "upgraded_damage": 17, "weak": 1, "vulnerable": 1, "upgraded_weak": 2, "upgraded_vulnerable": 2}
+      "tags": [
+        "damage",
+        "weak",
+        "vulnerable",
+        "defensive_attack",
+        "boss_damage"
+      ],
+      "values": {
+        "base_damage": 13,
+        "upgraded_damage": 17,
+        "weak": 1,
+        "vulnerable": 1,
+        "upgraded_weak": 2,
+        "upgraded_vulnerable": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      }
+    },
+    {
+      "id": "Warcry",
+      "name": "Warcry",
+      "character": "IRONCLAD",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "draw",
+        "zero_cost",
+        "deck_top",
+        "exhaust"
+      ],
+      "values": {
+        "draw": 1,
+        "upgraded_draw": 2,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "战吼"
+      ]
     },
     {
       "id": "Whirlwind",
       "name": "Whirlwind",
+      "aliases": [
+        "旋风斩"
+      ],
       "character": "IRONCLAD",
       "type": "ATTACK",
       "rarity": "UNCOMMON",
       "cost": -1,
-      "tags": ["damage", "aoe", "x_cost", "sentries", "slime_boss"],
-      "values": {"base_damage_per_energy": 5, "upgraded_damage_per_energy": 8}
+      "tags": [
+        "damage",
+        "aoe",
+        "x_cost",
+        "sentries",
+        "slime_boss"
+      ],
+      "values": {
+        "base_damage_per_energy": 5,
+        "upgraded_damage_per_energy": 8,
+        "base_damage": 5,
+        "upgraded_damage": 8
+      }
     },
     {
       "id": "Wild Strike",
@@ -339,8 +4168,2756 @@
       "type": "ATTACK",
       "rarity": "COMMON",
       "cost": 1,
-      "tags": ["damage", "frontload", "status_added"],
-      "values": {"base_damage": 12, "upgraded_damage": 17}
+      "tags": [
+        "damage",
+        "frontload",
+        "status_added"
+      ],
+      "values": {
+        "base_damage": 12,
+        "upgraded_damage": 17
+      },
+      "aliases": [
+        "狂野打击"
+      ]
+    },
+    {
+      "id": "A Thousand Cuts",
+      "name": "A Thousand Cuts",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "凌迟"
+      ]
+    },
+    {
+      "id": "Accuracy",
+      "name": "Accuracy",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 4,
+        "upgraded_magic_number": 6
+      },
+      "aliases": [
+        "精准"
+      ]
+    },
+    {
+      "id": "Acrobatics",
+      "name": "Acrobatics",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "杂技"
+      ]
+    },
+    {
+      "id": "Adrenaline",
+      "name": "Adrenaline",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "肾上腺素"
+      ]
+    },
+    {
+      "id": "After Image",
+      "name": "After Image",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "power",
+        "innate"
+      ],
+      "values": {},
+      "aliases": [
+        "余像"
+      ]
+    },
+    {
+      "id": "Alchemize",
+      "name": "Alchemize",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "VENOMOLOGY",
+        "炼制药水"
+      ]
+    },
+    {
+      "id": "All-Out Attack",
+      "name": "All-Out Attack",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 14
+      },
+      "aliases": [
+        "全力攻击"
+      ]
+    },
+    {
+      "id": "Backflip",
+      "name": "Backflip",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 5,
+        "upgraded_block": 8
+      },
+      "aliases": [
+        "后空翻"
+      ]
+    },
+    {
+      "id": "Backstab",
+      "name": "Backstab",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "exhaust",
+        "innate",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 11,
+        "upgraded_damage": 15
+      },
+      "aliases": [
+        "背刺"
+      ]
+    },
+    {
+      "id": "Bane",
+      "name": "Bane",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10
+      },
+      "aliases": [
+        "灾祸"
+      ]
+    },
+    {
+      "id": "Blade Dance",
+      "name": "Blade Dance",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "刀刃之舞"
+      ]
+    },
+    {
+      "id": "Blur",
+      "name": "Blur",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 5,
+        "upgraded_block": 8
+      },
+      "aliases": [
+        "残影"
+      ]
+    },
+    {
+      "id": "Bouncing Flask",
+      "name": "Bouncing Flask",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "弹跳药瓶"
+      ]
+    },
+    {
+      "id": "Bullet Time",
+      "name": "Bullet Time",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "子弹时间"
+      ]
+    },
+    {
+      "id": "Burst",
+      "name": "Burst",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "爆发"
+      ]
+    },
+    {
+      "id": "Calculated Gamble",
+      "name": "Calculated Gamble",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "计算下注"
+      ]
+    },
+    {
+      "id": "Caltrops",
+      "name": "Caltrops",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "铁蒺藜"
+      ]
+    },
+    {
+      "id": "Catalyst",
+      "name": "Catalyst",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "催化剂"
+      ]
+    },
+    {
+      "id": "Choke",
+      "name": "Choke",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 12,
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "勒脖"
+      ]
+    },
+    {
+      "id": "Cloak and Dagger",
+      "name": "Cloak and Dagger",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 6,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "斗篷与匕首"
+      ]
+    },
+    {
+      "id": "Concentrate",
+      "name": "Concentrate",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": -1
+      },
+      "aliases": [
+        "全神贯注"
+      ]
+    },
+    {
+      "id": "Corpse Explosion",
+      "name": "Corpse Explosion",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 6,
+        "upgraded_magic_number": 9
+      },
+      "aliases": [
+        "尸爆术"
+      ]
+    },
+    {
+      "id": "Crippling Cloud",
+      "name": "Crippling Cloud",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 4,
+        "upgraded_magic_number": 7
+      },
+      "aliases": [
+        "CRIPPLING_POISON",
+        "致残毒云"
+      ]
+    },
+    {
+      "id": "Dagger Spray",
+      "name": "Dagger Spray",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "匕首雨"
+      ]
+    },
+    {
+      "id": "Dagger Throw",
+      "name": "Dagger Throw",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 9,
+        "upgraded_damage": 12
+      },
+      "aliases": [
+        "投掷匕首"
+      ]
+    },
+    {
+      "id": "Dash",
+      "name": "Dash",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage",
+        "block"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 13,
+        "base_block": 10,
+        "upgraded_block": 13
+      },
+      "aliases": [
+        "冲刺"
+      ]
+    },
+    {
+      "id": "Deadly Poison",
+      "name": "Deadly Poison",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 5,
+        "upgraded_magic_number": 7
+      },
+      "aliases": [
+        "致命毒药"
+      ]
+    },
+    {
+      "id": "Deflect",
+      "name": "Deflect",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 4,
+        "upgraded_block": 7
+      },
+      "aliases": [
+        "偏折"
+      ]
+    },
+    {
+      "id": "Die Die Die",
+      "name": "Die Die Die",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage",
+        "exhaust"
+      ],
+      "values": {
+        "base_damage": 13,
+        "upgraded_damage": 17
+      },
+      "aliases": [
+        "死吧死吧死吧"
+      ]
+    },
+    {
+      "id": "Distraction",
+      "name": "Distraction",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "声东击西"
+      ]
+    },
+    {
+      "id": "Dodge and Roll",
+      "name": "Dodge and Roll",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 4,
+        "upgraded_block": 6
+      },
+      "aliases": [
+        "闪躲翻滚"
+      ]
+    },
+    {
+      "id": "Doppelganger",
+      "name": "Doppelganger",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": -1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "双重存在"
+      ]
+    },
+    {
+      "id": "Endless Agony",
+      "name": "Endless Agony",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "无尽苦痛"
+      ]
+    },
+    {
+      "id": "Envenom",
+      "name": "Envenom",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "power"
+      ],
+      "values": {},
+      "aliases": [
+        "涂毒"
+      ]
+    },
+    {
+      "id": "Escape Plan",
+      "name": "Escape Plan",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 3,
+        "upgraded_block": 5
+      },
+      "aliases": [
+        "逃脱计划"
+      ]
+    },
+    {
+      "id": "Eviscerate",
+      "name": "Eviscerate",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 3,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 9
+      },
+      "aliases": [
+        "内脏切除"
+      ]
+    },
+    {
+      "id": "Expertise",
+      "name": "Expertise",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 6,
+        "upgraded_magic_number": 7
+      },
+      "aliases": [
+        "独门技术"
+      ]
+    },
+    {
+      "id": "Finisher",
+      "name": "Finisher",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 8
+      },
+      "aliases": [
+        "终结技"
+      ]
+    },
+    {
+      "id": "Flechettes",
+      "name": "Flechettes",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "飞镖"
+      ]
+    },
+    {
+      "id": "Flying Knee",
+      "name": "Flying Knee",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 11
+      },
+      "aliases": [
+        "飞膝"
+      ]
+    },
+    {
+      "id": "Footwork",
+      "name": "Footwork",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "灵动步法"
+      ]
+    },
+    {
+      "id": "Glass Knife",
+      "name": "Glass Knife",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 12
+      },
+      "aliases": [
+        "玻璃刀刃"
+      ]
+    },
+    {
+      "id": "Grand Finale",
+      "name": "Grand Finale",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 50,
+        "upgraded_damage": 60
+      },
+      "aliases": [
+        "华丽收场"
+      ]
+    },
+    {
+      "id": "Heel Hook",
+      "name": "Heel Hook",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 5,
+        "upgraded_damage": 8
+      },
+      "aliases": [
+        "足跟勾"
+      ]
+    },
+    {
+      "id": "Infinite Blades",
+      "name": "Infinite Blades",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power",
+        "innate"
+      ],
+      "values": {},
+      "aliases": [
+        "无限刀刃"
+      ]
+    },
+    {
+      "id": "Leg Sweep",
+      "name": "Leg Sweep",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 11,
+        "upgraded_block": 14,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "扫腿"
+      ]
+    },
+    {
+      "id": "Malaise",
+      "name": "Malaise",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": -1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "萎靡"
+      ]
+    },
+    {
+      "id": "Masterful Stab",
+      "name": "Masterful Stab",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 12,
+        "upgraded_damage": 16
+      },
+      "aliases": [
+        "精巧刺击"
+      ]
+    },
+    {
+      "id": "Neutralize",
+      "name": "Neutralize",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "BASIC",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 4,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "中和"
+      ]
+    },
+    {
+      "id": "Nightmare",
+      "name": "Nightmare",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 3
+      },
+      "aliases": [
+        "NIGHT_TERROR",
+        "夜魇"
+      ]
+    },
+    {
+      "id": "Noxious Fumes",
+      "name": "Noxious Fumes",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "毒雾"
+      ]
+    },
+    {
+      "id": "Outmaneuver",
+      "name": "Outmaneuver",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "抢占先机"
+      ]
+    },
+    {
+      "id": "Phantasmal Killer",
+      "name": "Phantasmal Killer",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "幻影杀手"
+      ]
+    },
+    {
+      "id": "Piercing Wail",
+      "name": "Piercing Wail",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 6,
+        "upgraded_magic_number": 8
+      },
+      "aliases": [
+        "尖啸"
+      ]
+    },
+    {
+      "id": "Poisoned Stab",
+      "name": "Poisoned Stab",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 8,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "带毒刺击"
+      ]
+    },
+    {
+      "id": "Predator",
+      "name": "Predator",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 15,
+        "upgraded_damage": 20
+      },
+      "aliases": [
+        "猎杀者"
+      ]
+    },
+    {
+      "id": "Prepared",
+      "name": "Prepared",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "zero_cost"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "早有准备"
+      ]
+    },
+    {
+      "id": "Quick Slash",
+      "name": "Quick Slash",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 12
+      },
+      "aliases": [
+        "快斩"
+      ]
+    },
+    {
+      "id": "Reflex",
+      "name": "Reflex",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": -2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "本能反应"
+      ]
+    },
+    {
+      "id": "Riddle with Holes",
+      "name": "Riddle with Holes",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 4
+      },
+      "aliases": [
+        "千穿百刺"
+      ]
+    },
+    {
+      "id": "Setup",
+      "name": "Setup",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "部署"
+      ]
+    },
+    {
+      "id": "Skewer",
+      "name": "Skewer",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": -1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10
+      },
+      "aliases": [
+        "串刺"
+      ]
+    },
+    {
+      "id": "Slice",
+      "name": "Slice",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 9
+      },
+      "aliases": [
+        "切割"
+      ]
+    },
+    {
+      "id": "Sneaky Strike",
+      "name": "Sneaky Strike",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 12,
+        "upgraded_damage": 16
+      },
+      "aliases": [
+        "UNDERHANDED_STRIKE",
+        "隐秘打击"
+      ]
+    },
+    {
+      "id": "Storm of Steel",
+      "name": "Storm of Steel",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {},
+      "aliases": [
+        "钢铁风暴"
+      ]
+    },
+    {
+      "id": "Sucker Punch",
+      "name": "Sucker Punch",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 9,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "突然一拳"
+      ]
+    },
+    {
+      "id": "Survivor",
+      "name": "Survivor",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "BASIC",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 8,
+        "upgraded_block": 11
+      },
+      "aliases": [
+        "生存者"
+      ]
+    },
+    {
+      "id": "Tactician",
+      "name": "Tactician",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": -2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "战术大师"
+      ]
+    },
+    {
+      "id": "Terror",
+      "name": "Terror",
+      "character": "SILENT",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "恐怖"
+      ]
+    },
+    {
+      "id": "Tools of the Trade",
+      "name": "Tools of the Trade",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {},
+      "aliases": [
+        "必备工具"
+      ]
+    },
+    {
+      "id": "Unload",
+      "name": "Unload",
+      "character": "SILENT",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 14,
+        "upgraded_damage": 18
+      },
+      "aliases": [
+        "乾坤一掷"
+      ]
+    },
+    {
+      "id": "Well-Laid Plans",
+      "name": "Well-Laid Plans",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "计划妥当"
+      ]
+    },
+    {
+      "id": "Wraith Form",
+      "name": "Wraith Form",
+      "character": "SILENT",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "WRAITH_FORM_V2",
+        "幽魂形态"
+      ]
+    },
+    {
+      "id": "Alpha",
+      "name": "Alpha",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust",
+        "innate"
+      ],
+      "values": {},
+      "aliases": [
+        "阿尔法"
+      ]
+    },
+    {
+      "id": "Battle Hymn",
+      "name": "Battle Hymn",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power",
+        "innate"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "战歌"
+      ]
+    },
+    {
+      "id": "Blasphemy",
+      "name": "Blasphemy",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "渎神"
+      ]
+    },
+    {
+      "id": "Bowling Bash",
+      "name": "Bowling Bash",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10
+      },
+      "aliases": [
+        "碰撞连击"
+      ]
+    },
+    {
+      "id": "Brilliance",
+      "name": "Brilliance",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 12,
+        "upgraded_damage": 16,
+        "magic_number": 0
+      },
+      "aliases": [
+        "光辉"
+      ]
+    },
+    {
+      "id": "Carve Reality",
+      "name": "Carve Reality",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 6,
+        "upgraded_damage": 10
+      },
+      "aliases": [
+        "改造现实"
+      ]
+    },
+    {
+      "id": "Collect",
+      "name": "Collect",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": -1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "收集"
+      ]
+    },
+    {
+      "id": "Conclude",
+      "name": "Conclude",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 12,
+        "upgraded_damage": 16
+      },
+      "aliases": [
+        "结末"
+      ]
+    },
+    {
+      "id": "Conjure Blade",
+      "name": "Conjure Blade",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": -1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "聚能成刃"
+      ]
+    },
+    {
+      "id": "Consecrate",
+      "name": "Consecrate",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 5,
+        "upgraded_damage": 8
+      },
+      "aliases": [
+        "供奉"
+      ]
+    },
+    {
+      "id": "Crescendo",
+      "name": "Crescendo",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "渐强"
+      ]
+    },
+    {
+      "id": "Crush Joints",
+      "name": "Crush Joints",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 10,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "粉碎关节"
+      ]
+    },
+    {
+      "id": "Cut Through Fate",
+      "name": "Cut Through Fate",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 9,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "斩破命运"
+      ]
+    },
+    {
+      "id": "Deceive Reality",
+      "name": "Deceive Reality",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 4,
+        "upgraded_block": 7
+      },
+      "aliases": [
+        "欺瞒现实"
+      ]
+    },
+    {
+      "id": "Deus Ex Machina",
+      "name": "Deus Ex Machina",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": -2,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "机械降神"
+      ]
+    },
+    {
+      "id": "Deva Form",
+      "name": "Deva Form",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "power",
+        "ethereal"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "天人形态"
+      ]
+    },
+    {
+      "id": "Devotion",
+      "name": "Devotion",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "虔信"
+      ]
+    },
+    {
+      "id": "Empty Body",
+      "name": "Empty Body",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 7,
+        "upgraded_block": 10
+      },
+      "aliases": [
+        "化体为空"
+      ]
+    },
+    {
+      "id": "Empty Fist",
+      "name": "Empty Fist",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 9,
+        "upgraded_damage": 14
+      },
+      "aliases": [
+        "化拳为空"
+      ]
+    },
+    {
+      "id": "Empty Mind",
+      "name": "Empty Mind",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "化智为空"
+      ]
+    },
+    {
+      "id": "Eruption",
+      "name": "Eruption",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "BASIC",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 9
+      },
+      "aliases": [
+        "暴怒"
+      ]
+    },
+    {
+      "id": "Establishment",
+      "name": "Establishment",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "power",
+        "innate"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "确立基础"
+      ]
+    },
+    {
+      "id": "Evaluate",
+      "name": "Evaluate",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 6,
+        "upgraded_block": 10
+      },
+      "aliases": [
+        "评估"
+      ]
+    },
+    {
+      "id": "Fasting",
+      "name": "Fasting",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "FASTING2",
+        "斋戒"
+      ]
+    },
+    {
+      "id": "Fear No Evil",
+      "name": "Fear No Evil",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 11
+      },
+      "aliases": [
+        "不惧妖邪"
+      ]
+    },
+    {
+      "id": "Flurry of Blows",
+      "name": "Flurry of Blows",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "疾风连击"
+      ]
+    },
+    {
+      "id": "Flying Sleeves",
+      "name": "Flying Sleeves",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "流云飞袖"
+      ]
+    },
+    {
+      "id": "Follow-Up",
+      "name": "Follow-Up",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 11
+      },
+      "aliases": [
+        "追击"
+      ]
+    },
+    {
+      "id": "Foreign Influence",
+      "name": "Foreign Influence",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "exhaust",
+        "zero_cost"
+      ],
+      "values": {},
+      "aliases": [
+        "他山之石"
+      ]
+    },
+    {
+      "id": "Foresight",
+      "name": "Foresight",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "WIREHEADING",
+        "先见之明"
+      ]
+    },
+    {
+      "id": "Halt",
+      "name": "Halt",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 3,
+        "upgraded_block": 4,
+        "magic_number": 9
+      },
+      "aliases": [
+        "停顿"
+      ]
+    },
+    {
+      "id": "Indignation",
+      "name": "Indignation",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "义愤填膺"
+      ]
+    },
+    {
+      "id": "Inner Peace",
+      "name": "Inner Peace",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "内心宁静"
+      ]
+    },
+    {
+      "id": "Judgment",
+      "name": "Judgment",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 30,
+        "upgraded_magic_number": 40
+      },
+      "aliases": [
+        "JUDGEMENT",
+        "审判"
+      ]
+    },
+    {
+      "id": "Just Lucky",
+      "name": "Just Lucky",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 4,
+        "base_block": 2,
+        "upgraded_block": 3,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "幸运一击"
+      ]
+    },
+    {
+      "id": "Lesson Learned",
+      "name": "Lesson Learned",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage",
+        "exhaust"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 13
+      },
+      "aliases": [
+        "勤学精进"
+      ]
+    },
+    {
+      "id": "Like Water",
+      "name": "Like Water",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 5,
+        "upgraded_magic_number": 7
+      },
+      "aliases": [
+        "如水"
+      ]
+    },
+    {
+      "id": "Master Reality",
+      "name": "Master Reality",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {},
+      "aliases": [
+        "操控现实"
+      ]
+    },
+    {
+      "id": "Meditate",
+      "name": "Meditate",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "冥想"
+      ]
+    },
+    {
+      "id": "Mental Fortress",
+      "name": "Mental Fortress",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 4,
+        "upgraded_magic_number": 6
+      },
+      "aliases": [
+        "心灵堡垒"
+      ]
+    },
+    {
+      "id": "Nirvana",
+      "name": "Nirvana",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "涅槃"
+      ]
+    },
+    {
+      "id": "Omniscience",
+      "name": "Omniscience",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 4,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {
+        "magic_number": 2
+      },
+      "aliases": [
+        "通晓万物"
+      ]
+    },
+    {
+      "id": "Perseverance",
+      "name": "Perseverance",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 5,
+        "upgraded_block": 7,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "坚韧"
+      ]
+    },
+    {
+      "id": "Pray",
+      "name": "Pray",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "祈祷"
+      ]
+    },
+    {
+      "id": "Pressure Points",
+      "name": "Pressure Points",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 8,
+        "upgraded_magic_number": 11
+      },
+      "aliases": [
+        "PATHTOVICTORY",
+        "点穴"
+      ]
+    },
+    {
+      "id": "Prostrate",
+      "name": "Prostrate",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 0,
+      "tags": [
+        "skill",
+        "block",
+        "zero_cost"
+      ],
+      "values": {
+        "base_block": 4,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "五体投地"
+      ]
+    },
+    {
+      "id": "Protect",
+      "name": "Protect",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 12,
+        "upgraded_block": 16
+      },
+      "aliases": [
+        "护身"
+      ]
+    },
+    {
+      "id": "Ragnarok",
+      "name": "Ragnarok",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 5,
+        "upgraded_damage": 6,
+        "magic_number": 5,
+        "upgraded_magic_number": 6
+      },
+      "aliases": [
+        "诸神之黄昏"
+      ]
+    },
+    {
+      "id": "Reach Heaven",
+      "name": "Reach Heaven",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 10,
+        "upgraded_damage": 15
+      },
+      "aliases": [
+        "立地升天"
+      ]
+    },
+    {
+      "id": "Rushdown",
+      "name": "Rushdown",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 2
+      },
+      "aliases": [
+        "ADAPTATION",
+        "猛虎下山"
+      ]
+    },
+    {
+      "id": "Sanctity",
+      "name": "Sanctity",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 6,
+        "upgraded_block": 9,
+        "magic_number": 2
+      },
+      "aliases": [
+        "圣洁"
+      ]
+    },
+    {
+      "id": "Sands of Time",
+      "name": "Sands of Time",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 4,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 20,
+        "upgraded_damage": 26
+      },
+      "aliases": [
+        "时之沙"
+      ]
+    },
+    {
+      "id": "Sash Whip",
+      "name": "Sash Whip",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 8,
+        "upgraded_damage": 10,
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "腰带抽打"
+      ]
+    },
+    {
+      "id": "Scrawl",
+      "name": "Scrawl",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "潦草急就"
+      ]
+    },
+    {
+      "id": "Signature Move",
+      "name": "Signature Move",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 30,
+        "upgraded_damage": 40
+      },
+      "aliases": [
+        "招牌技"
+      ]
+    },
+    {
+      "id": "Simmering Fury",
+      "name": "Simmering Fury",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "VENGEANCE",
+        "怒火中烧"
+      ]
+    },
+    {
+      "id": "Spirit Shield",
+      "name": "Spirit Shield",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "精神护盾"
+      ]
+    },
+    {
+      "id": "Study",
+      "name": "Study",
+      "character": "WATCHER",
+      "type": "POWER",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "power"
+      ],
+      "values": {
+        "magic_number": 1
+      },
+      "aliases": [
+        "研习"
+      ]
+    },
+    {
+      "id": "Swivel",
+      "name": "Swivel",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 8,
+        "upgraded_block": 11
+      },
+      "aliases": [
+        "旋身"
+      ]
+    },
+    {
+      "id": "Talk to the Hand",
+      "name": "Talk to the Hand",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage",
+        "exhaust"
+      ],
+      "values": {
+        "base_damage": 5,
+        "upgraded_damage": 7,
+        "magic_number": 2,
+        "upgraded_magic_number": 3
+      },
+      "aliases": [
+        "以手拒之"
+      ]
+    },
+    {
+      "id": "Tantrum",
+      "name": "Tantrum",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 3,
+        "magic_number": 3,
+        "upgraded_magic_number": 4
+      },
+      "aliases": [
+        "发泄"
+      ]
+    },
+    {
+      "id": "Third Eye",
+      "name": "Third Eye",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 7,
+        "upgraded_block": 9,
+        "magic_number": 3,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "天眼"
+      ]
+    },
+    {
+      "id": "Tranquility",
+      "name": "Tranquility",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "COMMON",
+      "cost": 1,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "CLEARTHEMIND",
+        "安宁"
+      ]
+    },
+    {
+      "id": "Unraveling",
+      "name": "Unraveling",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "彻悟"
+      ]
+    },
+    {
+      "id": "Vault",
+      "name": "Vault",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "skill",
+        "exhaust"
+      ],
+      "values": {},
+      "aliases": [
+        "腾跃"
+      ]
+    },
+    {
+      "id": "Vigilance",
+      "name": "Vigilance",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "BASIC",
+      "cost": 2,
+      "tags": [
+        "skill",
+        "block"
+      ],
+      "values": {
+        "base_block": 8,
+        "upgraded_block": 12
+      },
+      "aliases": [
+        "警惕"
+      ]
+    },
+    {
+      "id": "Wallop",
+      "name": "Wallop",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 9,
+        "upgraded_damage": 12
+      },
+      "aliases": [
+        "当头棒喝"
+      ]
+    },
+    {
+      "id": "Wave of the Hand",
+      "name": "Wave of the Hand",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 1,
+        "upgraded_magic_number": 2
+      },
+      "aliases": [
+        "摆手"
+      ]
+    },
+    {
+      "id": "Weave",
+      "name": "Weave",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 0,
+      "tags": [
+        "attack",
+        "damage",
+        "zero_cost"
+      ],
+      "values": {
+        "base_damage": 4,
+        "upgraded_damage": 6
+      },
+      "aliases": [
+        "迂回"
+      ]
+    },
+    {
+      "id": "Wheel Kick",
+      "name": "Wheel Kick",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 15,
+        "upgraded_damage": 20,
+        "magic_number": 2
+      },
+      "aliases": [
+        "回环踢"
+      ]
+    },
+    {
+      "id": "Windmill Strike",
+      "name": "Windmill Strike",
+      "character": "WATCHER",
+      "type": "ATTACK",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "attack",
+        "damage"
+      ],
+      "values": {
+        "base_damage": 7,
+        "upgraded_damage": 10,
+        "magic_number": 4,
+        "upgraded_magic_number": 5
+      },
+      "aliases": [
+        "旋转打击"
+      ]
+    },
+    {
+      "id": "Wish",
+      "name": "Wish",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "RARE",
+      "cost": 3,
+      "tags": [
+        "skill",
+        "damage",
+        "block",
+        "exhaust"
+      ],
+      "values": {
+        "base_damage": 3,
+        "upgraded_damage": 4,
+        "base_block": 6,
+        "upgraded_block": 8,
+        "magic_number": 25,
+        "upgraded_magic_number": 30
+      },
+      "aliases": [
+        "许愿"
+      ]
+    },
+    {
+      "id": "Worship",
+      "name": "Worship",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 2,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 5
+      },
+      "aliases": [
+        "敬拜"
+      ]
+    },
+    {
+      "id": "Wreath of Flame",
+      "name": "Wreath of Flame",
+      "character": "WATCHER",
+      "type": "SKILL",
+      "rarity": "UNCOMMON",
+      "cost": 1,
+      "tags": [
+        "skill"
+      ],
+      "values": {
+        "magic_number": 5,
+        "upgraded_magic_number": 8
+      },
+      "aliases": [
+        "火焰纹"
+      ]
     }
   ]
 }

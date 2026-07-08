@@ -1,0 +1,147 @@
+{
+  "entities": {
+    "bosses": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "items": [
+        {
+          "count": 31,
+          "entity": "\u52bf\u4e0d\u53ef\u5f53",
+          "normalized_keys": [
+            "\u52bf\u4e0d\u53ef\u5f53"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 14
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 15
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 16
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 26
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 27
+            }
+          ]
+        },
+        {
+          "count": 10,
+          "entity": "\u706b\u7130\u5410\u606f",
+          "normalized_keys": [
+            "\u706b\u7130\u5410\u606f"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 7
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 8
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 26
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 27
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+              "step": 42
+            }
+          ]
+        }
+      ],
+      "occurrences": 41,
+      "unique": 2
+    },
+    "monsters": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    }
+  },
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_144156_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_144849_ironclad_a0.jsonl"
+  ],
+  "knowledge_dir": "data\\static_knowledge",
+  "knowledge_source_counts": {
+    "bosses": 3,
+    "cards": 84,
+    "monsters": 29,
+    "potions": 31,
+    "relics": 59
+  },
+  "observed_aliases": {
+    "cards": 10
+  },
+  "read_errors": [],
+  "resolved_log_count": 3,
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_143541_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_144156_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_29\\20260707_144849_ironclad_a0.jsonl"
+  ],
+  "status_line": "static_knowledge_gaps logs=3 missing=41 cards=41/2",
+  "total_missing_occurrences": 41,
+  "totals": {
+    "bosses": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "occurrences": 41,
+      "unique": 2
+    },
+    "monsters": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "occurrences": 0,
+      "unique": 0
+    }
+  },
+  "version": 1,
+  "warnings": []
+}

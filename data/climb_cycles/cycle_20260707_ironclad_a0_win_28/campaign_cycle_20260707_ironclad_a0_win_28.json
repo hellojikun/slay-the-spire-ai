@@ -1,0 +1,418 @@
+{
+  "version": 1,
+  "created_at": "2026-07-07T13:29:43",
+  "hardware": {
+    "use_all_hardware_requested": true,
+    "cpu_count": 16,
+    "gpu": {
+      "torch_available": true,
+      "cuda_available": true,
+      "devices": [
+        "NVIDIA GeForce RTX 4080 SUPER"
+      ]
+    }
+  },
+  "targets": {
+    "IRONCLAD:A0": {
+      "wins": 0,
+      "attempts": 3,
+      "last_status": "game_over",
+      "last_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_28\\20260707_140626_ironclad_a0.jsonl",
+      "last_manifest": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_140626_ironclad_a0.manifest.json",
+      "manifest_history": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_133005_ironclad_a0.manifest.json",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_134631_ironclad_a0.manifest.json",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_140626_ironclad_a0.manifest.json"
+      ],
+      "last_manifest_category": "clean_trainable",
+      "last_manifest_reason": "completed_clean",
+      "last_validation_grade": "usable_with_recoveries",
+      "last_validation_flags": [
+        "synthetic_terminal",
+        "synthetic_after_mcp_null",
+        "synthetic_terminal_state"
+      ],
+      "last_act1_boss_reached": true,
+      "last_act1_boss_cleared": true,
+      "last_act1_boss_enemy_ids": [
+        "SlimeBoss"
+      ],
+      "last_act1_boss_entry_step": 155,
+      "last_act1_boss_entry_hp": 66,
+      "last_act1_boss_entry_potion_count": 0,
+      "last_act1_boss_clear_step": 187,
+      "last_act1_boss_prefix_pristine_clear": true,
+      "last_act1_boss_prefix_blockers": [],
+      "last_act1_boss_last_turn": null,
+      "last_act1_boss_last_hp": 42,
+      "last_act1_boss_potion_use_steps": [],
+      "last_act1_boss_gate_passed": true,
+      "last_act1_boss_gate_next_action": "promote_to_next_validation_batch",
+      "last_act1_boss_gate_counts": {
+        "total_runs": 3,
+        "clean_trainable": 3,
+        "diagnostic_excluded": 0,
+        "infra_blocked": 0,
+        "act1_boss_reached": 3,
+        "act1_boss_cleared": 3,
+        "pristine_act1_boss_cleared": 2,
+        "prefix_pristine_act1_boss_cleared": 2,
+        "legacy_pristine_act1_boss_cleared": 0,
+        "explicit_prefix_evidence_runs": 3,
+        "usable_act1_boss_cleared": 3,
+        "diagnostic_act1_boss_cleared": 0,
+        "unknown_attribution_runs": 0,
+        "recovered_action_runs": 2,
+        "failed_action_runs": 0,
+        "validation_grades": {
+          "usable_with_recoveries": 3
+        },
+        "failure_attributions": {
+          "combat_planning": 1,
+          "route_risk": 2
+        },
+        "act1_boss_reached_by_enemy": {
+          "SlimeBoss": 1,
+          "TheGuardian": 2
+        },
+        "act1_boss_cleared_by_enemy": {
+          "SlimeBoss": 1,
+          "TheGuardian": 2
+        },
+        "pristine_act1_boss_cleared_by_enemy": {
+          "SlimeBoss": 1,
+          "TheGuardian": 1
+        },
+        "prefix_pristine_act1_boss_cleared_by_enemy": {
+          "SlimeBoss": 1,
+          "TheGuardian": 1
+        },
+        "legacy_pristine_act1_boss_cleared_by_enemy": {},
+        "act1_boss_non_pristine_cleared_by_enemy": {
+          "TheGuardian": 1
+        },
+        "act1_boss_outcomes_by_enemy": {
+          "SlimeBoss": {
+            "reached": 1,
+            "cleared": 1,
+            "pristine_cleared": 1,
+            "prefix_pristine_cleared": 1,
+            "legacy_pristine_cleared": 0,
+            "non_pristine_cleared": 0,
+            "uncleared": 0,
+            "clear_rate": 1.0,
+            "pristine_clear_rate": 1.0
+          },
+          "TheGuardian": {
+            "reached": 2,
+            "cleared": 2,
+            "pristine_cleared": 1,
+            "prefix_pristine_cleared": 1,
+            "legacy_pristine_cleared": 0,
+            "non_pristine_cleared": 1,
+            "uncleared": 0,
+            "clear_rate": 1.0,
+            "pristine_clear_rate": 0.5
+          }
+        },
+        "act1_boss_non_pristine_clear_blockers_by_enemy": {
+          "TheGuardian": {
+            "prefix:recovered_action_race": 1
+          }
+        },
+        "act1_boss_uncleared_by_enemy": {},
+        "act1_boss_uncleared_failure_attributions_by_enemy": {},
+        "recovery_flags": {
+          "recovered_action_race": 2
+        },
+        "non_pristine_clear_blockers": {
+          "prefix:recovered_action_race": 1
+        },
+        "shadow_feature_rows": 464,
+        "shadow_feature_gap_manifests": 0,
+        "shadow_feature_zero_manifests": 0,
+        "shadow_feature_missing_manifests": 0,
+        "shadow_unknown_static_manifests": 3,
+        "shadow_unknown_static_total": 584,
+        "shadow_label_rows": 159,
+        "shadow_label_excluded": 1,
+        "shadow_label_exclusion_manifests": 1,
+        "action_recovery_total": 4,
+        "action_recovery_unrecovered": 0,
+        "terminal_recovery_synthetic_terminals": 1,
+        "terminal_recovery_failed": 0,
+        "failure_evidence_runs": 3,
+        "failure_evidence_screen_stalls": 0,
+        "failure_evidence_mcp_reads": 0,
+        "failure_evidence_action_errors": 0,
+        "manifest_schema_missing_manifests": 0,
+        "manifest_schema_missing_key_total": 0
+      },
+      "last_act1_boss_gate_requirements": {
+        "min_reached": 3,
+        "min_cleared": 2,
+        "min_pristine_cleared": 2,
+        "no_unknown_attribution": true,
+        "no_infra_blocked": true
+      },
+      "last_act1_boss_gate_deficits": {
+        "runs": 0,
+        "act1_boss_reached": 0,
+        "act1_boss_cleared": 0,
+        "pristine_act1_boss_cleared": 0,
+        "unknown_attribution_runs": 0,
+        "infra_blocked": 0
+      },
+      "last_act1_boss_gate_progress": {
+        "act1_boss_reached": {
+          "current": 3,
+          "required": 3,
+          "deficit": 0,
+          "ok": true
+        },
+        "act1_boss_cleared": {
+          "current": 3,
+          "required": 2,
+          "deficit": 0,
+          "ok": true
+        },
+        "pristine_act1_boss_cleared": {
+          "current": 2,
+          "required": 2,
+          "deficit": 0,
+          "ok": true
+        }
+      },
+      "last_act1_boss_gate_remaining_progress": [],
+      "last_act1_boss_gate_primary_remaining_progress": null,
+      "last_act1_boss_gate_next_probe_goal": {
+        "action": "promote_to_next_validation_batch",
+        "primary_blocking_reason": null,
+        "metric": null,
+        "deficit": 0,
+        "summary": "gate passed; promote to the next validation batch",
+        "acceptance_criteria": {
+          "scope": "gate_already_passed",
+          "counts_toward_metric": null,
+          "no_next_validation_required": true
+        }
+      },
+      "last_act1_boss_gate_next_probe_acceptance_criteria": {
+        "scope": "gate_already_passed",
+        "counts_toward_metric": null,
+        "no_next_validation_required": true
+      },
+      "last_act1_boss_gate_latest_run_acceptance": {
+        "available": true,
+        "accepted": true,
+        "not_required": true,
+        "metric": null,
+        "action": "promote_to_next_validation_batch",
+        "summary": "gate already passed; latest run acceptance is not required",
+        "run_path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_28\\20260707_140626_ironclad_a0.jsonl",
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_140626_ironclad_a0.manifest.json"
+      },
+      "last_act1_boss_gate_execution_recovery": {
+        "manifests": [
+          {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_133005_ironclad_a0.manifest.json",
+            "action_recovery_source": "manifest_summary",
+            "action_recovery_total": 1,
+            "terminal_recovery_source": null,
+            "terminal_recovery_synthetic_terminals": 0
+          },
+          {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_134631_ironclad_a0.manifest.json",
+            "action_recovery_source": "manifest_summary",
+            "action_recovery_total": 3,
+            "terminal_recovery_source": null,
+            "terminal_recovery_synthetic_terminals": 0
+          },
+          {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_manifests\\20260707_140626_ironclad_a0.manifest.json",
+            "action_recovery_source": null,
+            "action_recovery_total": 0,
+            "terminal_recovery_source": "manifest_summary",
+            "terminal_recovery_synthetic_terminals": 1
+          }
+        ],
+        "action_recovery": {
+          "total": 4,
+          "recovered": 4,
+          "unrecovered": 0,
+          "runs_with_action_recovery": 2,
+          "runs_with_recovered_action": 2,
+          "runs_with_unrecovered_action": 0,
+          "by_status": {
+            "preflight_mismatch": 4
+          },
+          "by_kind": {
+            "unavailable_action": 4
+          },
+          "examples": [
+            {
+              "step": 357,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "select_cards"
+                }
+              ],
+              "available_commands": [
+                "choose"
+              ],
+              "last_error": "Preflight unavailable action(s): ['select_cards']; available commands: ['choose']",
+              "last_state": {
+                "step": 357,
+                "screen_type": "HAND_SELECT",
+                "room_phase": "COMBAT",
+                "floor": 24,
+                "act": 2,
+                "current_hp": 38,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_28\\20260707_133005_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 70,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "play_card",
+                  "card_index": 1,
+                  "target_index": 1
+                }
+              ],
+              "available_commands": [
+                "end_turn"
+              ],
+              "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn']",
+              "last_state": {
+                "step": 70,
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 4,
+                "act": 1,
+                "current_hp": 72,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_28\\20260707_134631_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 209,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "play_card",
+                  "card_index": 4,
+                  "target_index": 1
+                }
+              ],
+              "available_commands": [
+                "end_turn",
+                "use_potion"
+              ],
+              "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+              "last_state": {
+                "step": 209,
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 12,
+                "act": 1,
+                "current_hp": 66,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_28\\20260707_134631_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 313,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "choose",
+                  "choice_index": 1
+                }
+              ],
+              "available_commands": [
+                "proceed"
+              ],
+              "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+              "last_state": {
+                "step": 313,
+                "screen_type": "BOSS_REWARD",
+                "room_phase": "COMPLETE",
+                "floor": 17,
+                "act": 1,
+                "current_hp": 30,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_28\\20260707_134631_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            }
+          ]
+        },
+        "terminal_recovery": {
+          "attempted": 1,
+          "succeeded": 1,
+          "synthetic_terminals": 1
+        }
+      },
+      "last_act1_boss_gate_data_quality": {
+        "total_manifests": 3,
+        "coverage_manifests": 3,
+        "missing_coverage_manifests": 0,
+        "shadow_feature_rows": 464,
+        "feature_gap_manifests": 0,
+        "feature_zero_manifests": 0,
+        "feature_gaps": {},
+        "feature_zero": {},
+        "shadow_label_rows": 159,
+        "shadow_label_trainable": 158,
+        "shadow_label_excluded": 1,
+        "label_exclusion_manifests": 1,
+        "label_exclusion_reasons": {
+          "missed_single_card_search": 1
+        },
+        "direct_kill_available_labels": 0,
+        "missed_single_card_search_labels": 1
+      },
+      "last_act1_boss_gate_focus": {
+        "top_failure_attribution": {
+          "attribution": "route_risk",
+          "count": 2
+        },
+        "top_non_pristine_clear_blocker": {
+          "blocker": "prefix:recovered_action_race",
+          "count": 1
+        },
+        "top_uncleared_boss": null,
+        "top_non_pristine_clear_boss": {
+          "enemy": "TheGuardian",
+          "total": 1,
+          "top_blocker": "prefix:recovered_action_race",
+          "top_blocker_count": 1
+        }
+      },
+      "last_act1_boss_gate_blocking_reasons": [],
+      "last_act1_boss_gate_primary_blocking_reason": null,
+      "last_act1_boss_gate_status": "act1_boss_gate PASS: IRONCLAD A0 runs=3, reached=3/3, cleared=3/2, pristine_cleared=2/2, prefix_pristine=2, legacy_pristine=0, infra=0, unknown_attr=0; top_failure=route_risk:2; top_non_pristine=prefix:recovered_action_race:1; top_non_pristine_boss=TheGuardian:1/prefix:recovered_action_race:1; feature_rows=464, feature_unknown=potion_tempo:relic_unknown_count:259; labels=159, label_exclusions=1/missed_single_card_search:1; evidence=route:3, terminal_sources=synthetic_after_mcp_null:1; action_recovery=unavailable_action:4/4, terminal_recovery=synthetic:1,attempted:1,succeeded:1 -> promote_to_next_validation_batch",
+      "last_act1_boss_gate_report": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\act1_boss_gate_live_cycle_20260707_ironclad_a0_win_28.json",
+      "last_shadow_advice": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\live_advice\\20260707_140626_ironclad_a0",
+      "last_steps": 344,
+      "last_floor": 27,
+      "last_score": null,
+      "updated_at": "2026-07-07T14:24:23"
+    }
+  }
+}

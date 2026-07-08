@@ -1,0 +1,424 @@
+{
+  "accepted_rows": 899,
+  "example_count": 8,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 35,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 70,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        76
+      ],
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Pommel Strike",
+        "Defend_R",
+        "Slimed",
+        "Strike_R",
+        "Defend_R"
+      ],
+      "incoming": 35,
+      "initial_loss": 35,
+      "kills": 0,
+      "label_first_card_key": "Pommel Strike",
+      "label_sequence_card_keys": [
+        "Pommel Strike"
+      ],
+      "label_target_index": 1,
+      "line": 560,
+      "loss_delta": 35,
+      "max_hp": 80,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 180,
+      "turn": 3
+    },
+    {
+      "act": 1,
+      "attacks_removed": 16,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 56,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        44,
+        24,
+        24
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L",
+        "AcidSlime_M",
+        "AcidSlime_M"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF",
+        "ATTACK",
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Pommel Strike",
+        "Bash",
+        "Strike_R",
+        "Slimed",
+        "Anger"
+      ],
+      "incoming": 33,
+      "initial_loss": 33,
+      "kills": 0,
+      "label_first_card_key": "Bash",
+      "label_sequence_card_keys": [
+        "Bash"
+      ],
+      "label_target_index": 1,
+      "line": 741,
+      "loss_delta": 16,
+      "max_hp": 90,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 17,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 201,
+      "turn": 7
+    },
+    {
+      "act": 1,
+      "attacks_removed": 24,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 26,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        9
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Warcry",
+        "Strike_R",
+        "Strike_R",
+        "Anger"
+      ],
+      "incoming": 24,
+      "initial_loss": 19,
+      "kills": 1,
+      "label_first_card_key": "Strike_R",
+      "label_sequence_card_keys": [
+        "Strike_R"
+      ],
+      "label_target_index": 1,
+      "line": 121,
+      "loss_delta": 19,
+      "max_hp": 85,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_152959_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 204,
+      "turn": 9
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 25,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        13
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Bash",
+        "Strike_R",
+        "Defend_R",
+        "Defend_R"
+      ],
+      "incoming": 24,
+      "initial_loss": 16,
+      "kills": 0,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R"
+      ],
+      "line": 370,
+      "loss_delta": 8,
+      "max_hp": 80,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 8,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_181835_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 223,
+      "turn": 20
+    },
+    {
+      "act": 1,
+      "attacks_removed": 6,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 51,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        94
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Strike_R",
+        "Clothesline",
+        "Strike_R"
+      ],
+      "incoming": 18,
+      "initial_loss": 18,
+      "kills": 0,
+      "label_first_card_key": "Clothesline",
+      "label_sequence_card_keys": [
+        "Clothesline"
+      ],
+      "label_target_index": 1,
+      "line": 664,
+      "loss_delta": 6,
+      "max_hp": 80,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 12,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 174,
+      "turn": 9
+    },
+    {
+      "act": 1,
+      "attacks_removed": 4,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 34,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        99
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Defend_R",
+        "Clothesline",
+        "Strike_R"
+      ],
+      "incoming": 10,
+      "initial_loss": 4,
+      "kills": 0,
+      "label_first_card_key": "Clothesline",
+      "label_sequence_card_keys": [
+        "Clothesline"
+      ],
+      "label_target_index": 1,
+      "line": 638,
+      "loss_delta": 4,
+      "max_hp": 80,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 213,
+      "turn": 11
+    },
+    {
+      "act": 1,
+      "attacks_removed": 9,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 39,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        11
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Second Wind",
+        "Bash",
+        "Strike_R"
+      ],
+      "incoming": 9,
+      "initial_loss": 9,
+      "kills": 1,
+      "label_first_card_key": "Strike_R",
+      "label_sequence_card_keys": [
+        "Strike_R"
+      ],
+      "label_target_index": 1,
+      "line": 444,
+      "loss_delta": 9,
+      "max_hp": 80,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_184956_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 176,
+      "turn": 11
+    },
+    {
+      "act": 2,
+      "attacks_removed": 24,
+      "avoided_lethal": false,
+      "current_energy": 4,
+      "current_hp": 49,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        5
+      ],
+      "direct_kill_card_keys": [
+        "Cleave"
+      ],
+      "direct_kill_enemy_hp": 2,
+      "direct_kill_enemy_id": "SnakePlant",
+      "enemy_hps": [
+        2
+      ],
+      "enemy_ids": [
+        "SnakePlant"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 24,
+      "hand_ids": [
+        "Defend_R",
+        "Flame Barrier",
+        "Seeing Red",
+        "Shrug It Off",
+        "Cleave"
+      ],
+      "incoming": 24,
+      "initial_loss": 24,
+      "kills": 1,
+      "label_first_card_key": "Seeing Red",
+      "label_sequence_card_keys": [
+        "Seeing Red",
+        "Flame Barrier",
+        "Shrug It Off",
+        "Defend_R",
+        "Cleave"
+      ],
+      "line": 468,
+      "loss_delta": 24,
+      "max_hp": 80,
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_184956_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 335,
+      "turn": 4
+    }
+  ],
+  "excluded_rows": 8,
+  "exclusion_reasons": {
+    "missed_direct_kill": 1,
+    "missed_single_card_search": 7
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_deep_retrain_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_deep_retrain_30_37\\combat_search_labels.jsonl"
+  ],
+  "rows": 907,
+  "source_quality": {
+    "pristine": 77,
+    "usable_with_recoveries": 830
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=907 excluded=8 missed_single_card_search=7 missed_direct_kill=1",
+  "version": 1,
+  "warnings": []
+}

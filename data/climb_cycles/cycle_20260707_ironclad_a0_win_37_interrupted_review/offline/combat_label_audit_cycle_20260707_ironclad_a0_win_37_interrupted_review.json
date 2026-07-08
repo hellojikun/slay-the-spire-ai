@@ -1,0 +1,25 @@
+{
+  "accepted_rows": 41,
+  "example_count": 0,
+  "example_limit": 20,
+  "examples": [],
+  "excluded_rows": 0,
+  "exclusion_reasons": {},
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review\\combat_search_labels.jsonl"
+  ],
+  "rows": 41,
+  "source_quality": {
+    "pristine": 41
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=41 excluded=0",
+  "version": 1,
+  "warnings": []
+}

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "shadow_inputs": {
+    "mode": "shadow_rows",
+    "resolved_files": [
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\combat_search_labels.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\potion_tempo.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\pre_boss_deck_quality.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\route_risk.jsonl"
+    ],
+    "resolved_file_count": 4,
+    "categories": {
+      "route_risk": {
+        "row_count": 30,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\route_risk.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "potion_tempo": {
+        "row_count": 165,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\potion_tempo.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "pre_boss_deck_quality": {
+        "row_count": 2,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\pre_boss_deck_quality.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "combat_search": {
+        "row_count": 76,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_04\\offline\\shadow_cycle_20260707_ironclad_a0_win_04\\combat_search_labels.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      }
+    },
+    "warnings": []
+  },
+  "advice_rows": {
+    "route_risk": 30,
+    "potion_tempo": 165,
+    "pre_boss_deck_quality": 2,
+    "combat_search": 76
+  },
+  "models_available": {
+    "route_risk": false,
+    "potion_tempo": false,
+    "pre_boss_deck_quality": false,
+    "combat_search": false
+  },
+  "model_training_source": {
+    "route_risk": {},
+    "potion_tempo": {},
+    "pre_boss_deck_quality": {},
+    "combat_search": {}
+  },
+  "model_training_source_quality": {
+    "route_risk": null,
+    "potion_tempo": null,
+    "pre_boss_deck_quality": null,
+    "combat_search": null
+  },
+  "model_load_quality": {
+    "route_risk": {},
+    "potion_tempo": {},
+    "pre_boss_deck_quality": {},
+    "combat_search": {}
+  }
+}

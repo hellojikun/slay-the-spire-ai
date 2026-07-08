@@ -1,0 +1,29 @@
+{
+  "current_policy_matches_actual": 0,
+  "current_policy_matches_label": 0,
+  "current_policy_other": 0,
+  "example_count": 0,
+  "example_limit": 20,
+  "examples": [],
+  "excluded_rows": 0,
+  "exclusion_reasons": {},
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_27\\offline\\shadow_cycle_20260707_ironclad_a0_win_27"
+  ],
+  "missing_source_log": 0,
+  "missing_source_step": 0,
+  "policy_errors": 0,
+  "read_errors": [],
+  "replay_outcomes": {},
+  "replayed_rows": 0,
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_27\\offline\\shadow_cycle_20260707_ironclad_a0_win_27\\combat_search_labels.jsonl"
+  ],
+  "rows": 121,
+  "source_quality_policy": "all",
+  "status_line": "combat_label_replay_audit files=1 excluded=0 replayed=0 matches_label=0 matches_actual=0 other=0",
+  "version": 1,
+  "warnings": []
+}

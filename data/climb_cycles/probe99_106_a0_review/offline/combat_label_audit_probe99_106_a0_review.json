@@ -1,0 +1,1043 @@
+{
+  "accepted_rows": 349,
+  "example_count": 20,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 78,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        233
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Iron Wave",
+        "Defend_R",
+        "Intimidate"
+      ],
+      "incoming": 42,
+      "initial_loss": 42,
+      "kills": 0,
+      "label_first_card_key": "Intimidate",
+      "label_sequence_card_keys": [
+        "Intimidate"
+      ],
+      "line": 93,
+      "loss_delta": 12,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 30,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 286,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 78,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        233
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Iron Wave",
+        "Defend_R",
+        "Intimidate",
+        "Carnage",
+        "Strike_R"
+      ],
+      "incoming": 42,
+      "initial_loss": 42,
+      "kills": 0,
+      "label_first_card_key": "Intimidate",
+      "label_sequence_card_keys": [
+        "Intimidate"
+      ],
+      "line": 94,
+      "loss_delta": 12,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 30,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 287,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 78,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        233
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Iron Wave",
+        "Defend_R",
+        "Intimidate",
+        "Carnage",
+        "Strike_R"
+      ],
+      "incoming": 42,
+      "initial_loss": 42,
+      "kills": 0,
+      "label_first_card_key": "Intimidate",
+      "label_sequence_card_keys": [
+        "Intimidate"
+      ],
+      "line": 95,
+      "loss_delta": 12,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 30,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 288,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 35,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 74,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        98
+      ],
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Shrug It Off",
+        "Strike_R",
+        "Whirlwind"
+      ],
+      "incoming": 35,
+      "initial_loss": 35,
+      "kills": 0,
+      "label_first_card_key": "Whirlwind",
+      "label_sequence_card_keys": [
+        "Whirlwind"
+      ],
+      "line": 310,
+      "loss_delta": 35,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 226,
+      "turn": 3
+    },
+    {
+      "act": 1,
+      "attacks_removed": 35,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 74,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        98
+      ],
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Strike_R",
+        "Whirlwind",
+        "Strike_R",
+        "Defend_R"
+      ],
+      "incoming": 35,
+      "initial_loss": 27,
+      "kills": 0,
+      "label_first_card_key": "Whirlwind",
+      "label_sequence_card_keys": [
+        "Whirlwind"
+      ],
+      "line": 311,
+      "loss_delta": 27,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 227,
+      "turn": 3
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 62,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        200
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Shrug It Off",
+        "Twin Strike",
+        "Pommel Strike",
+        "Strike_R"
+      ],
+      "incoming": 32,
+      "initial_loss": 18,
+      "kills": 0,
+      "label_first_card_key": "Shrug It Off",
+      "label_sequence_card_keys": [
+        "Shrug It Off"
+      ],
+      "line": 39,
+      "loss_delta": 8,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 10,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 218,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 74,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        33,
+        25,
+        25
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L",
+        "AcidSlime_M",
+        "AcidSlime_M"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF",
+        "ATTACK",
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Spot Weakness",
+        "Anger",
+        "Strike_R"
+      ],
+      "incoming": 32,
+      "initial_loss": 29,
+      "kills": 0,
+      "label_first_card_key": "Strike_R",
+      "label_sequence_card_keys": [
+        "Strike_R"
+      ],
+      "label_target_index": 1,
+      "line": 143,
+      "loss_delta": 12,
+      "max_hp": 85,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 17,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 261,
+      "turn": 6
+    },
+    {
+      "act": 1,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 74,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        33,
+        25,
+        25
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L",
+        "AcidSlime_M",
+        "AcidSlime_M"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF",
+        "ATTACK",
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Spot Weakness",
+        "Anger",
+        "Strike_R"
+      ],
+      "incoming": 32,
+      "initial_loss": 29,
+      "kills": 0,
+      "label_first_card_key": "Strike_R",
+      "label_sequence_card_keys": [
+        "Strike_R"
+      ],
+      "label_target_index": 1,
+      "line": 144,
+      "loss_delta": 12,
+      "max_hp": 85,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 17,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 262,
+      "turn": 6
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 62,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        230
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Feel No Pain",
+        "Strike_R",
+        "Strike_R",
+        "Shrug It Off"
+      ],
+      "incoming": 30,
+      "initial_loss": 30,
+      "kills": 0,
+      "label_first_card_key": "Shrug It Off",
+      "label_sequence_card_keys": [
+        "Shrug It Off"
+      ],
+      "line": 264,
+      "loss_delta": 8,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 22,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe103_a0\\20260706_010955_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 208,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 2,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        58
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Cleave",
+        "Defend_R",
+        "Strike_R",
+        "Power Through"
+      ],
+      "incoming": 28,
+      "initial_loss": 28,
+      "kills": 0,
+      "label_first_card_key": "Power Through",
+      "label_sequence_card_keys": [
+        "Power Through"
+      ],
+      "line": 46,
+      "loss_delta": 15,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 13,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 255,
+      "turn": 13
+    },
+    {
+      "act": 1,
+      "attacks_removed": 10,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 73,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        65,
+        15,
+        31
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L",
+        "AcidSlime_M",
+        "AcidSlime_M"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF",
+        "DEBUFF",
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Defend_R",
+        "Perfected Strike",
+        "Slimed",
+        "Whirlwind"
+      ],
+      "incoming": 26,
+      "initial_loss": 26,
+      "kills": 1,
+      "label_first_card_key": "Whirlwind",
+      "label_sequence_card_keys": [
+        "Whirlwind"
+      ],
+      "line": 315,
+      "loss_delta": 10,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 16,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 239,
+      "turn": 6
+    },
+    {
+      "act": 1,
+      "attacks_removed": 10,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 73,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        65,
+        15,
+        31
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L",
+        "AcidSlime_M",
+        "AcidSlime_M"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF",
+        "DEBUFF",
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Defend_R",
+        "Perfected Strike",
+        "Slimed",
+        "Whirlwind",
+        "Armaments"
+      ],
+      "incoming": 26,
+      "initial_loss": 26,
+      "kills": 1,
+      "label_first_card_key": "Whirlwind",
+      "label_sequence_card_keys": [
+        "Whirlwind"
+      ],
+      "line": 316,
+      "loss_delta": 10,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 16,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 240,
+      "turn": 6
+    },
+    {
+      "act": 1,
+      "attacks_removed": 24,
+      "avoided_lethal": true,
+      "current_energy": 1,
+      "current_hp": 7,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        1
+      ],
+      "direct_kill_card_keys": [
+        "Twin Strike"
+      ],
+      "direct_kill_enemy_hp": 4,
+      "direct_kill_enemy_id": "Hexaghost",
+      "enemy_hps": [
+        4
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Twin Strike",
+        "Defend_R",
+        "Defend_R",
+        "Burn"
+      ],
+      "incoming": 24,
+      "initial_loss": 28,
+      "kills": 1,
+      "label_first_card_key": "Twin Strike",
+      "label_sequence_card_keys": [
+        "Twin Strike"
+      ],
+      "label_target_index": 1,
+      "line": 384,
+      "loss_delta": 24,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 4,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe105_a0\\20260706_101935_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 269,
+      "turn": 16
+    },
+    {
+      "act": 1,
+      "attacks_removed": 20,
+      "avoided_lethal": false,
+      "current_energy": 4,
+      "current_hp": 41,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        166
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "True Grit",
+        "Bash",
+        "Strike_R",
+        "Shockwave"
+      ],
+      "incoming": 20,
+      "initial_loss": 20,
+      "kills": 0,
+      "label_first_card_key": "Shockwave",
+      "label_sequence_card_keys": [
+        "Shockwave"
+      ],
+      "line": 217,
+      "loss_delta": 20,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 198,
+      "turn": 4
+    },
+    {
+      "act": 1,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 4,
+      "current_hp": 23,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        12
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "True Grit",
+        "Defend_R",
+        "Strike_R",
+        "Bash",
+        "Defend_R"
+      ],
+      "incoming": 12,
+      "initial_loss": 12,
+      "kills": 1,
+      "label_first_card_key": "Bash",
+      "label_sequence_card_keys": [
+        "Bash"
+      ],
+      "label_target_index": 1,
+      "line": 221,
+      "loss_delta": 12,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 213,
+      "turn": 8
+    },
+    {
+      "act": 1,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 4,
+      "current_hp": 23,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        2
+      ],
+      "direct_kill_card_keys": [
+        "Perfected Strike"
+      ],
+      "direct_kill_enemy_hp": 12,
+      "direct_kill_enemy_id": "TheGuardian",
+      "enemy_hps": [
+        12
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Iron Wave",
+        "Perfected Strike",
+        "Whirlwind",
+        "Strike_R"
+      ],
+      "incoming": 12,
+      "initial_loss": 12,
+      "kills": 1,
+      "label_first_card_key": "Iron Wave",
+      "label_sequence_card_keys": [
+        "Iron Wave",
+        "Whirlwind"
+      ],
+      "label_target_index": 1,
+      "line": 222,
+      "loss_delta": 12,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 214,
+      "turn": 8
+    },
+    {
+      "act": 2,
+      "attacks_removed": 12,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 20,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        1,
+        4
+      ],
+      "direct_kill_card_keys": [
+        "Anger",
+        "Anger"
+      ],
+      "direct_kill_enemy_hp": 3,
+      "direct_kill_enemy_id": "Centurion",
+      "enemy_hps": [
+        3
+      ],
+      "enemy_ids": [
+        "Centurion"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 24,
+      "hand_ids": [
+        "Anger",
+        "Spot Weakness",
+        "Metallicize",
+        "Anger"
+      ],
+      "incoming": 12,
+      "initial_loss": 12,
+      "kills": 1,
+      "label_first_card_key": "Metallicize",
+      "label_sequence_card_keys": [
+        "Metallicize",
+        "Anger"
+      ],
+      "line": 172,
+      "loss_delta": 12,
+      "max_hp": 85,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 416,
+      "turn": 6
+    },
+    {
+      "act": 2,
+      "attacks_removed": 15,
+      "avoided_lethal": true,
+      "current_energy": 4,
+      "current_hp": 12,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        2,
+        4
+      ],
+      "direct_kill_card_keys": [
+        "Blood for Blood",
+        "Hemokinesis"
+      ],
+      "direct_kill_enemy_hp": 10,
+      "direct_kill_enemy_id": "SnakePlant",
+      "enemy_hps": [
+        10
+      ],
+      "enemy_ids": [
+        "SnakePlant"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 23,
+      "hand_ids": [
+        "Iron Wave",
+        "Blood for Blood",
+        "Defend_R",
+        "Hemokinesis",
+        "Offering"
+      ],
+      "incoming": 15,
+      "initial_loss": 15,
+      "kills": 1,
+      "label_first_card_key": "Iron Wave",
+      "label_sequence_card_keys": [
+        "Iron Wave",
+        "Defend_R"
+      ],
+      "label_target_index": 1,
+      "line": 233,
+      "loss_delta": 15,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 339,
+      "turn": 5
+    },
+    {
+      "act": 2,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 4,
+      "current_hp": 15,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        2,
+        3
+      ],
+      "direct_kill_card_keys": [
+        "Headbutt",
+        "Hemokinesis"
+      ],
+      "direct_kill_enemy_hp": 3,
+      "direct_kill_enemy_id": "SnakePlant",
+      "enemy_hps": [
+        3
+      ],
+      "enemy_ids": [
+        "SnakePlant"
+      ],
+      "enemy_intents": [
+        "STRONG_DEBUFF"
+      ],
+      "floor": 22,
+      "hand_ids": [
+        "Defend_R",
+        "Headbutt",
+        "Hemokinesis"
+      ],
+      "incoming": 0,
+      "initial_loss": 0,
+      "kills": 1,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R",
+        "Headbutt"
+      ],
+      "line": 166,
+      "loss_delta": 0,
+      "max_hp": 85,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 381,
+      "turn": 5
+    },
+    {
+      "act": 2,
+      "attacks_removed": 10,
+      "avoided_lethal": false,
+      "current_energy": 4,
+      "current_hp": 63,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        4
+      ],
+      "direct_kill_card_keys": [
+        "Heavy Blade"
+      ],
+      "direct_kill_enemy_hp": 16,
+      "direct_kill_enemy_id": "SphericGuardian",
+      "enemy_hps": [
+        16
+      ],
+      "enemy_ids": [
+        "SphericGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEFEND"
+      ],
+      "floor": 18,
+      "hand_ids": [
+        "Seeing Red",
+        "Strike_R",
+        "Defend_R",
+        "Heavy Blade"
+      ],
+      "incoming": 10,
+      "initial_loss": 10,
+      "kills": 1,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R",
+        "Heavy Blade",
+        "Strike_R"
+      ],
+      "line": 319,
+      "loss_delta": 10,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 279,
+      "turn": 4
+    }
+  ],
+  "excluded_rows": 35,
+  "exclusion_reasons": {
+    "missed_direct_kill": 21,
+    "missed_single_card_search": 14
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review\\combat_search_labels.jsonl"
+  ],
+  "rows": 384,
+  "source_quality": {
+    "pristine": 40,
+    "usable_with_recoveries": 344
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=384 excluded=35 missed_direct_kill=21 missed_single_card_search=14",
+  "version": 1,
+  "warnings": []
+}

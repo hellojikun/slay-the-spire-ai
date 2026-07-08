@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "advice_rows": {
+    "route_risk": 31,
+    "potion_tempo": 251,
+    "pre_boss_deck_quality": 1,
+    "combat_search": 84
+  },
+  "models_available": {
+    "route_risk": false,
+    "potion_tempo": false,
+    "pre_boss_deck_quality": false,
+    "combat_search": false
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "diagnoses": [
+    {
+      "manifest_path": "data\\training_manifest_probe106_a0.json",
+      "category": "diagnostic_excluded",
+      "reason": "no_terminal_outcome",
+      "failure_attribution": "diagnostic_incomplete",
+      "failure_tags": [
+        "diagnostic",
+        "no_terminal_outcome"
+      ],
+      "path": "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl",
+      "character": "IRONCLAD",
+      "ascension": 0,
+      "floor": 17,
+      "victory": null,
+      "steps": 312,
+      "action_records": 311,
+      "recovered_actions": 1,
+      "failed_actions": 0,
+      "action_recovery_summary": {
+        "total": 1,
+        "recovered": 1,
+        "unrecovered": 0,
+        "by_status": {
+          "recoverable_error": 1
+        },
+        "by_kind": {
+          "invalid_command": 1
+        }
+      },
+      "validation_grade": "diagnostic",
+      "validation_flags": [
+        "diagnostic_excluded",
+        "no_terminal_outcome",
+        "recovered_action_race"
+      ],
+      "act1_boss": {
+        "reached": true,
+        "cleared": true,
+        "prefix_pristine_clear": true,
+        "prefix_blockers": [],
+        "floor": 16,
+        "enemy_ids": [
+          "TheGuardian"
+        ],
+        "entry_step": 181,
+        "entry_hp": 78,
+        "entry_potion_count": 3,
+        "clear_step": 255,
+        "last_step": 254,
+        "last_hp": 22,
+        "last_turn": null,
+        "potion_use_steps": [
+          189,
+          190,
+          192
+        ]
+      },
+      "shadow_examples": {
+        "route_risk": 0,
+        "potion_tempo": 0,
+        "pre_boss_deck_quality": 0,
+        "combat_search_labels": 0
+      },
+      "shadow_label_quality": {
+        "combat_search_labels": {
+          "total": 0,
+          "trainable": 0,
+          "excluded_from_training": 0,
+          "direct_kill_available": 0,
+          "exclusion_reasons": {}
+        }
+      },
+      "shadow_advice": {
+        "available": true,
+        "path": "data\\shadow_advice_probe106_a0",
+        "categories": {
+          "route_risk": {
+            "rows": 0,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {},
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "potion_tempo": {
+            "rows": 0,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {},
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "pre_boss_deck_quality": {
+            "rows": 0,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {},
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "combat_search": {
+            "rows": 0,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {},
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          }
+        }
+      },
+      "combat_endgame": {
+        "available": true,
+        "path": "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl",
+        "step": 250,
+        "floor": 16,
+        "turn": 17,
+        "current_hp": 16,
+        "current_energy": 1,
+        "incoming_damage": 0,
+        "enemy_count": 1,
+        "enemy_id": "TheGuardian",
+        "enemy_hp": 4,
+        "kill_cards": [
+          {
+            "card_index": 1,
+            "id": "Strike_R",
+            "name": "打击",
+            "damage": 6,
+            "cost": 1
+          }
+        ],
+        "chosen_action": "play_card",
+        "chosen_card_index": 1,
+        "missed_lethal": false
+      },
+      "next_action": "preserve_boss_validation_evidence",
+      "status_line": "diagnostic_excluded/diagnostic_incomplete: IRONCLAD A0 floor 17 (no_terminal_outcome; recovered=1, failed=0, recovery=invalid_command:1; validation=diagnostic; act1_boss=cleared:TheGuardian[hp=22,potions=3,clear_step=255,prefix_pristine=true]) -> preserve_boss_validation_evidence; advice=no_signals"
+    }
+  ]
+}

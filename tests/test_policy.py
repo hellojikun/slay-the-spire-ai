@@ -1,4 +1,4 @@
-﻿import unittest
+import unittest
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -7,8 +7,9 @@ from slay_ai.campaign import build_targets, load_progress
 from slay_ai.combat_search import find_best_combat_sequence
 from slay_ai.learn import read_log
 from slay_ai.memory import StrategyMemory
-from slay_ai.policy import HeuristicPolicy
+from slay_ai.policy import HeuristicPolicy, _PendingSearchSequence
 from slay_ai.train_card_model import load_examples
+from slay_ai.train_combat_value_model import CombatValueExample, train_torch_model
 from slay_ai.unlocks import read_unlocks
 
 
@@ -586,6 +587,90 @@ class PolicyTests(unittest.TestCase):
             decision = isolated_policy(tmp).decide(state)
         self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
 
+    def test_shop_screen_low_hp_act2_purges_over_slow_power(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "SHOP_SCREEN",
+                "act": 2,
+                "floor": 21,
+                "current_hp": 36,
+                "max_hp": 80,
+                "gold": 170,
+                "deck": [
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Strike_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Defend_R"},
+                    {"id": "Bash"},
+                    {"id": "Uppercut"},
+                    {"id": "Pommel Strike"},
+                    {"id": "Hemokinesis"},
+                ],
+                "screen_state": {
+                    "purge_available": True,
+                    "purge_cost": 75,
+                    "cards": [
+                        {"name": "Dark Embrace", "id": "Dark Embrace", "type": "POWER", "price": 69},
+                    ],
+                    "relics": [],
+                    "potions": [],
+                },
+            },
+        }
+
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        self.assertIn("purge Strike", decision.reason)
+
+    def test_shop_screen_purges_character_specific_starter_strikes(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "SHOP_SCREEN",
+                "class": "SILENT",
+                "act": 1,
+                "floor": 5,
+                "current_hp": 67,
+                "max_hp": 88,
+                "gold": 100,
+                "deck": [
+                    {"id": "Strike_G"},
+                    {"id": "Strike_G"},
+                    {"id": "Strike_G"},
+                    {"id": "Strike_G"},
+                    {"id": "Strike_R"},
+                    {"id": "Defend_G"},
+                ],
+                "screen_state": {
+                    "purge_available": True,
+                    "purge_cost": 75,
+                    "cards": [],
+                    "relics": [],
+                    "potions": [],
+                },
+            },
+        }
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+
+        state["game_state"]["deck"] = [
+            {"id": "Strike_R"},
+            {"id": "Strike_R"},
+            {"id": "Strike_R"},
+            {"id": "Strike_R"},
+            {"id": "Strike_G"},
+            {"id": "Defend_G"},
+        ]
+        with TemporaryDirectory() as tmp:
+            decision = isolated_policy(tmp).decide(state)
+        self.assertEqual(decision.actions, [{"action": "cancel"}])
+
     def test_shop_screen_buys_elite_potion_after_probe58_purge(self):
         state = {
             "in_game": True,
@@ -871,6 +956,167 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2, "target_index": 1}])
+
+    def test_combat_treats_null_block_as_zero_for_direct_boss_lethal(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 7,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 16,
+                    "player": {"current_hp": 7, "max_hp": 80, "current_energy": 1, "block": None},
+                    "hand": [
+                        {
+                            "id": "Twin Strike",
+                            "name": "Twin Strike",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 5,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {
+                            "id": "Defend_R",
+                            "name": "Defend",
+                            "type": "SKILL",
+                            "cost": 1,
+                            "block": 7,
+                            "is_playable": True,
+                        },
+                    ],
+                    "monsters": [
+                        {
+                            "id": "Hexaghost",
+                            "name": "Hexaghost",
+                            "current_hp": 4,
+                            "max_hp": 250,
+                            "block": None,
+                            "intent": "ATTACK_DEBUFF",
+                            "move": {"damage": 24},
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+        self.assertIn("direct lethal", decision.reason)
+
+    def test_combat_accepts_single_card_search_for_slime_boss_pressure(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 74,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 3,
+                    "player": {"current_hp": 74, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {
+                            "id": "Strike_R",
+                            "name": "Strike",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 8,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {
+                            "id": "Shrug It Off",
+                            "name": "Shrug It Off",
+                            "type": "SKILL",
+                            "cost": 1,
+                            "block": 8,
+                            "is_playable": True,
+                        },
+                        {
+                            "id": "Strike_R",
+                            "name": "Strike",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 8,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {
+                            "id": "Whirlwind",
+                            "name": "Whirlwind+",
+                            "type": "ATTACK",
+                            "cost": -1,
+                            "damage": 10,
+                            "is_playable": True,
+                        },
+                    ],
+                    "monsters": [
+                        {
+                            "id": "SlimeBoss",
+                            "name": "Slime Boss",
+                            "current_hp": 98,
+                            "max_hp": 140,
+                            "intent": "ATTACK",
+                            "move": {"damage": 35},
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 4}])
+        self.assertIn("One-turn search", decision.reason)
+
+    def test_combat_accepts_single_card_search_after_slime_boss_split(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 73,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 6,
+                    "player": {"current_hp": 73, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"id": "Defend_R", "name": "Defend", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {
+                            "id": "Perfected Strike",
+                            "name": "Perfected Strike",
+                            "type": "ATTACK",
+                            "cost": 2,
+                            "damage": 16,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {"id": "Slimed", "name": "Slimed", "type": "STATUS", "cost": 1, "is_playable": True},
+                        {"id": "Whirlwind", "name": "Whirlwind", "type": "ATTACK", "cost": -1, "damage": 19, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"id": "SpikeSlime_L", "name": "Spike Slime", "current_hp": 65, "max_hp": 70, "intent": "ATTACK_DEBUFF", "move": {"damage": 10}},
+                        {"id": "AcidSlime_M", "name": "Acid Slime", "current_hp": 15, "max_hp": 30, "intent": "DEBUFF"},
+                        {"id": "AcidSlime_M", "name": "Acid Slime", "current_hp": 31, "max_hp": 30, "intent": "ATTACK", "move": {"damage": 16}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 4}])
+        self.assertIn("One-turn search", decision.reason)
 
     def test_combat_avoids_basic_defend_against_gremlin_nob_when_not_lethal(self):
         state = {
@@ -1256,6 +1502,10 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
         self.assertIn("One-turn search", decision.reason)
+        self.assertEqual(decision.metadata["search"]["type"], "one_turn_search")
+        self.assertEqual(decision.metadata["search"]["initial_loss"], 16)
+        self.assertEqual(decision.metadata["search"]["projected_loss"], 6)
+        self.assertEqual(decision.metadata["search"]["sequence_card_keys"], ["Defend_R", "Defend_R"])
 
     def test_combat_local_search_counts_move_damage_hits(self):
         state = {
@@ -1720,7 +1970,7 @@ class PolicyTests(unittest.TestCase):
                             "current_hp": 34,
                             "max_hp": 85,
                             "move": {"damage": 24},
-                            "powers": [{"amount": 1, "id": "Vulnerable"}, {"amount": 2, "id": "Anger"}],
+                            "powers": [{"amount": 2, "id": "Anger"}],
                         }
                     ],
                 },
@@ -3061,6 +3311,85 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
 
+    def test_combat_search_allows_safe_sharp_hide_lethal_sequence(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 9,
+                "max_hp": 80,
+                "potions": [],
+                "combat_state": {
+                    "turn": 16,
+                    "player": {"current_hp": 9, "max_hp": 80, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "has_target": True, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "has_target": True, "is_playable": True},
+                        {"name": "Pommel Strike", "id": "Pommel Strike", "type": "ATTACK", "cost": 1, "damage": 9, "has_target": True, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "has_target": True, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 10,
+                            "max_hp": 240,
+                            "move": {"hits": 2, "damage": 6},
+                            "powers": [{"id": "Sharp Hide", "amount": 3}],
+                        },
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3, "target_index": 1}])
+        self.assertIn("One-turn search", decision.reason)
+
+    def test_combat_prefers_probe105_hexaghost_direct_lethal_over_block(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 7,
+                "max_hp": 80,
+                "potions": [{"id": "AncientPotion", "name": "Ancient Potion", "can_use": True}],
+                "combat_state": {
+                    "turn": 16,
+                    "player": {"current_hp": 7, "max_hp": 80, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {
+                            "name": "Twin Strike",
+                            "id": "Twin Strike",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 5,
+                            "has_target": True,
+                            "is_playable": True,
+                        },
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 7, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 7, "is_playable": True},
+                        {"name": "Burn+", "id": "Burn", "type": "STATUS", "cost": -2, "is_playable": False},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "Hexaghost",
+                            "id": "Hexaghost",
+                            "current_hp": 4,
+                            "max_hp": 250,
+                            "move": {"hits": 6, "damage": 4},
+                        },
+                    ],
+                },
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+        self.assertIn("direct lethal", decision.reason)
+
     def test_combat_pressure_fallback_skips_negative_reflect_attack(self):
         state = {
             "in_game": True,
@@ -3092,6 +3421,47 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "end_turn"}])
+
+    def test_guardian_reflect_pressure_prefers_block_over_extra_strike(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "current_hp": 47,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 8,
+                    "player": {"current_hp": 47, "max_hp": 80, "current_energy": 1, "block": 7},
+                    "hand": [
+                        {
+                            "name": "Strike",
+                            "id": "Strike_R",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 6,
+                            "has_target": True,
+                            "is_playable": True,
+                        },
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 98,
+                            "max_hp": 240,
+                            "move": {"hits": 2, "damage": 8},
+                            "powers": [{"id": "Sharp Hide", "amount": 3}],
+                        },
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
 
     def test_combat_targets_attack_even_without_has_target_flag(self):
         state = {
@@ -3244,6 +3614,105 @@ class PolicyTests(unittest.TestCase):
         }
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 3}])
+
+    def test_combat_search_records_combat_value_shadow_score_without_authority(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 7,
+                "act": 1,
+                "class": "IRONCLAD",
+                "ascension_level": 0,
+                "combat_state": {
+                    "turn": 3,
+                    "player": {"current_hp": 20, "max_hp": 80, "current_energy": 2, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Strike", "id": "Strike_R", "type": "ATTACK", "cost": 1, "damage": 6, "is_playable": True, "has_target": True},
+                    ],
+                    "monsters": [
+                        {"name": "Jaw Worm", "id": "JawWorm", "current_hp": 35, "max_hp": 40, "move": {"damage": 18}},
+                    ],
+                },
+            },
+        }
+        examples = [
+            CombatValueExample(
+                row={
+                    "source_validation_grade": "pristine",
+                    "act": 1,
+                    "floor": 7,
+                    "turn": 3,
+                    "hp_ratio": 0.25,
+                    "current_hp": 20,
+                    "max_hp": 80,
+                    "current_block": 0,
+                    "current_energy": 2,
+                    "incoming": 18,
+                    "hand_size": 3,
+                    "playable_count": 3,
+                    "enemy_count": 1,
+                    "enemy_ids": ["JawWorm"],
+                    "hand_ids": ["Defend_R", "Defend_R", "Strike_R"],
+                    "label_first_card_key": "Defend_R",
+                    "label_sequence_card_keys": ["Defend_R", "Defend_R"],
+                    "sequence_length": 2,
+                    "initial_loss": 18,
+                    "projected_loss": 8,
+                    "loss_delta": 10,
+                    "kills": 0,
+                    "attacks_removed": 0,
+                    "retaliation_damage": 0,
+                    "avoided_lethal": False,
+                },
+                target_value=1.55,
+                sample_weight=1.0,
+            ),
+            CombatValueExample(
+                row={
+                    "source_validation_grade": "pristine",
+                    "act": 1,
+                    "floor": 3,
+                    "turn": 1,
+                    "hp_ratio": 0.9,
+                    "current_hp": 72,
+                    "max_hp": 80,
+                    "current_block": 5,
+                    "current_energy": 1,
+                    "incoming": 6,
+                    "hand_size": 2,
+                    "playable_count": 2,
+                    "enemy_count": 1,
+                    "enemy_ids": ["Louse"],
+                    "hand_ids": ["Strike_R", "Defend_R"],
+                    "label_first_card_key": "Strike_R",
+                    "label_sequence_card_keys": ["Strike_R"],
+                    "sequence_length": 1,
+                    "initial_loss": 1,
+                    "projected_loss": 1,
+                    "loss_delta": 0,
+                    "kills": 0,
+                    "attacks_removed": 0,
+                    "retaliation_damage": 0,
+                    "avoided_lethal": False,
+                },
+                target_value=1.0,
+                sample_weight=1.0,
+            ),
+        ]
+        with TemporaryDirectory() as tmp:
+            model_path = Path(tmp) / "combat_value_model.pt"
+            train_torch_model(examples, model_path=model_path, epochs=2, device_name="cpu", hidden_dim=16)
+            decision = HeuristicPolicy(StrategyMemory.load(), combat_value_model_path=model_path).decide(state)
+
+        shadow = decision.metadata["search"]["combat_value_shadow"]
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1}])
+        self.assertEqual(shadow["status"], "scored")
+        self.assertFalse(shadow["runtime_authority"])
+        self.assertIsInstance(shadow["predicted_value"], float)
 
     def test_combat_avoids_burning_pact_under_low_hp_pressure(self):
         state = {
@@ -3795,6 +4264,251 @@ class PolicyTests(unittest.TestCase):
         self.assertIn("act2_route_penalty", route_eval["options"][0]["lookahead"])
         self.assertNotIn("act2_route_penalty", route_eval["options"][1]["lookahead"])
 
+    def test_map_act2_injured_prefers_safe_question_over_forced_elite_chain(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 21,
+            "current_hp": 51,
+            "max_hp": 80,
+            "gold": 120,
+            "potions": [{"id": "ElixirPotion"}],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 0, "y": 4},
+                    {"symbol": "?", "x": 1, "y": 4},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 0, "y": 4, "children": [{"x": 0, "y": 5}]},
+                        {"symbol": "?", "x": 1, "y": 4, "children": [{"x": 1, "y": 5}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 5, "children": [{"x": 0, "y": 6}]},
+                        {"symbol": "R", "x": 1, "y": 5},
+                    ],
+                    [
+                        {"symbol": "E", "x": 0, "y": 6},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        monster_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertEqual(monster_lookahead["act2_route_penalty"], -24.0)
+        self.assertIn("act2_injured_safer_question_available", monster_lookahead["act2_route_flags"])
+
+    def test_map_act2_coffee_dripper_prefers_safe_question_before_forced_elite_chain(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 19,
+            "current_hp": 62,
+            "max_hp": 80,
+            "gold": 222,
+            "relic_items": [{"id": "Coffee Dripper"}],
+            "potions": [],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 0, "y": 2},
+                    {"symbol": "?", "x": 1, "y": 2},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 0, "y": 2, "children": [{"x": 0, "y": 3}]},
+                        {"symbol": "?", "x": 1, "y": 2, "children": [{"x": 1, "y": 3}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 0, "y": 3, "children": [{"x": 0, "y": 4}]},
+                        {"symbol": "$", "x": 1, "y": 3, "children": [{"x": 1, "y": 4}]},
+                    ],
+                    [
+                        {"symbol": "E", "x": 0, "y": 4},
+                        {"symbol": "M", "x": 1, "y": 4},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        monster_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertEqual(monster_lookahead["act2_route_penalty"], -44.0)
+        self.assertIn("act2_no_rest_forced_elite_safe_question_available", monster_lookahead["act2_route_flags"])
+
+    def test_map_act2_injured_prefers_question_over_hallway_before_rest(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 23,
+            "current_hp": 53,
+            "max_hp": 80,
+            "gold": 70,
+            "potions": [{"id": "DexterityPotion"}, {"id": "ColorlessPotion"}, {"id": "SpeedPotion"}],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 1, "y": 6},
+                    {"symbol": "$", "x": 2, "y": 6},
+                    {"symbol": "?", "x": 3, "y": 6},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 1, "y": 6, "children": [{"x": 1, "y": 7}]},
+                        {"symbol": "$", "x": 2, "y": 6, "children": [{"x": 2, "y": 7}]},
+                        {"symbol": "?", "x": 3, "y": 6, "children": [{"x": 3, "y": 7}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 1, "y": 7, "children": [{"x": 1, "y": 8}]},
+                        {"symbol": "M", "x": 2, "y": 7, "children": [{"x": 2, "y": 8}]},
+                        {"symbol": "R", "x": 3, "y": 7},
+                    ],
+                    [
+                        {"symbol": "R", "x": 1, "y": 8},
+                        {"symbol": "M", "x": 2, "y": 8},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 3}])
+        monster_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertIn("act2_injured_safer_question_available", monster_lookahead["act2_route_flags"])
+
+    def test_map_act2_injured_prefers_shop_over_monster_before_forced_elite_chain(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 20,
+            "current_hp": 46,
+            "max_hp": 80,
+            "gold": 400,
+            "potions": [{"id": "Ancient Potion"}],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 1, "y": 4},
+                    {"symbol": "$", "x": 2, "y": 4},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 1, "y": 4, "children": [{"x": 1, "y": 5}]},
+                        {"symbol": "$", "x": 2, "y": 4, "children": [{"x": 2, "y": 5}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 1, "y": 5, "children": [{"x": 1, "y": 6}]},
+                        {"symbol": "R", "x": 2, "y": 5},
+                    ],
+                    [
+                        {"symbol": "E", "x": 1, "y": 6},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        monster_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertEqual(monster_lookahead["act2_route_penalty"], -42.0)
+        self.assertIn("act2_injured_recovery_available", monster_lookahead["act2_route_flags"])
+        self.assertIn("act2_injured_forced_elite_chain", monster_lookahead["act2_route_flags"])
+
+    def test_map_act2_low_max_hp_prefers_question_over_elite(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 22,
+            "current_hp": 59,
+            "max_hp": 59,
+            "gold": 90,
+            "potions": [],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "E", "x": 1, "y": 5},
+                    {"symbol": "?", "x": 2, "y": 5},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "E", "x": 1, "y": 5, "children": [{"x": 1, "y": 6}]},
+                        {"symbol": "?", "x": 2, "y": 5, "children": [{"x": 2, "y": 6}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 1, "y": 6},
+                        {"symbol": "R", "x": 2, "y": 6},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        elite_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertIn("act2_low_max_hp_elite_path", elite_lookahead["act2_route_flags"])
+        self.assertIn("act2_low_max_hp_immediate_elite", elite_lookahead["act2_route_flags"])
+
+    def test_map_act2_coffee_dripper_does_not_treat_rest_as_recovery(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 2,
+            "floor": 26,
+            "current_hp": 12,
+            "max_hp": 56,
+            "gold": 239,
+            "relic_items": [{"id": "Coffee Dripper"}],
+            "potions": [],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "?", "x": 1, "y": 9},
+                    {"symbol": "M", "x": 2, "y": 9},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "?", "x": 1, "y": 9, "children": [{"x": 1, "y": 10}]},
+                        {"symbol": "M", "x": 2, "y": 9, "children": [{"x": 2, "y": 10}]},
+                    ],
+                    [
+                        {"symbol": "M", "x": 1, "y": 10, "children": [{"x": 1, "y": 11}]},
+                        {"symbol": "R", "x": 2, "y": 10, "children": [{"x": 2, "y": 11}]},
+                    ],
+                    [
+                        {"symbol": "R", "x": 1, "y": 11},
+                        {"symbol": "M", "x": 2, "y": 11},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        monster_lookahead = game["route_evaluation"]["options"][1]["lookahead"]
+        self.assertIn("act2_no_recovery_buffer", monster_lookahead["act2_route_flags"])
+        self.assertLessEqual(monster_lookahead["act2_route_penalty"], -70.0)
+
     def test_map_probe63_prefers_shop_buffer_before_forced_elite(self):
         game = {
             "screen_type": "MAP",
@@ -4161,6 +4875,213 @@ class PolicyTests(unittest.TestCase):
         self.assertLess(elite_lookahead["readiness_penalty"], 0)
         self.assertIn("elite_not_ready", elite_lookahead["readiness_flags"])
         self.assertIn("premium_block_missing", elite_lookahead["readiness_gaps"])
+
+    def test_map_route_risk_model_assist_penalizes_early_forced_elite_path(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 5,
+            "current_hp": 55,
+            "max_hp": 88,
+            "potions": [],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+                {"id": "Pummel"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 1, "y": 5},
+                    {"symbol": "E", "x": 2, "y": 5},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"id": "m5", "symbol": "M", "x": 1, "y": 5, "children": ["r6"]},
+                        {"id": "e5", "symbol": "E", "x": 2, "y": 5, "children": ["r7"]},
+                    ],
+                    [
+                        {"id": "r6", "symbol": "R", "x": 1, "y": 6},
+                        {"id": "r7", "symbol": "R", "x": 2, "y": 6},
+                    ],
+                ],
+            },
+        }
+        with TemporaryDirectory() as tmp:
+            model_path = Path(tmp) / "route_risk_model.json"
+            model_path.write_text(
+                json.dumps(
+                    {
+                        "metadata": {
+                            "examples": 13,
+                            "training_source_quality": "pristine",
+                        },
+                        "intercept": -2.0,
+                        "feature_weights": {"forced_elite_within_3": 4.0},
+                        "feature_means": {"forced_elite_within_3": 0.0},
+                        "feature_scales": {"forced_elite_within_3": 1.0},
+                    }
+                ),
+                encoding="utf-8",
+            )
+            p = HeuristicPolicy(
+                StrategyMemory.load(learned_path=Path(tmp) / "learned.json"),
+                model_authority="assist",
+                route_risk_model_path=model_path,
+            )
+            decision = p.decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        route_eval = game["route_evaluation"]
+        monster_option, elite_option = route_eval["options"]
+        self.assertLess(elite_option["model_adjustment"], 0)
+        self.assertEqual(elite_option["model_assist"]["status"], "scored")
+        self.assertFalse(elite_option["model_assist"]["runtime_authority"])
+        self.assertEqual(elite_option["model_assist"]["runtime_authority_level"], "assist")
+        self.assertEqual(elite_option["model_assist"]["decision_influence"], "route_score_adjustment")
+        self.assertFalse(elite_option["model_assist"]["direct_mcp_control"])
+        self.assertTrue(elite_option["model_assist"]["does_not_control_live_mcp"])
+        self.assertEqual(elite_option["model_assist"]["small_sample_cap"], 12.0)
+        self.assertGreaterEqual(elite_option["model_adjustment"], -12.0)
+        self.assertGreater(elite_option["model_assist"]["risk_score"], monster_option["model_assist"]["risk_score"])
+        self.assertLess(elite_option["score"], monster_option["score"])
+
+    def test_assist_policy_wires_potion_tempo_model_into_live_potion_policy(self):
+        with TemporaryDirectory() as tmp:
+            model_path = Path(tmp) / "potion_tempo_model.json"
+            model_path.write_text(
+                json.dumps(
+                    {
+                        "metadata": {
+                            "examples": 120,
+                            "training_source_quality": "pristine",
+                        },
+                        "intercept": 0.0,
+                        "feature_weights": {"incoming": 1.0},
+                        "feature_means": {"incoming": 0.0},
+                        "feature_scales": {"incoming": 30.0},
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            p = HeuristicPolicy(
+                StrategyMemory.load(learned_path=Path(tmp) / "learned.json"),
+                model_authority="assist",
+                route_risk_model_path=None,
+                potion_tempo_model_path=model_path,
+            )
+
+        self.assertIsNotNone(p._potion_policy.potion_tempo_model)
+        self.assertEqual(p._potion_policy.potion_tempo_model.metadata["examples"], 120)
+        self.assertEqual(p._potion_policy.model_authority, "assist")
+
+    def test_map_readiness_avoids_late_forced_hallway_chain_without_frontload_aoe_or_potion(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 10,
+            "current_hp": 67,
+            "max_hp": 88,
+            "potions": [],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+                {"id": "Battle Trance"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 1, "y": 10},
+                    {"symbol": "R", "x": 2, "y": 10},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"id": "m10", "symbol": "M", "x": 1, "y": 10, "children": ["m11"]},
+                        {"id": "r10", "symbol": "R", "x": 2, "y": 10, "children": ["r11"]},
+                    ],
+                    [
+                        {"id": "m11", "symbol": "M", "x": 1, "y": 11},
+                        {"id": "r11", "symbol": "R", "x": 2, "y": 11},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        monster_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertLess(monster_lookahead["readiness_penalty"], 0)
+        self.assertIn("act1_late_forced_hallway_frontload_gap", monster_lookahead["readiness_flags"])
+        self.assertIn("act1_late_forced_hallway_aoe_gap", monster_lookahead["readiness_flags"])
+        self.assertIn("act1_late_forced_hallway_no_tempo_potion", monster_lookahead["readiness_flags"])
+
+    def test_map_readiness_avoids_low_buffer_hallway_before_rest(self):
+        game = {
+            "screen_type": "MAP",
+            "act": 1,
+            "floor": 4,
+            "current_hp": 53,
+            "max_hp": 80,
+            "potions": [],
+            "deck": [
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Strike_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Defend_R"},
+                {"id": "Bash"},
+            ],
+            "screen_state": {
+                "next_nodes": [
+                    {"symbol": "M", "x": 1, "y": 4},
+                    {"symbol": "?", "x": 2, "y": 4},
+                ]
+            },
+            "map_observation": {
+                "status": "success",
+                "map": [
+                    [
+                        {"symbol": "M", "x": 1, "y": 4, "children": [{"x": 1, "y": 5}]},
+                        {"symbol": "?", "x": 2, "y": 4, "children": [{"x": 2, "y": 5}]},
+                    ],
+                    [
+                        {"symbol": "R", "x": 1, "y": 5},
+                        {"symbol": "R", "x": 2, "y": 5},
+                    ],
+                ],
+            },
+        }
+
+        decision = policy().decide({"in_game": True, "game_state": game})
+
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 2}])
+        monster_lookahead = game["route_evaluation"]["options"][0]["lookahead"]
+        self.assertLess(monster_lookahead["readiness_penalty"], 0)
+        self.assertIn("act1_low_buffer_no_recovery", monster_lookahead["readiness_flags"])
 
     def test_map_readiness_allows_elite_with_aoe_weak_block_and_tempo(self):
         game = {
@@ -4595,6 +5516,24 @@ class PolicyTests(unittest.TestCase):
         decision = policy().decide(state)
         self.assertEqual(decision.actions, [{"action": "proceed"}])
 
+    def test_rest_coffee_dripper_low_hp_smith_reason_marks_forced(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "REST",
+                "act": 2,
+                "floor": 25,
+                "current_hp": 12,
+                "max_hp": 56,
+                "relic_items": [{"id": "Coffee Dripper"}],
+                "screen_state": {"rest_options": ["Smith"]},
+            },
+        }
+        decision = policy().decide(state)
+        self.assertEqual(decision.actions, [{"action": "choose", "choice_index": 1}])
+        self.assertIn("Cannot rest", decision.reason)
+        self.assertEqual(decision.metadata["rest_blocked_by_relic"], "Coffee Dripper")
+
     def test_event_grid_picks_low_value_card_for_transform(self):
         state = {
             "in_game": True,
@@ -4768,6 +5707,354 @@ class PolicyTests(unittest.TestCase):
             }
             memory.record_outcome(state, ["Shrug It Off"])
             self.assertEqual(memory.learned["card_picks"]["Shrug It Off"]["delta"], 1.0)
+
+    def test_low_hp_uses_non_self_damage_kill_before_hemokinesis(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 8,
+                "max_hp": 95,
+                "combat_state": {
+                    "turn": 10,
+                    "player": {"current_hp": 8, "max_hp": 95, "current_energy": 2, "block": 0},
+                    "hand": [
+                        {"name": "Slimed", "id": "Slimed", "type": "STATUS", "cost": 1, "is_playable": True},
+                        {
+                            "name": "Strike",
+                            "id": "Strike_R",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 6,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {"name": "Warcry", "id": "Warcry", "type": "SKILL", "cost": 0, "is_playable": True},
+                        {
+                            "name": "Hemokinesis",
+                            "id": "Hemokinesis",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 17,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                    ],
+                    "monsters": [
+                        {"name": "Spike Slime", "id": "SpikeSlime_L", "current_hp": 43, "max_hp": 73, "move": {"damage": 0}},
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 1, "max_hp": 28, "move": {"damage": 7}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2, "target_index": 2}])
+
+    def test_fresh_search_interrupts_stale_pending_for_large_block(self):
+        agent = policy()
+        agent._pending_search_sequence = _PendingSearchSequence(
+            floor=16,
+            turn=8,
+            card_keys=("defendr",),
+            reason="sequence ['Bash', 'Defend_R'] loss 16->13",
+        )
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 21,
+                "max_hp": 95,
+                "combat_state": {
+                    "turn": 8,
+                    "player": {"current_hp": 21, "max_hp": 95, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {"name": "Slimed", "id": "Slimed", "type": "STATUS", "cost": 1, "is_playable": True},
+                        {"name": "Demon Form", "id": "Demon Form", "type": "POWER", "cost": 3, "is_playable": False},
+                        {
+                            "name": "Power Through",
+                            "id": "Power Through",
+                            "type": "SKILL",
+                            "cost": 1,
+                            "block": 15,
+                            "is_playable": True,
+                        },
+                    ],
+                    "monsters": [
+                        {"name": "Spike Slime", "id": "SpikeSlime_L", "current_hp": 43, "max_hp": 73, "move": {"damage": 16}},
+                        {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 15, "max_hp": 28, "move": {"damage": 0}},
+                    ],
+                },
+            },
+        }
+
+        decision = agent.decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 4}])
+        self.assertIn("One-turn search", decision.reason)
+
+    def test_high_pressure_search_sequence_can_be_remembered_without_block_followup(self):
+        agent = policy()
+        game = {
+            "screen_type": "NONE",
+            "room_phase": "COMBAT",
+            "floor": 5,
+            "act": 1,
+            "current_hp": 38,
+            "max_hp": 80,
+            "combat_state": {
+                "turn": 4,
+                "player": {"current_hp": 38, "max_hp": 80, "current_energy": 2, "block": 5},
+                "hand": [
+                    {"name": "Shrug It Off", "id": "Shrug It Off", "type": "SKILL", "cost": 1, "block": 8},
+                    {
+                        "name": "Strike",
+                        "id": "Strike_R",
+                        "type": "ATTACK",
+                        "cost": 1,
+                        "damage": 6,
+                        "is_playable": True,
+                        "has_target": True,
+                    },
+                ],
+                "monsters": [
+                    {"name": "Red Slaver", "id": "SlaverRed", "current_hp": 22, "max_hp": 48, "move": {"damage": 14}},
+                    {"name": "Acid Slime", "id": "AcidSlime_M", "current_hp": 18, "max_hp": 28, "move": {"damage": 20}},
+                ],
+            },
+        }
+
+        agent._remember_search_sequence(
+            game,
+            ("Shrug It Off", "Strike_R"),
+            "sequence ['Shrug It Off', 'Strike_R'] loss 34->22",
+            loss_reduction=12,
+            initial_loss=34,
+        )
+        self.assertIsNotNone(agent._pending_search_sequence)
+        self.assertEqual(agent._pending_search_sequence.card_keys, ("Strike",))
+
+    def test_direct_lethal_single_card_preempts_combat_search_sequence(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 14,
+                "act": 1,
+                "current_hp": 82,
+                "max_hp": 85,
+                "combat_state": {
+                    "turn": 4,
+                    "player": {"current_hp": 82, "max_hp": 85, "current_energy": 3, "block": 0},
+                    "hand": [
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {
+                            "name": "Carnage",
+                            "id": "Carnage",
+                            "type": "ATTACK",
+                            "cost": 2,
+                            "damage": 20,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                        {
+                            "name": "Uppercut",
+                            "id": "Uppercut",
+                            "type": "ATTACK",
+                            "cost": 2,
+                            "damage": 13,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {
+                            "name": "Bash",
+                            "id": "Bash",
+                            "type": "ATTACK",
+                            "cost": 2,
+                            "damage": 10,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                    ],
+                    "monsters": [
+                        {
+                            "name": "Blue Slaver",
+                            "id": "SlaverBlue",
+                            "current_hp": 10,
+                            "max_hp": 48,
+                            "move": {"damage": 5},
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2, "target_index": 1}])
+        self.assertIn("direct lethal", decision.reason)
+        self.assertNotIn("One-turn search", decision.reason)
+
+    def test_high_pressure_single_card_search_can_take_attack_reduction(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 16,
+                "act": 1,
+                "current_hp": 50,
+                "max_hp": 96,
+                "combat_state": {
+                    "turn": 8,
+                    "player": {"current_hp": 50, "max_hp": 96, "current_energy": 2, "block": 0},
+                    "hand": [
+                        {
+                            "name": "Clothesline",
+                            "id": "Clothesline",
+                            "type": "ATTACK",
+                            "cost": 2,
+                            "damage": 12,
+                            "is_playable": True,
+                            "has_target": True,
+                        }
+                    ],
+                    "monsters": [
+                        {
+                            "name": "The Guardian",
+                            "id": "TheGuardian",
+                            "current_hp": 117,
+                            "max_hp": 240,
+                            "move": {"damage": 32},
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 1, "target_index": 1}])
+        self.assertIn("One-turn search", decision.reason)
+        self.assertEqual(decision.metadata["search"]["sequence_card_keys"], ["Clothesline"])
+
+    def test_high_pressure_power_defers_to_available_block(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 30,
+                "act": 2,
+                "current_hp": 68,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 1,
+                    "player": {"current_hp": 68, "max_hp": 80, "current_energy": 1, "block": 0},
+                    "hand": [
+                        {"name": "Feel No Pain", "id": "Feel No Pain", "type": "POWER", "cost": 1, "is_playable": True},
+                        {"name": "Defend", "id": "Defend_R", "type": "SKILL", "cost": 1, "block": 5, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {"name": "Snake Plant", "id": "SnakePlant", "current_hp": 79, "max_hp": 79, "move": {"damage": 21}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+
+    def test_high_pressure_slow_power_does_not_beat_fallback_attack(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 38,
+                "act": 3,
+                "current_hp": 21,
+                "max_hp": 80,
+                "combat_state": {
+                    "turn": 2,
+                    "player": {"current_hp": 21, "max_hp": 80, "current_energy": 2, "block": 0},
+                    "hand": [
+                        {"name": "Demon Form", "id": "Demon Form", "type": "POWER", "cost": 2, "is_playable": True},
+                        {
+                            "name": "Strike",
+                            "id": "Strike_R",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 6,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                    ],
+                    "monsters": [
+                        {"name": "Maw", "id": "Maw", "current_hp": 120, "max_hp": 120, "move": {"damage": 25}},
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertNotEqual(decision.actions, [{"action": "play_card", "card_index": 1}])
+        self.assertNotIn("Demon Form", decision.reason)
+
+    def test_lethal_pressure_does_not_play_inflame_after_block(self):
+        state = {
+            "in_game": True,
+            "game_state": {
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 23,
+                "act": 2,
+                "current_hp": 1,
+                "max_hp": 85,
+                "combat_state": {
+                    "turn": 4,
+                    "player": {"current_hp": 1, "max_hp": 85, "current_energy": 1, "block": 12},
+                    "hand": [
+                        {
+                            "name": "Strike",
+                            "id": "Strike_R",
+                            "type": "ATTACK",
+                            "cost": 1,
+                            "damage": 10,
+                            "is_playable": True,
+                            "has_target": True,
+                        },
+                        {"name": "Inflame", "id": "Inflame", "type": "POWER", "cost": 1, "is_playable": True},
+                    ],
+                    "monsters": [
+                        {
+                            "name": "Book of Stabbing",
+                            "id": "BookOfStabbing",
+                            "current_hp": 105,
+                            "max_hp": 163,
+                            "move": {"hits": 4, "damage": 6},
+                        }
+                    ],
+                },
+            },
+        }
+
+        decision = policy().decide(state)
+
+        self.assertNotEqual(decision.actions, [{"action": "play_card", "card_index": 2}])
+        self.assertNotIn("Inflame", decision.reason)
 
     def test_builds_frontier_targets_from_unlocked_ascensions(self):
         unlocks = {

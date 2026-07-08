@@ -1,0 +1,447 @@
+{
+  "entities": {
+    "bosses": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "items": [
+        {
+          "count": 570,
+          "entity": "\u5934\u69cc",
+          "normalized_keys": [
+            "\u5934\u69cc"
+          ],
+          "sources": [
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 27
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 28
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 29
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 30
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 31
+            }
+          ]
+        },
+        {
+          "count": 477,
+          "entity": "\u6076\u9b54\u5f62\u6001",
+          "normalized_keys": [
+            "\u6076\u9b54\u5f62\u6001"
+          ],
+          "sources": [
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 5
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 6
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 7
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 8
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 9
+            }
+          ]
+        },
+        {
+          "count": 471,
+          "entity": "\u72c2\u66b4",
+          "normalized_keys": [
+            "\u72c2\u66b4"
+          ],
+          "sources": [
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 5
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 6
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 7
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 8
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 9
+            }
+          ]
+        },
+        {
+          "count": 419,
+          "entity": "\u5bc4\u751f",
+          "normalized_keys": [
+            "\u5bc4\u751f"
+          ],
+          "sources": [
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 157
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 158
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 159
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 160
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 161
+            }
+          ]
+        },
+        {
+          "count": 205,
+          "entity": "\u6b8b\u6740",
+          "normalized_keys": [
+            "\u6b8b\u6740"
+          ],
+          "sources": [
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 341
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 342
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 343
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 344
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 345
+            }
+          ]
+        },
+        {
+          "count": 78,
+          "entity": "\u71d4\u796d",
+          "normalized_keys": [
+            "\u71d4\u796d"
+          ],
+          "sources": [
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 192
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 193
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 194
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 195
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 196
+            }
+          ]
+        },
+        {
+          "count": 74,
+          "entity": "\u65e0\u60e7\u75bc\u75db",
+          "normalized_keys": [
+            "\u65e0\u60e7\u75bc\u75db"
+          ],
+          "sources": [
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 193
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 194
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 195
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 196
+            },
+            {
+              "field": "deck",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 197
+            }
+          ]
+        },
+        {
+          "count": 3,
+          "entity": "Bloodletting",
+          "normalized_keys": [
+            "bloodletting",
+            "\u653e\u8840"
+          ],
+          "sources": [
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 58
+            },
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+              "step": 49
+            },
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 163
+            }
+          ]
+        },
+        {
+          "count": 1,
+          "entity": "Double Tap",
+          "normalized_keys": [
+            "doubletap",
+            "\u53cc\u53d1"
+          ],
+          "sources": [
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 58
+            }
+          ]
+        },
+        {
+          "count": 1,
+          "entity": "Infernal Blade",
+          "normalized_keys": [
+            "infernalblade",
+            "\u5730\u72f1\u4e4b\u5203"
+          ],
+          "sources": [
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+              "step": 307
+            }
+          ]
+        },
+        {
+          "count": 1,
+          "entity": "Juggernaut",
+          "normalized_keys": [
+            "juggernaut",
+            "\u52bf\u4e0d\u53ef\u5f53"
+          ],
+          "sources": [
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 198
+            }
+          ]
+        },
+        {
+          "count": 1,
+          "entity": "Searing Blow",
+          "normalized_keys": [
+            "searingblow",
+            "\u707c\u70ed\u653b\u51fb"
+          ],
+          "sources": [
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+              "step": 71
+            }
+          ]
+        }
+      ],
+      "occurrences": 2301,
+      "unique": 12
+    },
+    "monsters": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "items": [
+        {
+          "count": 244,
+          "entity": "\u8239\u5939\u677f",
+          "normalized_keys": [
+            "\u8239\u5939\u677f"
+          ],
+          "sources": [
+            {
+              "field": "relics",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 145
+            },
+            {
+              "field": "relics",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 146
+            },
+            {
+              "field": "relics",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 147
+            },
+            {
+              "field": "relics",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 148
+            },
+            {
+              "field": "relics",
+              "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+              "step": 149
+            }
+          ]
+        }
+      ],
+      "occurrences": 244,
+      "unique": 1
+    }
+  },
+  "inputs": [
+    "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe103_a0\\20260706_010955_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe105_a0\\20260706_101935_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl"
+  ],
+  "knowledge_dir": "data\\static_knowledge",
+  "knowledge_source_counts": {
+    "bosses": 3,
+    "cards": 75,
+    "monsters": 29,
+    "potions": 30,
+    "relics": 44
+  },
+  "observed_aliases": {
+    "cards": 71
+  },
+  "read_errors": [],
+  "resolved_log_count": 8,
+  "resolved_logs": [
+    "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe103_a0\\20260706_010955_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe105_a0\\20260706_101935_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl"
+  ],
+  "status_line": "static_knowledge_gaps logs=8 missing=2545 cards=2301/12 relics=244/1",
+  "total_missing_occurrences": 2545,
+  "totals": {
+    "bosses": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "occurrences": 2301,
+      "unique": 12
+    },
+    "monsters": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "occurrences": 244,
+      "unique": 1
+    }
+  },
+  "version": 1,
+  "warnings": []
+}

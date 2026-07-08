@@ -1,0 +1,197 @@
+{
+  "version": 1,
+  "gate": {
+    "passed": true,
+    "target": {
+      "character": "IRONCLAD",
+      "ascension": 0
+    },
+    "requirements": {
+      "min_reached": 1,
+      "min_cleared": 1,
+      "min_pristine_cleared": 1,
+      "no_unknown_attribution": true,
+      "no_infra_blocked": true
+    },
+    "checks": {
+      "has_runs": true,
+      "reach_ok": true,
+      "clear_ok": true,
+      "pristine_clear_ok": true,
+      "attribution_ok": true,
+      "no_infra_blocked": true
+    },
+    "blocking_reasons": [],
+    "primary_blocking_reason": null,
+    "deficits": {
+      "runs": 0,
+      "act1_boss_reached": 0,
+      "act1_boss_cleared": 0,
+      "pristine_act1_boss_cleared": 0,
+      "unknown_attribution_runs": 0,
+      "infra_blocked": 0
+    },
+    "progress": {
+      "act1_boss_reached": {
+        "current": 1,
+        "required": 1,
+        "deficit": 0,
+        "ok": true
+      },
+      "act1_boss_cleared": {
+        "current": 1,
+        "required": 1,
+        "deficit": 0,
+        "ok": true
+      },
+      "pristine_act1_boss_cleared": {
+        "current": 1,
+        "required": 1,
+        "deficit": 0,
+        "ok": true
+      }
+    },
+    "remaining_progress": [],
+    "primary_remaining_progress": null,
+    "focus": {
+      "top_failure_attribution": {
+        "attribution": "diagnostic_incomplete",
+        "count": 1
+      },
+      "top_non_pristine_clear_blocker": null,
+      "top_uncleared_boss": null,
+      "top_non_pristine_clear_boss": null
+    },
+    "next_action": "promote_to_next_validation_batch",
+    "next_probe_goal": {
+      "action": "promote_to_next_validation_batch",
+      "primary_blocking_reason": null,
+      "metric": null,
+      "deficit": 0,
+      "summary": "gate passed; promote to the next validation batch",
+      "acceptance_criteria": {
+        "scope": "gate_already_passed",
+        "counts_toward_metric": null,
+        "no_next_validation_required": true
+      }
+    },
+    "latest_run_acceptance": {
+      "available": true,
+      "accepted": true,
+      "not_required": true,
+      "metric": null,
+      "action": "promote_to_next_validation_batch",
+      "summary": "gate already passed; latest run acceptance is not required",
+      "run_path": "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl",
+      "manifest_path": "data\\training_manifest_probe106_a0.json"
+    }
+  },
+  "counts": {
+    "total_runs": 1,
+    "clean_trainable": 0,
+    "diagnostic_excluded": 1,
+    "infra_blocked": 0,
+    "act1_boss_reached": 1,
+    "act1_boss_cleared": 1,
+    "pristine_act1_boss_cleared": 1,
+    "prefix_pristine_act1_boss_cleared": 1,
+    "legacy_pristine_act1_boss_cleared": 0,
+    "explicit_prefix_evidence_runs": 1,
+    "usable_act1_boss_cleared": 0,
+    "diagnostic_act1_boss_cleared": 1,
+    "unknown_attribution_runs": 0,
+    "recovered_action_runs": 1,
+    "failed_action_runs": 0,
+    "validation_grades": {
+      "diagnostic": 1
+    },
+    "failure_attributions": {
+      "diagnostic_incomplete": 1
+    },
+    "act1_boss_reached_by_enemy": {
+      "TheGuardian": 1
+    },
+    "act1_boss_cleared_by_enemy": {
+      "TheGuardian": 1
+    },
+    "pristine_act1_boss_cleared_by_enemy": {
+      "TheGuardian": 1
+    },
+    "prefix_pristine_act1_boss_cleared_by_enemy": {
+      "TheGuardian": 1
+    },
+    "legacy_pristine_act1_boss_cleared_by_enemy": {},
+    "act1_boss_non_pristine_cleared_by_enemy": {},
+    "act1_boss_outcomes_by_enemy": {
+      "TheGuardian": {
+        "reached": 1,
+        "cleared": 1,
+        "pristine_cleared": 1,
+        "prefix_pristine_cleared": 1,
+        "legacy_pristine_cleared": 0,
+        "non_pristine_cleared": 0,
+        "uncleared": 0,
+        "clear_rate": 1.0,
+        "pristine_clear_rate": 1.0
+      }
+    },
+    "act1_boss_non_pristine_clear_blockers_by_enemy": {},
+    "act1_boss_uncleared_by_enemy": {},
+    "act1_boss_uncleared_failure_attributions_by_enemy": {},
+    "recovery_flags": {
+      "recovered_action_race": 1
+    },
+    "non_pristine_clear_blockers": {}
+  },
+  "runs": [
+    {
+      "manifest_path": "data\\training_manifest_probe106_a0.json",
+      "path": "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl",
+      "category": "diagnostic_excluded",
+      "reason": "no_terminal_outcome",
+      "character": "IRONCLAD",
+      "ascension": 0,
+      "floor": 17,
+      "victory": null,
+      "validation_grade": "diagnostic",
+      "validation_flags": [
+        "diagnostic_excluded",
+        "no_terminal_outcome",
+        "recovered_action_race"
+      ],
+      "failure_attribution": "diagnostic_incomplete",
+      "failure_tags": [
+        "diagnostic",
+        "no_terminal_outcome"
+      ],
+      "recovered_actions": 1,
+      "failed_actions": 0,
+      "act1_boss_reached": true,
+      "act1_boss_cleared": true,
+      "pristine_act1_boss_cleared": true,
+      "act1_boss_prefix_pristine_clear": true,
+      "non_pristine_clear_blockers": [],
+      "act1_boss": {
+        "reached": true,
+        "cleared": true,
+        "enemy_ids": [
+          "TheGuardian"
+        ],
+        "entry_step": 181,
+        "entry_hp": 78,
+        "entry_potion_count": 3,
+        "clear_step": 255,
+        "prefix_pristine_clear": true,
+        "prefix_blockers": [],
+        "last_turn": null,
+        "last_hp": 22,
+        "potion_use_steps": [
+          189,
+          190,
+          192
+        ]
+      },
+      "attribution_known": true
+    }
+  ]
+}

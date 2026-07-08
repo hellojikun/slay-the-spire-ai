@@ -1,0 +1,75 @@
+{
+  "accepted_rows": 132,
+  "example_count": 1,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 24,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 26,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        9
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Warcry",
+        "Strike_R",
+        "Strike_R",
+        "Anger"
+      ],
+      "incoming": 24,
+      "initial_loss": 19,
+      "kills": 1,
+      "label_first_card_key": "Strike_R",
+      "label_sequence_card_keys": [
+        "Strike_R"
+      ],
+      "label_target_index": 1,
+      "line": 121,
+      "loss_delta": 19,
+      "max_hp": 85,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_30\\offline\\shadow_cycle_20260707_ironclad_a0_win_30\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_152959_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 204,
+      "turn": 9
+    }
+  ],
+  "excluded_rows": 1,
+  "exclusion_reasons": {
+    "missed_single_card_search": 1
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_30\\offline\\shadow_cycle_20260707_ironclad_a0_win_30"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_30\\offline\\shadow_cycle_20260707_ironclad_a0_win_30\\combat_search_labels.jsonl"
+  ],
+  "rows": 133,
+  "source_quality": {
+    "usable_with_recoveries": 133
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=133 excluded=1 missed_single_card_search=1",
+  "version": 1,
+  "warnings": []
+}

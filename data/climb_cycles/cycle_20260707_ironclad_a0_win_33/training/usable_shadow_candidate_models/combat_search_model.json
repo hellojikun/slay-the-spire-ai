@@ -1,0 +1,136 @@
+{
+  "metadata": {
+    "version": 1,
+    "trained_at": "2026-07-07T17:59:44",
+    "backend": "frequency_context_stats",
+    "examples": 35,
+    "label_cards": 5,
+    "target": "label_first_card_key",
+    "value_target": "loss_delta_attacks_removed_kills_retaliation_damage_avoided_lethal",
+    "min_count": 2,
+    "max_weight": 2.0,
+    "source_quality": {
+      "usable_with_recoveries": 35
+    },
+    "load_quality": {
+      "files": 1,
+      "rows": 35,
+      "accepted": 35,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "training_source": {
+      "mode": "shadow_rows",
+      "category": "combat_search",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_33\\live_shadow\\20260707_174128_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "combat_search_labels.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_33\\live_shadow\\20260707_174128_ironclad_a0\\combat_search_labels.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    },
+    "training_source_quality": "usable"
+  },
+  "card_priors": {
+    "bash": 0.8514,
+    "clothesline": 0.9432,
+    "defendr": 1.1924,
+    "striker": 1.4855
+  },
+  "context_card_scores": {
+    "act:1": {
+      "bash": -0.2033,
+      "clothesline": -0.0558,
+      "defendr": -0.1253,
+      "striker": 0.2616
+    },
+    "enemy:multi": {
+      "bash": -0.1306,
+      "clothesline": -0.0416,
+      "defendr": -0.0836
+    },
+    "enemy:single": {
+      "bash": -0.224,
+      "clothesline": -0.051,
+      "defendr": -0.1464,
+      "striker": 0.2212
+    },
+    "enemy_id:acidslimel": {
+      "defendr": -0.2865
+    },
+    "enemy_id:acidslimem": {
+      "defendr": -0.3125
+    },
+    "enemy_id:cultist": {
+      "striker": 0.3943
+    },
+    "enemy_id:fungibeast": {
+      "clothesline": -0.1994,
+      "defendr": 0.239
+    },
+    "enemy_id:fuzzylousedefensive": {
+      "defendr": 0.1976
+    },
+    "enemy_id:looter": {
+      "defendr": -0.1228,
+      "striker": -0.3704
+    },
+    "enemy_id:slaverblue": {
+      "striker": 0.3943
+    },
+    "enemy_id:spikeslimel": {
+      "defendr": -0.3548
+    },
+    "enemy_id:spikeslimem": {
+      "bash": -0.3306,
+      "striker": 0.3943
+    },
+    "energy:2": {
+      "defendr": -0.2628,
+      "striker": 0.2029
+    },
+    "energy:3": {
+      "bash": -0.2033,
+      "clothesline": -0.0558,
+      "defendr": -0.0782,
+      "striker": 0.2572
+    },
+    "hp:high": {
+      "bash": -0.3347,
+      "clothesline": -0.0635,
+      "defendr": -0.0379,
+      "striker": 0.2616
+    },
+    "hp:low": {
+      "defendr": -0.3125
+    },
+    "incoming:chip": {
+      "bash": 0.097,
+      "clothesline": 0.0802,
+      "defendr": -0.0627,
+      "striker": 0.5421
+    },
+    "incoming:covered": {
+      "bash": -0.3704,
+      "striker": -0.3704
+    },
+    "turn:early": {
+      "defendr": 0.0372,
+      "striker": 0.2572
+    },
+    "turn:first": {
+      "clothesline": 0.0802
+    },
+    "turn:late": {
+      "bash": -0.1306,
+      "clothesline": -0.1727,
+      "defendr": -0.3548,
+      "striker": 0.2029
+    }
+  }
+}

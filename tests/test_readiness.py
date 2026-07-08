@@ -405,6 +405,39 @@ class ReadinessTests(unittest.TestCase):
         self.assertIn("hallway_lacks_premium_block", result["risk_flags"])
         self.assertIn("seek_or_save_hallway_tempo_potion", result["recommendations"])
 
+    def test_low_buffer_immediate_hallway_before_rest_is_flagged(self):
+        state = {
+            "act": 1,
+            "floor": 4,
+            "class": "IRONCLAD",
+            "current_hp": 53,
+            "max_hp": 80,
+            "deck": starting_ironclad_deck(),
+            "potions": [],
+            "map_options": [{"symbol": "M", "x": 1, "y": 4}],
+            "route_evaluation": {
+                "options": [
+                    {
+                        "choice_index": 1,
+                        "symbol": "M",
+                        "score": 62.0,
+                        "lookahead": {
+                            "forced_combat_within_2": True,
+                            "forced_combat_within_4": True,
+                            "nearest_rest": 1,
+                            "nearest_shop": 5,
+                        },
+                    }
+                ]
+            },
+        }
+
+        result = act1_readiness(state, knowledge=Act1TagKnowledge())
+
+        self.assertIn("act1_low_buffer_no_recovery", result["risk_flags"])
+        self.assertIn("hallway_no_immediate_tempo_potion", result["risk_flags"])
+        self.assertIn("hallway_lacks_premium_block", result["risk_flags"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,122 @@
+{
+  "accepted_rows": 125,
+  "example_count": 2,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 53,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        155
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Defend_R",
+        "Defend_R",
+        "Strike_R",
+        "Strike_R"
+      ],
+      "incoming": 32,
+      "initial_loss": 32,
+      "kills": 0,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R"
+      ],
+      "line": 118,
+      "loss_delta": 8,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_25\\offline\\shadow_cycle_20260707_ironclad_a0_win_25\\combat_search_labels.jsonl",
+      "projected_loss": 24,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_25\\20260707_114842_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 243,
+      "turn": 7
+    },
+    {
+      "act": 1,
+      "attacks_removed": 28,
+      "avoided_lethal": true,
+      "current_energy": 2,
+      "current_hp": 25,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        75
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Hemokinesis",
+        "Strike_R",
+        "Pommel Strike"
+      ],
+      "incoming": 28,
+      "initial_loss": 28,
+      "kills": 0,
+      "label_first_card_key": "Pommel Strike",
+      "label_sequence_card_keys": [
+        "Pommel Strike"
+      ],
+      "label_target_index": 1,
+      "line": 123,
+      "loss_delta": 28,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_25\\offline\\shadow_cycle_20260707_ironclad_a0_win_25\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_25\\20260707_114842_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 271,
+      "turn": 14
+    }
+  ],
+  "excluded_rows": 2,
+  "exclusion_reasons": {
+    "missed_single_card_search": 2
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_25\\offline\\shadow_cycle_20260707_ironclad_a0_win_25"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_25\\offline\\shadow_cycle_20260707_ironclad_a0_win_25\\combat_search_labels.jsonl"
+  ],
+  "rows": 127,
+  "source_quality": {
+    "pristine": 37,
+    "usable_with_recoveries": 90
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=127 excluded=2 missed_single_card_search=2",
+  "version": 1,
+  "warnings": []
+}

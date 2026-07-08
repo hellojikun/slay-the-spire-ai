@@ -18,7 +18,8 @@ def read_game_state(client: MCPClient, attempts: int = 8, delay: float = 0.25) -
     last_error: MCPError | None = None
     for attempt in range(attempts):
         try:
-            return client.get_game_state(BASE_GAME_STATE_INCLUDE)
+            state = client.get_game_state(BASE_GAME_STATE_INCLUDE)
+            return _validated_game_state(state)
         except MCPError as exc:
             last_error = exc
             if is_transient_state_error(exc):
@@ -243,6 +244,25 @@ def _elapsed_ms(started: float) -> int:
 def is_transient_state_error(exc: MCPError) -> bool:
     text = str(exc).lower()
     return ("internal error" in text and "null" in text) or "read_state_failed" in text
+
+
+def _validated_game_state(state: Any) -> dict[str, Any]:
+    reason = _invalid_game_state_reason(state)
+    if reason is not None:
+        raise MCPError(f"read_state_failed: invalid state payload: {reason}")
+    return state
+
+
+def _invalid_game_state_reason(state: Any) -> str | None:
+    if not isinstance(state, dict):
+        return type(state).__name__
+    if not state:
+        return "empty dict"
+    if state.get("in_game") is True and not isinstance(state.get("game_state"), dict):
+        return "in_game without game_state"
+    if "in_game" not in state and "game_state" not in state and "ready_for_command" not in state:
+        return "missing state markers"
+    return None
 
 
 def probe_mcp_health(client: MCPClient) -> dict[str, Any] | None:

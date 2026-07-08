@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -12,3 +12,4 @@ class Decision:
     reason: str
     should_stop: bool = False
     learn_card_pick: str | None = None
+    metadata: dict[str, Any] = field(default_factory=dict)

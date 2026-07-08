@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "created_at": "2026-07-07T00:40:22",
+  "hardware": {
+    "use_all_hardware_requested": true,
+    "cpu_count": 16,
+    "gpu": {
+      "torch_available": true,
+      "cuda_available": true,
+      "devices": [
+        "NVIDIA GeForce RTX 4080 SUPER"
+      ]
+    }
+  },
+  "targets": {
+    "IRONCLAD:A0": {
+      "wins": 0,
+      "attempts": 0,
+      "last_status": "start_failed",
+      "last_log": null,
+      "last_error": "Error: Invalid command: start. Possible commands: [play, end, potion, key, click, wait, save, state]",
+      "updated_at": "2026-07-07T00:40:25"
+    }
+  }
+}

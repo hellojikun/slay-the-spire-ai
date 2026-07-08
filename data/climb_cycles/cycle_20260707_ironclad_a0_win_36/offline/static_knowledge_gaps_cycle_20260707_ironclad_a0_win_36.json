@@ -1,0 +1,790 @@
+{
+  "entities": {
+    "bosses": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "items": [
+        {
+          "count": 180,
+          "entity": "Master of Strategy",
+          "normalized_keys": [
+            "masterofstrategy",
+            "\u6218\u7565\u5927\u5e08"
+          ],
+          "sources": [
+            {
+              "field": "deck_cards",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 295
+            },
+            {
+              "field": "deck_cards",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 296
+            },
+            {
+              "field": "deck_cards",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 297
+            },
+            {
+              "field": "deck_cards",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 298
+            },
+            {
+              "field": "deck_cards",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 299
+            }
+          ]
+        },
+        {
+          "count": 68,
+          "entity": "\u5251\u67c4\u6253\u51fb",
+          "normalized_keys": [
+            "\u5251\u67c4\u6253\u51fb"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 187
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 188
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 189
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 190
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 201
+            }
+          ]
+        },
+        {
+          "count": 64,
+          "entity": "\u71d4\u796d",
+          "normalized_keys": [
+            "\u71d4\u796d"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 12
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 13
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 16
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 38
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 52
+            }
+          ]
+        },
+        {
+          "count": 30,
+          "entity": "\u6218\u7565\u5927\u5e08",
+          "normalized_keys": [
+            "\u6218\u7565\u5927\u5e08"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 305
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 306
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 307
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 308
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 336
+            }
+          ]
+        },
+        {
+          "count": 29,
+          "entity": "\u5168\u8eab\u649e\u51fb",
+          "normalized_keys": [
+            "\u5168\u8eab\u649e\u51fb"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 360
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 361
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 362
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 363
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 364
+            }
+          ]
+        },
+        {
+          "count": 25,
+          "entity": "\u9ed1\u6697\u4e4b\u62e5",
+          "normalized_keys": [
+            "\u9ed1\u6697\u4e4b\u62e5"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 356
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 357
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 358
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 359
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 365
+            }
+          ]
+        },
+        {
+          "count": 22,
+          "entity": "\u71c3\u70e7\u5951\u7ea6+",
+          "normalized_keys": [
+            "\u71c3\u70e7\u5951\u7ea6"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 448
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 449
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 450
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 451
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 463
+            }
+          ]
+        },
+        {
+          "count": 12,
+          "entity": "\u72c2\u66b4",
+          "normalized_keys": [
+            "\u72c2\u66b4"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 302
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 303
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 332
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 333
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 334
+            }
+          ]
+        },
+        {
+          "count": 11,
+          "entity": "\u65e0\u60e7\u75bc\u75db",
+          "normalized_keys": [
+            "\u65e0\u60e7\u75bc\u75db"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 351
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 352
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 353
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 354
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 393
+            }
+          ]
+        },
+        {
+          "count": 8,
+          "entity": "\u72c2\u5bb4",
+          "normalized_keys": [
+            "\u72c2\u5bb4"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 380
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 381
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 457
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 458
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 459
+            }
+          ]
+        },
+        {
+          "count": 7,
+          "entity": "\u796d\u54c1+",
+          "normalized_keys": [
+            "\u796d\u54c1"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 383
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 452
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 453
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 454
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 455
+            }
+          ]
+        },
+        {
+          "count": 2,
+          "entity": "\u796d\u54c1",
+          "normalized_keys": [
+            "\u796d\u54c1"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 348
+            },
+            {
+              "field": "combat.hand",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 349
+            }
+          ]
+        }
+      ],
+      "occurrences": 458,
+      "unique": 12
+    },
+    "monsters": {
+      "items": [
+        {
+          "count": 82,
+          "entity": "Darkling",
+          "normalized_keys": [
+            "darkling",
+            "\u5c0f\u9ed1"
+          ],
+          "sources": [
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 447
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 447
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 447
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 448
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 448
+            }
+          ]
+        },
+        {
+          "count": 60,
+          "entity": "GremlinLeader",
+          "normalized_keys": [
+            "gremlinleader",
+            "\u5730\u7cbe\u9996\u9886"
+          ],
+          "sources": [
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 337
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 338
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 339
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 340
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 341
+            }
+          ]
+        },
+        {
+          "count": 51,
+          "entity": "Champ",
+          "normalized_keys": [
+            "champ",
+            "\u7b2c\u4e00\u52c7\u58eb"
+          ],
+          "sources": [
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 492
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 493
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 494
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 495
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 496
+            }
+          ]
+        },
+        {
+          "count": 41,
+          "entity": "Repulsor",
+          "normalized_keys": [
+            "repulsor",
+            "\u53cd\u51b2\u673a"
+          ],
+          "sources": [
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 484
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 484
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 485
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 485
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 486
+            }
+          ]
+        },
+        {
+          "count": 9,
+          "entity": "Orb Walker",
+          "normalized_keys": [
+            "orbwalker",
+            "\u5706\u7403\u884c\u8005"
+          ],
+          "sources": [
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 436
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 437
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 438
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 439
+            },
+            {
+              "field": "combat.monsters",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 440
+            }
+          ]
+        }
+      ],
+      "occurrences": 243,
+      "unique": 5
+    },
+    "potions": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "items": [
+        {
+          "count": 385,
+          "entity": "Red Skull",
+          "normalized_keys": [
+            "redskull",
+            "\u7ea2\u5934\u9aa8"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 124
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 125
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 126
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 127
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 128
+            }
+          ]
+        },
+        {
+          "count": 271,
+          "entity": "Velvet Choker",
+          "normalized_keys": [
+            "velvetchoker",
+            "\u5929\u9e45\u7ed2\u9888\u5708"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 238
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 239
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 240
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 241
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 242
+            }
+          ]
+        },
+        {
+          "count": 180,
+          "entity": "Thread and Needle",
+          "normalized_keys": [
+            "threadandneedle",
+            "\u9488\u7ebf"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 329
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 330
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 331
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 332
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 333
+            }
+          ]
+        },
+        {
+          "count": 77,
+          "entity": "Busted Crown",
+          "normalized_keys": [
+            "bustedcrown",
+            "\u7834\u788e\u91d1\u51a0"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 432
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 433
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 434
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 435
+            },
+            {
+              "field": "relic_items",
+              "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 436
+            }
+          ]
+        }
+      ],
+      "occurrences": 913,
+      "unique": 4
+    }
+  },
+  "inputs": [
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl"
+  ],
+  "knowledge_dir": "data\\static_knowledge",
+  "knowledge_source_counts": {
+    "bosses": 3,
+    "cards": 87,
+    "monsters": 30,
+    "potions": 32,
+    "relics": 69
+  },
+  "observed_aliases": {
+    "cards": 58
+  },
+  "read_errors": [],
+  "resolved_log_count": 3,
+  "resolved_logs": [
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl"
+  ],
+  "status_line": "static_knowledge_gaps logs=3 missing=1614 cards=458/12 relics=913/4 monsters=243/5",
+  "total_missing_occurrences": 1614,
+  "totals": {
+    "bosses": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "occurrences": 458,
+      "unique": 12
+    },
+    "monsters": {
+      "occurrences": 243,
+      "unique": 5
+    },
+    "potions": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "occurrences": 913,
+      "unique": 4
+    }
+  },
+  "version": 1,
+  "warnings": []
+}

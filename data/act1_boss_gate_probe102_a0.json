@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "gate": {
+    "passed": false,
+    "target": {
+      "character": "IRONCLAD",
+      "ascension": 0
+    },
+    "requirements": {
+      "min_reached": 3,
+      "min_cleared": 2,
+      "min_pristine_cleared": 2,
+      "no_unknown_attribution": true,
+      "no_infra_blocked": true
+    },
+    "checks": {
+      "has_runs": true,
+      "reach_ok": false,
+      "clear_ok": false,
+      "pristine_clear_ok": false,
+      "attribution_ok": true,
+      "no_infra_blocked": true
+    },
+    "next_action": "improve_route_and_early_act1_survival"
+  },
+  "counts": {
+    "total_runs": 1,
+    "clean_trainable": 1,
+    "diagnostic_excluded": 0,
+    "infra_blocked": 0,
+    "act1_boss_reached": 1,
+    "act1_boss_cleared": 1,
+    "pristine_act1_boss_cleared": 0,
+    "usable_act1_boss_cleared": 1,
+    "diagnostic_act1_boss_cleared": 0,
+    "unknown_attribution_runs": 0,
+    "recovered_action_runs": 1,
+    "failed_action_runs": 0,
+    "validation_grades": {
+      "usable_with_recoveries": 1
+    },
+    "failure_attributions": {
+      "route_risk": 1
+    },
+    "recovery_flags": {
+      "recovered_action_race": 1
+    },
+    "non_pristine_clear_blockers": {
+      "flag:recovered_action_race": 1,
+      "grade:usable_with_recoveries": 1,
+      "recovered_actions": 1
+    }
+  },
+  "runs": [
+    {
+      "manifest_path": "runs\\ai_runs_strategy_probe102_a0\\manifests\\20260706_005531_ironclad_a0.manifest.json",
+      "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+      "category": "clean_trainable",
+      "reason": "completed_clean",
+      "character": "IRONCLAD",
+      "ascension": 0,
+      "floor": 30,
+      "victory": false,
+      "validation_grade": "usable_with_recoveries",
+      "validation_flags": [
+        "recovered_action_race"
+      ],
+      "failure_attribution": "route_risk",
+      "failure_tags": [
+        "run_loss",
+        "route_risk"
+      ],
+      "recovered_actions": 3,
+      "failed_actions": 0,
+      "act1_boss_reached": true,
+      "act1_boss_cleared": true,
+      "pristine_act1_boss_cleared": false,
+      "non_pristine_clear_blockers": [
+        "flag:recovered_action_race",
+        "grade:usable_with_recoveries",
+        "recovered_actions"
+      ],
+      "act1_boss": {
+        "enemy_ids": [
+          "TheGuardian"
+        ],
+        "entry_hp": 64,
+        "entry_potion_count": 2,
+        "last_turn": null,
+        "last_hp": 29,
+        "potion_use_steps": [
+          197,
+          212
+        ]
+      },
+      "attribution_known": true
+    }
+  ]
+}

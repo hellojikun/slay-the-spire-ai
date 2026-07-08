@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "version": 1,
+    "trained_at": "2026-07-07T16:42:28",
+    "backend": "frequency_context_stats",
+    "examples": 53,
+    "label_cards": 4,
+    "target": "label_first_card_key",
+    "value_target": "loss_delta_attacks_removed_kills_retaliation_damage_avoided_lethal",
+    "min_count": 2,
+    "max_weight": 2.0,
+    "source_quality": {
+      "usable_with_recoveries": 53
+    },
+    "load_quality": {
+      "files": 3,
+      "rows": 53,
+      "accepted": 53,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "training_source": {
+      "mode": "shadow_rows",
+      "category": "combat_search",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "combat_search_labels.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\combat_search_labels.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\combat_search_labels.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\combat_search_labels.jsonl"
+      ],
+      "resolved_file_count": 3,
+      "warnings": []
+    },
+    "training_source_quality": "usable"
+  },
+  "card_priors": {
+    "bash": 1.499,
+    "defendr": 1.4676,
+    "striker": 1.5008
+  },
+  "context_card_scores": {
+    "act:1": {
+      "bash": 0.1575,
+      "defendr": -0.1145,
+      "striker": 0.1836
+    },
+    "enemy:multi": {
+      "bash": 0.0277,
+      "defendr": -0.1106
+    },
+    "enemy:single": {
+      "bash": 0.3711,
+      "defendr": -0.0902,
+      "striker": 0.3165
+    },
+    "enemy_id:acidslimem": {
+      "bash": 0.2208,
+      "defendr": 0.0047,
+      "striker": 0.1004
+    },
+    "enemy_id:acidslimes": {
+      "bash": -0.065,
+      "striker": 0.2277
+    },
+    "enemy_id:fungibeast": {
+      "defendr": 0.2207
+    },
+    "enemy_id:fuzzylousedefensive": {
+      "bash": 0.2294,
+      "defendr": 0.0102,
+      "striker": 0.1811
+    },
+    "enemy_id:fuzzylousenormal": {
+      "striker": -0.2383
+    },
+    "enemy_id:jawworm": {
+      "defendr": -0.3173
+    },
+    "enemy_id:sentry": {
+      "defendr": -0.3463
+    },
+    "enemy_id:slaverblue": {
+      "defendr": -0.1647
+    },
+    "enemy_id:spikeslimes": {
+      "bash": 0.1995,
+      "defendr": 0.1207,
+      "striker": 0.2277
+    },
+    "energy:2": {
+      "defendr": -0.1471,
+      "striker": 0.1879
+    },
+    "energy:3": {
+      "bash": 0.1575,
+      "defendr": -0.0834,
+      "striker": 0.1186
+    },
+    "hp:high": {
+      "bash": 0.2949,
+      "defendr": -0.1233,
+      "striker": 0.2374
+    },
+    "hp:low": {
+      "defendr": -0.3393
+    },
+    "hp:mid": {
+      "bash": 0.016,
+      "defendr": -0.0289,
+      "striker": 0.079
+    },
+    "incoming:chip": {
+      "bash": 0.3119,
+      "defendr": -0.023,
+      "striker": 0.3037
+    },
+    "incoming:covered": {
+      "defendr": -0.3937,
+      "striker": -0.2383
+    },
+    "incoming:danger": {
+      "defendr": -0.3393
+    },
+    "turn:early": {
+      "bash": 0.3158,
+      "defendr": 0.1251,
+      "striker": 0.1391
+    },
+    "turn:first": {
+      "bash": 0.1373,
+      "defendr": -0.1579
+    },
+    "turn:late": {
+      "bash": -0.1703,
+      "defendr": -0.2835,
+      "striker": 0.2796
+    }
+  }
+}

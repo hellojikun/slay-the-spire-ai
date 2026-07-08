@@ -1,0 +1,94 @@
+{
+  "current_policy_matches_actual": 0,
+  "current_policy_matches_label": 0,
+  "current_policy_other": 1,
+  "example_count": 1,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "actual_action": {
+        "action": "play_card"
+      },
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 72,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        218
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Shrug It Off",
+        "Defend_R",
+        "Strike_R",
+        "Double Tap",
+        "Defend_R"
+      ],
+      "incoming": 32,
+      "initial_loss": 18,
+      "kills": 0,
+      "label_action": {
+        "action": "play_card",
+        "card_index": 1
+      },
+      "label_first_card_key": "Shrug It Off",
+      "label_sequence_card_keys": [
+        "Shrug It Off"
+      ],
+      "line": 41,
+      "loss_delta": 8,
+      "max_hp": 80,
+      "outcome": "current_policy_other",
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\offline\\shadow_cycle_20260707_ironclad_a0_win_28\\combat_search_labels.jsonl",
+      "policy_action": {
+        "action": "use_potion",
+        "potion_slot": 1
+      },
+      "policy_reason": "Long boss/elite fight; use \u590d\u5236\u836f\u6c34 before a high-impact card.",
+      "projected_loss": 10,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_28\\20260707_133005_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 206,
+      "turn": 2
+    }
+  ],
+  "excluded_rows": 1,
+  "exclusion_reasons": {
+    "missed_single_card_search": 1
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\offline\\shadow_cycle_20260707_ironclad_a0_win_28"
+  ],
+  "missing_source_log": 0,
+  "missing_source_step": 0,
+  "policy_errors": 0,
+  "read_errors": [],
+  "replay_outcomes": {
+    "current_policy_other": 1
+  },
+  "replayed_rows": 1,
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_28\\offline\\shadow_cycle_20260707_ironclad_a0_win_28\\combat_search_labels.jsonl"
+  ],
+  "rows": 159,
+  "source_quality_policy": "all",
+  "status_line": "combat_label_replay_audit files=1 excluded=1 replayed=1 matches_label=0 matches_actual=0 other=1",
+  "version": 1,
+  "warnings": []
+}

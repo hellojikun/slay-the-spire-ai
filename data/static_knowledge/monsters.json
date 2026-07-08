@@ -9,83 +9,95 @@
     {
       "name": "Slay the Spire Monsters wiki",
       "url": "https://slay-the-spire.fandom.com/wiki/Monsters"
+    },
+    {
+      "name": "Spire Archive STS1 parsed game data",
+      "url": "https://github.com/nkhoit/spire-archive"
     }
   ],
   "monsters": [
     {
-      "id": "Hexaghost",
-      "name": "Hexaghost",
-      "act": 1,
-      "boss": true,
-      "elite": false,
-      "multi_hit": true,
-      "tags": ["boss", "multi_hit", "scaling_pressure", "burns", "weak_high_value", "frontload_check"],
-      "values": {"max_expected_attack": 36}
-    },
-    {
-      "id": "SlimeBoss",
-      "name": "Slime Boss",
-      "aliases": ["Slime Boss"],
-      "act": 1,
-      "boss": true,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["boss", "split", "aoe_required", "status_pressure", "frontload_check"],
-      "values": {"max_expected_attack": 38}
-    },
-    {
-      "id": "TheGuardian",
-      "name": "The Guardian",
-      "aliases": ["Guardian"],
-      "act": 1,
-      "boss": true,
-      "elite": false,
-      "multi_hit": true,
-      "tags": ["boss", "mode_shift", "thorns", "defense_check", "burst_damage_check"],
-      "values": {"max_expected_attack": 36}
-    },
-    {
-      "id": "GremlinNob",
-      "name": "Gremlin Nob",
-      "aliases": ["Gremlin Nob"],
-      "act": 1,
-      "boss": false,
-      "elite": true,
-      "multi_hit": false,
-      "tags": ["elite", "anti_skill", "frontload_check", "vulnerable_pressure"],
-      "values": {"max_expected_attack": 24}
-    },
-    {
-      "id": "Lagavulin",
-      "name": "Lagavulin",
-      "act": 1,
-      "boss": false,
-      "elite": true,
-      "multi_hit": false,
-      "tags": ["elite", "debuff", "burst_window", "block_check"],
-      "values": {"max_expected_attack": 20}
-    },
-    {
-      "id": "Sentry",
-      "name": "Sentry",
-      "aliases": ["Sentries"],
-      "act": 1,
-      "boss": false,
-      "elite": true,
-      "multi_hit": false,
-      "tags": ["elite", "multi_enemy", "artifact", "status_pressure", "aoe_high_value"],
-      "values": {"max_expected_attack": 20}
-    },
-    {
-      "id": "JawWorm",
-      "name": "Jaw Worm",
-      "aliases": ["Jaw Worm"],
+      "id": "AcidSlimeL",
+      "name": "Acid Slime (L)",
+      "aliases": [
+        "Acid Slime",
+        "Large Acid Slime",
+        "酸液史莱姆（大）"
+      ],
       "act": 1,
       "boss": false,
       "elite": false,
       "multi_hit": false,
-      "tags": ["hallway", "scaling_pressure", "block_check"],
-      "values": {"max_expected_attack": 17}
+      "tags": [
+        "hallway",
+        "split",
+        "weak",
+        "status_pressure"
+      ],
+      "values": {
+        "max_expected_attack": 18
+      }
+    },
+    {
+      "id": "AcidSlimeM",
+      "name": "Acid Slime (M)",
+      "aliases": [
+        "Medium Acid Slime",
+        "AcidSlime_S",
+        "Small Acid Slime",
+        "酸液史莱姆（中）",
+        "酸液史莱姆（小）"
+      ],
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "status_pressure",
+        "small_enemy"
+      ],
+      "values": {
+        "max_expected_attack": 12
+      }
+    },
+    {
+      "id": "ApologySlime",
+      "name": "Apology Slime",
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 3
+      },
+      "aliases": [
+        "抱歉史莱姆"
+      ]
+    },
+    {
+      "id": "BlueSlaver",
+      "name": "Blue Slaver",
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "weak",
+        "block_check"
+      ],
+      "values": {
+        "max_expected_attack": 13
+      },
+      "aliases": [
+        "SLAVERBLUE"
+      ]
     },
     {
       "id": "Cultist",
@@ -94,107 +106,408 @@
       "boss": false,
       "elite": false,
       "multi_hit": false,
-      "tags": ["hallway", "scaling_pressure", "frontload_check"],
-      "values": {"max_expected_attack": 30}
+      "tags": [
+        "hallway",
+        "scaling_pressure",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 30
+      },
+      "aliases": [
+        "邪教徒"
+      ]
     },
     {
       "id": "FungiBeast",
       "name": "Fungi Beast",
-      "aliases": ["Fungi Beast"],
+      "aliases": [
+        "Fungi Beast",
+        "真菌兽"
+      ],
       "act": 1,
       "boss": false,
       "elite": false,
       "multi_hit": false,
-      "tags": ["hallway", "multi_enemy", "vulnerable_pressure", "on_death_strength"],
-      "values": {"max_expected_attack": 12}
-    },
-    {
-      "id": "LouseNormal",
-      "name": "Louse",
-      "aliases": ["Red Louse", "Green Louse"],
-      "act": 1,
-      "boss": false,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["hallway", "multi_enemy", "small_enemy"],
-      "values": {"max_expected_attack": 12}
-    },
-    {
-      "id": "AcidSlimeL",
-      "name": "Acid Slime (L)",
-      "aliases": ["Acid Slime", "Large Acid Slime"],
-      "act": 1,
-      "boss": false,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["hallway", "split", "weak", "status_pressure"],
-      "values": {"max_expected_attack": 18}
-    },
-    {
-      "id": "SpikeSlimeL",
-      "name": "Spike Slime (L)",
-      "aliases": ["Spike Slime", "Large Spike Slime"],
-      "act": 1,
-      "boss": false,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["hallway", "split", "frail", "status_pressure"],
-      "values": {"max_expected_attack": 18}
-    },
-    {
-      "id": "AcidSlimeM",
-      "name": "Acid Slime (M)",
-      "aliases": ["Medium Acid Slime"],
-      "act": 1,
-      "boss": false,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["hallway", "status_pressure", "small_enemy"],
-      "values": {"max_expected_attack": 12}
-    },
-    {
-      "id": "SpikeSlimeM",
-      "name": "Spike Slime (M)",
-      "aliases": ["Medium Spike Slime"],
-      "act": 1,
-      "boss": false,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["hallway", "frail", "status_pressure", "small_enemy"],
-      "values": {"max_expected_attack": 10}
-    },
-    {
-      "id": "BlueSlaver",
-      "name": "Blue Slaver",
-      "aliases": ["SlaverBlue"],
-      "act": 1,
-      "boss": false,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["hallway", "weak", "block_check"],
-      "values": {"max_expected_attack": 13}
-    },
-    {
-      "id": "RedSlaver",
-      "name": "Red Slaver",
-      "aliases": ["SlaverRed"],
-      "act": 1,
-      "boss": false,
-      "elite": false,
-      "multi_hit": false,
-      "tags": ["hallway", "vulnerable_pressure", "entangle"],
-      "values": {"max_expected_attack": 14}
+      "tags": [
+        "hallway",
+        "multi_enemy",
+        "vulnerable_pressure",
+        "on_death_strength"
+      ],
+      "values": {
+        "max_expected_attack": 12
+      }
     },
     {
       "id": "GremlinWarrior",
       "name": "Gremlin",
-      "aliases": ["Mad Gremlin", "Fat Gremlin", "Sneaky Gremlin", "Shield Gremlin", "Gremlin Wizard"],
+      "aliases": [
+        "Mad Gremlin",
+        "Fat Gremlin",
+        "Sneaky Gremlin",
+        "Shield Gremlin",
+        "Gremlin Wizard",
+        "GremlinFat",
+        "GremlinThief",
+        "GremlinTsundere",
+        "胖地精",
+        "卑鄙地精",
+        "持盾地精",
+        "火大地精",
+        "地精法师"
+      ],
       "act": 1,
       "boss": false,
       "elite": false,
       "multi_hit": false,
-      "tags": ["hallway", "multi_enemy", "small_enemy", "aoe_high_value"],
-      "values": {"max_expected_attack": 25}
+      "tags": [
+        "hallway",
+        "multi_enemy",
+        "small_enemy",
+        "aoe_high_value"
+      ],
+      "values": {
+        "max_expected_attack": 25
+      }
+    },
+    {
+      "id": "GremlinNob",
+      "name": "Gremlin Nob",
+      "aliases": [
+        "Gremlin Nob",
+        "地精大块头"
+      ],
+      "act": 1,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "anti_skill",
+        "frontload_check",
+        "vulnerable_pressure"
+      ],
+      "values": {
+        "max_expected_attack": 24
+      }
+    },
+    {
+      "id": "HEXAGHOSTBODY",
+      "name": "HEXAGHOSTBODY",
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal"
+      ],
+      "values": {}
+    },
+    {
+      "id": "HEXAGHOSTORB",
+      "name": "HEXAGHOSTORB",
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Hexaghost",
+      "name": "Hexaghost",
+      "act": 1,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "multi_hit",
+        "scaling_pressure",
+        "burns",
+        "weak_high_value",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 36,
+        "max_hit_count": 6
+      },
+      "aliases": [
+        "六火亡魂"
+      ]
+    },
+    {
+      "id": "JawWorm",
+      "name": "Jaw Worm",
+      "aliases": [
+        "Jaw Worm",
+        "大颚虫"
+      ],
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "scaling_pressure",
+        "block_check"
+      ],
+      "values": {
+        "max_expected_attack": 17
+      }
+    },
+    {
+      "id": "Lagavulin",
+      "name": "Lagavulin",
+      "act": 1,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "debuff",
+        "burst_window",
+        "block_check"
+      ],
+      "values": {
+        "max_expected_attack": 20
+      },
+      "aliases": [
+        "乐加维林"
+      ]
+    },
+    {
+      "id": "LouseNormal",
+      "name": "Louse",
+      "aliases": [
+        "Red Louse",
+        "Green Louse",
+        "FuzzyLouseNormal",
+        "FuzzyLouseDefensive",
+        "虱虫"
+      ],
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "multi_enemy",
+        "small_enemy"
+      ],
+      "values": {
+        "max_expected_attack": 12
+      }
+    },
+    {
+      "id": "RedSlaver",
+      "name": "Red Slaver",
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "vulnerable_pressure",
+        "entangle"
+      ],
+      "values": {
+        "max_expected_attack": 14
+      }
+    },
+    {
+      "id": "Sentry",
+      "name": "Sentry",
+      "aliases": [
+        "Sentries",
+        "哨卫"
+      ],
+      "act": 1,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "multi_enemy",
+        "artifact",
+        "status_pressure",
+        "aoe_high_value"
+      ],
+      "values": {
+        "max_expected_attack": 20
+      }
+    },
+    {
+      "id": "Slaver",
+      "name": "Slaver",
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 14
+      },
+      "aliases": [
+        "SLAVERRED"
+      ]
+    },
+    {
+      "id": "SlimeBoss",
+      "name": "Slime Boss",
+      "aliases": [
+        "Slime Boss",
+        "史莱姆老大"
+      ],
+      "act": 1,
+      "boss": true,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "boss",
+        "split",
+        "aoe_required",
+        "status_pressure",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 38
+      }
+    },
+    {
+      "id": "SpikeSlimeL",
+      "name": "Spike Slime (L)",
+      "aliases": [
+        "Spike Slime",
+        "Large Spike Slime",
+        "尖刺史莱姆（大）"
+      ],
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "split",
+        "frail",
+        "status_pressure"
+      ],
+      "values": {
+        "max_expected_attack": 18
+      }
+    },
+    {
+      "id": "SpikeSlimeM",
+      "name": "Spike Slime (M)",
+      "aliases": [
+        "Medium Spike Slime",
+        "SpikeSlime_S",
+        "Small Spike Slime",
+        "尖刺史莱姆（中）",
+        "尖刺史莱姆（小）"
+      ],
+      "act": 1,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "frail",
+        "status_pressure",
+        "small_enemy"
+      ],
+      "values": {
+        "max_expected_attack": 10
+      }
+    },
+    {
+      "id": "TheGuardian",
+      "name": "The Guardian",
+      "aliases": [
+        "Guardian",
+        "守护者"
+      ],
+      "act": 1,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "mode_shift",
+        "thorns",
+        "defense_check",
+        "burst_damage_check"
+      ],
+      "values": {
+        "max_expected_attack": 36,
+        "max_hit_count": 4
+      }
+    },
+    {
+      "id": "Bear",
+      "name": "Bear",
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal",
+        "debuff"
+      ],
+      "values": {},
+      "aliases": [
+        "BANDITBEAR",
+        "熊"
+      ]
+    },
+    {
+      "id": "BookOfStabbing",
+      "name": "Book of Stabbing",
+      "aliases": [
+        "Book of Stabbing",
+        "扎人的书"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": true,
+      "multi_hit": true,
+      "tags": [
+        "elite",
+        "multi_hit",
+        "scaling_pressure",
+        "potion_tempo_check",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 35
+      }
+    },
+    {
+      "id": "BronzeAutomaton",
+      "name": "Bronze Automaton",
+      "act": 2,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "multi_hit",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 50,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "铜制机械人偶"
+      ]
     },
     {
       "id": "Byrd",
@@ -203,8 +516,228 @@
       "boss": false,
       "elite": false,
       "multi_hit": true,
-      "tags": ["hallway", "multi_hit", "multi_enemy", "act2_low_hp_check"],
-      "values": {"max_expected_attack": 21}
+      "tags": [
+        "hallway",
+        "multi_hit",
+        "multi_enemy",
+        "act2_low_hp_check"
+      ],
+      "values": {
+        "max_expected_attack": 21,
+        "max_hit_count": 5
+      },
+      "aliases": [
+        "异鸟"
+      ]
+    },
+    {
+      "id": "Centurion",
+      "name": "Centurion",
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "multi_enemy",
+        "block_check"
+      ],
+      "values": {
+        "max_expected_attack": 14,
+        "max_hit_count": 3
+      },
+      "aliases": [
+        "百夫长"
+      ]
+    },
+    {
+      "id": "Chosen",
+      "name": "Chosen",
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "hallway",
+        "multi_hit",
+        "debuff",
+        "hex",
+        "potion_tempo_check",
+        "high_incoming"
+      ],
+      "values": {
+        "max_expected_attack": 21,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "被拣选者"
+      ]
+    },
+    {
+      "id": "GremlinLeader",
+      "name": "Gremlin Leader",
+      "aliases": [
+        "GremlinLeader",
+        "地精首领"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "multi_enemy",
+        "summons",
+        "scaling_pressure",
+        "aoe_high_value"
+      ],
+      "values": {
+        "max_expected_attack": 18,
+        "max_hit_count": 3
+      }
+    },
+    {
+      "id": "Looter",
+      "name": "Looter",
+      "aliases": [
+        "Mugger",
+        "抢劫的",
+        "打劫的"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "frontload_check",
+        "escape_timer"
+      ],
+      "values": {
+        "max_expected_attack": 11
+      }
+    },
+    {
+      "id": "Healer",
+      "name": "Mystic",
+      "aliases": [
+        "Mystic",
+        "神秘术士"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "multi_enemy",
+        "healing_support",
+        "scaling_pressure"
+      ],
+      "values": {
+        "max_expected_attack": 16
+      }
+    },
+    {
+      "id": "Orb",
+      "name": "Orb",
+      "act": 2,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 8
+      },
+      "aliases": [
+        "BRONZEORB",
+        "铜球"
+      ]
+    },
+    {
+      "id": "Pointy",
+      "name": "Pointy",
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "normal",
+        "multi_hit",
+        "frontload_check"
+      ],
+      "values": {
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "BANDITCHILD",
+        "尖尖"
+      ]
+    },
+    {
+      "id": "Romeo",
+      "name": "Romeo",
+      "act": 2,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite"
+      ],
+      "values": {},
+      "aliases": [
+        "BANDITLEADER",
+        "罗密欧"
+      ]
+    },
+    {
+      "id": "Shelled Parasite",
+      "name": "Shelled Parasite",
+      "aliases": [
+        "ShelledParasite",
+        "带壳寄生怪"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "frail",
+        "high_incoming",
+        "block_check"
+      ],
+      "values": {
+        "max_expected_attack": 21,
+        "max_hit_count": 2
+      }
+    },
+    {
+      "id": "SnakePlant",
+      "name": "Snake Plant",
+      "aliases": [
+        "Snake Plant",
+        "蛇花"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "hallway",
+        "multi_hit",
+        "frail",
+        "potion_tempo_check",
+        "high_incoming"
+      ],
+      "values": {
+        "max_expected_attack": 24,
+        "max_hit_count": 3
+      }
     },
     {
       "id": "Snecko",
@@ -213,8 +746,530 @@
       "boss": false,
       "elite": false,
       "multi_hit": false,
-      "tags": ["hallway", "confuse", "high_incoming", "potion_tempo_check"],
-      "values": {"max_expected_attack": 27}
+      "tags": [
+        "hallway",
+        "confuse",
+        "high_incoming",
+        "potion_tempo_check"
+      ],
+      "values": {
+        "max_expected_attack": 27
+      },
+      "aliases": [
+        "异蛇"
+      ]
+    },
+    {
+      "id": "SphericGuardian",
+      "name": "Spheric Guardian",
+      "aliases": [
+        "Spheric Guardian",
+        "圆球守护者"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "artifact",
+        "block_check",
+        "frail",
+        "potion_tempo_check"
+      ],
+      "values": {
+        "max_expected_attack": 11,
+        "max_hit_count": 2
+      }
+    },
+    {
+      "id": "SlaverBoss",
+      "name": "Taskmaster",
+      "aliases": [
+        "Taskmaster",
+        "奴隶头子"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "multi_enemy",
+        "scaling_pressure",
+        "aoe_high_value"
+      ],
+      "values": {
+        "max_expected_attack": 19
+      }
+    },
+    {
+      "id": "Champ",
+      "name": "The Champ",
+      "aliases": [
+        "Champ",
+        "第一勇士"
+      ],
+      "act": 2,
+      "boss": true,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "boss",
+        "execute_window",
+        "scaling_pressure",
+        "block_check",
+        "phase_shift"
+      ],
+      "values": {
+        "max_expected_attack": 48,
+        "max_hit_count": 2
+      }
+    },
+    {
+      "id": "TheCollector",
+      "name": "The Collector",
+      "aliases": [
+        "The Collector",
+        "收藏家"
+      ],
+      "act": 2,
+      "boss": true,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "boss",
+        "multi_enemy",
+        "debuff",
+        "scaling_pressure",
+        "aoe_high_value"
+      ],
+      "values": {
+        "max_expected_attack": 27
+      }
+    },
+    {
+      "id": "TorchHead",
+      "name": "Torch Head",
+      "aliases": [
+        "TorchHead",
+        "火炬头"
+      ],
+      "act": 2,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "minion",
+        "multi_enemy",
+        "collector_summon",
+        "aoe_high_value"
+      ],
+      "values": {
+        "max_expected_attack": 12
+      }
+    },
+    {
+      "id": "AwakenedOne",
+      "name": "Awakened One",
+      "act": 3,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 40,
+        "max_hit_count": 4
+      },
+      "aliases": [
+        "觉醒者"
+      ]
+    },
+    {
+      "id": "Dagger",
+      "name": "Dagger",
+      "act": 3,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 25
+      },
+      "aliases": [
+        "匕首"
+      ]
+    },
+    {
+      "id": "Darkling",
+      "name": "Darkling",
+      "aliases": [
+        "小黑"
+      ],
+      "act": 3,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "multi_enemy",
+        "revive",
+        "aoe_high_value",
+        "act3_frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 16,
+        "max_hit_count": 2
+      }
+    },
+    {
+      "id": "Deca",
+      "name": "Deca",
+      "act": 3,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 24,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "八体"
+      ]
+    },
+    {
+      "id": "Donu",
+      "name": "Donu",
+      "act": 3,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "multi_hit",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 24,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "甜圈"
+      ]
+    },
+    {
+      "id": "Exploder",
+      "name": "Exploder",
+      "act": 3,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 11
+      },
+      "aliases": [
+        "爆炸机"
+      ]
+    },
+    {
+      "id": "GiantHead",
+      "name": "Giant Head",
+      "act": 3,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 15
+      },
+      "aliases": [
+        "大脑袋"
+      ]
+    },
+    {
+      "id": "Nemesis",
+      "name": "Nemesis",
+      "act": 3,
+      "boss": false,
+      "elite": true,
+      "multi_hit": true,
+      "tags": [
+        "elite",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 45,
+        "max_hit_count": 3
+      },
+      "aliases": [
+        "天罚"
+      ]
+    },
+    {
+      "id": "Orb Walker",
+      "name": "Orb Walker",
+      "aliases": [
+        "OrbWalker",
+        "圆球行者"
+      ],
+      "act": 3,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "artifact",
+        "scaling_pressure",
+        "act3_frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 22
+      }
+    },
+    {
+      "id": "Reptomancer",
+      "name": "Reptomancer",
+      "act": 3,
+      "boss": false,
+      "elite": true,
+      "multi_hit": true,
+      "tags": [
+        "elite",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 34,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "拜蛇术士"
+      ]
+    },
+    {
+      "id": "Repulsor",
+      "name": "Repulsor",
+      "aliases": [
+        "反冲机"
+      ],
+      "act": 3,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "hallway",
+        "multi_enemy",
+        "status_pressure",
+        "dazed",
+        "artifact"
+      ],
+      "values": {
+        "max_expected_attack": 13
+      }
+    },
+    {
+      "id": "Spiker",
+      "name": "Spiker",
+      "act": 3,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 9
+      },
+      "aliases": [
+        "钉刺机"
+      ]
+    },
+    {
+      "id": "SpireGrowth",
+      "name": "Spire Growth",
+      "act": 3,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 25
+      },
+      "aliases": [
+        "SERPENT",
+        "塔内增生组织"
+      ]
+    },
+    {
+      "id": "TheMaw",
+      "name": "The Maw",
+      "act": 3,
+      "boss": false,
+      "elite": false,
+      "multi_hit": false,
+      "tags": [
+        "normal",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 30
+      },
+      "aliases": [
+        "MAW",
+        "巨口"
+      ]
+    },
+    {
+      "id": "TimeEater",
+      "name": "Time Eater",
+      "act": 3,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_hit_count": 3
+      },
+      "aliases": [
+        "时间吞噬者"
+      ]
+    },
+    {
+      "id": "Transient",
+      "name": "Transient",
+      "act": 3,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 40
+      },
+      "aliases": [
+        "倏忽魔"
+      ]
+    },
+    {
+      "id": "WrithingMass",
+      "name": "Writhing Mass",
+      "act": 3,
+      "boss": false,
+      "elite": true,
+      "multi_hit": true,
+      "tags": [
+        "elite",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 38,
+        "max_hit_count": 3
+      },
+      "aliases": [
+        "扭曲团块"
+      ]
+    },
+    {
+      "id": "CorruptHeart",
+      "name": "Corrupt Heart",
+      "act": 4,
+      "boss": true,
+      "elite": false,
+      "multi_hit": true,
+      "tags": [
+        "boss",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 45,
+        "max_hit_count": 12
+      },
+      "aliases": [
+        "腐化之心"
+      ]
+    },
+    {
+      "id": "SpireShield",
+      "name": "Spire Shield",
+      "act": 4,
+      "boss": false,
+      "elite": true,
+      "multi_hit": false,
+      "tags": [
+        "elite",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 38
+      },
+      "aliases": [
+        "高塔之盾"
+      ]
+    },
+    {
+      "id": "SpireSpear",
+      "name": "Spire Spear",
+      "act": 4,
+      "boss": false,
+      "elite": true,
+      "multi_hit": true,
+      "tags": [
+        "elite",
+        "multi_hit",
+        "debuff",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 30,
+        "max_hit_count": 3
+      },
+      "aliases": [
+        "高塔之矛"
+      ]
     }
   ]
 }

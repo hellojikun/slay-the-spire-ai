@@ -1,0 +1,177 @@
+{
+  "accepted_rows": 151,
+  "example_count": 3,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 32,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 87,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        221
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Blood for Blood",
+        "Thunderclap",
+        "Hemokinesis",
+        "Battle Trance"
+      ],
+      "incoming": 32,
+      "initial_loss": 27,
+      "kills": 0,
+      "label_first_card_key": "Hemokinesis",
+      "label_sequence_card_keys": [
+        "Hemokinesis"
+      ],
+      "label_target_index": 1,
+      "line": 76,
+      "loss_delta": 25,
+      "max_hp": 87,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_15\\offline\\shadow_cycle_20260707_ironclad_a0_win_15\\combat_search_labels.jsonl",
+      "projected_loss": 2,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_15\\20260707_071729_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 186,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 57,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        107
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Defend_R",
+        "Hemokinesis",
+        "Flame Barrier"
+      ],
+      "incoming": 9,
+      "initial_loss": 4,
+      "kills": 0,
+      "label_first_card_key": "Flame Barrier",
+      "label_sequence_card_keys": [
+        "Flame Barrier"
+      ],
+      "line": 82,
+      "loss_delta": 4,
+      "max_hp": 87,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_15\\offline\\shadow_cycle_20260707_ironclad_a0_win_15\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_15\\20260707_071729_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 212,
+      "turn": 8
+    },
+    {
+      "act": 1,
+      "attacks_removed": 9,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 34,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        3
+      ],
+      "direct_kill_card_keys": [
+        "Blood for Blood"
+      ],
+      "direct_kill_enemy_hp": 10,
+      "direct_kill_enemy_id": "TheGuardian",
+      "enemy_hps": [
+        10
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Spot Weakness",
+        "Defend_R",
+        "Blood for Blood",
+        "Flame Barrier"
+      ],
+      "incoming": 9,
+      "initial_loss": 9,
+      "kills": 1,
+      "label_first_card_key": "Blood for Blood",
+      "label_sequence_card_keys": [
+        "Blood for Blood"
+      ],
+      "label_target_index": 1,
+      "line": 87,
+      "loss_delta": 9,
+      "max_hp": 87,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_15\\offline\\shadow_cycle_20260707_ironclad_a0_win_15\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_15\\20260707_071729_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 233,
+      "turn": 13
+    }
+  ],
+  "excluded_rows": 3,
+  "exclusion_reasons": {
+    "missed_direct_kill": 1,
+    "missed_single_card_search": 2
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_15\\offline\\shadow_cycle_20260707_ironclad_a0_win_15"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_15\\offline\\shadow_cycle_20260707_ironclad_a0_win_15\\combat_search_labels.jsonl"
+  ],
+  "rows": 154,
+  "source_quality": {
+    "usable_with_recoveries": 154
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=154 excluded=3 missed_single_card_search=2 missed_direct_kill=1",
+  "version": 1,
+  "warnings": []
+}

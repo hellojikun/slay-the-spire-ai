@@ -1,0 +1,23 @@
+{
+  "accepted_rows": 0,
+  "example_count": 0,
+  "example_limit": 20,
+  "examples": [],
+  "excluded_rows": 0,
+  "exclusion_reasons": {},
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05\\offline\\shadow_cycle_20260707_ironclad_a0_win_05"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05\\offline\\shadow_cycle_20260707_ironclad_a0_win_05\\combat_search_labels.jsonl"
+  ],
+  "rows": 0,
+  "source_quality": {},
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=0 excluded=0",
+  "version": 1,
+  "warnings": []
+}

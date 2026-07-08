@@ -1,0 +1,72 @@
+{
+  "entities": {
+    "bosses": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "monsters": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    }
+  },
+  "inputs": [],
+  "knowledge_dir": "data\\static_knowledge",
+  "knowledge_source_counts": {
+    "bosses": 3,
+    "cards": 75,
+    "monsters": 29,
+    "potions": 30,
+    "relics": 44
+  },
+  "observed_aliases": {
+    "cards": 0
+  },
+  "read_errors": [],
+  "resolved_log_count": 0,
+  "resolved_logs": [],
+  "status_line": "static_knowledge_gaps logs=0 missing=0 warnings=no_resolved_logs",
+  "total_missing_occurrences": 0,
+  "totals": {
+    "bosses": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "monsters": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "occurrences": 0,
+      "unique": 0
+    }
+  },
+  "version": 1,
+  "warnings": [
+    "no_resolved_logs"
+  ]
+}

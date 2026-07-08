@@ -1,0 +1,2584 @@
+{
+  "version": 1,
+  "scope": "Relic seed for current Ironclad A0/A1 probes and early shadow features",
+  "sources": [
+    {
+      "name": "MCP/CommunicationMod state ids",
+      "url": "https://github.com/ForgottenArbiter/CommunicationMod"
+    },
+    {
+      "name": "Slay the Spire Relics wiki",
+      "url": "https://slay-the-spire.fandom.com/wiki/Relics"
+    },
+    {
+      "name": "Spire Archive STS1 parsed game data",
+      "url": "https://github.com/nkhoit/spire-archive"
+    }
+  ],
+  "relics": [
+    {
+      "id": "Akabeko",
+      "name": "Akabeko",
+      "rarity": "COMMON",
+      "tags": [
+        "damage",
+        "frontload",
+        "first_attack",
+        "aoe_synergy"
+      ],
+      "values": {
+        "damage_bonus": 8
+      },
+      "aliases": [
+        "赤牛"
+      ]
+    },
+    {
+      "id": "Anchor",
+      "name": "Anchor",
+      "aliases": [
+        "锚"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "block",
+        "turn_one",
+        "defense",
+        "frontload_defense"
+      ],
+      "values": {
+        "combat_block": 10
+      }
+    },
+    {
+      "id": "Ancient Tea Set",
+      "name": "Ancient Tea Set",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "古茶具套装"
+      ]
+    },
+    {
+      "id": "Art of War",
+      "name": "Art of War",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "孙子兵法"
+      ]
+    },
+    {
+      "id": "Astrolabe",
+      "name": "Astrolabe",
+      "aliases": [
+        "星盘"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "transform",
+        "upgrade",
+        "deck_quality"
+      ],
+      "values": {
+        "transform_and_upgrade_cards": 3
+      }
+    },
+    {
+      "id": "Bag of Marbles",
+      "name": "Bag of Marbles",
+      "aliases": [
+        "弹珠袋"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "vulnerable",
+        "frontload",
+        "aoe_debuff",
+        "elite_tempo",
+        "boss_damage"
+      ],
+      "values": {
+        "vulnerable": 1
+      }
+    },
+    {
+      "id": "Bag of Preparation",
+      "name": "Bag of Preparation",
+      "aliases": [
+        "准备背包"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "draw",
+        "turn_one",
+        "frontload",
+        "tempo"
+      ],
+      "values": {
+        "turn_one_draw": 2
+      }
+    },
+    {
+      "id": "Bird-Faced Urn",
+      "name": "Bird-Faced Urn",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "鸟面瓮"
+      ]
+    },
+    {
+      "id": "Black Star",
+      "name": "Black Star",
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "elite_reward",
+        "route_aggression",
+        "slow_value"
+      ],
+      "values": {},
+      "aliases": [
+        "黑星"
+      ]
+    },
+    {
+      "id": "Blood Vial",
+      "name": "Blood Vial",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "小血瓶"
+      ]
+    },
+    {
+      "id": "Bloody Idol",
+      "name": "Bloody Idol",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "鲜血神像"
+      ]
+    },
+    {
+      "id": "Blue Candle",
+      "name": "Blue Candle",
+      "aliases": [
+        "蓝蜡烛"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "curse",
+        "exhaust",
+        "status_cleanup_synergy",
+        "self_damage"
+      ],
+      "values": {
+        "curse_playable": 1,
+        "self_damage": 1
+      }
+    },
+    {
+      "id": "Bottled Flame",
+      "name": "Bottled Flame",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "瓶装火焰"
+      ]
+    },
+    {
+      "id": "Bottled Lightning",
+      "name": "Bottled Lightning",
+      "aliases": [
+        "瓶装闪电"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "bottle",
+        "skill_bottle",
+        "opening_hand",
+        "planning"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Bottled Tornado",
+      "name": "Bottled Tornado",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "瓶装旋风"
+      ]
+    },
+    {
+      "id": "Bronze Scales",
+      "name": "Bronze Scales",
+      "aliases": [
+        "铜制鳞片"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "thorns",
+        "frontload",
+        "defense"
+      ],
+      "values": {
+        "thorns": 3
+      }
+    },
+    {
+      "id": "Busted Crown",
+      "name": "Busted Crown",
+      "aliases": [
+        "BustedCrown",
+        "破碎金冠"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "reward_penalty",
+        "deck_growth_risk"
+      ],
+      "values": {
+        "energy_per_turn": 1,
+        "card_reward_options_delta": -2
+      }
+    },
+    {
+      "id": "Calipers",
+      "name": "Calipers",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "外卡钳"
+      ]
+    },
+    {
+      "id": "Calling Bell",
+      "name": "Calling Bell",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "召唤铃铛"
+      ]
+    },
+    {
+      "id": "CaptainsWheel",
+      "name": "Captain's Wheel",
+      "aliases": [
+        "舵盘"
+      ],
+      "rarity": "RARE",
+      "tags": [
+        "block",
+        "turn_three",
+        "defense"
+      ],
+      "values": {
+        "turn_three_block": 18
+      }
+    },
+    {
+      "id": "Cauldron",
+      "name": "Cauldron",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "大锅"
+      ]
+    },
+    {
+      "id": "Centennial Puzzle",
+      "name": "Centennial Puzzle",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "百年积木"
+      ]
+    },
+    {
+      "id": "Ceramic Fish",
+      "name": "Ceramic Fish",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "陶瓷小鱼"
+      ]
+    },
+    {
+      "id": "Chemical X",
+      "name": "Chemical X",
+      "rarity": "SHOP",
+      "tags": [
+        "x_cost",
+        "whirlwind_synergy",
+        "frontload"
+      ],
+      "values": {
+        "x_cost_bonus": 2
+      },
+      "aliases": [
+        "化学物X"
+      ]
+    },
+    {
+      "id": "Circlet",
+      "name": "Circlet",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "头环"
+      ]
+    },
+    {
+      "id": "Cloak Clasp",
+      "name": "Cloak Clasp",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "斗篷扣"
+      ]
+    },
+    {
+      "id": "Clockwork Souvenir",
+      "name": "Clockwork Souvenir",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "齿轮工艺品"
+      ]
+    },
+    {
+      "id": "Coffee Dripper",
+      "name": "Coffee Dripper",
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "no_rest",
+        "high_risk"
+      ],
+      "values": {
+        "energy_per_turn": 1
+      },
+      "aliases": [
+        "咖啡滤杯"
+      ]
+    },
+    {
+      "id": "Cracked Core",
+      "name": "Cracked Core",
+      "rarity": "STARTER",
+      "tags": [
+        "starter",
+        "defect"
+      ],
+      "values": {},
+      "aliases": [
+        "破损核心"
+      ]
+    },
+    {
+      "id": "Cultist Headpiece",
+      "name": "Cultist Headpiece",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "CULTISTMASK",
+        "邪教徒头套"
+      ]
+    },
+    {
+      "id": "Cursed Key",
+      "name": "Cursed Key",
+      "aliases": [
+        "诅咒钥匙"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "curse_on_chest",
+        "high_risk"
+      ],
+      "values": {
+        "energy_per_turn": 1
+      }
+    },
+    {
+      "id": "Damaru",
+      "name": "Damaru",
+      "rarity": "COMMON",
+      "tags": [
+        "common",
+        "watcher"
+      ],
+      "values": {},
+      "aliases": [
+        "手摇鼓"
+      ]
+    },
+    {
+      "id": "Darkstone Periapt",
+      "name": "Darkstone Periapt",
+      "aliases": [
+        "黑石护符"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "curse_synergy",
+        "max_hp",
+        "event_safety"
+      ],
+      "values": {
+        "max_hp_per_curse": 6
+      }
+    },
+    {
+      "id": "Data Disk",
+      "name": "Data Disk",
+      "rarity": "COMMON",
+      "tags": [
+        "common",
+        "defect"
+      ],
+      "values": {},
+      "aliases": [
+        "数据磁盘"
+      ]
+    },
+    {
+      "id": "Dead Branch",
+      "name": "Dead Branch",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "枯木树枝"
+      ]
+    },
+    {
+      "id": "Discerning Monocle",
+      "name": "Discerning Monocle",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "鉴识单片眼镜"
+      ]
+    },
+    {
+      "id": "Dolly's Mirror",
+      "name": "Dolly's Mirror",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "多利之镜"
+      ]
+    },
+    {
+      "id": "Dream Catcher",
+      "name": "Dream Catcher",
+      "aliases": [
+        "捕梦网"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "rest_reward",
+        "card_reward",
+        "deck_growth"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Du-Vu Doll",
+      "name": "Du-Vu Doll",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "毒巫娃娃"
+      ]
+    },
+    {
+      "id": "Duality",
+      "name": "Duality",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "YANG",
+        "两仪"
+      ]
+    },
+    {
+      "id": "Ectoplasm",
+      "name": "Ectoplasm",
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "no_gold",
+        "shop_penalty"
+      ],
+      "values": {
+        "energy_per_turn": 1
+      },
+      "aliases": [
+        "灵体外质"
+      ]
+    },
+    {
+      "id": "Emotion Chip",
+      "name": "Emotion Chip",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "情感芯片"
+      ]
+    },
+    {
+      "id": "Empty Cage",
+      "name": "Empty Cage",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "空鸟笼"
+      ]
+    },
+    {
+      "id": "Enchiridion",
+      "name": "Enchiridion",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "英雄宝典"
+      ]
+    },
+    {
+      "id": "Eternal Feather",
+      "name": "Eternal Feather",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "永恒羽毛"
+      ]
+    },
+    {
+      "id": "Face Of Cleric",
+      "name": "Face Of Cleric",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "牧师的脸"
+      ]
+    },
+    {
+      "id": "FossilizedHelix",
+      "name": "Fossilized Helix",
+      "aliases": [
+        "螺类化石"
+      ],
+      "rarity": "RARE",
+      "tags": [
+        "damage_prevent",
+        "defense",
+        "frontload_defense"
+      ],
+      "values": {
+        "damage_prevent_count": 1
+      }
+    },
+    {
+      "id": "Frozen Core",
+      "name": "Frozen Core",
+      "rarity": "BOSS",
+      "tags": [
+        "boss",
+        "defect"
+      ],
+      "values": {},
+      "aliases": [
+        "冻结核心"
+      ]
+    },
+    {
+      "id": "Frozen Egg 2",
+      "name": "Frozen Egg",
+      "aliases": [
+        "冻结之蛋"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "power_upgrade",
+        "deck_quality",
+        "scaling"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Frozen Eye",
+      "name": "Frozen Eye",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "冻结之眼"
+      ]
+    },
+    {
+      "id": "Fusion Hammer",
+      "name": "Fusion Hammer",
+      "aliases": [
+        "融合之锤"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "no_smith",
+        "upgrade_penalty"
+      ],
+      "values": {
+        "energy_per_turn": 1
+      }
+    },
+    {
+      "id": "Gambling Chip",
+      "name": "Gambling Chip",
+      "aliases": [
+        "赌博筹码"
+      ],
+      "rarity": "RARE",
+      "tags": [
+        "draw",
+        "opening_hand",
+        "hand_filter",
+        "planning"
+      ],
+      "values": {
+        "opening_discard_redraw": 1
+      }
+    },
+    {
+      "id": "Ginger",
+      "name": "Ginger",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "生姜"
+      ]
+    },
+    {
+      "id": "Girya",
+      "name": "Girya",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "壶铃"
+      ]
+    },
+    {
+      "id": "Gold-Plated Cables",
+      "name": "Gold-Plated Cables",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "CABLES",
+        "镀金缆线"
+      ]
+    },
+    {
+      "id": "Golden Eye",
+      "name": "Golden Eye",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "黄金眼"
+      ]
+    },
+    {
+      "id": "Golden Idol",
+      "name": "Golden Idol",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "金神像"
+      ]
+    },
+    {
+      "id": "Gremlin Horn",
+      "name": "Gremlin Horn",
+      "aliases": [
+        "GremlinHorn",
+        "地精之角",
+        "鍦扮簿涔嬭"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "energy",
+        "draw",
+        "multi_enemy",
+        "snowball",
+        "combat_tempo"
+      ],
+      "values": {
+        "energy_on_enemy_kill": 1,
+        "draw_on_enemy_kill": 1
+      }
+    },
+    {
+      "id": "Gremlin Visage",
+      "name": "Gremlin Visage",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "GREMLINMASK",
+        "地精容貌"
+      ]
+    },
+    {
+      "id": "Hand Drill",
+      "name": "Hand Drill",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "手钻"
+      ]
+    },
+    {
+      "id": "Happy Flower",
+      "name": "Happy Flower",
+      "aliases": [
+        "开心小花"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "energy",
+        "tempo"
+      ],
+      "values": {
+        "energy_every_turns": 3
+      }
+    },
+    {
+      "id": "Holy Water",
+      "name": "Holy Water",
+      "rarity": "BOSS",
+      "tags": [
+        "boss",
+        "watcher"
+      ],
+      "values": {},
+      "aliases": [
+        "圣水"
+      ]
+    },
+    {
+      "id": "HornCleat",
+      "name": "Horn Cleat",
+      "aliases": [
+        "Horn Cleat",
+        "船夹板"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "block",
+        "turn_two",
+        "defense",
+        "frontload_defense"
+      ],
+      "values": {
+        "turn_two_block": 14
+      }
+    },
+    {
+      "id": "Hovering Kite",
+      "name": "Hovering Kite",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "悬浮风筝"
+      ]
+    },
+    {
+      "id": "Ice Cream",
+      "name": "Ice Cream",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "冰淇淋"
+      ]
+    },
+    {
+      "id": "Incense Burner",
+      "name": "Incense Burner",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "香炉"
+      ]
+    },
+    {
+      "id": "Ink Bottle",
+      "name": "Ink Bottle",
+      "aliases": [
+        "墨水瓶"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "draw",
+        "attack_spam",
+        "skill_spam",
+        "tempo"
+      ],
+      "values": {
+        "draw_every_cards": 10
+      }
+    },
+    {
+      "id": "Inserter",
+      "name": "Inserter",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "机械臂"
+      ]
+    },
+    {
+      "id": "Juzu Bracelet",
+      "name": "Juzu Bracelet",
+      "rarity": "COMMON",
+      "tags": [
+        "event_safety",
+        "route_safety",
+        "hallway_avoidance"
+      ],
+      "values": {
+        "prevents_normal_enemy_events": true
+      },
+      "aliases": [
+        "佛珠手链"
+      ]
+    },
+    {
+      "id": "Kunai",
+      "name": "Kunai",
+      "aliases": [
+        "苦无"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "dexterity",
+        "attack_spam",
+        "scaling",
+        "defense"
+      ],
+      "values": {
+        "dexterity": 1
+      }
+    },
+    {
+      "id": "Lantern",
+      "name": "Lantern",
+      "rarity": "COMMON",
+      "tags": [
+        "energy",
+        "frontload",
+        "turn_one",
+        "tempo"
+      ],
+      "values": {
+        "turn_one_energy": 1
+      },
+      "aliases": [
+        "灯笼"
+      ]
+    },
+    {
+      "id": "Lee's Waffle",
+      "name": "Lee's Waffle",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "李家华夫饼"
+      ]
+    },
+    {
+      "id": "Letter Opener",
+      "name": "Letter Opener",
+      "aliases": [
+        "开信刀"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "damage",
+        "skill_synergy",
+        "aoe_damage"
+      ],
+      "values": {
+        "skills_per_trigger": 3,
+        "aoe_damage": 5
+      }
+    },
+    {
+      "id": "Lizard Tail",
+      "name": "Lizard Tail",
+      "aliases": [
+        "LizardTail",
+        "蜥蜴尾巴"
+      ],
+      "rarity": "RARE",
+      "tags": [
+        "revive",
+        "lethal_prevention",
+        "route_recovery",
+        "safety"
+      ],
+      "values": {
+        "revive_percent_max_hp": 50
+      }
+    },
+    {
+      "id": "Magic Flower",
+      "name": "Magic Flower",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "魔法花"
+      ]
+    },
+    {
+      "id": "Mango",
+      "name": "Mango",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "芒果"
+      ]
+    },
+    {
+      "id": "Mark of Pain",
+      "name": "Mark of Pain",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "痛楚印记"
+      ]
+    },
+    {
+      "id": "Mark of the Bloom",
+      "name": "Mark of the Bloom",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "绽放印记"
+      ]
+    },
+    {
+      "id": "Matryoshka",
+      "name": "Matryoshka",
+      "aliases": [
+        "套娃"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "relic_reward",
+        "chest_value",
+        "slow_value"
+      ],
+      "values": {
+        "bonus_chest_relics": 1,
+        "bonus_chests": 2
+      }
+    },
+    {
+      "id": "Maw Bank",
+      "name": "Maw Bank",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "巨口储蓄罐"
+      ]
+    },
+    {
+      "id": "MealTicket",
+      "name": "Meal Ticket",
+      "aliases": [
+        "Meal Ticket",
+        "餐券"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "healing",
+        "shop",
+        "route_recovery"
+      ],
+      "values": {
+        "shop_heal": 15
+      }
+    },
+    {
+      "id": "Meat on the Bone",
+      "name": "Meat on the Bone",
+      "aliases": [
+        "带骨肉"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "healing",
+        "route_recovery",
+        "low_hp_recovery"
+      ],
+      "values": {
+        "heal_below_half": 12
+      }
+    },
+    {
+      "id": "Medical Kit",
+      "name": "Medical Kit",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "医药箱"
+      ]
+    },
+    {
+      "id": "Melange",
+      "name": "Melange",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "美琅脂"
+      ]
+    },
+    {
+      "id": "Membership Card",
+      "name": "Membership Card",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "会员卡"
+      ]
+    },
+    {
+      "id": "Mercury Hourglass",
+      "name": "Mercury Hourglass",
+      "aliases": [
+        "水银沙漏"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "damage",
+        "aoe",
+        "end_turn",
+        "frontload"
+      ],
+      "values": {
+        "enemy_damage_per_turn": 3
+      }
+    },
+    {
+      "id": "Molten Egg 2",
+      "name": "Molten Egg",
+      "aliases": [
+        "Molten Egg",
+        "MoltenEgg2",
+        "熔火之蛋"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "card_upgrade",
+        "attack_upgrade",
+        "deck_quality"
+      ],
+      "values": {
+        "upgrade_future_attacks": true
+      }
+    },
+    {
+      "id": "Mummified Hand",
+      "name": "Mummified Hand",
+      "aliases": [
+        "干瘪之手"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "power_synergy",
+        "energy_discount",
+        "tempo"
+      ],
+      "values": {
+        "discount_random_card_on_power": 1
+      }
+    },
+    {
+      "id": "Mutagenic Strength",
+      "name": "Mutagenic Strength",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "突变之力"
+      ]
+    },
+    {
+      "id": "N'loth's Gift",
+      "name": "N'loth's Gift",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "恩洛斯的礼物"
+      ]
+    },
+    {
+      "id": "N'loth's Hungry Face",
+      "name": "N'loth's Hungry Face",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "NLOTHSMASK",
+        "恩洛斯的饥饿的脸"
+      ]
+    },
+    {
+      "id": "Necronomicon",
+      "name": "Necronomicon",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "死灵之书"
+      ]
+    },
+    {
+      "id": "Neow's Lament",
+      "name": "Neow's Lament",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "NEOWSBLESSING",
+        "涅奥的悲恸"
+      ]
+    },
+    {
+      "id": "Nilry's Codex",
+      "name": "Nilry's Codex",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "尼利的宝典"
+      ]
+    },
+    {
+      "id": "Ninja Scroll",
+      "name": "Ninja Scroll",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "忍术卷轴"
+      ]
+    },
+    {
+      "id": "Nuclear Battery",
+      "name": "Nuclear Battery",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "核能电池"
+      ]
+    },
+    {
+      "id": "Nunchaku",
+      "name": "Nunchaku",
+      "aliases": [
+        "双节棍"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "energy",
+        "attack_spam",
+        "tempo"
+      ],
+      "values": {
+        "energy_every_attacks": 10
+      }
+    },
+    {
+      "id": "Odd Mushroom",
+      "name": "Odd Mushroom",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "奇怪蘑菇"
+      ]
+    },
+    {
+      "id": "Oddly Smooth Stone",
+      "name": "Oddly Smooth Stone",
+      "aliases": [
+        "意外光滑的石头"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "dexterity",
+        "defense",
+        "frontload_defense"
+      ],
+      "values": {
+        "dexterity": 1
+      }
+    },
+    {
+      "id": "Old Coin",
+      "name": "Old Coin",
+      "aliases": [
+        "古钱币"
+      ],
+      "rarity": "RARE",
+      "tags": [
+        "gold",
+        "shop",
+        "frontload_economy"
+      ],
+      "values": {
+        "gold": 300
+      }
+    },
+    {
+      "id": "Omamori",
+      "name": "Omamori",
+      "aliases": [
+        "御守"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "curse_protection",
+        "event_safety",
+        "chest_safety"
+      ],
+      "values": {
+        "curse_negate_count": 2
+      }
+    },
+    {
+      "id": "Orange Pellets",
+      "name": "Orange Pellets",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "橙色药丸"
+      ]
+    },
+    {
+      "id": "Orichalcum",
+      "name": "Orichalcum",
+      "aliases": [
+        "奥利哈钢",
+        "濂ュ埄鍝堥挗"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "block",
+        "defense",
+        "zero_block_floor",
+        "chip_damage_reduction"
+      ],
+      "values": {
+        "min_block_when_none": 6
+      }
+    },
+    {
+      "id": "Ornamental Fan",
+      "name": "Ornamental Fan",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "精致折扇"
+      ]
+    },
+    {
+      "id": "Orrery",
+      "name": "Orrery",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "星系仪"
+      ]
+    },
+    {
+      "id": "Pandora's Box",
+      "name": "Pandora's Box",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "潘多拉的魔盒"
+      ]
+    },
+    {
+      "id": "Pantograph",
+      "name": "Pantograph",
+      "aliases": [
+        "缩放仪"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "healing",
+        "boss",
+        "route_recovery",
+        "boss_recovery"
+      ],
+      "values": {
+        "heal_at_boss_start": 25
+      }
+    },
+    {
+      "id": "Paper Krane",
+      "name": "Paper Krane",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "PAPER_CRANE",
+        "纸鹤"
+      ]
+    },
+    {
+      "id": "Peace Pipe",
+      "name": "Peace Pipe",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "宁静烟斗"
+      ]
+    },
+    {
+      "id": "Pear",
+      "name": "Pear",
+      "aliases": [
+        "梨子"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "max_hp",
+        "survivability"
+      ],
+      "values": {
+        "max_hp": 10
+      }
+    },
+    {
+      "id": "Pen Nib",
+      "name": "Pen Nib",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "钢笔尖"
+      ]
+    },
+    {
+      "id": "Philosopher's Stone",
+      "name": "Philosopher's Stone",
+      "aliases": [
+        "PhilosophersStone",
+        "贤者之石"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "enemy_strength",
+        "multi_enemy_risk"
+      ],
+      "values": {
+        "energy_per_turn": 1,
+        "enemy_strength": 1
+      }
+    },
+    {
+      "id": "Pocketwatch",
+      "name": "Pocketwatch",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "怀表"
+      ]
+    },
+    {
+      "id": "Potion Belt",
+      "name": "Potion Belt",
+      "aliases": [
+        "药水腰带"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "potion",
+        "potion_capacity",
+        "route_flexibility"
+      ],
+      "values": {
+        "potion_slots": 2
+      }
+    },
+    {
+      "id": "Prayer Wheel",
+      "name": "Prayer Wheel",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "转经轮"
+      ]
+    },
+    {
+      "id": "Preserved Insect",
+      "name": "Preserved Insect",
+      "rarity": "COMMON",
+      "tags": [
+        "elite_tempo",
+        "route_aggression",
+        "frontload"
+      ],
+      "values": {
+        "elite_hp_damage_percent": 25
+      },
+      "aliases": [
+        "昆虫标本"
+      ]
+    },
+    {
+      "id": "Prismatic Shard",
+      "name": "Prismatic Shard",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "棱镜碎片"
+      ]
+    },
+    {
+      "id": "Pure Water",
+      "name": "Pure Water",
+      "rarity": "STARTER",
+      "tags": [
+        "starter"
+      ],
+      "values": {},
+      "aliases": [
+        "至纯之水"
+      ]
+    },
+    {
+      "id": "Question Card",
+      "name": "Question Card",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "问号牌"
+      ]
+    },
+    {
+      "id": "Red Circlet",
+      "name": "Red Circlet",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "红头环"
+      ]
+    },
+    {
+      "id": "Red Mask",
+      "name": "Red Mask",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "红面具"
+      ]
+    },
+    {
+      "id": "Red Skull",
+      "name": "Red Skull",
+      "aliases": [
+        "RedSkull",
+        "红头骨"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "strength",
+        "low_hp",
+        "combat_tempo",
+        "act2_survival"
+      ],
+      "values": {
+        "strength_below_half_hp": 3
+      }
+    },
+    {
+      "id": "Regal Pillow",
+      "name": "Regal Pillow",
+      "aliases": [
+        "皇家枕头"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "rest",
+        "healing",
+        "route_recovery"
+      ],
+      "values": {
+        "rest_heal_bonus": 15
+      }
+    },
+    {
+      "id": "Ring of the Serpent",
+      "name": "Ring of the Serpent",
+      "rarity": "BOSS",
+      "tags": [
+        "boss",
+        "silent"
+      ],
+      "values": {},
+      "aliases": [
+        "长蛇戒指"
+      ]
+    },
+    {
+      "id": "Ring of the Snake",
+      "name": "Ring of the Snake",
+      "rarity": "STARTER",
+      "tags": [
+        "starter",
+        "silent"
+      ],
+      "values": {},
+      "aliases": [
+        "蛇之戒指"
+      ]
+    },
+    {
+      "id": "Runic Capacitor",
+      "name": "Runic Capacitor",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "符文电容器"
+      ]
+    },
+    {
+      "id": "Runic Dome",
+      "name": "Runic Dome",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "符文圆顶"
+      ]
+    },
+    {
+      "id": "Runic Pyramid",
+      "name": "Runic Pyramid",
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "hand_retention",
+        "planning",
+        "defense"
+      ],
+      "values": {},
+      "aliases": [
+        "符文金字塔"
+      ]
+    },
+    {
+      "id": "Sacred Bark",
+      "name": "Sacred Bark",
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "potion_synergy",
+        "potion_value",
+        "scaling"
+      ],
+      "values": {
+        "double_potion_effects": true
+      },
+      "aliases": [
+        "神圣树皮"
+      ]
+    },
+    {
+      "id": "Self Forming Clay",
+      "name": "Self-Forming Clay",
+      "aliases": [
+        "Self Forming Clay",
+        "SelfFormingClay",
+        "自成型黏土"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "block",
+        "damage_taken_synergy",
+        "defense",
+        "act2_survival"
+      ],
+      "values": {
+        "block_next_turn_per_unblocked_hit": 3
+      }
+    },
+    {
+      "id": "Shovel",
+      "name": "Shovel",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "铲子"
+      ]
+    },
+    {
+      "id": "Shuriken",
+      "name": "Shuriken",
+      "aliases": [
+        "手里剑"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "strength",
+        "attack_spam",
+        "scaling",
+        "damage"
+      ],
+      "values": {
+        "strength": 1
+      }
+    },
+    {
+      "id": "Singing Bowl",
+      "name": "Singing Bowl",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "max_hp",
+        "skip_reward_value",
+        "route_recovery"
+      ],
+      "values": {
+        "max_hp_on_skip": 2
+      },
+      "aliases": [
+        "颂钵"
+      ]
+    },
+    {
+      "id": "Slaver's Collar",
+      "name": "Slaver's Collar",
+      "aliases": [
+        "Slavers Collar",
+        "奴隶贩子颈环"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "elite_tempo",
+        "boss_tempo",
+        "hallway_no_value"
+      ],
+      "values": {
+        "energy_in_elite_or_boss": 1
+      }
+    },
+    {
+      "id": "Sling of Courage",
+      "name": "Sling of Courage",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "SLING",
+        "勇气投石索"
+      ]
+    },
+    {
+      "id": "Smiling Mask",
+      "name": "Smiling Mask",
+      "aliases": [
+        "微笑面具"
+      ],
+      "rarity": "SHOP",
+      "tags": [
+        "shop",
+        "card_remove",
+        "economy"
+      ],
+      "values": {
+        "remove_cost": 50
+      }
+    },
+    {
+      "id": "Snecko Eye",
+      "name": "Snecko Eye",
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "draw",
+        "confusion",
+        "energy_variance",
+        "high_cost_synergy"
+      ],
+      "values": {
+        "draw": 2
+      },
+      "aliases": [
+        "异蛇之眼"
+      ]
+    },
+    {
+      "id": "Snecko Skull",
+      "name": "Snecko Skull",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "SNAKE_SKULL",
+        "异蛇头骨"
+      ]
+    },
+    {
+      "id": "Sozu",
+      "name": "Sozu",
+      "aliases": [
+        "添水"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "no_potions",
+        "boss_potion_gap_risk"
+      ],
+      "values": {
+        "energy_per_turn": 1
+      }
+    },
+    {
+      "id": "Spirit Poop",
+      "name": "Spirit Poop",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "精灵便便"
+      ]
+    },
+    {
+      "id": "Ssserpent Head",
+      "name": "Ssserpent Head",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "蛇的头"
+      ]
+    },
+    {
+      "id": "Stone Calendar",
+      "name": "Stone Calendar",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "历石"
+      ]
+    },
+    {
+      "id": "Strange Spoon",
+      "name": "Strange Spoon",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "奇怪的勺子"
+      ]
+    },
+    {
+      "id": "Strawberry",
+      "name": "Strawberry",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "草莓"
+      ]
+    },
+    {
+      "id": "Strike Dummy",
+      "name": "Strike Dummy",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "打击木偶"
+      ]
+    },
+    {
+      "id": "Sundial",
+      "name": "Sundial",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "日晷"
+      ]
+    },
+    {
+      "id": "Symbiotic Virus",
+      "name": "Symbiotic Virus",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "共生病毒"
+      ]
+    },
+    {
+      "id": "Teardrop Locket",
+      "name": "Teardrop Locket",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "泪滴吊坠盒"
+      ]
+    },
+    {
+      "id": "The Abacus",
+      "name": "The Abacus",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "算盘"
+      ]
+    },
+    {
+      "id": "The Boot",
+      "name": "The Boot",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "BOOT",
+        "发条靴"
+      ]
+    },
+    {
+      "id": "The Courier",
+      "name": "The Courier",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "送货员"
+      ]
+    },
+    {
+      "id": "The Specimen",
+      "name": "The Specimen",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "生物样本"
+      ]
+    },
+    {
+      "id": "Thread and Needle",
+      "name": "Thread and Needle",
+      "aliases": [
+        "ThreadAndNeedle",
+        "针线"
+      ],
+      "rarity": "RARE",
+      "tags": [
+        "block",
+        "plated_armor",
+        "defense",
+        "act3_survival"
+      ],
+      "values": {
+        "plated_armor": 4
+      }
+    },
+    {
+      "id": "Tingsha",
+      "name": "Tingsha",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "铜钹"
+      ]
+    },
+    {
+      "id": "Tiny Chest",
+      "name": "Tiny Chest",
+      "rarity": "COMMON",
+      "tags": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "小宝箱"
+      ]
+    },
+    {
+      "id": "Tiny House",
+      "name": "Tiny House",
+      "aliases": [
+        "小屋子"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "max_hp",
+        "healing",
+        "gold",
+        "potion",
+        "card_reward",
+        "upgrade"
+      ],
+      "values": {
+        "max_hp": 5,
+        "healing": 5,
+        "gold": 50,
+        "potion_count": 1,
+        "card_reward_count": 1,
+        "random_upgrade_count": 1
+      }
+    },
+    {
+      "id": "Toolbox",
+      "name": "Toolbox",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "工具箱"
+      ]
+    },
+    {
+      "id": "Torii",
+      "name": "Torii",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "鸟居"
+      ]
+    },
+    {
+      "id": "Tough Bandages",
+      "name": "Tough Bandages",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "结实绷带"
+      ]
+    },
+    {
+      "id": "Toxic Egg",
+      "name": "Toxic Egg",
+      "aliases": [
+        "Toxic Egg 2",
+        "毒素之蛋"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "skill_upgrade",
+        "deck_quality",
+        "frontload_defense",
+        "reward_quality"
+      ],
+      "values": {
+        "upgrade_future_skill_rewards": true
+      }
+    },
+    {
+      "id": "Toy Ornithopter",
+      "name": "Toy Ornithopter",
+      "rarity": "COMMON",
+      "tags": [
+        "healing",
+        "potion_synergy",
+        "route_recovery",
+        "combat_sustain"
+      ],
+      "values": {
+        "heal_on_potion": 5
+      },
+      "aliases": [
+        "玩具扑翼飞机"
+      ]
+    },
+    {
+      "id": "Tungsten Rod",
+      "name": "Tungsten Rod",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "钨合金棍"
+      ]
+    },
+    {
+      "id": "Turnip",
+      "name": "Turnip",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "萝卜"
+      ]
+    },
+    {
+      "id": "Twisted Funnel",
+      "name": "Twisted Funnel",
+      "rarity": "SHOP",
+      "tags": [
+        "shop"
+      ],
+      "values": {},
+      "aliases": [
+        "扭曲漏斗"
+      ]
+    },
+    {
+      "id": "Unceasing Top",
+      "name": "Unceasing Top",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "不休陀螺"
+      ]
+    },
+    {
+      "id": "Vajra",
+      "name": "Vajra",
+      "aliases": [
+        "金刚杵"
+      ],
+      "rarity": "COMMON",
+      "tags": [
+        "strength",
+        "damage",
+        "scaling",
+        "frontload"
+      ],
+      "values": {
+        "strength": 1
+      }
+    },
+    {
+      "id": "Velvet Choker",
+      "name": "Velvet Choker",
+      "aliases": [
+        "VelvetChoker",
+        "天鹅绒颈圈"
+      ],
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "energy",
+        "card_play_limit",
+        "draw_limit_risk"
+      ],
+      "values": {
+        "energy_per_turn": 1,
+        "max_cards_per_turn": 6
+      }
+    },
+    {
+      "id": "Violet Lotus",
+      "name": "Violet Lotus",
+      "rarity": "BOSS",
+      "tags": [
+        "boss",
+        "watcher"
+      ],
+      "values": {},
+      "aliases": [
+        "紫色莲花"
+      ]
+    },
+    {
+      "id": "War Paint",
+      "name": "War Paint",
+      "aliases": [
+        "战纹涂料"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "skill_upgrade",
+        "deck_quality",
+        "frontload_defense"
+      ],
+      "values": {
+        "upgrade_skill_count": 2
+      }
+    },
+    {
+      "id": "Warped Tongs",
+      "name": "Warped Tongs",
+      "rarity": "SPECIAL",
+      "tags": [
+        "special"
+      ],
+      "values": {},
+      "aliases": [
+        "弯曲铁钳"
+      ]
+    },
+    {
+      "id": "Whetstone",
+      "name": "Whetstone",
+      "aliases": [
+        "磨刀石"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "attack_upgrade",
+        "deck_quality",
+        "frontload"
+      ],
+      "values": {
+        "upgrade_attack_count": 2
+      }
+    },
+    {
+      "id": "White Beast Statue",
+      "name": "White Beast Statue",
+      "aliases": [
+        "WhiteBeast",
+        "白兽雕像"
+      ],
+      "rarity": "UNCOMMON",
+      "tags": [
+        "potion",
+        "reward_consistency",
+        "route_flexibility"
+      ],
+      "values": {
+        "guaranteed_potion_rewards": true
+      }
+    },
+    {
+      "id": "Wing Boots",
+      "name": "Wing Boots",
+      "rarity": "RARE",
+      "tags": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "WINGEDGREAVES",
+        "羽翼之靴"
+      ]
+    },
+    {
+      "id": "Wrist Blade",
+      "name": "Wrist Blade",
+      "rarity": "BOSS",
+      "tags": [
+        "boss"
+      ],
+      "values": {},
+      "aliases": [
+        "袖剑"
+      ]
+    },
+    {
+      "id": "Black Blood",
+      "name": "Black Blood",
+      "aliases": [
+        "黑暗之血",
+        "榛戞殫涔嬭"
+      ],
+      "character": "IRONCLAD",
+      "rarity": "BOSS",
+      "tags": [
+        "boss_relic",
+        "healing",
+        "route_recovery",
+        "ironclad_only"
+      ],
+      "values": {
+        "healing_per_combat": 12
+      }
+    },
+    {
+      "id": "Brimstone",
+      "name": "Brimstone",
+      "character": "IRONCLAD",
+      "rarity": "SHOP",
+      "tags": [
+        "strength",
+        "scaling",
+        "high_risk",
+        "boss_damage",
+        "ironclad_only"
+      ],
+      "values": {
+        "strength": 2,
+        "enemy_strength_per_turn": 1
+      },
+      "aliases": [
+        "硫磺"
+      ]
+    },
+    {
+      "id": "Burning Blood",
+      "name": "Burning Blood",
+      "aliases": [
+        "燃烧之血"
+      ],
+      "character": "IRONCLAD",
+      "rarity": "STARTER",
+      "tags": [
+        "starter",
+        "healing",
+        "route_recovery",
+        "ironclad_only"
+      ],
+      "values": {
+        "healing_per_combat": 6
+      }
+    },
+    {
+      "id": "Champion Belt",
+      "name": "Champion Belt",
+      "character": "IRONCLAD",
+      "rarity": "RARE",
+      "tags": [
+        "weak",
+        "vulnerable",
+        "defense",
+        "ironclad_only",
+        "boss_defense"
+      ],
+      "values": {
+        "weak_when_vulnerable": 1
+      },
+      "aliases": [
+        "冠军腰带"
+      ]
+    },
+    {
+      "id": "Charon's Ashes",
+      "name": "Charon's Ashes",
+      "character": "IRONCLAD",
+      "aliases": [
+        "Charons Ashes",
+        "卡戎之灰"
+      ],
+      "rarity": "RARE",
+      "tags": [
+        "exhaust_synergy",
+        "aoe_damage",
+        "ironclad_only",
+        "status_cleanup_synergy"
+      ],
+      "values": {
+        "damage_all_on_exhaust": 3
+      }
+    },
+    {
+      "id": "Paper Phrog",
+      "name": "Paper Phrog",
+      "aliases": [
+        "Paper Frog",
+        "纸蛙"
+      ],
+      "character": "IRONCLAD",
+      "rarity": "UNCOMMON",
+      "tags": [
+        "vulnerable",
+        "damage",
+        "boss_damage",
+        "ironclad_only"
+      ],
+      "values": {
+        "vulnerable_damage_multiplier_bonus": 25
+      }
+    },
+    {
+      "id": "Runic Cube",
+      "name": "Runic Cube",
+      "character": "IRONCLAD",
+      "rarity": "RARE",
+      "tags": [
+        "draw",
+        "self_damage_synergy",
+        "ironclad_only",
+        "engine"
+      ],
+      "values": {},
+      "aliases": [
+        "符文立方体"
+      ]
+    }
+  ]
+}

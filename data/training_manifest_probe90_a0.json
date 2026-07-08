@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-05T20:15:56",
+  "summary": {
+    "total_logs": 1,
+    "clean_trainable": 0,
+    "diagnostic_excluded": 1,
+    "infra_blocked": 0,
+    "shadow_examples": {
+      "route_risk": 0,
+      "potion_tempo": 0,
+      "pre_boss_deck_quality": 0
+    }
+  },
+  "categories": {
+    "clean_trainable": [],
+    "diagnostic_excluded": [
+      {
+        "path": "ai_runs_strategy_probe90_a0\\20260705_200019_ironclad_a0.jsonl",
+        "category": "diagnostic_excluded",
+        "reason": "synthetic_after_main_menu",
+        "character": "IRONCLAD",
+        "ascension": 0,
+        "floor": 8,
+        "victory": false,
+        "score": null,
+        "steps": 167,
+        "card_picks": 5,
+        "action_records": 166,
+        "recovered_actions": 20,
+        "failed_actions": 0
+      }
+    ],
+    "infra_blocked": []
+  },
+  "static_knowledge": {
+    "dir": "data\\static_knowledge",
+    "source_counts": {
+      "cards": 33,
+      "monsters": 19,
+      "potions": 22
+    }
+  }
+}

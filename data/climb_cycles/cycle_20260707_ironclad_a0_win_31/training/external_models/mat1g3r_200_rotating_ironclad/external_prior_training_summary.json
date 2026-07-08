@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "status": "trained",
+  "source_quality": "external_prior",
+  "model_kind": "external_card_prior",
+  "model_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\training\\external_models\\mat1g3r_200_rotating_ironclad\\card_prior_model.json",
+  "examples": 889,
+  "deltas": 151,
+  "min_count": 2,
+  "max_delta": 2.0,
+  "prior_scale": 0.2,
+  "runtime_authority": false,
+  "runtime_default_enabled": false,
+  "does_not_control_live_mcp": true,
+  "training_source": {
+    "mode": "external_prior_rows",
+    "source_category": "external_run_history",
+    "source_quality_policy": "external_prior",
+    "source_ids": [
+      "mat1g3r_200_rotating_ironclad"
+    ],
+    "source_id": "mat1g3r_200_rotating_ironclad",
+    "inputs": [
+      "data\\external\\sts_runs\\mat1g3r_200_rotating_ironclad\\external_manifest.json"
+    ],
+    "missing_inputs": [],
+    "manifest_paths": [
+      "data\\external\\sts_runs\\mat1g3r_200_rotating_ironclad\\external_manifest.json"
+    ],
+    "resolved_files": [
+      "data\\external\\sts_runs\\mat1g3r_200_rotating_ironclad\\card_reward_priors.jsonl"
+    ],
+    "resolved_file_count": 1,
+    "warnings": [],
+    "forbidden_uses": [
+      "clean_trainable",
+      "pristine",
+      "gate",
+      "learned_memory",
+      "runtime_authority"
+    ]
+  },
+  "load_quality": {
+    "files": 1,
+    "rows": 889,
+    "accepted": 889,
+    "skipped": 0,
+    "skip_reasons": {},
+    "source_datasets": {
+      "mat1g3r_200_rotating_ironclad": 889
+    },
+    "has_reward_options_count": 889,
+    "picked_only_count": 0,
+    "source_weight_total": 44.45
+  },
+  "forbidden_uses": [
+    "clean_trainable",
+    "pristine",
+    "gate",
+    "learned_memory",
+    "runtime_authority"
+  ]
+}

@@ -1,0 +1,231 @@
+{
+  "metadata": {
+    "version": 1,
+    "trained_at": "2026-07-07T00:59:46",
+    "backend": "frequency_context_stats",
+    "examples": 121,
+    "label_cards": 8,
+    "target": "label_first_card_key",
+    "value_target": "loss_delta_attacks_removed_kills_retaliation_damage_avoided_lethal",
+    "min_count": 2,
+    "max_weight": 2.0,
+    "source_quality": {
+      "usable_with_recoveries": 121
+    },
+    "load_quality": {
+      "files": 1,
+      "rows": 129,
+      "accepted": 121,
+      "skipped": 8,
+      "skip_reasons": {
+        "missed_direct_kill": 8
+      }
+    },
+    "training_source": {
+      "mode": "shadow_rows",
+      "category": "combat_search",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+      ],
+      "missing_inputs": [],
+      "row_file": "combat_search_labels.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\combat_search_labels.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    },
+    "training_source_quality": "usable"
+  },
+  "card_priors": {
+    "bash": 1.5207,
+    "clothesline": 1.521,
+    "defendr": 1.5585,
+    "shrugitoff": 1.4259,
+    "striker": 1.5415,
+    "thunderclap": 1.2313
+  },
+  "context_card_scores": {
+    "act:1": {
+      "bash": -0.0251,
+      "clothesline": 0.267,
+      "defendr": -0.0525,
+      "shrugitoff": -0.0943,
+      "striker": 0.1143,
+      "thunderclap": 0.0121
+    },
+    "enemy:multi": {
+      "bash": 0.0407,
+      "clothesline": 0.2565,
+      "defendr": -0.0318,
+      "shrugitoff": -0.129,
+      "striker": 0.1218,
+      "thunderclap": 0.1
+    },
+    "enemy:single": {
+      "bash": -0.0819,
+      "clothesline": 0.1761,
+      "defendr": -0.0719,
+      "shrugitoff": -0.0594,
+      "striker": 0.0629
+    },
+    "enemy_id:acidslimel": {
+      "defendr": 0.0388,
+      "shrugitoff": 0.0143,
+      "striker": 0.2437
+    },
+    "enemy_id:acidslimem": {
+      "bash": -0.0422,
+      "clothesline": 0.2307,
+      "defendr": -0.3587,
+      "shrugitoff": -0.0454,
+      "striker": 0.3756
+    },
+    "enemy_id:acidslimes": {
+      "bash": -0.2113,
+      "defendr": 0.2183,
+      "shrugitoff": 0.1384,
+      "striker": -0.0344,
+      "thunderclap": 0.2681
+    },
+    "enemy_id:cultist": {
+      "bash": -0.0344,
+      "defendr": -0.0532,
+      "shrugitoff": -0.1372
+    },
+    "enemy_id:fungibeast": {
+      "clothesline": 0.242,
+      "defendr": 0.1384
+    },
+    "enemy_id:fuzzylousedefensive": {
+      "bash": 0.2161,
+      "defendr": -0.1255,
+      "shrugitoff": -0.0583,
+      "striker": 0.0577
+    },
+    "enemy_id:fuzzylousenormal": {
+      "bash": 0.3109,
+      "defendr": -0.1335,
+      "striker": 0.1048
+    },
+    "enemy_id:gremlinfat": {
+      "defendr": -0.0444
+    },
+    "enemy_id:gremlinwizard": {
+      "defendr": -0.0444
+    },
+    "enemy_id:jawworm": {
+      "bash": -0.0145,
+      "clothesline": 0.2307,
+      "defendr": -0.011,
+      "shrugitoff": -0.079,
+      "striker": -0.0272,
+      "thunderclap": -0.3129
+    },
+    "enemy_id:lagavulin": {
+      "bash": -0.233,
+      "defendr": -0.3114,
+      "shrugitoff": -0.2246
+    },
+    "enemy_id:slaverblue": {
+      "shrugitoff": 0.1384
+    },
+    "enemy_id:slaverred": {
+      "defendr": -0.3587,
+      "shrugitoff": -0.0169
+    },
+    "enemy_id:spikeslimel": {
+      "defendr": -0.1157,
+      "shrugitoff": -0.2106
+    },
+    "enemy_id:spikeslimem": {
+      "bash": -0.0579,
+      "defendr": -0.0559,
+      "shrugitoff": -0.079,
+      "thunderclap": -0.224
+    },
+    "enemy_id:spikeslimes": {
+      "bash": 0.012,
+      "defendr": 0.3399,
+      "striker": 0.3094,
+      "thunderclap": 0.2681
+    },
+    "energy:2": {
+      "defendr": 0.0466,
+      "shrugitoff": -0.1237,
+      "striker": 0.0049
+    },
+    "energy:3": {
+      "bash": 0.0414,
+      "defendr": -0.1647,
+      "shrugitoff": -0.0912,
+      "striker": 0.2234,
+      "thunderclap": 0.0075
+    },
+    "energy:4": {
+      "bash": -0.1739,
+      "clothesline": 0.2308,
+      "defendr": 0.2859,
+      "shrugitoff": -0.0368
+    },
+    "hp:high": {
+      "bash": -0.0319,
+      "clothesline": 0.2511,
+      "defendr": -0.1007,
+      "shrugitoff": -0.1582,
+      "striker": 0.1274,
+      "thunderclap": 0.0714
+    },
+    "hp:low": {
+      "shrugitoff": 0.242
+    },
+    "hp:mid": {
+      "bash": -0.0661,
+      "defendr": -0.0108,
+      "shrugitoff": -0.0772,
+      "striker": -0.047,
+      "thunderclap": -0.0206
+    },
+    "incoming:chip": {
+      "bash": 0.0555,
+      "clothesline": 0.2511,
+      "defendr": -0.0258,
+      "shrugitoff": -0.1388,
+      "striker": 0.4182,
+      "thunderclap": 0.2454
+    },
+    "incoming:covered": {
+      "bash": -0.4966,
+      "defendr": -0.3206,
+      "striker": -0.3803,
+      "thunderclap": -0.3897
+    },
+    "incoming:danger": {
+      "bash": 0.3446,
+      "defendr": 0.0683
+    },
+    "turn:early": {
+      "bash": 0.0661,
+      "defendr": -0.0315,
+      "shrugitoff": -0.1414,
+      "striker": 0.3756
+    },
+    "turn:first": {
+      "bash": -0.2279,
+      "clothesline": 0.197,
+      "defendr": -0.2073,
+      "shrugitoff": -0.0583,
+      "striker": 0.0906,
+      "thunderclap": 0.1785
+    },
+    "turn:late": {
+      "bash": -0.0049,
+      "clothesline": 0.1954,
+      "defendr": -0.0189,
+      "shrugitoff": -0.0141,
+      "striker": -0.0272,
+      "thunderclap": -0.1256
+    }
+  }
+}

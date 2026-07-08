@@ -1,0 +1,301 @@
+{
+  "version": 1,
+  "scope": "Act 1 boss mechanics for pre-boss and combat shadow features",
+  "sources": [
+    {
+      "name": "MCP/CommunicationMod combat observations",
+      "url": "https://github.com/ForgottenArbiter/CommunicationMod"
+    },
+    {
+      "name": "Slay the Spire Monsters wiki",
+      "url": "https://slay-the-spire.fandom.com/wiki/Monsters"
+    },
+    {
+      "name": "Spire Archive STS1 parsed game data",
+      "url": "https://github.com/nkhoit/spire-archive"
+    }
+  ],
+  "bosses": [
+    {
+      "id": "Hexaghost",
+      "name": "Hexaghost",
+      "act": 1,
+      "aliases": [
+        "Hexa Ghost",
+        "六火亡魂"
+      ],
+      "mechanics": [
+        "hp_scaled_opening",
+        "large_multi_hit",
+        "burn_status_pressure",
+        "scaling_cycle"
+      ],
+      "search_hints": [
+        "burn_cleanup_pressure",
+        "multi_hit_block_scaling",
+        "preserve_hp_for_opening"
+      ],
+      "deck_needs": [
+        "premium_block",
+        "weak",
+        "frontload",
+        "burn_cleanup"
+      ],
+      "potion_needs": [
+        "block",
+        "weak",
+        "scaling",
+        "burst_turn"
+      ],
+      "tags": [
+        "act1_boss",
+        "multi_hit",
+        "status_pressure",
+        "long_fight"
+      ],
+      "values": {
+        "max_expected_attack": 36,
+        "max_hit_count": 6,
+        "burn_damage": 2,
+        "upgraded_burn_damage": 4
+      }
+    },
+    {
+      "id": "SlimeBoss",
+      "name": "Slime Boss",
+      "act": 1,
+      "aliases": [
+        "Slime Boss",
+        "史莱姆老大"
+      ],
+      "mechanics": [
+        "split_threshold",
+        "large_single_hit",
+        "slime_status_pressure",
+        "post_split_multi_enemy"
+      ],
+      "search_hints": [
+        "cross_split_line",
+        "avoid_bad_split_without_followup",
+        "post_split_aoe_value"
+      ],
+      "deck_needs": [
+        "frontload",
+        "aoe",
+        "split_planning",
+        "premium_block"
+      ],
+      "potion_needs": [
+        "burst_damage",
+        "aoe",
+        "block"
+      ],
+      "tags": [
+        "act1_boss",
+        "split",
+        "aoe_check",
+        "frontload_check"
+      ],
+      "values": {
+        "max_expected_attack": 38,
+        "split_threshold_percent": 50,
+        "post_split_enemy_count": 2
+      }
+    },
+    {
+      "id": "TheGuardian",
+      "name": "The Guardian",
+      "act": 1,
+      "aliases": [
+        "Guardian",
+        "守护者"
+      ],
+      "mechanics": [
+        "mode_shift",
+        "sharp_hide",
+        "defensive_mode",
+        "attack_cycle"
+      ],
+      "search_hints": [
+        "mode_shift_attack_cancel",
+        "avoid_attack_spam_in_defensive_mode",
+        "value_non_attack_defense"
+      ],
+      "deck_needs": [
+        "premium_block",
+        "controlled_burst",
+        "weak",
+        "non_attack_defense"
+      ],
+      "potion_needs": [
+        "block",
+        "weak",
+        "scaling",
+        "duplication"
+      ],
+      "tags": [
+        "act1_boss",
+        "mode_shift",
+        "thorns",
+        "defense_check"
+      ],
+      "values": {
+        "max_expected_attack": 36,
+        "mode_shift_threshold": 30,
+        "sharp_hide_damage": 3,
+        "max_hit_count": 4
+      }
+    },
+    {
+      "id": "BronzeAutomaton",
+      "name": "Bronze Automaton",
+      "act": 2,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_expected_attack": 50,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "铜制机械人偶"
+      ]
+    },
+    {
+      "id": "TheChamp",
+      "name": "The Champ",
+      "act": 2,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_expected_attack": 20,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "CHAMP",
+        "第一勇士"
+      ]
+    },
+    {
+      "id": "TheCollector",
+      "name": "The Collector",
+      "act": 2,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_expected_attack": 21
+      },
+      "aliases": [
+        "收藏家"
+      ]
+    },
+    {
+      "id": "AwakenedOne",
+      "name": "Awakened One",
+      "act": 3,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_expected_attack": 40,
+        "max_hit_count": 4
+      },
+      "aliases": [
+        "觉醒者"
+      ]
+    },
+    {
+      "id": "Deca",
+      "name": "Deca",
+      "act": 3,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_expected_attack": 24,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "八体"
+      ]
+    },
+    {
+      "id": "Donu",
+      "name": "Donu",
+      "act": 3,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_expected_attack": 24,
+        "max_hit_count": 2
+      },
+      "aliases": [
+        "甜圈"
+      ]
+    },
+    {
+      "id": "TimeEater",
+      "name": "Time Eater",
+      "act": 3,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_hit_count": 3
+      },
+      "aliases": [
+        "时间吞噬者"
+      ]
+    },
+    {
+      "id": "CorruptHeart",
+      "name": "Corrupt Heart",
+      "act": 4,
+      "mechanics": [],
+      "search_hints": [],
+      "deck_needs": [],
+      "potion_needs": [],
+      "tags": [
+        "boss"
+      ],
+      "values": {
+        "max_expected_attack": 45,
+        "max_hit_count": 12
+      },
+      "aliases": [
+        "腐化之心"
+      ]
+    }
+  ]
+}

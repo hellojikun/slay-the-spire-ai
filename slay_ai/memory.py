@@ -59,12 +59,21 @@ class StrategyMemory:
         )
 
     def card_score(self, name: str, character: str = "IRONCLAD") -> float:
+        return self.card_score_breakdown(name, character)["total"]
+
+    def card_score_breakdown(self, name: str, character: str = "IRONCLAD") -> dict[str, Any]:
         profile = self.base["character_profiles"].get(character, {})
         normalized = normalize_card_name(name)
-        score = profile.get("card_scores", {}).get(normalized, 30)
+        score = float(profile.get("card_scores", {}).get(normalized, 30))
         learned_delta = self.learned.get("card_picks", {}).get(normalized, {}).get("delta", 0)
         model_delta = self.value_model.score_delta(normalized, character)
-        return score + learned_delta + model_delta
+        return {
+            "card": normalized,
+            "base_score": score,
+            "learned_delta": float(learned_delta),
+            "model_delta": float(model_delta),
+            "total": score + float(learned_delta) + float(model_delta),
+        }
 
     def reload_value_model(self) -> None:
         self.value_model = CardValueModel.load(self.value_model_path)

@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "diagnoses": [
+    {
+      "manifest_path": "data\\training_manifest_probe105_a0.json",
+      "category": "clean_trainable",
+      "reason": "completed_clean",
+      "failure_attribution": "potion_planning",
+      "failure_tags": [
+        "run_loss",
+        "boss_combat",
+        "potion_planning"
+      ],
+      "path": "runs\\ai_runs_strategy_probe105_a0\\20260706_101935_ironclad_a0.jsonl",
+      "character": "IRONCLAD",
+      "ascension": 0,
+      "floor": 16,
+      "victory": false,
+      "steps": 271,
+      "action_records": 270,
+      "recovered_actions": 0,
+      "failed_actions": 0,
+      "action_recovery_summary": {},
+      "validation_grade": "pristine",
+      "validation_flags": [],
+      "act1_boss": {
+        "reached": true,
+        "cleared": false,
+        "prefix_pristine_clear": false,
+        "prefix_blockers": [],
+        "floor": 16,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "entry_step": 215,
+        "entry_hp": 80,
+        "entry_potion_count": 1,
+        "clear_step": null,
+        "last_step": 271,
+        "last_hp": 0,
+        "last_turn": 16,
+        "potion_use_steps": []
+      },
+      "shadow_examples": {
+        "route_risk": 15,
+        "potion_tempo": 83,
+        "pre_boss_deck_quality": 1,
+        "combat_search_labels": 39
+      },
+      "shadow_label_quality": {
+        "combat_search_labels": {
+          "total": 39,
+          "trainable": 39,
+          "excluded_from_training": 0,
+          "direct_kill_available": 2,
+          "exclusion_reasons": {}
+        }
+      },
+      "shadow_advice": {
+        "available": true,
+        "path": "data\\shadow_advice_probe105_a0",
+        "categories": {
+          "route_risk": {
+            "rows": 15,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 15
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "potion_tempo": {
+            "rows": 83,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 83
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "pre_boss_deck_quality": {
+            "rows": 1,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 1
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "combat_search": {
+            "rows": 39,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 39
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          }
+        }
+      },
+      "combat_endgame": {
+        "available": true,
+        "path": "runs\\ai_runs_strategy_probe105_a0\\20260706_101935_ironclad_a0.jsonl",
+        "step": 269,
+        "floor": 16,
+        "turn": 16,
+        "current_hp": 7,
+        "current_energy": 1,
+        "incoming_damage": 24,
+        "enemy_count": 1,
+        "enemy_id": "Hexaghost",
+        "enemy_hp": 4,
+        "kill_cards": [
+          {
+            "card_index": 1,
+            "id": "Twin Strike",
+            "name": "双重打击",
+            "damage": 5,
+            "cost": 1
+          }
+        ],
+        "chosen_action": "play_card",
+        "chosen_card_index": 2,
+        "missed_lethal": true
+      },
+      "next_action": "fix_combat_lethal_priority",
+      "status_line": "clean_trainable/potion_planning: IRONCLAD A0 floor 16 (completed_clean; recovered=0, failed=0; validation=pristine; act1_boss=reached:Hexaghost[T16,hp=0,prefix_pristine=false]; missed_lethal=双重打击->Hexaghost hp=4) -> fix_combat_lethal_priority; advice=no_signals"
+    }
+  ]
+}

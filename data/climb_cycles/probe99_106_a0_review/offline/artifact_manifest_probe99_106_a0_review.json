@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "name": "probe99_106_a0_review",
+  "artifact_manifest_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\artifact_manifest_probe99_106_a0_review.json",
+  "inputs": [
+    "runs\\ai_runs_strategy_probe99_a0",
+    "runs\\ai_runs_strategy_probe100_a0",
+    "runs\\ai_runs_strategy_probe101_a0",
+    "runs\\ai_runs_strategy_probe102_a0",
+    "runs\\ai_runs_strategy_probe103_a0",
+    "runs\\ai_runs_strategy_probe104_a0",
+    "runs\\ai_runs_strategy_probe105_a0",
+    "runs\\ai_runs_strategy_probe106_a0"
+  ],
+  "input_count": 8,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_strategy_probe99_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 477063,
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe100_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 653918,
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe101_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 1095794,
+      "index": 2
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe102_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 811527,
+      "index": 3
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe103_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 480830,
+      "index": 4
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe104_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 888907,
+      "index": 5
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe105_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 509781,
+      "index": 6
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe106_a0",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 1,
+      "bytes": 525543,
+      "index": 7
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe103_a0\\20260706_010955_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe105_a0\\20260706_101935_ironclad_a0.jsonl",
+    "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 8,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_strategy_probe99_a0\\20260706_002051_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 472550,
+      "sha256": "65ee1c4f0d4cde9869502142df8717ed8c9281b5193abd20400afc04fda973dc",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe100_a0\\20260706_002940_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 649565,
+      "sha256": "bd5a05a72fdc2cf72277c76af783740d200a2b752bb37be1ec794429985a06c0",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe101_a0\\20260706_003952_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1091334,
+      "sha256": "73c77b7aada956d180093a5dd9310bf6c887d94e84cf279e141906ebf072d9b6",
+      "index": 2
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe102_a0\\20260706_005531_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 807301,
+      "sha256": "da40799ffed306ec2018aea35b2d2f95bfcb4f707ad68c5779e4f2bbbadb8fb1",
+      "index": 3
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe103_a0\\20260706_010955_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 476615,
+      "sha256": "ac93c84b3a00e59a792024bb63f0264fc1fdd531336b3429faef09227d157a36",
+      "index": 4
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 884593,
+      "sha256": "02b1fb3d6864d0fd7b2fc7adcfbf40548355c2ea5c251cce4f49cae993e9d793",
+      "index": 5
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe105_a0\\20260706_101935_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 505577,
+      "sha256": "983c1b7b992b122931b8dc0705516a3c1204bbc1ceb01544c38a1519c58a9940",
+      "index": 6
+    },
+    {
+      "path": "runs\\ai_runs_strategy_probe106_a0\\20260706_103237_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 525543,
+      "sha256": "40a7a727312ea5232e4a81f39f00a430e3fbd221a72a12a0dfb3a86aae433b9a",
+      "index": 7
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\training_manifest_probe99_106_a0_review.json",
+    "shadow_dir": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review",
+    "advice_dir": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_advice_probe99_106_a0_review",
+    "diagnosis_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\run_diagnosis_probe99_106_a0_review.json",
+    "gate_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\act1_boss_gate_probe99_106_a0_review.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\static_knowledge_gaps_probe99_106_a0_review.json",
+    "combat_label_audit_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\combat_label_audit_probe99_106_a0_review.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\combat_label_replay_audit_probe99_106_a0_review.json",
+    "summary_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\offline_batch_probe99_106_a0_review.json",
+    "artifact_manifest_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\artifact_manifest_probe99_106_a0_review.json",
+    "handoff_dir": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review",
+    "handoff_index_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_advice_probe99_106_a0_review",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 2123501
+    },
+    "combat_label_audit_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\combat_label_audit_probe99_106_a0_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 28527,
+      "sha256": "68195a5ae28fb557c3bb910fa15d6f34d3cb92286ffbea46a122e302845a86c2"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\combat_label_replay_audit_probe99_106_a0_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 37594,
+      "sha256": "b4d6576bcd8c91f434c14bd2f03145a2641c0120a0a3890fbcff750e03b6c1d9"
+    },
+    "diagnosis_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\run_diagnosis_probe99_106_a0_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2871207,
+      "sha256": "b6a284c9e103a4931f2cf48d099a07bd9f96ef9e25be6d5b6d3cae78b5d1cfea"
+    },
+    "gate_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\act1_boss_gate_probe99_106_a0_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 29579,
+      "sha256": "ee79aaa8ec876c987840d4287e1c47965b81bf2d8b2b1730d3b746d93813bb5d"
+    },
+    "handoff_dir": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 943233
+    },
+    "handoff_index_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 70092,
+      "sha256": "c28f2506b132023f905890fc0d9d70575aca3374dae950096391ca9ecfaf3c5c"
+    },
+    "manifest_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\training_manifest_probe99_106_a0_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 354166,
+      "sha256": "cbad5115817ae1226ef505eb59db4a1f096e059919ec5f5a909d6a7ec5033191"
+    },
+    "next_handoff_prompt_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 77033,
+      "sha256": "564add456f93cd76286b13491d3978c309c820e344c906837b70b27119f15424"
+    },
+    "shadow_dir": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\shadow_probe99_106_a0_review",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 7914632
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\static_knowledge_gaps_probe99_106_a0_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 14169,
+      "sha256": "84373662dd2c324bad19c0e664d856b84edc2f0da6efe1b2d54316c1f2dd341d"
+    },
+    "summary_path": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\offline_batch_probe99_106_a0_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 667560,
+      "sha256": "1637e1bfacf711d1aa0fb87198878d66bcdd32b9d0dbb04c8c62677a5aa00e9c"
+    },
+    "ai_agent_handoff": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 190629,
+      "sha256": "61a5d663c6b0623195ef342d334c79b45e5e53c4b8ac4b1ddd73b165614fe0cb"
+    },
+    "engineering_agent_handoff": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 146691,
+      "sha256": "0d13cfb5ba2159238f57a8f2adfb6d72e40429c3ae3102d71fe85a1d2b1f8795"
+    },
+    "main_agent_handoff": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 169199,
+      "sha256": "306347450224952fcc2047cb695341c3559fa20d21f18be781b180312b04722a"
+    },
+    "runner_agent_handoff": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 169304,
+      "sha256": "90fa150b05f31591d7e7c830a4ad87a5d02f75ac286ed459f982f314af9b2b9c"
+    },
+    "ai_agent_prompt": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 30381,
+      "sha256": "aff65915b65a809325ce68962e5dd797d65921146906f3037ce699e16bc9525d"
+    },
+    "engineering_agent_prompt": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 29909,
+      "sha256": "750aa662d7894626f91c27a575197196cb749d10623d158e2873a13b2eaa6faa"
+    },
+    "main_agent_prompt": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 29978,
+      "sha256": "8a6496707aeca6074fbf2c86f6361efaea24155c82d38fdfe8ba8ad07bd38db7"
+    },
+    "runner_agent_prompt": {
+      "path": "data\\climb_cycles\\probe99_106_a0_review\\offline\\handoff_probe99_106_a0_review\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 30017,
+      "sha256": "712d6da06ebfce2089b4beca6311986a5534e8b28044cfa9265bd037f40f914b"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

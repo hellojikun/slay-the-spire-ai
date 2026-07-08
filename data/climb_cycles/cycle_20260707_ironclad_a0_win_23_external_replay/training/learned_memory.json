@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "runs": {
+    "victories": 0,
+    "deaths": 3,
+    "total": 3
+  },
+  "card_picks": {
+    "Clothesline": {
+      "picked": 2,
+      "delta": -0.6,
+      "mid_deaths": 2
+    },
+    "Hemokinesis": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Carnage": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "True Grit": {
+      "picked": 3,
+      "delta": -1.2,
+      "mid_deaths": 2,
+      "early_deaths": 1
+    },
+    "Thunderclap": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Perfected Strike": {
+      "picked": 3,
+      "delta": -0.9,
+      "mid_deaths": 3
+    },
+    "Immolate": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Cleave": {
+      "picked": 3,
+      "delta": -0.9,
+      "mid_deaths": 3
+    },
+    "Disarm": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Uppercut": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Pommel Strike": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Headbutt": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Shockwave": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Anger": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Flame Barrier": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Offering": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Sever Soul": {
+      "picked": 1,
+      "delta": -0.3,
+      "mid_deaths": 1
+    },
+    "Twin Strike": {
+      "picked": 1,
+      "delta": -0.6,
+      "early_deaths": 1
+    },
+    "Shrug It Off": {
+      "picked": 1,
+      "delta": -0.6,
+      "early_deaths": 1
+    },
+    "Reaper": {
+      "picked": 2,
+      "delta": -1.2,
+      "early_deaths": 2
+    },
+    "Seeing Red": {
+      "picked": 1,
+      "delta": -0.6,
+      "early_deaths": 1
+    }
+  },
+  "recent_outcomes": [
+    {
+      "time": "2026-07-07T02:47:35.706683+00:00",
+      "victory": false,
+      "score": null,
+      "floor": 30,
+      "class": "IRONCLAD",
+      "ascension": 0
+    },
+    {
+      "time": "2026-07-07T02:47:35.738838+00:00",
+      "victory": false,
+      "score": null,
+      "floor": 22,
+      "class": "IRONCLAD",
+      "ascension": 0
+    },
+    {
+      "time": "2026-07-07T02:47:35.765627+00:00",
+      "victory": false,
+      "score": null,
+      "floor": 10,
+      "class": "IRONCLAD",
+      "ascension": 0
+    }
+  ],
+  "learning_replays": [
+    {
+      "time": "2026-07-07T02:47:35+00:00",
+      "source": {
+        "mode": "manifest_clean_trainable",
+        "quality_policy": "clean_trainable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23_external_replay\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_23_external_replay.json"
+        ],
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23_external_replay\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_23_external_replay.json",
+        "manifest_clean_paths": [
+          "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_101046_ironclad_a0.jsonl",
+          "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102217_ironclad_a0.jsonl",
+          "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102952_ironclad_a0.jsonl"
+        ],
+        "manifest_clean_count": 3,
+        "missing_clean_paths": [],
+        "resolved_logs": [
+          "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_101046_ironclad_a0.jsonl",
+          "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102217_ironclad_a0.jsonl",
+          "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102952_ironclad_a0.jsonl"
+        ],
+        "resolved_log_count": 3,
+        "warnings": []
+      },
+      "read_logs": 3,
+      "applied_completed_runs": 3,
+      "skipped_incomplete_runs": 0
+    }
+  ],
+  "last_learning_replay": {
+    "time": "2026-07-07T02:47:35+00:00",
+    "source": {
+      "mode": "manifest_clean_trainable",
+      "quality_policy": "clean_trainable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23_external_replay\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_23_external_replay.json"
+      ],
+      "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23_external_replay\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_23_external_replay.json",
+      "manifest_clean_paths": [
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_101046_ironclad_a0.jsonl",
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102217_ironclad_a0.jsonl",
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102952_ironclad_a0.jsonl"
+      ],
+      "manifest_clean_count": 3,
+      "missing_clean_paths": [],
+      "resolved_logs": [
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_101046_ironclad_a0.jsonl",
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102217_ironclad_a0.jsonl",
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102952_ironclad_a0.jsonl"
+      ],
+      "resolved_log_count": 3,
+      "warnings": []
+    },
+    "read_logs": 3,
+    "applied_completed_runs": 3,
+    "skipped_incomplete_runs": 0
+  }
+}

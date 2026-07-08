@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "version": 1,
+    "trained_at": "2026-07-07T17:59:44",
+    "backend": "stats",
+    "examples": 0,
+    "positive_examples": 0,
+    "target": "used_potion",
+    "min_count": 2,
+    "max_weight": 2.0,
+    "source_quality": {},
+    "load_quality": {
+      "files": 1,
+      "rows": 0,
+      "accepted": 0,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "training_source": {
+      "mode": "shadow_rows",
+      "category": "potion_tempo",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_33\\live_shadow\\20260707_174128_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "potion_tempo.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_33\\live_shadow\\20260707_174128_ironclad_a0\\potion_tempo.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    },
+    "training_source_quality": "usable"
+  },
+  "intercept": 0.0,
+  "feature_weights": {},
+  "feature_means": {},
+  "feature_scales": {}
+}

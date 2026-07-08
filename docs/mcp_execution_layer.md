@@ -26,8 +26,11 @@ Implemented client safeguards:
 - JSON-RPC response decoding errors are converted to `MCPError`.
 - The implementation now lives in `slay_ai.mcp.client`; `slay_ai.mcp_client` is only a compatibility import layer.
 - State read retry/stability logic now lives in `slay_ai.core.state_reader`.
+- State reads now validate the returned payload shape before the runner uses it. `None`, empty objects, or `in_game=true` payloads without `game_state` are treated like transient `read_state_failed` responses and enter the same retry/recovery path as `Internal error: null`.
 - Runner startup now treats an already in-dungeon state as a valid continuation instead of calling MCP `continue_game` or retrying `start_game` into a live combat.
 - Runner preflight can rewrite a completed CHEST `choose` probe to `proceed` when MCP exposes only `proceed`, keeping the bot from crashing while still making the skipped-relic case visible in logs.
+- Runner preflight can also rewrite an unverified CHEST `proceed` to `choose 1` when MCP exposes `choose` instead of `proceed`, and the same narrow rewrite is retried if `proceed` fails with possible command `choose`.
+- Runner preflight rejects stale targeted `play_card` and targeted `use_potion` actions before MCP execution, including dead/missing monsters and unavailable potion slots.
 
 ## 2026-07-05 A0 Execution Findings
 
@@ -43,7 +46,14 @@ Immediate runner-side fixes:
 
 - CHEST policy is split into `slay_ai.policy_chest` and treats `chest_open != true` with empty rewards as an unverified chest. It probes `choose 1` once per floor before allowing `proceed`.
 - CHEST snapshots now record `chest_open` and visible rewards, so future logs can prove whether MCP exposed a relic reward.
+- Runner execution now guards the opposite CHEST race too: if a stale `proceed` reaches an unverified CHEST whose live command surface has fallen back to `choose`, it rewrites to `choose 1` rather than recording a recovered action race.
 - State-read terminal recovery now sends `proceed` when health diagnostics show a terminal `GAME_OVER` with `proceed`, then waits briefly for available commands to leave `GAME_OVER` before writing post-recovery diagnostics.
+- Action preflight now rejects stale targeted `play_card` and targeted `use_potion` actions before MCP execution when the card/potion slot is gone or unavailable, the monster index is out of range, or the target monster is already dead/gone/0 HP. The runner records these as recoverable `preflight_mismatch` events and lets the next stable frame replan.
+- Reward policy now waits once on an empty, incomplete combat-reward screen before proceeding, and normalizes reward-type names before deciding whether to collect gold, relics, potions, or card rewards.
+- Runner execution now treats post-combat transition errors as a wait/re-read instead of a recovered action race when a stale combat frame sends `end_turn` or `play_card` after MCP has already moved to reward commands such as `choose`/`proceed`. Probe102 exposed both shapes in Act 2 after a clean Guardian clear.
+- Training manifests summarize action-race recovery kinds in both per-run `action_recovery_summary` and batch `summary.action_recovery`, keeping unrecovered races separate from recovered ones, so diagnostic handoffs and Act 1 boss gate reports can tell whether a run or batch involved stale card targets, stale potion targets, stale potion slots, rewritten UI actions, unavailable commands, or an unresolved execution issue.
+- Training manifests now also classify repeated no-terminal `COMBAT_REWARD`, `CARD_REWARD`, `BOSS_REWARD`, and `CHEST` tails as `infra_blocked` screen stalls with reward/relic/chest evidence, so reward-collection failures are not mistaken for strategy deaths or clean training data.
+- Training manifests preserve compact infra evidence for MCP read/null failures and action/preflight errors in `failure_evidence.mcp_read`, `failure_evidence.synthetic_terminal`, and `failure_evidence.action_error`, and `summary.terminal_recovery` rolls synthetic terminal recovery into attempted/succeeded/failed/unhealthy counters. `run_diagnosis`, `run_status`, `offline_batch`, and `act1_boss_gate` surface the same context in status lines and engineering handoffs, so monitors can distinguish normal strategy deaths from MCP terminal-recovery instability without opening every JSONL.
 
 Next MCP-side investigation:
 

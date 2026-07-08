@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "version": 1,
+    "trained_at": "2026-07-07T17:59:44",
+    "backend": "stats",
+    "examples": 1,
+    "positive_examples": 0,
+    "target": "cleared_act1_boss",
+    "min_count": 2,
+    "max_weight": 2.0,
+    "source_quality": {
+      "usable_with_recoveries": 1
+    },
+    "load_quality": {
+      "files": 1,
+      "rows": 1,
+      "accepted": 1,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "training_source": {
+      "mode": "shadow_rows",
+      "category": "pre_boss_deck_quality",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_33\\live_shadow\\20260707_174128_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "pre_boss_deck_quality.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_33\\live_shadow\\20260707_174128_ironclad_a0\\pre_boss_deck_quality.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    },
+    "training_source_quality": "usable"
+  },
+  "intercept": -1.0986,
+  "feature_weights": {},
+  "feature_means": {},
+  "feature_scales": {}
+}

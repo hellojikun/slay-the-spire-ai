@@ -224,6 +224,7 @@ def act1_readiness(state: dict[str, Any], knowledge: Any | None = None) -> dict[
     risk_flags = _risk_flags(
         scores,
         act=act,
+        floor=floor,
         hp_ratio=hp_ratio,
         boss_available=boss_available,
         elite_available=elite_available,
@@ -434,6 +435,7 @@ def _risk_flags(
     scores: dict[str, float],
     *,
     act: int,
+    floor: int,
     hp_ratio: float,
     boss_available: bool,
     elite_available: bool,
@@ -481,6 +483,18 @@ def _risk_flags(
             flags.append("hallway_no_immediate_tempo_potion")
         if deck_features["premium_block_cards"] <= 0:
             flags.append("hallway_lacks_premium_block")
+    if _act1_late_forced_hallway_pressure(
+        act=act,
+        floor=floor,
+        monster_available=monster_available,
+        route_context=route_context,
+    ):
+        if scores["output"] < 60:
+            flags.append("act1_late_forced_hallway_frontload_gap")
+        if scores["aoe"] < 25:
+            flags.append("act1_late_forced_hallway_aoe_gap")
+        if potion_features["immediate_tempo_potions"] <= 0:
+            flags.append("act1_late_forced_hallway_no_tempo_potion")
     if _act2_low_hp_route_pressure(
         act=act,
         hp_ratio=hp_ratio,
@@ -534,6 +548,10 @@ def _recommendations(gaps: list[str], flags: list[str], *, boss_available: bool,
         recommendations.append("prefer_rest_shop_or_safe_event")
     if "hallway_no_immediate_tempo_potion" in flags:
         recommendations.append("seek_or_save_hallway_tempo_potion")
+    if "act1_late_forced_hallway_frontload_gap" in flags:
+        recommendations.append("avoid_late_forced_hallway_until_frontload_improves")
+    if "act1_late_forced_hallway_aoe_gap" in flags:
+        recommendations.append("avoid_late_forced_hallway_until_aoe_improves")
     if "act2_critical_hp_forced_combat" in flags or "act2_low_hp_forced_combat" in flags:
         recommendations.append("prefer_act2_recovery_or_safe_event")
     if "act2_no_emergency_potion" in flags:
@@ -552,16 +570,32 @@ def _act1_hallway_low_buffer_no_recovery(
     monster_available: bool,
     route_context: dict[str, Any],
 ) -> bool:
-    if act != 1 or hp_ratio >= 0.62:
+    if act != 1:
         return False
     combat_pressure = monster_available or bool(route_context.get("forced_combat_within_2"))
     if not combat_pressure:
         return False
     nearest_rest = route_context.get("nearest_rest")
     nearest_shop = route_context.get("nearest_shop")
+    if monster_available and hp_ratio < 0.68 and nearest_rest is not None and nearest_rest <= 1:
+        return True
+    if hp_ratio >= 0.62:
+        return False
     rest_near = nearest_rest is not None and nearest_rest <= 2
     shop_near = nearest_shop is not None and nearest_shop <= 1
     return not rest_near and not shop_near
+
+
+def _act1_late_forced_hallway_pressure(
+    *,
+    act: int,
+    floor: int,
+    monster_available: bool,
+    route_context: dict[str, Any],
+) -> bool:
+    if act != 1 or floor < 8 or not monster_available:
+        return False
+    return bool(route_context.get("forced_combat_within_2") or route_context.get("forced_combat_within_4"))
 
 
 def _act2_low_hp_route_pressure(

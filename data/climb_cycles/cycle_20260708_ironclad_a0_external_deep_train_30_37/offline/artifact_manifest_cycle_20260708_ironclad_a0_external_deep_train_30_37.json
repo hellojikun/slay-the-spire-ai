@@ -1,0 +1,449 @@
+{
+  "version": 1,
+  "name": "cycle_20260708_ironclad_a0_external_deep_train_30_37",
+  "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\artifact_manifest_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_30",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_31",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_32",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_33",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_34",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35",
+    "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36",
+    "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37"
+  ],
+  "input_count": 8,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_30",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 3210119,
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_31",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 1859334,
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_32",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 2729102,
+      "index": 2
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_33",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 2,
+      "bytes": 1001277,
+      "index": 3
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_34",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 5011665,
+      "index": 4
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 3387972,
+      "index": 5
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 6726138,
+      "index": 6
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 1,
+      "bytes": 715448,
+      "index": 7
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_150112_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_151331_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_152959_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_31\\20260707_160545_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_31\\20260707_161645_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_31\\20260707_162319_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_32\\20260707_164601_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_32\\20260707_165954_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_32\\20260707_171219_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_33\\20260707_174128_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_33\\20260707_175258_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_180529_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_181835_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_184956_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 21,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_150112_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 888340,
+      "sha256": "f6a9b03ed2ad8aa9fbafa242c7f8332cace212dc5940693b2fe67a4b18731dfc",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_151331_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1156081,
+      "sha256": "500b9877ef9192f20a0a036d5158f0ba10d55f638554481018d48e78e5b374df",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_30\\20260707_152959_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1165698,
+      "sha256": "189bab407d0f518f521fa1cdea8dea213a46bcf86fb9bce174854762b02c7df8",
+      "index": 2
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_31\\20260707_160545_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 628317,
+      "sha256": "57c76207086ccf72325457e16233c228b6a5e69b248f283e1c833cd3d5fbaf50",
+      "index": 3
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_31\\20260707_161645_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 371241,
+      "sha256": "a5664ed132e124325d279d7083505b92448bc92dd114541c253a47c0e46e6736",
+      "index": 4
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_31\\20260707_162319_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 859776,
+      "sha256": "ffca2fc5b31c3da4a34546489bd76c9d9c8b0e650430e8202076171075366002",
+      "index": 5
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_32\\20260707_164601_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 935363,
+      "sha256": "0c56c4739801593d2815d72a89547d80281ada3a138083fe5814fe7ffc90c9f9",
+      "index": 6
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_32\\20260707_165954_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 800047,
+      "sha256": "96ee8715f2ac209a90f68660b51e598661d7d38dfdf3975e68fd4346ec83c22f",
+      "index": 7
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_32\\20260707_171219_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 993692,
+      "sha256": "8cc7672047ba9d808759b7c85aa11c85cea8a896b6ef06ab75f57c1c442ca693",
+      "index": 8
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_33\\20260707_174128_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 761190,
+      "sha256": "3a5e25cfe80f9416d3859c6d2ddab665182729fb27542054624f2d52c60f7fb5",
+      "index": 9
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_33\\20260707_175258_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 240087,
+      "sha256": "5948a6263a9e40196232995e89d7339b5888a978ffb3cc7799ba9cb2f99202ba",
+      "index": 10
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_180529_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 837940,
+      "sha256": "fb6bd5e3fd09064ffffcf87612e407cb5ad7175aedeeefae6f542596939ae454",
+      "index": 11
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_181835_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2153015,
+      "sha256": "a425c2f9d2ffabb39d03f8e6186c76d809f1581c9484b6d7f9642365fa1f36cb",
+      "index": 12
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_34\\20260707_184956_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2020710,
+      "sha256": "24078143aab6773c000314a99c7f1f7483720e56e67e0011e05dfa91662db59c",
+      "index": 13
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 14
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 15
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 16
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2008186,
+      "sha256": "d0deb11334fee4bbd0d4b138e825f6712e4c9db73593a56511b5b49c480ae412",
+      "index": 17
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2347551,
+      "sha256": "397c89f8c31b410fea8126cf880343de3632e0b8ac1d97532285dbf473adc04c",
+      "index": 18
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2370401,
+      "sha256": "1dd537e7d8135a101d2f0fe9e89a5dba10013da6c6091b62fe5e5570f857e2b1",
+      "index": 19
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 715448,
+      "sha256": "51912fcf65ac3e0b0876806e31f1c57e2236b5b770cc22d0f0accdd0ef7566ca",
+      "index": 20
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\training_manifest_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37",
+    "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_advice_cycle_20260708_ironclad_a0_external_deep_train_30_37",
+    "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\run_diagnosis_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\act1_boss_gate_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\static_knowledge_gaps_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\combat_label_audit_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\combat_label_replay_audit_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\offline_batch_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\artifact_manifest_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+    "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37",
+    "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\index.json",
+    "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\ai_agent.json",
+    "engineering_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\engineering_agent.json",
+    "main_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\main_agent.json",
+    "runner_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\ai_agent.txt",
+    "engineering_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\engineering_agent.txt",
+    "main_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\main_agent.txt",
+    "runner_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_advice_cycle_20260708_ironclad_a0_external_deep_train_30_37",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 5725394
+    },
+    "combat_label_audit_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\combat_label_audit_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 12733,
+      "sha256": "de173475455333f63cb8fee3ec1326435e978dafe960389117c54c7618cc6f6d"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\combat_label_replay_audit_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 16878,
+      "sha256": "73a9ed5f73eba5581e3fb3c07a4aecc90748d49fec8553f6018e107dbf3b1edf"
+    },
+    "diagnosis_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\run_diagnosis_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 8386186,
+      "sha256": "de7abaf1a86f3c2b2b6065df807a907c3c651aaa5fe1a489d67dbfc041e5d7c6"
+    },
+    "gate_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\act1_boss_gate_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 51514,
+      "sha256": "751a49d8ab4d7dd7cdc3ee08748fb69c82cd8726487d343be50b5a3274330444"
+    },
+    "handoff_dir": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 1133520
+    },
+    "handoff_index_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 75317,
+      "sha256": "11ea6dd283cab4222612aafef06e9e7cc264bcf2ac6ea18f4aed15294c6c0288"
+    },
+    "manifest_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\training_manifest_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 427691,
+      "sha256": "93274ebc65714928e060f1e1dfc3dc15a699c406ecdce0f87fb57df76d6df9ac"
+    },
+    "next_handoff_prompt_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 81105,
+      "sha256": "7caac398925e417a62d3052e82b0daf61e8976c8f051c2530cbad040829e4369"
+    },
+    "shadow_dir": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 14476216
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\static_knowledge_gaps_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 5021,
+      "sha256": "4d923b58af467333265e58898166355f545ec477149d0c66a9a67365d63d1230"
+    },
+    "summary_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\offline_batch_cycle_20260708_ironclad_a0_external_deep_train_30_37.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 910417,
+      "sha256": "c0dac075a4da1d6945c93e6b15df2c8923157f357e22dda6049812fd196a54d3"
+    },
+    "ai_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 275467,
+      "sha256": "ed6e5995ab81f65ac2f9f2646a16a5faf4f95d83ace08c99ea58047d71304f28"
+    },
+    "engineering_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 179528,
+      "sha256": "6fb9907f9bb898483484e10c92ae5eecb3a739cabfb15bbd0e294065cc9b722d"
+    },
+    "main_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 193473,
+      "sha256": "f780f243874d907675655f73e94e95c57c55591406ff3377dc05480db62bee9b"
+    },
+    "runner_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 199573,
+      "sha256": "fac281978c531d607b7e68f99e7414b507ac5c57dd6fe85fd403341488dc3739"
+    },
+    "ai_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 33425,
+      "sha256": "49eef2becd8eef92cf192c173b2f91f5a920d4ebb7d7928f188b2cff1865dda6"
+    },
+    "engineering_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 31924,
+      "sha256": "811458127ccf1dd7f6012f8e7a9b7e1f26f300952ba0bd5318c82353261dc60c"
+    },
+    "main_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 31748,
+      "sha256": "c4cf97e1ab27ba7d9271c2ef7e7b6da4d1c01e75a58e496d05f417c80c064484"
+    },
+    "runner_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\handoff_cycle_20260708_ironclad_a0_external_deep_train_30_37\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 31960,
+      "sha256": "4179b43e4075072985c5a9b665615f887f009e7c29b0f9bd910399c7f78678f1"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

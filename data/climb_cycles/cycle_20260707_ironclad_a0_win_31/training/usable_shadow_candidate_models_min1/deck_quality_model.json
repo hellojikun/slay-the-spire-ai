@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "version": 1,
+    "trained_at": "2026-07-07T16:42:15",
+    "backend": "stats",
+    "examples": 0,
+    "positive_examples": 0,
+    "target": "cleared_act1_boss",
+    "min_count": 1,
+    "max_weight": 2.0,
+    "source_quality": {},
+    "load_quality": {
+      "files": 3,
+      "rows": 0,
+      "accepted": 0,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "training_source": {
+      "mode": "shadow_rows",
+      "category": "pre_boss_deck_quality",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "pre_boss_deck_quality.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\pre_boss_deck_quality.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\pre_boss_deck_quality.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\pre_boss_deck_quality.jsonl"
+      ],
+      "resolved_file_count": 3,
+      "warnings": []
+    },
+    "training_source_quality": "usable"
+  },
+  "intercept": 0.0,
+  "feature_weights": {},
+  "feature_means": {},
+  "feature_scales": {}
+}

@@ -1,0 +1,696 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-07T22:40:19",
+  "inputs": [
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl"
+  ],
+  "resolved_logs": [
+    "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl"
+  ],
+  "warnings": [],
+  "summary": {
+    "input_count": 1,
+    "resolved_log_count": 1,
+    "warnings": [],
+    "total_logs": 1,
+    "clean_trainable": 1,
+    "diagnostic_excluded": 0,
+    "infra_blocked": 0,
+    "shadow_examples": {
+      "route_risk": 15,
+      "potion_tempo": 0,
+      "pre_boss_deck_quality": 1,
+      "combat_search_labels": 41
+    },
+    "shadow_feature_coverage": {
+      "version": 1,
+      "shadow_inputs": [],
+      "prefixes": [
+        "deck_",
+        "potion_",
+        "relic_",
+        "enemy_",
+        "boss_"
+      ],
+      "missing_inputs": [],
+      "total_files": 0,
+      "total_rows": 57,
+      "categories": {
+        "combat_search": {
+          "files": 0,
+          "paths": [],
+          "rows": 41,
+          "source_quality": {
+            "pristine": 41
+          },
+          "feature_prefixes": {
+            "deck_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "potion_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "relic_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "enemy_": {
+              "field_count": 4,
+              "rows_with_any": 41,
+              "rows_with_nonzero": 41,
+              "present_values": 164,
+              "nonzero_values": 41,
+              "row_coverage": 1.0,
+              "nonzero_row_rate": 1.0,
+              "fields": {
+                "enemy_count": {
+                  "present": 41,
+                  "numeric": 41,
+                  "nonzero": 41,
+                  "coverage": 1.0,
+                  "nonzero_rate": 1.0
+                },
+                "enemy_hps": {
+                  "present": 41,
+                  "numeric": 0,
+                  "nonzero": 0,
+                  "coverage": 1.0,
+                  "nonzero_rate": 0.0
+                },
+                "enemy_ids": {
+                  "present": 41,
+                  "numeric": 0,
+                  "nonzero": 0,
+                  "coverage": 1.0,
+                  "nonzero_rate": 0.0
+                },
+                "enemy_intents": {
+                  "present": 41,
+                  "numeric": 0,
+                  "nonzero": 0,
+                  "coverage": 1.0,
+                  "nonzero_rate": 0.0
+                }
+              }
+            },
+            "boss_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            }
+          },
+          "unknown_static_features": {}
+        },
+        "potion_tempo": {
+          "files": 0,
+          "paths": [],
+          "rows": 0,
+          "source_quality": {},
+          "feature_prefixes": {
+            "deck_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "potion_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "relic_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "enemy_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "boss_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            }
+          },
+          "unknown_static_features": {}
+        },
+        "pre_boss_deck_quality": {
+          "files": 0,
+          "paths": [],
+          "rows": 1,
+          "source_quality": {
+            "pristine": 1
+          },
+          "feature_prefixes": {
+            "deck_": {
+              "field_count": 1,
+              "rows_with_any": 1,
+              "rows_with_nonzero": 1,
+              "present_values": 1,
+              "nonzero_values": 1,
+              "row_coverage": 1.0,
+              "nonzero_row_rate": 1.0,
+              "fields": {
+                "deck_size": {
+                  "present": 1,
+                  "numeric": 1,
+                  "nonzero": 1,
+                  "coverage": 1.0,
+                  "nonzero_rate": 1.0
+                }
+              }
+            },
+            "potion_": {
+              "field_count": 1,
+              "rows_with_any": 1,
+              "rows_with_nonzero": 0,
+              "present_values": 1,
+              "nonzero_values": 0,
+              "row_coverage": 1.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {
+                "potion_count": {
+                  "present": 1,
+                  "numeric": 1,
+                  "nonzero": 0,
+                  "coverage": 1.0,
+                  "nonzero_rate": 0.0
+                }
+              }
+            },
+            "relic_": {
+              "field_count": 1,
+              "rows_with_any": 1,
+              "rows_with_nonzero": 1,
+              "present_values": 1,
+              "nonzero_values": 1,
+              "row_coverage": 1.0,
+              "nonzero_row_rate": 1.0,
+              "fields": {
+                "relic_count": {
+                  "present": 1,
+                  "numeric": 1,
+                  "nonzero": 1,
+                  "coverage": 1.0,
+                  "nonzero_rate": 1.0
+                }
+              }
+            },
+            "enemy_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "boss_": {
+              "field_count": 1,
+              "rows_with_any": 1,
+              "rows_with_nonzero": 1,
+              "present_values": 1,
+              "nonzero_values": 1,
+              "row_coverage": 1.0,
+              "nonzero_row_rate": 1.0,
+              "fields": {
+                "boss_potion_gap": {
+                  "present": 1,
+                  "numeric": 1,
+                  "nonzero": 1,
+                  "coverage": 1.0,
+                  "nonzero_rate": 1.0
+                }
+              }
+            }
+          },
+          "unknown_static_features": {}
+        },
+        "route_risk": {
+          "files": 0,
+          "paths": [],
+          "rows": 15,
+          "source_quality": {
+            "pristine": 15
+          },
+          "feature_prefixes": {
+            "deck_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "potion_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "relic_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "enemy_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            },
+            "boss_": {
+              "field_count": 0,
+              "rows_with_any": 0,
+              "rows_with_nonzero": 0,
+              "present_values": 0,
+              "nonzero_values": 0,
+              "row_coverage": 0.0,
+              "nonzero_row_rate": 0.0,
+              "fields": {}
+            }
+          },
+          "unknown_static_features": {}
+        }
+      },
+      "source": "memory",
+      "feature_focus": {
+        "expected_prefixes": {
+          "combat_search": [
+            "deck_",
+            "enemy_"
+          ],
+          "potion_tempo": [
+            "potion_",
+            "enemy_"
+          ],
+          "pre_boss_deck_quality": [
+            "deck_",
+            "boss_"
+          ],
+          "route_risk": [
+            "deck_"
+          ]
+        },
+        "categories_with_issues": 2,
+        "missing_prefix_count": 2,
+        "zero_prefix_count": 0,
+        "unknown_static_total": 0,
+        "unknown_static_features": {},
+        "categories": {
+          "combat_search": {
+            "rows": 41,
+            "expected_prefixes": [
+              "deck_",
+              "enemy_"
+            ],
+            "missing_prefixes": [
+              "deck_"
+            ],
+            "zero_prefixes": [],
+            "nonzero_prefixes": {
+              "enemy_": 41
+            },
+            "unknown_static_features": {},
+            "attention_required": true,
+            "issues": [
+              "missing_prefixes"
+            ]
+          },
+          "pre_boss_deck_quality": {
+            "rows": 1,
+            "expected_prefixes": [
+              "deck_",
+              "boss_"
+            ],
+            "missing_prefixes": [],
+            "zero_prefixes": [],
+            "nonzero_prefixes": {
+              "deck_": 1,
+              "boss_": 1
+            },
+            "unknown_static_features": {},
+            "attention_required": false,
+            "issues": []
+          },
+          "route_risk": {
+            "rows": 15,
+            "expected_prefixes": [
+              "deck_"
+            ],
+            "missing_prefixes": [
+              "deck_"
+            ],
+            "zero_prefixes": [],
+            "nonzero_prefixes": {},
+            "unknown_static_features": {},
+            "attention_required": true,
+            "issues": [
+              "missing_prefixes"
+            ]
+          }
+        }
+      }
+    },
+    "shadow_label_quality": {
+      "combat_search_labels": {
+        "total": 41,
+        "trainable": 41,
+        "excluded_from_training": 0,
+        "direct_kill_available": 0,
+        "missed_single_card_search": 0,
+        "exclusion_reasons": {}
+      }
+    },
+    "classification_reasons": {
+      "clean_trainable": {
+        "completed_clean": 1
+      },
+      "diagnostic_excluded": {},
+      "infra_blocked": {}
+    },
+    "failure_attributions": {
+      "potion_planning": 1
+    },
+    "failure_evidence": {
+      "runs_with_evidence": 1,
+      "by_type": {
+        "boss_combat": 1,
+        "pre_boss": 1,
+        "route": 1
+      }
+    },
+    "action_recovery": {},
+    "terminal_recovery": {},
+    "validation": {
+      "by_grade": {
+        "pristine": 1
+      },
+      "by_flag": {},
+      "act1_boss_reached": 1,
+      "act1_boss_cleared": 0,
+      "pristine_act1_boss_cleared": 0,
+      "act1_boss_prefix_blockers": {},
+      "act1_boss_clear_blockers": {}
+    }
+  },
+  "categories": {
+    "clean_trainable": [
+      {
+        "path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+        "category": "clean_trainable",
+        "reason": "completed_clean",
+        "character": "IRONCLAD",
+        "ascension": 0,
+        "floor": 16,
+        "victory": false,
+        "score": null,
+        "steps": 240,
+        "card_picks": 2,
+        "action_records": 239,
+        "recovered_actions": 0,
+        "failed_actions": 0,
+        "action_recovery_summary": {},
+        "failure_attribution": "potion_planning",
+        "failure_tags": [
+          "run_loss",
+          "boss_combat",
+          "potion_planning"
+        ],
+        "failure_evidence": {
+          "final_floor": 16,
+          "final_act": 1,
+          "last_screen_type": "NONE",
+          "last_room_phase": "COMBAT",
+          "route": {
+            "step": 201,
+            "floor": 14,
+            "selected_choice": 1,
+            "selected_symbol": "R",
+            "route_score": 110.0,
+            "forced_elite_within_3": false,
+            "forced_combat_within_2": false,
+            "nearest_rest": 0,
+            "nearest_shop": null,
+            "readiness_penalty": null,
+            "readiness_flags": [],
+            "readiness_gaps": [],
+            "act2_route_flags": []
+          },
+          "boss_combat": {
+            "floor": 16,
+            "turn": 10,
+            "enemy_ids": [
+              "Hexaghost"
+            ],
+            "incoming_damage": 8,
+            "current_hp": 0
+          },
+          "pre_boss": {
+            "step": 204,
+            "floor": 15,
+            "hp_ratio": 0.65,
+            "potion_count": 0
+          }
+        },
+        "validation_grade": "pristine",
+        "validation_flags": [],
+        "validation_evidence": {
+          "act1_boss": {
+            "reached": true,
+            "cleared": false,
+            "prefix_pristine_clear": false,
+            "prefix_blockers": [],
+            "floor": 16,
+            "enemy_ids": [
+              "Hexaghost"
+            ],
+            "entry_step": 205,
+            "entry_hp": 52,
+            "entry_potion_count": 0,
+            "clear_step": null,
+            "last_step": 240,
+            "last_hp": 0,
+            "last_turn": 10,
+            "potion_use_steps": []
+          }
+        }
+      }
+    ],
+    "diagnostic_excluded": [],
+    "infra_blocked": []
+  },
+  "episode": {
+    "status": "game_over",
+    "steps": 240,
+    "victory": false,
+    "floor": 16,
+    "score": null,
+    "log_path": "C:\\Users\\jikun\\Documents\\game\\runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl"
+  },
+  "shadow_advice": {
+    "version": 1,
+    "shadow_inputs": {
+      "mode": "in_memory_examples",
+      "resolved_files": [],
+      "resolved_file_count": 0,
+      "categories": {
+        "route_risk": {
+          "row_count": 15,
+          "modes": [
+            "in_memory_examples"
+          ],
+          "resolved_files": [],
+          "resolved_file_count": 0,
+          "warnings": []
+        },
+        "potion_tempo": {
+          "row_count": 0,
+          "modes": [],
+          "resolved_files": [],
+          "resolved_file_count": 0,
+          "warnings": []
+        },
+        "pre_boss_deck_quality": {
+          "row_count": 1,
+          "modes": [
+            "in_memory_examples"
+          ],
+          "resolved_files": [],
+          "resolved_file_count": 0,
+          "warnings": []
+        },
+        "combat_search": {
+          "row_count": 41,
+          "modes": [
+            "in_memory_examples"
+          ],
+          "resolved_files": [],
+          "resolved_file_count": 0,
+          "warnings": []
+        }
+      },
+      "warnings": []
+    },
+    "advice_rows": {
+      "route_risk": 15,
+      "potion_tempo": 0,
+      "pre_boss_deck_quality": 1,
+      "combat_search": 41
+    },
+    "models_available": {
+      "route_risk": true,
+      "potion_tempo": false,
+      "pre_boss_deck_quality": true,
+      "combat_search": true
+    },
+    "model_training_source": {
+      "route_risk": {
+        "mode": "shadow_rows",
+        "category": "route_risk",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain"
+        ],
+        "missing_inputs": [],
+        "row_file": "route_risk.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\route_risk.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "potion_tempo": {},
+      "pre_boss_deck_quality": {
+        "mode": "shadow_rows",
+        "category": "pre_boss_deck_quality",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain"
+        ],
+        "missing_inputs": [],
+        "row_file": "pre_boss_deck_quality.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\pre_boss_deck_quality.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "combat_search": {
+        "mode": "shadow_rows",
+        "category": "combat_search",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain"
+        ],
+        "missing_inputs": [],
+        "row_file": "combat_search_labels.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\combat_search_labels.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      }
+    },
+    "model_training_source_quality": {
+      "route_risk": "usable",
+      "potion_tempo": null,
+      "pre_boss_deck_quality": "usable",
+      "combat_search": "usable"
+    },
+    "model_load_quality": {
+      "route_risk": {
+        "files": 1,
+        "rows": 92,
+        "accepted": 92,
+        "skipped": 0,
+        "skip_reasons": {}
+      },
+      "potion_tempo": {},
+      "pre_boss_deck_quality": {
+        "files": 1,
+        "rows": 5,
+        "accepted": 5,
+        "skipped": 0,
+        "skip_reasons": {}
+      },
+      "combat_search": {
+        "files": 1,
+        "rows": 226,
+        "accepted": 224,
+        "skipped": 2,
+        "skip_reasons": {
+          "missed_single_card_search": 2
+        }
+      }
+    },
+    "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37\\live_advice\\20260707_222717_ironclad_a0"
+  }
+}

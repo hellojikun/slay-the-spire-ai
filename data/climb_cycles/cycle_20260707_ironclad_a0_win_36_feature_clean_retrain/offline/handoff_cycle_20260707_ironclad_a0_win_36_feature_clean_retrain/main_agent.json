@@ -1,0 +1,3953 @@
+{
+  "version": 1,
+  "batch_name": "cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+  "owner": "main_agent",
+  "handoff_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\main_agent.json",
+  "assignment_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\main_agent.txt",
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\runner_agent.txt"
+  },
+  "ownership_contract": {
+    "role": "coordination and merge judgment",
+    "owns": [
+      "handoff selection",
+      "scope arbitration",
+      "acceptance decisions"
+    ],
+    "live_mcp_policy": "do not control live MCP unless ownership changes"
+  },
+  "default_execution_contract": {
+    "mode": "coordination_only",
+    "requires_live_mcp_ownership": false,
+    "allowed_operations": [
+      "choose_next_handoff",
+      "merge_evidence",
+      "decide_acceptance"
+    ],
+    "forbidden_operations": [
+      "control_live_mcp_unless_ownership_changes"
+    ]
+  },
+  "queue_count": 1,
+  "first_item": {
+    "action": "collect_pristine_act1_boss_clears",
+    "gate_next_action": "collect_pristine_act1_boss_clears",
+    "diagnosis_next_action": "inspect_combat_planning",
+    "priority": 0,
+    "next_probe_goal": {
+      "action": "collect_pristine_act1_boss_clears",
+      "primary_blocking_reason": "insufficient_pristine_act1_boss_cleared",
+      "metric": "pristine_act1_boss_cleared",
+      "deficit": 1,
+      "summary": "collect 1 more pristine Act 1 boss clear",
+      "acceptance_criteria": {
+        "scope": "next_matching_run",
+        "counts_toward_metric": "pristine_act1_boss_cleared",
+        "accepted_manifest_categories": [
+          "clean_trainable",
+          "diagnostic_excluded"
+        ],
+        "rejected_manifest_categories": [
+          "infra_blocked"
+        ],
+        "requires_known_failure_attribution_if_failed": true,
+        "unknown_failure_attribution_values": [
+          "",
+          "none",
+          "unknown",
+          "unknown_clean_failure"
+        ],
+        "act1_boss": {
+          "reached": true,
+          "cleared": true,
+          "prefix_pristine_clear": true,
+          "prefix_blockers": []
+        },
+        "disallowed_prefix_blockers": [
+          "recovered_action_race",
+          "unrecovered_action_race",
+          "failed_action",
+          "synthetic_terminal_state",
+          "synthetic_terminal",
+          "synthetic_after_mcp_null"
+        ]
+      }
+    },
+    "acceptance_criteria": {
+      "scope": "next_matching_run",
+      "counts_toward_metric": "pristine_act1_boss_cleared",
+      "accepted_manifest_categories": [
+        "clean_trainable",
+        "diagnostic_excluded"
+      ],
+      "rejected_manifest_categories": [
+        "infra_blocked"
+      ],
+      "requires_known_failure_attribution_if_failed": true,
+      "unknown_failure_attribution_values": [
+        "",
+        "none",
+        "unknown",
+        "unknown_clean_failure"
+      ],
+      "act1_boss": {
+        "reached": true,
+        "cleared": true,
+        "prefix_pristine_clear": true,
+        "prefix_blockers": []
+      },
+      "disallowed_prefix_blockers": [
+        "recovered_action_race",
+        "unrecovered_action_race",
+        "failed_action",
+        "synthetic_terminal_state",
+        "synthetic_terminal",
+        "synthetic_after_mcp_null"
+      ]
+    },
+    "latest_run_acceptance": {
+      "available": true,
+      "accepted": false,
+      "metric": "pristine_act1_boss_cleared",
+      "action": "collect_pristine_act1_boss_clears",
+      "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+      "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "category": "clean_trainable",
+      "reason": "completed_clean",
+      "validation_grade": "usable_with_recoveries",
+      "failure_attribution": "combat_planning",
+      "act1_boss": {
+        "reached": true,
+        "cleared": true,
+        "enemy_ids": [
+          "SlimeBoss"
+        ],
+        "entry_step": 202,
+        "entry_hp": 46,
+        "entry_potion_count": 0,
+        "clear_step": 236,
+        "prefix_pristine_clear": false,
+        "prefix_blockers": [
+          "recovered_action_race"
+        ],
+        "last_turn": null,
+        "last_hp": 11,
+        "potion_use_steps": []
+      },
+      "blockers": [
+        "failure_attribution:combat_planning",
+        "prefix:recovered_action_race",
+        "prefix_pristine_clear_false"
+      ]
+    },
+    "gate_execution_recovery": {
+      "action_recovery": {
+        "total": 6,
+        "recovered": 6,
+        "unrecovered": 0,
+        "runs_with_action_recovery": 3,
+        "runs_with_recovered_action": 3,
+        "runs_with_unrecovered_action": 0,
+        "by_status": {
+          "preflight_mismatch": 4,
+          "recoverable_error": 2
+        },
+        "by_kind": {
+          "unavailable_action": 4,
+          "invalid_command": 1,
+          "recoverable_error": 1
+        },
+        "examples": [
+          {
+            "step": 61,
+            "action_status": "preflight_mismatch",
+            "recovered": true,
+            "kind": "unavailable_action",
+            "actions": [
+              {
+                "action": "proceed"
+              }
+            ],
+            "available_commands": [
+              "choose"
+            ],
+            "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+            "last_state": {
+              "step": 61,
+              "screen_type": "COMPLETE",
+              "room_phase": "COMPLETE",
+              "floor": 5,
+              "act": 1,
+              "current_hp": 79,
+              "max_hp": 80
+            },
+            "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          },
+          {
+            "step": 378,
+            "action_status": "recoverable_error",
+            "recovered": true,
+            "kind": "invalid_command",
+            "actions": [
+              {
+                "action": "play_card",
+                "card_index": 3,
+                "target_index": 2
+              }
+            ],
+            "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+            "last_state": {
+              "step": 378,
+              "screen_type": "NONE",
+              "room_phase": "COMBAT",
+              "floor": 23,
+              "act": 2,
+              "current_hp": 36,
+              "max_hp": 90
+            },
+            "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          },
+          {
+            "step": 435,
+            "action_status": "preflight_mismatch",
+            "recovered": true,
+            "kind": "unavailable_action",
+            "actions": [
+              {
+                "action": "choose",
+                "choice_index": 4
+              }
+            ],
+            "available_commands": [
+              "proceed"
+            ],
+            "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+            "last_state": {
+              "step": 435,
+              "screen_type": "SHOP_SCREEN",
+              "room_phase": "COMPLETE",
+              "floor": 28,
+              "act": 2,
+              "current_hp": 26,
+              "max_hp": 90
+            },
+            "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          },
+          {
+            "step": 161,
+            "action_status": "preflight_mismatch",
+            "recovered": true,
+            "kind": "unavailable_action",
+            "actions": [
+              {
+                "action": "proceed"
+              }
+            ],
+            "available_commands": [
+              "choose"
+            ],
+            "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+            "last_state": {
+              "step": 161,
+              "screen_type": "COMPLETE",
+              "room_phase": "COMPLETE",
+              "floor": 13,
+              "act": 1,
+              "current_hp": 64,
+              "max_hp": 80
+            },
+            "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          },
+          {
+            "step": 353,
+            "action_status": "recoverable_error",
+            "recovered": true,
+            "kind": "recoverable_error",
+            "actions": [
+              {
+                "action": "play_card",
+                "card_index": 4,
+                "target_index": 3
+              }
+            ],
+            "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+            "last_state": {
+              "step": 353,
+              "screen_type": "NONE",
+              "room_phase": "COMBAT",
+              "floor": 30,
+              "act": 2,
+              "current_hp": 70,
+              "max_hp": 80
+            },
+            "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          },
+          {
+            "step": 494,
+            "action_status": "preflight_mismatch",
+            "recovered": true,
+            "kind": "unavailable_action",
+            "actions": [
+              {
+                "action": "play_card",
+                "card_index": 3,
+                "target_index": 3
+              }
+            ],
+            "available_commands": [
+              "end_turn",
+              "use_potion"
+            ],
+            "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+            "last_state": {
+              "step": 494,
+              "screen_type": "NONE",
+              "room_phase": "COMBAT",
+              "floor": 37,
+              "act": 3,
+              "current_hp": 47,
+              "max_hp": 80
+            },
+            "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          }
+        ]
+      },
+      "terminal_recovery": {
+        "attempted": 2,
+        "succeeded": 2,
+        "synthetic_terminals": 2
+      }
+    },
+    "gate_data_quality": {
+      "total_manifests": 1,
+      "coverage_manifests": 1,
+      "shadow_feature_rows": 865,
+      "shadow_label_rows": 226,
+      "shadow_label_trainable": 224,
+      "shadow_label_excluded": 2,
+      "label_exclusion_manifests": 1,
+      "missed_single_card_search_labels": 2,
+      "schema_complete_manifests": 1,
+      "label_exclusion_reasons": {
+        "missed_single_card_search": 2
+      }
+    },
+    "gate_failure_evidence": {
+      "runs_with_evidence": 3,
+      "by_type": {
+        "pre_boss": 3,
+        "route": 3,
+        "synthetic_terminal": 2,
+        "terminal_outcome_source": 2
+      },
+      "synthetic_terminals": {
+        "by_source": {
+          "unknown_source": 2
+        },
+        "terminal_outcome_sources": {
+          "synthetic_after_mcp_null": 2
+        }
+      }
+    },
+    "artifact_paths": {
+      "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+      "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+      "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+      "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+      "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+      "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+    },
+    "execution_contract": {
+      "mode": "coordination_only",
+      "requires_live_mcp_ownership": false,
+      "allowed_operations": [
+        "choose_next_handoff",
+        "merge_evidence",
+        "decide_acceptance"
+      ],
+      "forbidden_operations": [
+        "control_live_mcp_unless_ownership_changes"
+      ]
+    }
+  },
+  "queue": [
+    {
+      "action": "collect_pristine_act1_boss_clears",
+      "gate_next_action": "collect_pristine_act1_boss_clears",
+      "diagnosis_next_action": "inspect_combat_planning",
+      "priority": 0,
+      "next_probe_goal": {
+        "action": "collect_pristine_act1_boss_clears",
+        "primary_blocking_reason": "insufficient_pristine_act1_boss_cleared",
+        "metric": "pristine_act1_boss_cleared",
+        "deficit": 1,
+        "summary": "collect 1 more pristine Act 1 boss clear",
+        "acceptance_criteria": {
+          "scope": "next_matching_run",
+          "counts_toward_metric": "pristine_act1_boss_cleared",
+          "accepted_manifest_categories": [
+            "clean_trainable",
+            "diagnostic_excluded"
+          ],
+          "rejected_manifest_categories": [
+            "infra_blocked"
+          ],
+          "requires_known_failure_attribution_if_failed": true,
+          "unknown_failure_attribution_values": [
+            "",
+            "none",
+            "unknown",
+            "unknown_clean_failure"
+          ],
+          "act1_boss": {
+            "reached": true,
+            "cleared": true,
+            "prefix_pristine_clear": true,
+            "prefix_blockers": []
+          },
+          "disallowed_prefix_blockers": [
+            "recovered_action_race",
+            "unrecovered_action_race",
+            "failed_action",
+            "synthetic_terminal_state",
+            "synthetic_terminal",
+            "synthetic_after_mcp_null"
+          ]
+        }
+      },
+      "acceptance_criteria": {
+        "scope": "next_matching_run",
+        "counts_toward_metric": "pristine_act1_boss_cleared",
+        "accepted_manifest_categories": [
+          "clean_trainable",
+          "diagnostic_excluded"
+        ],
+        "rejected_manifest_categories": [
+          "infra_blocked"
+        ],
+        "requires_known_failure_attribution_if_failed": true,
+        "unknown_failure_attribution_values": [
+          "",
+          "none",
+          "unknown",
+          "unknown_clean_failure"
+        ],
+        "act1_boss": {
+          "reached": true,
+          "cleared": true,
+          "prefix_pristine_clear": true,
+          "prefix_blockers": []
+        },
+        "disallowed_prefix_blockers": [
+          "recovered_action_race",
+          "unrecovered_action_race",
+          "failed_action",
+          "synthetic_terminal_state",
+          "synthetic_terminal",
+          "synthetic_after_mcp_null"
+        ]
+      },
+      "latest_run_acceptance": {
+        "available": true,
+        "accepted": false,
+        "metric": "pristine_act1_boss_cleared",
+        "action": "collect_pristine_act1_boss_clears",
+        "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "category": "clean_trainable",
+        "reason": "completed_clean",
+        "validation_grade": "usable_with_recoveries",
+        "failure_attribution": "combat_planning",
+        "act1_boss": {
+          "reached": true,
+          "cleared": true,
+          "enemy_ids": [
+            "SlimeBoss"
+          ],
+          "entry_step": 202,
+          "entry_hp": 46,
+          "entry_potion_count": 0,
+          "clear_step": 236,
+          "prefix_pristine_clear": false,
+          "prefix_blockers": [
+            "recovered_action_race"
+          ],
+          "last_turn": null,
+          "last_hp": 11,
+          "potion_use_steps": []
+        },
+        "blockers": [
+          "failure_attribution:combat_planning",
+          "prefix:recovered_action_race",
+          "prefix_pristine_clear_false"
+        ]
+      },
+      "gate_execution_recovery": {
+        "action_recovery": {
+          "total": 6,
+          "recovered": 6,
+          "unrecovered": 0,
+          "runs_with_action_recovery": 3,
+          "runs_with_recovered_action": 3,
+          "runs_with_unrecovered_action": 0,
+          "by_status": {
+            "preflight_mismatch": 4,
+            "recoverable_error": 2
+          },
+          "by_kind": {
+            "unavailable_action": 4,
+            "invalid_command": 1,
+            "recoverable_error": 1
+          },
+          "examples": [
+            {
+              "step": 61,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "proceed"
+                }
+              ],
+              "available_commands": [
+                "choose"
+              ],
+              "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+              "last_state": {
+                "step": 61,
+                "screen_type": "COMPLETE",
+                "room_phase": "COMPLETE",
+                "floor": 5,
+                "act": 1,
+                "current_hp": 79,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 378,
+              "action_status": "recoverable_error",
+              "recovered": true,
+              "kind": "invalid_command",
+              "actions": [
+                {
+                  "action": "play_card",
+                  "card_index": 3,
+                  "target_index": 2
+                }
+              ],
+              "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+              "last_state": {
+                "step": 378,
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 23,
+                "act": 2,
+                "current_hp": 36,
+                "max_hp": 90
+              },
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 435,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "choose",
+                  "choice_index": 4
+                }
+              ],
+              "available_commands": [
+                "proceed"
+              ],
+              "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+              "last_state": {
+                "step": 435,
+                "screen_type": "SHOP_SCREEN",
+                "room_phase": "COMPLETE",
+                "floor": 28,
+                "act": 2,
+                "current_hp": 26,
+                "max_hp": 90
+              },
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 161,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "proceed"
+                }
+              ],
+              "available_commands": [
+                "choose"
+              ],
+              "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+              "last_state": {
+                "step": 161,
+                "screen_type": "COMPLETE",
+                "room_phase": "COMPLETE",
+                "floor": 13,
+                "act": 1,
+                "current_hp": 64,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 353,
+              "action_status": "recoverable_error",
+              "recovered": true,
+              "kind": "recoverable_error",
+              "actions": [
+                {
+                  "action": "play_card",
+                  "card_index": 4,
+                  "target_index": 3
+                }
+              ],
+              "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+              "last_state": {
+                "step": 353,
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 30,
+                "act": 2,
+                "current_hp": 70,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 494,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "play_card",
+                  "card_index": 3,
+                  "target_index": 3
+                }
+              ],
+              "available_commands": [
+                "end_turn",
+                "use_potion"
+              ],
+              "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+              "last_state": {
+                "step": 494,
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 37,
+                "act": 3,
+                "current_hp": 47,
+                "max_hp": 80
+              },
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            }
+          ]
+        },
+        "terminal_recovery": {
+          "attempted": 2,
+          "succeeded": 2,
+          "synthetic_terminals": 2
+        }
+      },
+      "gate_data_quality": {
+        "total_manifests": 1,
+        "coverage_manifests": 1,
+        "shadow_feature_rows": 865,
+        "shadow_label_rows": 226,
+        "shadow_label_trainable": 224,
+        "shadow_label_excluded": 2,
+        "label_exclusion_manifests": 1,
+        "missed_single_card_search_labels": 2,
+        "schema_complete_manifests": 1,
+        "label_exclusion_reasons": {
+          "missed_single_card_search": 2
+        }
+      },
+      "gate_failure_evidence": {
+        "runs_with_evidence": 3,
+        "by_type": {
+          "pre_boss": 3,
+          "route": 3,
+          "synthetic_terminal": 2,
+          "terminal_outcome_source": 2
+        },
+        "synthetic_terminals": {
+          "by_source": {
+            "unknown_source": 2
+          },
+          "terminal_outcome_sources": {
+            "synthetic_after_mcp_null": 2
+          }
+        }
+      },
+      "artifact_paths": {
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+        "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+        "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+        "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+        "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+        "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+      },
+      "execution_contract": {
+        "mode": "coordination_only",
+        "requires_live_mcp_ownership": false,
+        "allowed_operations": [
+          "choose_next_handoff",
+          "merge_evidence",
+          "decide_acceptance"
+        ],
+        "forbidden_operations": [
+          "control_live_mcp_unless_ownership_changes"
+        ]
+      }
+    }
+  ],
+  "next_handoff": {
+    "primary_worker": {
+      "owner": "engineering_agent",
+      "item": {
+        "action": "stabilize_pristine_gate_execution",
+        "count": 8,
+        "reason": "pristine_gate_execution_recovery",
+        "priority": 0,
+        "gate_execution_recovery": {
+          "action_recovery": {
+            "total": 6,
+            "recovered": 6,
+            "unrecovered": 0,
+            "runs_with_action_recovery": 3,
+            "runs_with_recovered_action": 3,
+            "runs_with_unrecovered_action": 0,
+            "by_status": {
+              "preflight_mismatch": 4,
+              "recoverable_error": 2
+            },
+            "by_kind": {
+              "unavailable_action": 4,
+              "invalid_command": 1,
+              "recoverable_error": 1
+            },
+            "examples": [
+              {
+                "step": 61,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "proceed"
+                  }
+                ],
+                "available_commands": [
+                  "choose"
+                ],
+                "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                "last_state": {
+                  "step": 61,
+                  "screen_type": "COMPLETE",
+                  "room_phase": "COMPLETE",
+                  "floor": 5,
+                  "act": 1,
+                  "current_hp": 79,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 378,
+                "action_status": "recoverable_error",
+                "recovered": true,
+                "kind": "invalid_command",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 3,
+                    "target_index": 2
+                  }
+                ],
+                "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+                "last_state": {
+                  "step": 378,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 23,
+                  "act": 2,
+                  "current_hp": 36,
+                  "max_hp": 90
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 435,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "choose",
+                    "choice_index": 4
+                  }
+                ],
+                "available_commands": [
+                  "proceed"
+                ],
+                "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                "last_state": {
+                  "step": 435,
+                  "screen_type": "SHOP_SCREEN",
+                  "room_phase": "COMPLETE",
+                  "floor": 28,
+                  "act": 2,
+                  "current_hp": 26,
+                  "max_hp": 90
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 161,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "proceed"
+                  }
+                ],
+                "available_commands": [
+                  "choose"
+                ],
+                "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                "last_state": {
+                  "step": 161,
+                  "screen_type": "COMPLETE",
+                  "room_phase": "COMPLETE",
+                  "floor": 13,
+                  "act": 1,
+                  "current_hp": 64,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 353,
+                "action_status": "recoverable_error",
+                "recovered": true,
+                "kind": "recoverable_error",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 4,
+                    "target_index": 3
+                  }
+                ],
+                "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+                "last_state": {
+                  "step": 353,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 30,
+                  "act": 2,
+                  "current_hp": 70,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 494,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 3,
+                    "target_index": 3
+                  }
+                ],
+                "available_commands": [
+                  "end_turn",
+                  "use_potion"
+                ],
+                "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+                "last_state": {
+                  "step": 494,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 37,
+                  "act": 3,
+                  "current_hp": 47,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              }
+            ]
+          },
+          "terminal_recovery": {
+            "attempted": 2,
+            "succeeded": 2,
+            "synthetic_terminals": 2
+          }
+        },
+        "gate_execution_recovery_resolution": {
+          "current_runner_resolved": false,
+          "action_recovery_total": 6,
+          "resolved_examples": 0,
+          "unresolved_examples": 6,
+          "uncovered_events": 0,
+          "unresolved": [
+            {
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+              "step": 61,
+              "kind": "unavailable_action",
+              "action_status": "preflight_mismatch",
+              "actions": [
+                {
+                  "action": "proceed"
+                }
+              ],
+              "available_commands": [
+                "choose"
+              ],
+              "last_state": {
+                "step": 61,
+                "screen_type": "COMPLETE",
+                "room_phase": "COMPLETE",
+                "floor": 5,
+                "act": 1,
+                "current_hp": 79,
+                "max_hp": 80
+              }
+            },
+            {
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 378,
+              "kind": "invalid_command",
+              "action_status": "recoverable_error",
+              "actions": [
+                {
+                  "action": "play_card",
+                  "card_index": 3,
+                  "target_index": 2
+                }
+              ],
+              "last_state": {
+                "step": 378,
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 23,
+                "act": 2,
+                "current_hp": 36,
+                "max_hp": 90
+              }
+            },
+            {
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+              "step": 435,
+              "kind": "unavailable_action",
+              "action_status": "preflight_mismatch",
+              "actions": [
+                {
+                  "action": "choose",
+                  "choice_index": 4
+                }
+              ],
+              "available_commands": [
+                "proceed"
+              ],
+              "last_state": {
+                "step": 435,
+                "screen_type": "SHOP_SCREEN",
+                "room_phase": "COMPLETE",
+                "floor": 28,
+                "act": 2,
+                "current_hp": 26,
+                "max_hp": 90
+              }
+            },
+            {
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 161,
+              "kind": "unavailable_action",
+              "action_status": "preflight_mismatch",
+              "actions": [
+                {
+                  "action": "proceed"
+                }
+              ],
+              "available_commands": [
+                "choose"
+              ],
+              "last_state": {
+                "step": 161,
+                "screen_type": "COMPLETE",
+                "room_phase": "COMPLETE",
+                "floor": 13,
+                "act": 1,
+                "current_hp": 64,
+                "max_hp": 80
+              }
+            },
+            {
+              "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+              "step": 353,
+              "kind": "recoverable_error",
+              "action_status": "recoverable_error",
+              "actions": [
+                {
+                  "action": "play_card",
+                  "card_index": 4,
+                  "target_index": 3
+                }
+              ],
+              "last_state": {
+                "step": 353,
+                "screen_type": "NONE",
+                "room_phase": "COMBAT",
+                "floor": 30,
+                "act": 2,
+                "current_hp": 70,
+                "max_hp": 80
+              }
+            }
+          ]
+        },
+        "gate_failure_evidence": {
+          "runs_with_evidence": 3,
+          "by_type": {
+            "pre_boss": 3,
+            "route": 3,
+            "synthetic_terminal": 2,
+            "terminal_outcome_source": 2
+          },
+          "synthetic_terminals": {
+            "by_source": {
+              "unknown_source": 2
+            },
+            "terminal_outcome_sources": {
+              "synthetic_after_mcp_null": 2
+            }
+          }
+        },
+        "artifact_paths": {
+          "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+          "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+          "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+          "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+          "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+        },
+        "execution_contract": {
+          "mode": "offline_code_or_data_infra",
+          "requires_live_mcp_ownership": false,
+          "allowed_operations": [
+            "edit_runner_or_data_layer",
+            "add_tests",
+            "run_offline_replay"
+          ],
+          "forbidden_operations": [
+            "control_live_mcp_without_explicit_ownership",
+            "train_strategy_models"
+          ]
+        }
+      }
+    },
+    "coordinator": {
+      "owner": "main_agent",
+      "item": {
+        "action": "collect_pristine_act1_boss_clears",
+        "gate_next_action": "collect_pristine_act1_boss_clears",
+        "diagnosis_next_action": "inspect_combat_planning",
+        "priority": 0,
+        "next_probe_goal": {
+          "action": "collect_pristine_act1_boss_clears",
+          "primary_blocking_reason": "insufficient_pristine_act1_boss_cleared",
+          "metric": "pristine_act1_boss_cleared",
+          "deficit": 1,
+          "summary": "collect 1 more pristine Act 1 boss clear",
+          "acceptance_criteria": {
+            "scope": "next_matching_run",
+            "counts_toward_metric": "pristine_act1_boss_cleared",
+            "accepted_manifest_categories": [
+              "clean_trainable",
+              "diagnostic_excluded"
+            ],
+            "rejected_manifest_categories": [
+              "infra_blocked"
+            ],
+            "requires_known_failure_attribution_if_failed": true,
+            "unknown_failure_attribution_values": [
+              "",
+              "none",
+              "unknown",
+              "unknown_clean_failure"
+            ],
+            "act1_boss": {
+              "reached": true,
+              "cleared": true,
+              "prefix_pristine_clear": true,
+              "prefix_blockers": []
+            },
+            "disallowed_prefix_blockers": [
+              "recovered_action_race",
+              "unrecovered_action_race",
+              "failed_action",
+              "synthetic_terminal_state",
+              "synthetic_terminal",
+              "synthetic_after_mcp_null"
+            ]
+          }
+        },
+        "acceptance_criteria": {
+          "scope": "next_matching_run",
+          "counts_toward_metric": "pristine_act1_boss_cleared",
+          "accepted_manifest_categories": [
+            "clean_trainable",
+            "diagnostic_excluded"
+          ],
+          "rejected_manifest_categories": [
+            "infra_blocked"
+          ],
+          "requires_known_failure_attribution_if_failed": true,
+          "unknown_failure_attribution_values": [
+            "",
+            "none",
+            "unknown",
+            "unknown_clean_failure"
+          ],
+          "act1_boss": {
+            "reached": true,
+            "cleared": true,
+            "prefix_pristine_clear": true,
+            "prefix_blockers": []
+          },
+          "disallowed_prefix_blockers": [
+            "recovered_action_race",
+            "unrecovered_action_race",
+            "failed_action",
+            "synthetic_terminal_state",
+            "synthetic_terminal",
+            "synthetic_after_mcp_null"
+          ]
+        },
+        "latest_run_acceptance": {
+          "available": true,
+          "accepted": false,
+          "metric": "pristine_act1_boss_cleared",
+          "action": "collect_pristine_act1_boss_clears",
+          "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+          "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "category": "clean_trainable",
+          "reason": "completed_clean",
+          "validation_grade": "usable_with_recoveries",
+          "failure_attribution": "combat_planning",
+          "act1_boss": {
+            "reached": true,
+            "cleared": true,
+            "enemy_ids": [
+              "SlimeBoss"
+            ],
+            "entry_step": 202,
+            "entry_hp": 46,
+            "entry_potion_count": 0,
+            "clear_step": 236,
+            "prefix_pristine_clear": false,
+            "prefix_blockers": [
+              "recovered_action_race"
+            ],
+            "last_turn": null,
+            "last_hp": 11,
+            "potion_use_steps": []
+          },
+          "blockers": [
+            "failure_attribution:combat_planning",
+            "prefix:recovered_action_race",
+            "prefix_pristine_clear_false"
+          ]
+        },
+        "gate_execution_recovery": {
+          "action_recovery": {
+            "total": 6,
+            "recovered": 6,
+            "unrecovered": 0,
+            "runs_with_action_recovery": 3,
+            "runs_with_recovered_action": 3,
+            "runs_with_unrecovered_action": 0,
+            "by_status": {
+              "preflight_mismatch": 4,
+              "recoverable_error": 2
+            },
+            "by_kind": {
+              "unavailable_action": 4,
+              "invalid_command": 1,
+              "recoverable_error": 1
+            },
+            "examples": [
+              {
+                "step": 61,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "proceed"
+                  }
+                ],
+                "available_commands": [
+                  "choose"
+                ],
+                "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                "last_state": {
+                  "step": 61,
+                  "screen_type": "COMPLETE",
+                  "room_phase": "COMPLETE",
+                  "floor": 5,
+                  "act": 1,
+                  "current_hp": 79,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 378,
+                "action_status": "recoverable_error",
+                "recovered": true,
+                "kind": "invalid_command",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 3,
+                    "target_index": 2
+                  }
+                ],
+                "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+                "last_state": {
+                  "step": 378,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 23,
+                  "act": 2,
+                  "current_hp": 36,
+                  "max_hp": 90
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 435,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "choose",
+                    "choice_index": 4
+                  }
+                ],
+                "available_commands": [
+                  "proceed"
+                ],
+                "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                "last_state": {
+                  "step": 435,
+                  "screen_type": "SHOP_SCREEN",
+                  "room_phase": "COMPLETE",
+                  "floor": 28,
+                  "act": 2,
+                  "current_hp": 26,
+                  "max_hp": 90
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 161,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "proceed"
+                  }
+                ],
+                "available_commands": [
+                  "choose"
+                ],
+                "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                "last_state": {
+                  "step": 161,
+                  "screen_type": "COMPLETE",
+                  "room_phase": "COMPLETE",
+                  "floor": 13,
+                  "act": 1,
+                  "current_hp": 64,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 353,
+                "action_status": "recoverable_error",
+                "recovered": true,
+                "kind": "recoverable_error",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 4,
+                    "target_index": 3
+                  }
+                ],
+                "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+                "last_state": {
+                  "step": 353,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 30,
+                  "act": 2,
+                  "current_hp": 70,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 494,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 3,
+                    "target_index": 3
+                  }
+                ],
+                "available_commands": [
+                  "end_turn",
+                  "use_potion"
+                ],
+                "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+                "last_state": {
+                  "step": 494,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 37,
+                  "act": 3,
+                  "current_hp": 47,
+                  "max_hp": 80
+                },
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              }
+            ]
+          },
+          "terminal_recovery": {
+            "attempted": 2,
+            "succeeded": 2,
+            "synthetic_terminals": 2
+          }
+        },
+        "gate_data_quality": {
+          "total_manifests": 1,
+          "coverage_manifests": 1,
+          "shadow_feature_rows": 865,
+          "shadow_label_rows": 226,
+          "shadow_label_trainable": 224,
+          "shadow_label_excluded": 2,
+          "label_exclusion_manifests": 1,
+          "missed_single_card_search_labels": 2,
+          "schema_complete_manifests": 1,
+          "label_exclusion_reasons": {
+            "missed_single_card_search": 2
+          }
+        },
+        "gate_failure_evidence": {
+          "runs_with_evidence": 3,
+          "by_type": {
+            "pre_boss": 3,
+            "route": 3,
+            "synthetic_terminal": 2,
+            "terminal_outcome_source": 2
+          },
+          "synthetic_terminals": {
+            "by_source": {
+              "unknown_source": 2
+            },
+            "terminal_outcome_sources": {
+              "synthetic_after_mcp_null": 2
+            }
+          }
+        },
+        "artifact_paths": {
+          "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+          "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+          "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+          "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+          "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+          "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+        },
+        "execution_contract": {
+          "mode": "coordination_only",
+          "requires_live_mcp_ownership": false,
+          "allowed_operations": [
+            "choose_next_handoff",
+            "merge_evidence",
+            "decide_acceptance"
+          ],
+          "forbidden_operations": [
+            "control_live_mcp_unless_ownership_changes"
+          ]
+        }
+      }
+    },
+    "by_agent": {
+      "runner_agent": {
+        "owner": "runner_agent",
+        "item": {
+          "action": "collect_pristine_act1_boss_clears",
+          "reason": "act1_boss_gate_needs_pristine_clear",
+          "priority": 0,
+          "next_probe_goal": {
+            "action": "collect_pristine_act1_boss_clears",
+            "primary_blocking_reason": "insufficient_pristine_act1_boss_cleared",
+            "metric": "pristine_act1_boss_cleared",
+            "deficit": 1,
+            "summary": "collect 1 more pristine Act 1 boss clear",
+            "acceptance_criteria": {
+              "scope": "next_matching_run",
+              "counts_toward_metric": "pristine_act1_boss_cleared",
+              "accepted_manifest_categories": [
+                "clean_trainable",
+                "diagnostic_excluded"
+              ],
+              "rejected_manifest_categories": [
+                "infra_blocked"
+              ],
+              "requires_known_failure_attribution_if_failed": true,
+              "unknown_failure_attribution_values": [
+                "",
+                "none",
+                "unknown",
+                "unknown_clean_failure"
+              ],
+              "act1_boss": {
+                "reached": true,
+                "cleared": true,
+                "prefix_pristine_clear": true,
+                "prefix_blockers": []
+              },
+              "disallowed_prefix_blockers": [
+                "recovered_action_race",
+                "unrecovered_action_race",
+                "failed_action",
+                "synthetic_terminal_state",
+                "synthetic_terminal",
+                "synthetic_after_mcp_null"
+              ]
+            }
+          },
+          "acceptance_criteria": {
+            "scope": "next_matching_run",
+            "counts_toward_metric": "pristine_act1_boss_cleared",
+            "accepted_manifest_categories": [
+              "clean_trainable",
+              "diagnostic_excluded"
+            ],
+            "rejected_manifest_categories": [
+              "infra_blocked"
+            ],
+            "requires_known_failure_attribution_if_failed": true,
+            "unknown_failure_attribution_values": [
+              "",
+              "none",
+              "unknown",
+              "unknown_clean_failure"
+            ],
+            "act1_boss": {
+              "reached": true,
+              "cleared": true,
+              "prefix_pristine_clear": true,
+              "prefix_blockers": []
+            },
+            "disallowed_prefix_blockers": [
+              "recovered_action_race",
+              "unrecovered_action_race",
+              "failed_action",
+              "synthetic_terminal_state",
+              "synthetic_terminal",
+              "synthetic_after_mcp_null"
+            ]
+          },
+          "latest_run_acceptance": {
+            "available": true,
+            "accepted": false,
+            "metric": "pristine_act1_boss_cleared",
+            "action": "collect_pristine_act1_boss_clears",
+            "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "category": "clean_trainable",
+            "reason": "completed_clean",
+            "validation_grade": "usable_with_recoveries",
+            "failure_attribution": "combat_planning",
+            "act1_boss": {
+              "reached": true,
+              "cleared": true,
+              "enemy_ids": [
+                "SlimeBoss"
+              ],
+              "entry_step": 202,
+              "entry_hp": 46,
+              "entry_potion_count": 0,
+              "clear_step": 236,
+              "prefix_pristine_clear": false,
+              "prefix_blockers": [
+                "recovered_action_race"
+              ],
+              "last_turn": null,
+              "last_hp": 11,
+              "potion_use_steps": []
+            },
+            "blockers": [
+              "failure_attribution:combat_planning",
+              "prefix:recovered_action_race",
+              "prefix_pristine_clear_false"
+            ]
+          },
+          "gate_execution_recovery": {
+            "action_recovery": {
+              "total": 6,
+              "recovered": 6,
+              "unrecovered": 0,
+              "runs_with_action_recovery": 3,
+              "runs_with_recovered_action": 3,
+              "runs_with_unrecovered_action": 0,
+              "by_status": {
+                "preflight_mismatch": 4,
+                "recoverable_error": 2
+              },
+              "by_kind": {
+                "unavailable_action": 4,
+                "invalid_command": 1,
+                "recoverable_error": 1
+              },
+              "examples": [
+                {
+                  "step": 61,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "proceed"
+                    }
+                  ],
+                  "available_commands": [
+                    "choose"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                  "last_state": {
+                    "step": 61,
+                    "screen_type": "COMPLETE",
+                    "room_phase": "COMPLETE",
+                    "floor": 5,
+                    "act": 1,
+                    "current_hp": 79,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 378,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "invalid_command",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 3,
+                      "target_index": 2
+                    }
+                  ],
+                  "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+                  "last_state": {
+                    "step": 378,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 23,
+                    "act": 2,
+                    "current_hp": 36,
+                    "max_hp": 90
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 435,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "choose",
+                      "choice_index": 4
+                    }
+                  ],
+                  "available_commands": [
+                    "proceed"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                  "last_state": {
+                    "step": 435,
+                    "screen_type": "SHOP_SCREEN",
+                    "room_phase": "COMPLETE",
+                    "floor": 28,
+                    "act": 2,
+                    "current_hp": 26,
+                    "max_hp": 90
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 161,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "proceed"
+                    }
+                  ],
+                  "available_commands": [
+                    "choose"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                  "last_state": {
+                    "step": 161,
+                    "screen_type": "COMPLETE",
+                    "room_phase": "COMPLETE",
+                    "floor": 13,
+                    "act": 1,
+                    "current_hp": 64,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 353,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "recoverable_error",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 4,
+                      "target_index": 3
+                    }
+                  ],
+                  "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+                  "last_state": {
+                    "step": 353,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 30,
+                    "act": 2,
+                    "current_hp": 70,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 494,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 3,
+                      "target_index": 3
+                    }
+                  ],
+                  "available_commands": [
+                    "end_turn",
+                    "use_potion"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+                  "last_state": {
+                    "step": 494,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 37,
+                    "act": 3,
+                    "current_hp": 47,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                }
+              ]
+            },
+            "terminal_recovery": {
+              "attempted": 2,
+              "succeeded": 2,
+              "synthetic_terminals": 2
+            }
+          },
+          "gate_data_quality": {
+            "total_manifests": 1,
+            "coverage_manifests": 1,
+            "shadow_feature_rows": 865,
+            "shadow_label_rows": 226,
+            "shadow_label_trainable": 224,
+            "shadow_label_excluded": 2,
+            "label_exclusion_manifests": 1,
+            "missed_single_card_search_labels": 2,
+            "schema_complete_manifests": 1,
+            "label_exclusion_reasons": {
+              "missed_single_card_search": 2
+            }
+          },
+          "gate_failure_evidence": {
+            "runs_with_evidence": 3,
+            "by_type": {
+              "pre_boss": 3,
+              "route": 3,
+              "synthetic_terminal": 2,
+              "terminal_outcome_source": 2
+            },
+            "synthetic_terminals": {
+              "by_source": {
+                "unknown_source": 2
+              },
+              "terminal_outcome_sources": {
+                "synthetic_after_mcp_null": 2
+              }
+            }
+          },
+          "artifact_paths": {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+            "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "live_mcp_gated_collection",
+            "requires_live_mcp_ownership": true,
+            "allowed_operations": [
+              "read_logs",
+              "refresh_offline_manifest_advice_gate",
+              "prepare_probe_command"
+            ],
+            "forbidden_operations": [
+              "edit_code",
+              "train_models",
+              "control_live_mcp_without_explicit_ownership"
+            ]
+          }
+        }
+      },
+      "engineering_agent": {
+        "owner": "engineering_agent",
+        "item": {
+          "action": "stabilize_pristine_gate_execution",
+          "count": 8,
+          "reason": "pristine_gate_execution_recovery",
+          "priority": 0,
+          "gate_execution_recovery": {
+            "action_recovery": {
+              "total": 6,
+              "recovered": 6,
+              "unrecovered": 0,
+              "runs_with_action_recovery": 3,
+              "runs_with_recovered_action": 3,
+              "runs_with_unrecovered_action": 0,
+              "by_status": {
+                "preflight_mismatch": 4,
+                "recoverable_error": 2
+              },
+              "by_kind": {
+                "unavailable_action": 4,
+                "invalid_command": 1,
+                "recoverable_error": 1
+              },
+              "examples": [
+                {
+                  "step": 61,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "proceed"
+                    }
+                  ],
+                  "available_commands": [
+                    "choose"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                  "last_state": {
+                    "step": 61,
+                    "screen_type": "COMPLETE",
+                    "room_phase": "COMPLETE",
+                    "floor": 5,
+                    "act": 1,
+                    "current_hp": 79,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 378,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "invalid_command",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 3,
+                      "target_index": 2
+                    }
+                  ],
+                  "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+                  "last_state": {
+                    "step": 378,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 23,
+                    "act": 2,
+                    "current_hp": 36,
+                    "max_hp": 90
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 435,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "choose",
+                      "choice_index": 4
+                    }
+                  ],
+                  "available_commands": [
+                    "proceed"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                  "last_state": {
+                    "step": 435,
+                    "screen_type": "SHOP_SCREEN",
+                    "room_phase": "COMPLETE",
+                    "floor": 28,
+                    "act": 2,
+                    "current_hp": 26,
+                    "max_hp": 90
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 161,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "proceed"
+                    }
+                  ],
+                  "available_commands": [
+                    "choose"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                  "last_state": {
+                    "step": 161,
+                    "screen_type": "COMPLETE",
+                    "room_phase": "COMPLETE",
+                    "floor": 13,
+                    "act": 1,
+                    "current_hp": 64,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 353,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "recoverable_error",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 4,
+                      "target_index": 3
+                    }
+                  ],
+                  "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+                  "last_state": {
+                    "step": 353,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 30,
+                    "act": 2,
+                    "current_hp": 70,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 494,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 3,
+                      "target_index": 3
+                    }
+                  ],
+                  "available_commands": [
+                    "end_turn",
+                    "use_potion"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+                  "last_state": {
+                    "step": 494,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 37,
+                    "act": 3,
+                    "current_hp": 47,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                }
+              ]
+            },
+            "terminal_recovery": {
+              "attempted": 2,
+              "succeeded": 2,
+              "synthetic_terminals": 2
+            }
+          },
+          "gate_execution_recovery_resolution": {
+            "current_runner_resolved": false,
+            "action_recovery_total": 6,
+            "resolved_examples": 0,
+            "unresolved_examples": 6,
+            "uncovered_events": 0,
+            "unresolved": [
+              {
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+                "step": 61,
+                "kind": "unavailable_action",
+                "action_status": "preflight_mismatch",
+                "actions": [
+                  {
+                    "action": "proceed"
+                  }
+                ],
+                "available_commands": [
+                  "choose"
+                ],
+                "last_state": {
+                  "step": 61,
+                  "screen_type": "COMPLETE",
+                  "room_phase": "COMPLETE",
+                  "floor": 5,
+                  "act": 1,
+                  "current_hp": 79,
+                  "max_hp": 80
+                }
+              },
+              {
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                "step": 378,
+                "kind": "invalid_command",
+                "action_status": "recoverable_error",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 3,
+                    "target_index": 2
+                  }
+                ],
+                "last_state": {
+                  "step": 378,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 23,
+                  "act": 2,
+                  "current_hp": 36,
+                  "max_hp": 90
+                }
+              },
+              {
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                "step": 435,
+                "kind": "unavailable_action",
+                "action_status": "preflight_mismatch",
+                "actions": [
+                  {
+                    "action": "choose",
+                    "choice_index": 4
+                  }
+                ],
+                "available_commands": [
+                  "proceed"
+                ],
+                "last_state": {
+                  "step": 435,
+                  "screen_type": "SHOP_SCREEN",
+                  "room_phase": "COMPLETE",
+                  "floor": 28,
+                  "act": 2,
+                  "current_hp": 26,
+                  "max_hp": 90
+                }
+              },
+              {
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "step": 161,
+                "kind": "unavailable_action",
+                "action_status": "preflight_mismatch",
+                "actions": [
+                  {
+                    "action": "proceed"
+                  }
+                ],
+                "available_commands": [
+                  "choose"
+                ],
+                "last_state": {
+                  "step": 161,
+                  "screen_type": "COMPLETE",
+                  "room_phase": "COMPLETE",
+                  "floor": 13,
+                  "act": 1,
+                  "current_hp": 64,
+                  "max_hp": 80
+                }
+              },
+              {
+                "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                "step": 353,
+                "kind": "recoverable_error",
+                "action_status": "recoverable_error",
+                "actions": [
+                  {
+                    "action": "play_card",
+                    "card_index": 4,
+                    "target_index": 3
+                  }
+                ],
+                "last_state": {
+                  "step": 353,
+                  "screen_type": "NONE",
+                  "room_phase": "COMBAT",
+                  "floor": 30,
+                  "act": 2,
+                  "current_hp": 70,
+                  "max_hp": 80
+                }
+              }
+            ]
+          },
+          "gate_failure_evidence": {
+            "runs_with_evidence": 3,
+            "by_type": {
+              "pre_boss": 3,
+              "route": 3,
+              "synthetic_terminal": 2,
+              "terminal_outcome_source": 2
+            },
+            "synthetic_terminals": {
+              "by_source": {
+                "unknown_source": 2
+              },
+              "terminal_outcome_sources": {
+                "synthetic_after_mcp_null": 2
+              }
+            }
+          },
+          "artifact_paths": {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+            "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "offline_code_or_data_infra",
+            "requires_live_mcp_ownership": false,
+            "allowed_operations": [
+              "edit_runner_or_data_layer",
+              "add_tests",
+              "run_offline_replay"
+            ],
+            "forbidden_operations": [
+              "control_live_mcp_without_explicit_ownership",
+              "train_strategy_models"
+            ]
+          }
+        }
+      },
+      "ai_agent": {
+        "owner": "ai_agent",
+        "item": {
+          "action": "inspect_combat_planning",
+          "count": 2,
+          "reason": "per_run_diagnosis",
+          "paths": [
+            "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+            "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl"
+          ],
+          "shadow_advice": {
+            "available": true,
+            "categories": {
+              "route_risk": {
+                "rows": 63,
+                "high_risk_count": 17,
+                "watch_count": 6,
+                "shadow_source_file_count": 2,
+                "shadow_input_file_count": 2,
+                "model_training_source_file_count": 2,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 92,
+                  "accepted": 92,
+                  "skipped": 0
+                },
+                "top_signals": [
+                  {
+                    "score": 0.9991,
+                    "advice": "avoid_or_require_recovery",
+                    "floor": 31,
+                    "step": 486,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl"
+                  },
+                  {
+                    "score": 1.0,
+                    "advice": "avoid_or_require_recovery",
+                    "floor": 29,
+                    "step": 347,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl"
+                  }
+                ]
+              },
+              "potion_tempo": {
+                "rows": 428,
+                "high_risk_count": 0,
+                "watch_count": 0,
+                "shadow_source_file_count": 2,
+                "shadow_input_file_count": 2,
+                "model_training_source_file_count": 2,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 542,
+                  "accepted": 542,
+                  "skipped": 0
+                },
+                "top_signals": [
+                  {
+                    "score": 0.0232,
+                    "advice": "hold_potion",
+                    "floor": 5,
+                    "step": 59,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                    "incoming": 18,
+                    "potion_ids": [
+                      "FairyPotion"
+                    ],
+                    "used_potion": false,
+                    "used_potion_targeted": false,
+                    "enemy_ids": [
+                      "SpikeSlime_S",
+                      "SpikeSlime_S",
+                      "SpikeSlime_S"
+                    ],
+                    "potion_block_value": 0,
+                    "potion_damage_value": 0,
+                    "potion_draw_value": 0,
+                    "potion_vulnerable_value": 0,
+                    "potion_weak_value": 0,
+                    "enemy_total_expected_attack": 54,
+                    "enemy_boss_count": 0,
+                    "boss_identity_known": false,
+                    "boss_known_count": 0
+                  },
+                  {
+                    "score": 0.3144,
+                    "advice": "hold_potion",
+                    "floor": 33,
+                    "step": 387,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                    "incoming": 27,
+                    "potion_ids": [
+                      "Ancient Potion",
+                      "FearPotion",
+                      "Dexterity Potion"
+                    ],
+                    "used_potion": true,
+                    "used_potion_slot": 2,
+                    "used_potion_targeted": true,
+                    "enemy_ids": [
+                      "TorchHead",
+                      "TorchHead",
+                      "TheCollector"
+                    ],
+                    "potion_block_value": 0,
+                    "potion_damage_value": 0,
+                    "potion_draw_value": 0,
+                    "potion_vulnerable_value": 3,
+                    "potion_weak_value": 0,
+                    "enemy_total_expected_attack": 51,
+                    "enemy_boss_count": 1,
+                    "boss_identity_known": false,
+                    "boss_known_count": 0
+                  }
+                ]
+              },
+              "pre_boss_deck_quality": {
+                "rows": 4,
+                "high_risk_count": 0,
+                "watch_count": 0,
+                "shadow_source_file_count": 2,
+                "shadow_input_file_count": 2,
+                "model_training_source_file_count": 2,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 5,
+                  "accepted": 5,
+                  "skipped": 0
+                },
+                "top_signals": [
+                  {
+                    "score": 0.9167,
+                    "advice": "boss_ready",
+                    "floor": 15,
+                    "step": 178,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl"
+                  },
+                  {
+                    "score": 0.9167,
+                    "advice": "boss_ready",
+                    "floor": 15,
+                    "step": 201,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl"
+                  }
+                ]
+              },
+              "combat_search": {
+                "rows": 158,
+                "high_risk_count": 1,
+                "watch_count": 119,
+                "shadow_source_file_count": 2,
+                "shadow_input_file_count": 2,
+                "model_training_source_file_count": 2,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 226,
+                  "accepted": 224,
+                  "skipped": 2,
+                  "skip_reasons": {
+                    "missed_single_card_search": 2
+                  }
+                },
+                "top_signals": [
+                  {
+                    "score": 4.8014,
+                    "advice": "review_search_label",
+                    "floor": 12,
+                    "step": 142,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                    "label_first_card_key": "defendr",
+                    "model_top_card_key": "striker",
+                    "loss_delta": 6,
+                    "attacks_removed": 0,
+                    "retaliation_damage": 0,
+                    "label_missed_direct_kill": false,
+                    "label_missed_single_card_search": false
+                  },
+                  {
+                    "score": 6.5625,
+                    "advice": "model_matches_search",
+                    "floor": 33,
+                    "step": 423,
+                    "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                    "label_first_card_key": "whirlwind",
+                    "model_top_card_key": "whirlwind",
+                    "loss_delta": 44,
+                    "attacks_removed": 44,
+                    "retaliation_damage": 0,
+                    "label_missed_direct_kill": false,
+                    "label_missed_single_card_search": false
+                  }
+                ]
+              }
+            }
+          },
+          "priority": 1,
+          "failure_evidence": {
+            "synthetic_terminals": [
+              {
+                "step": 508,
+                "last_error": "Internal error: null",
+                "previous_error": "Internal error: null",
+                "terminal_recovery_attempted": true,
+                "terminal_recovery_succeeded": true,
+                "post_recovery_status": "healthy",
+                "terminal_outcome_source": "synthetic_after_mcp_null",
+                "path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl"
+              }
+            ]
+          },
+          "artifact_paths": {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+            "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "offline_strategy_or_shadow_model",
+            "requires_live_mcp_ownership": false,
+            "allowed_operations": [
+              "inspect_logs",
+              "score_shadow_advice",
+              "train_shadow_models_to_scratch_dir"
+            ],
+            "forbidden_operations": [
+              "control_live_mcp",
+              "replace_live_policy_with_model"
+            ]
+          }
+        }
+      },
+      "main_agent": {
+        "owner": "main_agent",
+        "item": {
+          "action": "collect_pristine_act1_boss_clears",
+          "gate_next_action": "collect_pristine_act1_boss_clears",
+          "diagnosis_next_action": "inspect_combat_planning",
+          "priority": 0,
+          "next_probe_goal": {
+            "action": "collect_pristine_act1_boss_clears",
+            "primary_blocking_reason": "insufficient_pristine_act1_boss_cleared",
+            "metric": "pristine_act1_boss_cleared",
+            "deficit": 1,
+            "summary": "collect 1 more pristine Act 1 boss clear",
+            "acceptance_criteria": {
+              "scope": "next_matching_run",
+              "counts_toward_metric": "pristine_act1_boss_cleared",
+              "accepted_manifest_categories": [
+                "clean_trainable",
+                "diagnostic_excluded"
+              ],
+              "rejected_manifest_categories": [
+                "infra_blocked"
+              ],
+              "requires_known_failure_attribution_if_failed": true,
+              "unknown_failure_attribution_values": [
+                "",
+                "none",
+                "unknown",
+                "unknown_clean_failure"
+              ],
+              "act1_boss": {
+                "reached": true,
+                "cleared": true,
+                "prefix_pristine_clear": true,
+                "prefix_blockers": []
+              },
+              "disallowed_prefix_blockers": [
+                "recovered_action_race",
+                "unrecovered_action_race",
+                "failed_action",
+                "synthetic_terminal_state",
+                "synthetic_terminal",
+                "synthetic_after_mcp_null"
+              ]
+            }
+          },
+          "acceptance_criteria": {
+            "scope": "next_matching_run",
+            "counts_toward_metric": "pristine_act1_boss_cleared",
+            "accepted_manifest_categories": [
+              "clean_trainable",
+              "diagnostic_excluded"
+            ],
+            "rejected_manifest_categories": [
+              "infra_blocked"
+            ],
+            "requires_known_failure_attribution_if_failed": true,
+            "unknown_failure_attribution_values": [
+              "",
+              "none",
+              "unknown",
+              "unknown_clean_failure"
+            ],
+            "act1_boss": {
+              "reached": true,
+              "cleared": true,
+              "prefix_pristine_clear": true,
+              "prefix_blockers": []
+            },
+            "disallowed_prefix_blockers": [
+              "recovered_action_race",
+              "unrecovered_action_race",
+              "failed_action",
+              "synthetic_terminal_state",
+              "synthetic_terminal",
+              "synthetic_after_mcp_null"
+            ]
+          },
+          "latest_run_acceptance": {
+            "available": true,
+            "accepted": false,
+            "metric": "pristine_act1_boss_cleared",
+            "action": "collect_pristine_act1_boss_clears",
+            "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "category": "clean_trainable",
+            "reason": "completed_clean",
+            "validation_grade": "usable_with_recoveries",
+            "failure_attribution": "combat_planning",
+            "act1_boss": {
+              "reached": true,
+              "cleared": true,
+              "enemy_ids": [
+                "SlimeBoss"
+              ],
+              "entry_step": 202,
+              "entry_hp": 46,
+              "entry_potion_count": 0,
+              "clear_step": 236,
+              "prefix_pristine_clear": false,
+              "prefix_blockers": [
+                "recovered_action_race"
+              ],
+              "last_turn": null,
+              "last_hp": 11,
+              "potion_use_steps": []
+            },
+            "blockers": [
+              "failure_attribution:combat_planning",
+              "prefix:recovered_action_race",
+              "prefix_pristine_clear_false"
+            ]
+          },
+          "gate_execution_recovery": {
+            "action_recovery": {
+              "total": 6,
+              "recovered": 6,
+              "unrecovered": 0,
+              "runs_with_action_recovery": 3,
+              "runs_with_recovered_action": 3,
+              "runs_with_unrecovered_action": 0,
+              "by_status": {
+                "preflight_mismatch": 4,
+                "recoverable_error": 2
+              },
+              "by_kind": {
+                "unavailable_action": 4,
+                "invalid_command": 1,
+                "recoverable_error": 1
+              },
+              "examples": [
+                {
+                  "step": 61,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "proceed"
+                    }
+                  ],
+                  "available_commands": [
+                    "choose"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                  "last_state": {
+                    "step": 61,
+                    "screen_type": "COMPLETE",
+                    "room_phase": "COMPLETE",
+                    "floor": 5,
+                    "act": 1,
+                    "current_hp": 79,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 378,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "invalid_command",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 3,
+                      "target_index": 2
+                    }
+                  ],
+                  "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+                  "last_state": {
+                    "step": 378,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 23,
+                    "act": 2,
+                    "current_hp": 36,
+                    "max_hp": 90
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 435,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "choose",
+                      "choice_index": 4
+                    }
+                  ],
+                  "available_commands": [
+                    "proceed"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                  "last_state": {
+                    "step": 435,
+                    "screen_type": "SHOP_SCREEN",
+                    "room_phase": "COMPLETE",
+                    "floor": 28,
+                    "act": 2,
+                    "current_hp": 26,
+                    "max_hp": 90
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 161,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "proceed"
+                    }
+                  ],
+                  "available_commands": [
+                    "choose"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+                  "last_state": {
+                    "step": 161,
+                    "screen_type": "COMPLETE",
+                    "room_phase": "COMPLETE",
+                    "floor": 13,
+                    "act": 1,
+                    "current_hp": 64,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 353,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "recoverable_error",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 4,
+                      "target_index": 3
+                    }
+                  ],
+                  "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+                  "last_state": {
+                    "step": 353,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 30,
+                    "act": 2,
+                    "current_hp": 70,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 494,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "play_card",
+                      "card_index": 3,
+                      "target_index": 3
+                    }
+                  ],
+                  "available_commands": [
+                    "end_turn",
+                    "use_potion"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+                  "last_state": {
+                    "step": 494,
+                    "screen_type": "NONE",
+                    "room_phase": "COMBAT",
+                    "floor": 37,
+                    "act": 3,
+                    "current_hp": 47,
+                    "max_hp": 80
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                }
+              ]
+            },
+            "terminal_recovery": {
+              "attempted": 2,
+              "succeeded": 2,
+              "synthetic_terminals": 2
+            }
+          },
+          "gate_data_quality": {
+            "total_manifests": 1,
+            "coverage_manifests": 1,
+            "shadow_feature_rows": 865,
+            "shadow_label_rows": 226,
+            "shadow_label_trainable": 224,
+            "shadow_label_excluded": 2,
+            "label_exclusion_manifests": 1,
+            "missed_single_card_search_labels": 2,
+            "schema_complete_manifests": 1,
+            "label_exclusion_reasons": {
+              "missed_single_card_search": 2
+            }
+          },
+          "gate_failure_evidence": {
+            "runs_with_evidence": 3,
+            "by_type": {
+              "pre_boss": 3,
+              "route": 3,
+              "synthetic_terminal": 2,
+              "terminal_outcome_source": 2
+            },
+            "synthetic_terminals": {
+              "by_source": {
+                "unknown_source": 2
+              },
+              "terminal_outcome_sources": {
+                "synthetic_after_mcp_null": 2
+              }
+            }
+          },
+          "artifact_paths": {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+            "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+            "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+            "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "coordination_only",
+            "requires_live_mcp_ownership": false,
+            "allowed_operations": [
+              "choose_next_handoff",
+              "merge_evidence",
+              "decide_acceptance"
+            ],
+            "forbidden_operations": [
+              "control_live_mcp_unless_ownership_changes"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "agent_queue_counts": {
+    "runner_agent": 1,
+    "engineering_agent": 1,
+    "ai_agent": 4,
+    "main_agent": 1
+  },
+  "agent_queue_actions": {
+    "runner_agent": [
+      {
+        "action": "collect_pristine_act1_boss_clears",
+        "reason": "act1_boss_gate_needs_pristine_clear",
+        "priority": 0,
+        "execution_mode": "live_mcp_gated_collection",
+        "requires_live_mcp_ownership": true,
+        "gate_metric": "pristine_act1_boss_cleared",
+        "gate_deficit": 1,
+        "acceptance_scope": "next_matching_run",
+        "counts_toward_metric": "pristine_act1_boss_cleared",
+        "latest_run_accepted": false,
+        "latest_run_blockers": [
+          "failure_attribution:combat_planning",
+          "prefix:recovered_action_race",
+          "prefix_pristine_clear_false"
+        ]
+      }
+    ],
+    "engineering_agent": [
+      {
+        "action": "stabilize_pristine_gate_execution",
+        "count": 8,
+        "reason": "pristine_gate_execution_recovery",
+        "priority": 0,
+        "current_runner_recovery_resolved": false,
+        "execution_mode": "offline_code_or_data_infra",
+        "requires_live_mcp_ownership": false
+      }
+    ],
+    "ai_agent": [
+      {
+        "action": "inspect_combat_planning",
+        "count": 2,
+        "reason": "per_run_diagnosis",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "inspect_route_risk",
+        "count": 1,
+        "reason": "per_run_diagnosis",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "review_excluded_combat_search_labels",
+        "count": 2,
+        "reason": "excluded_from_training",
+        "priority": 1,
+        "current_policy_replay_resolved": false,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "review_gate_data_quality",
+        "count": 5,
+        "reason": "gate_data_quality_issues",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      }
+    ],
+    "main_agent": [
+      {
+        "action": "collect_pristine_act1_boss_clears",
+        "priority": 0,
+        "execution_mode": "coordination_only",
+        "requires_live_mcp_ownership": false,
+        "gate_metric": "pristine_act1_boss_cleared",
+        "gate_deficit": 1,
+        "acceptance_scope": "next_matching_run",
+        "counts_toward_metric": "pristine_act1_boss_cleared",
+        "latest_run_accepted": false,
+        "latest_run_blockers": [
+          "failure_attribution:combat_planning",
+          "prefix:recovered_action_race",
+          "prefix_pristine_clear_false"
+        ]
+      }
+    ]
+  },
+  "classification_reasons": {
+    "clean_trainable": {
+      "completed_clean": 3
+    },
+    "diagnostic_excluded": {},
+    "infra_blocked": {}
+  },
+  "validation": {
+    "by_grade": {
+      "usable_with_recoveries": 3
+    },
+    "by_flag": {
+      "recovered_action_race": 3,
+      "synthetic_after_mcp_null": 2,
+      "synthetic_terminal": 2,
+      "synthetic_terminal_state": 2
+    },
+    "act1_boss_reached": 3,
+    "act1_boss_cleared": 3,
+    "pristine_act1_boss_cleared": 1,
+    "act1_boss_prefix_blockers": {
+      "recovered_action_race": 2
+    },
+    "act1_boss_clear_blockers": {
+      "recovered_action_race": 2
+    }
+  },
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+    "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\next_handoff.txt"
+  },
+  "offline_refresh_command": {
+    "kind": "offline_batch_replay",
+    "argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36",
+      "--output-dir",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline",
+      "--name",
+      "cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+      "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+      "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+      "--output-dir",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline",
+      "--name",
+      "cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv_available": true,
+    "resolved_log_count": 3,
+    "touches_live_mcp": false,
+    "trains_models": false,
+    "writes_models": false
+  },
+  "shadow_advice_provenance": {
+    "available": true,
+    "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain",
+    "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\summary.json",
+    "mode": "shadow_rows",
+    "resolved_file_count": 4,
+    "warnings": [],
+    "categories": {
+      "route_risk": {
+        "rows": 29,
+        "high_risk_count": 9,
+        "watch_count": 0,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.9983,
+          "advice": "avoid_or_require_recovery",
+          "floor": 30,
+          "step": 424,
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl"
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 92,
+          "accepted": 92,
+          "skipped": 0
+        }
+      },
+      "potion_tempo": {
+        "rows": 114,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.1566,
+          "advice": "hold_potion",
+          "floor": 16,
+          "step": 150,
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+          "incoming": 24,
+          "potion_ids": [
+            "Dexterity Potion",
+            "LiquidMemories",
+            "Dexterity Potion"
+          ],
+          "used_potion": false,
+          "used_potion_targeted": false,
+          "enemy_ids": [
+            "Hexaghost"
+          ],
+          "potion_block_value": 0,
+          "potion_damage_value": 0,
+          "potion_draw_value": 0,
+          "potion_vulnerable_value": 0,
+          "potion_weak_value": 0,
+          "enemy_total_expected_attack": 36,
+          "enemy_boss_count": 1,
+          "boss_identity_known": true,
+          "boss_known_count": 1
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 542,
+          "accepted": 542,
+          "skipped": 0
+        }
+      },
+      "pre_boss_deck_quality": {
+        "rows": 1,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.9167,
+          "advice": "boss_ready",
+          "floor": 15,
+          "step": 146,
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl"
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 5,
+          "accepted": 5,
+          "skipped": 0
+        }
+      },
+      "combat_search": {
+        "rows": 68,
+        "high_risk_count": 1,
+        "watch_count": 50,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 4.875,
+          "advice": "review_search_label",
+          "floor": 10,
+          "step": 88,
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+          "label_first_card_key": "defendr",
+          "model_top_card_key": "striker",
+          "loss_delta": 11,
+          "attacks_removed": 5,
+          "retaliation_damage": 0,
+          "label_missed_direct_kill": false,
+          "label_missed_single_card_search": false
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 226,
+          "accepted": 224,
+          "skipped": 2,
+          "skip_reasons": {
+            "missed_single_card_search": 2
+          }
+        }
+      }
+    }
+  },
+  "shadow_label_quality": {
+    "combat_search_labels": {
+      "total": 226,
+      "trainable": 224,
+      "excluded_from_training": 2,
+      "exclusion_reasons": {
+        "missed_single_card_search": 2
+      }
+    }
+  },
+  "combat_label_audit": {
+    "status_line": "combat_label_audit files=1 rows=226 excluded=2 missed_single_card_search=2",
+    "resolved_file_count": 1,
+    "rows": 226,
+    "filtered_rows": 0,
+    "accepted_rows": 224,
+    "excluded_rows": 2,
+    "exclusion_reasons": {
+      "missed_single_card_search": 2
+    },
+    "source_quality": {
+      "usable_with_recoveries": 226
+    },
+    "examples": [
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\combat_search_labels.jsonl",
+        "line": 101,
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 7,
+        "step": 201,
+        "current_hp": 56,
+        "max_hp": 90,
+        "current_energy": 3,
+        "incoming": 33,
+        "initial_loss": 33,
+        "projected_loss": 17,
+        "loss_delta": 16,
+        "attacks_removed": 16,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Bash",
+        "label_sequence_card_keys": [
+          "Bash"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "SpikeSlime_L",
+          "AcidSlime_M",
+          "AcidSlime_M"
+        ],
+        "enemy_hps": [
+          44,
+          24,
+          24
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF",
+          "ATTACK",
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Pommel Strike",
+          "Bash",
+          "Strike_R",
+          "Slimed",
+          "Anger"
+        ]
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\combat_search_labels.jsonl",
+        "line": 24,
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 9,
+        "step": 174,
+        "current_hp": 51,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 18,
+        "initial_loss": 18,
+        "projected_loss": 12,
+        "loss_delta": 6,
+        "attacks_removed": 6,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Clothesline",
+        "label_sequence_card_keys": [
+          "Clothesline"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          94
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Strike_R",
+          "Strike_R",
+          "Clothesline",
+          "Strike_R"
+        ]
+      }
+    ]
+  },
+  "combat_label_replay_audit": {
+    "status_line": "combat_label_replay_audit files=1 excluded=2 replayed=2 matches_label=1 matches_actual=0 other=1",
+    "resolved_file_count": 1,
+    "excluded_rows": 2,
+    "replayed_rows": 2,
+    "current_policy_matches_label": 1,
+    "current_policy_matches_actual": 0,
+    "current_policy_other": 1,
+    "missing_source_log": 0,
+    "missing_source_step": 0,
+    "policy_errors": 0,
+    "replay_outcomes": {
+      "current_policy_matches_label": 1,
+      "current_policy_other": 1
+    },
+    "exclusion_reasons": {
+      "missed_single_card_search": 2
+    },
+    "examples": [
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\combat_search_labels.jsonl",
+        "line": 101,
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 7,
+        "step": 201,
+        "current_hp": 56,
+        "max_hp": 90,
+        "current_energy": 3,
+        "incoming": 33,
+        "initial_loss": 33,
+        "projected_loss": 17,
+        "loss_delta": 16,
+        "attacks_removed": 16,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Bash",
+        "label_sequence_card_keys": [
+          "Bash"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "SpikeSlime_L",
+          "AcidSlime_M",
+          "AcidSlime_M"
+        ],
+        "enemy_hps": [
+          44,
+          24,
+          24
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF",
+          "ATTACK",
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Pommel Strike",
+          "Bash",
+          "Strike_R",
+          "Slimed",
+          "Anger"
+        ],
+        "outcome": "current_policy_other",
+        "policy_action": {
+          "action": "use_potion",
+          "target_index": 1,
+          "potion_slot": 2
+        },
+        "policy_reason": "Dangerous incoming damage; use 恐惧药水.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 2,
+          "target_index": 1
+        },
+        "actual_action": {
+          "action": "play_card"
+        }
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\combat_search_labels.jsonl",
+        "line": 24,
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 9,
+        "step": 174,
+        "current_hp": 51,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 18,
+        "initial_loss": 18,
+        "projected_loss": 12,
+        "loss_delta": 6,
+        "attacks_removed": 6,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Clothesline",
+        "label_sequence_card_keys": [
+          "Clothesline"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          94
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Strike_R",
+          "Strike_R",
+          "Clothesline",
+          "Strike_R"
+        ],
+        "outcome": "current_policy_matches_label",
+        "policy_action": {
+          "action": "play_card",
+          "card_index": 3,
+          "target_index": 1
+        },
+        "policy_reason": "One-turn search: sequence ['Clothesline', 'Strike_R'] loss 18->12, damage=20, retaliation_damage=0, kills=0, attacks_removed=6, avoided_lethal=False, score=48.0.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 3,
+          "target_index": 1
+        },
+        "actual_action": {
+          "action": "play_card"
+        }
+      }
+    ]
+  },
+  "failure_evidence": {
+    "runs_with_evidence": 3,
+    "by_type": {
+      "pre_boss": 3,
+      "route": 3,
+      "synthetic_terminal": 2,
+      "terminal_outcome_source": 2
+    },
+    "synthetic_terminals": {
+      "by_source": {
+        "unknown_source": 2
+      },
+      "terminal_outcome_sources": {
+        "synthetic_after_mcp_null": 2
+      }
+    }
+  },
+  "action_recovery": {
+    "total": 6,
+    "recovered": 6,
+    "unrecovered": 0,
+    "runs_with_action_recovery": 3,
+    "runs_with_recovered_action": 3,
+    "runs_with_unrecovered_action": 0,
+    "by_status": {
+      "preflight_mismatch": 4,
+      "recoverable_error": 2
+    },
+    "by_kind": {
+      "unavailable_action": 4,
+      "invalid_command": 1,
+      "recoverable_error": 1
+    },
+    "examples": [
+      {
+        "step": 61,
+        "action_status": "preflight_mismatch",
+        "recovered": true,
+        "kind": "unavailable_action",
+        "actions": [
+          {
+            "action": "proceed"
+          }
+        ],
+        "available_commands": [
+          "choose"
+        ],
+        "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+        "last_state": {
+          "step": 61,
+          "screen_type": "COMPLETE",
+          "room_phase": "COMPLETE",
+          "floor": 5,
+          "act": 1,
+          "current_hp": 79,
+          "max_hp": 80
+        },
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      },
+      {
+        "step": 378,
+        "action_status": "recoverable_error",
+        "recovered": true,
+        "kind": "invalid_command",
+        "actions": [
+          {
+            "action": "play_card",
+            "card_index": 3,
+            "target_index": 2
+          }
+        ],
+        "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+        "last_state": {
+          "step": 378,
+          "screen_type": "NONE",
+          "room_phase": "COMBAT",
+          "floor": 23,
+          "act": 2,
+          "current_hp": 36,
+          "max_hp": 90
+        },
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      },
+      {
+        "step": 435,
+        "action_status": "preflight_mismatch",
+        "recovered": true,
+        "kind": "unavailable_action",
+        "actions": [
+          {
+            "action": "choose",
+            "choice_index": 4
+          }
+        ],
+        "available_commands": [
+          "proceed"
+        ],
+        "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+        "last_state": {
+          "step": 435,
+          "screen_type": "SHOP_SCREEN",
+          "room_phase": "COMPLETE",
+          "floor": 28,
+          "act": 2,
+          "current_hp": 26,
+          "max_hp": 90
+        },
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      },
+      {
+        "step": 161,
+        "action_status": "preflight_mismatch",
+        "recovered": true,
+        "kind": "unavailable_action",
+        "actions": [
+          {
+            "action": "proceed"
+          }
+        ],
+        "available_commands": [
+          "choose"
+        ],
+        "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+        "last_state": {
+          "step": 161,
+          "screen_type": "COMPLETE",
+          "room_phase": "COMPLETE",
+          "floor": 13,
+          "act": 1,
+          "current_hp": 64,
+          "max_hp": 80
+        },
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      },
+      {
+        "step": 353,
+        "action_status": "recoverable_error",
+        "recovered": true,
+        "kind": "recoverable_error",
+        "actions": [
+          {
+            "action": "play_card",
+            "card_index": 4,
+            "target_index": 3
+          }
+        ],
+        "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+        "last_state": {
+          "step": 353,
+          "screen_type": "NONE",
+          "room_phase": "COMBAT",
+          "floor": 30,
+          "act": 2,
+          "current_hp": 70,
+          "max_hp": 80
+        },
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      },
+      {
+        "step": 494,
+        "action_status": "preflight_mismatch",
+        "recovered": true,
+        "kind": "unavailable_action",
+        "actions": [
+          {
+            "action": "play_card",
+            "card_index": 3,
+            "target_index": 3
+          }
+        ],
+        "available_commands": [
+          "end_turn",
+          "use_potion"
+        ],
+        "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+        "last_state": {
+          "step": 494,
+          "screen_type": "NONE",
+          "room_phase": "COMBAT",
+          "floor": 37,
+          "act": 3,
+          "current_hp": 47,
+          "max_hp": 80
+        },
+        "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      }
+    ]
+  },
+  "terminal_recovery": {
+    "attempted": 2,
+    "succeeded": 2,
+    "synthetic_terminals": 2
+  },
+  "gate_execution_recovery": {
+    "action_recovery": {
+      "total": 6,
+      "recovered": 6,
+      "unrecovered": 0,
+      "runs_with_action_recovery": 3,
+      "runs_with_recovered_action": 3,
+      "runs_with_unrecovered_action": 0,
+      "by_status": {
+        "preflight_mismatch": 4,
+        "recoverable_error": 2
+      },
+      "by_kind": {
+        "unavailable_action": 4,
+        "invalid_command": 1,
+        "recoverable_error": 1
+      },
+      "examples": [
+        {
+          "step": 61,
+          "action_status": "preflight_mismatch",
+          "recovered": true,
+          "kind": "unavailable_action",
+          "actions": [
+            {
+              "action": "proceed"
+            }
+          ],
+          "available_commands": [
+            "choose"
+          ],
+          "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+          "last_state": {
+            "step": 61,
+            "screen_type": "COMPLETE",
+            "room_phase": "COMPLETE",
+            "floor": 5,
+            "act": 1,
+            "current_hp": 79,
+            "max_hp": 80
+          },
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_203911_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        },
+        {
+          "step": 378,
+          "action_status": "recoverable_error",
+          "recovered": true,
+          "kind": "invalid_command",
+          "actions": [
+            {
+              "action": "play_card",
+              "card_index": 3,
+              "target_index": 2
+            }
+          ],
+          "last_error": "Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]",
+          "last_state": {
+            "step": 378,
+            "screen_type": "NONE",
+            "room_phase": "COMBAT",
+            "floor": 23,
+            "act": 2,
+            "current_hp": 36,
+            "max_hp": 90
+          },
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        },
+        {
+          "step": 435,
+          "action_status": "preflight_mismatch",
+          "recovered": true,
+          "kind": "unavailable_action",
+          "actions": [
+            {
+              "action": "choose",
+              "choice_index": 4
+            }
+          ],
+          "available_commands": [
+            "proceed"
+          ],
+          "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+          "last_state": {
+            "step": 435,
+            "screen_type": "SHOP_SCREEN",
+            "room_phase": "COMPLETE",
+            "floor": 28,
+            "act": 2,
+            "current_hp": 26,
+            "max_hp": 90
+          },
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_210655_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        },
+        {
+          "step": 161,
+          "action_status": "preflight_mismatch",
+          "recovered": true,
+          "kind": "unavailable_action",
+          "actions": [
+            {
+              "action": "proceed"
+            }
+          ],
+          "available_commands": [
+            "choose"
+          ],
+          "last_error": "Preflight unavailable action(s): ['proceed']; available commands: ['choose']",
+          "last_state": {
+            "step": 161,
+            "screen_type": "COMPLETE",
+            "room_phase": "COMPLETE",
+            "floor": 13,
+            "act": 1,
+            "current_hp": 64,
+            "max_hp": 80
+          },
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        },
+        {
+          "step": 353,
+          "action_status": "recoverable_error",
+          "recovered": true,
+          "kind": "recoverable_error",
+          "actions": [
+            {
+              "action": "play_card",
+              "card_index": 4,
+              "target_index": 3
+            }
+          ],
+          "last_error": "Error at action 1: Index 3 out of bounds in command \"play 4 3\"",
+          "last_state": {
+            "step": 353,
+            "screen_type": "NONE",
+            "room_phase": "COMBAT",
+            "floor": 30,
+            "act": 2,
+            "current_hp": 70,
+            "max_hp": 80
+          },
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        },
+        {
+          "step": 494,
+          "action_status": "preflight_mismatch",
+          "recovered": true,
+          "kind": "unavailable_action",
+          "actions": [
+            {
+              "action": "play_card",
+              "card_index": 3,
+              "target_index": 3
+            }
+          ],
+          "available_commands": [
+            "end_turn",
+            "use_potion"
+          ],
+          "last_error": "Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']",
+          "last_state": {
+            "step": 494,
+            "screen_type": "NONE",
+            "room_phase": "COMBAT",
+            "floor": 37,
+            "act": 3,
+            "current_hp": 47,
+            "max_hp": 80
+          },
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        }
+      ]
+    },
+    "terminal_recovery": {
+      "attempted": 2,
+      "succeeded": 2,
+      "synthetic_terminals": 2
+    }
+  },
+  "gate_data_quality": {
+    "total_manifests": 1,
+    "coverage_manifests": 1,
+    "shadow_feature_rows": 865,
+    "shadow_label_rows": 226,
+    "shadow_label_trainable": 224,
+    "shadow_label_excluded": 2,
+    "label_exclusion_manifests": 1,
+    "missed_single_card_search_labels": 2,
+    "schema_complete_manifests": 1,
+    "label_exclusion_reasons": {
+      "missed_single_card_search": 2
+    }
+  },
+  "gate_data_quality_replay_resolved_issues": {},
+  "static_knowledge_gaps": {
+    "status_line": "static_knowledge_gaps logs=3 missing=0",
+    "resolved_log_count": 3,
+    "total_missing_occurrences": 0,
+    "observed_aliases": {
+      "cards": 58
+    }
+  },
+  "gate_failure_evidence": {
+    "runs_with_evidence": 3,
+    "by_type": {
+      "pre_boss": 3,
+      "route": 3,
+      "synthetic_terminal": 2,
+      "terminal_outcome_source": 2
+    },
+    "synthetic_terminals": {
+      "by_source": {
+        "unknown_source": 2
+      },
+      "terminal_outcome_sources": {
+        "synthetic_after_mcp_null": 2
+      }
+    }
+  },
+  "gate_passed": false,
+  "gate_status_line": "act1_boss_gate NEEDS_WORK: IRONCLAD A0 runs=3, reached=3/3, cleared=3/2, pristine_cleared=1/2, prefix_pristine=1, legacy_pristine=0, infra=0, unknown_attr=0; top_failure=combat_planning:2; top_non_pristine=prefix:recovered_action_race:2; top_non_pristine_boss=SlimeBoss:1/prefix:recovered_action_race:1; feature_rows=865; labels=226, label_exclusions=2/missed_single_card_search:2; evidence=route:3, terminal_sources=synthetic_after_mcp_null:2; action_recovery=unavailable_action:4/6, terminal_recovery=synthetic:2,attempted:2,succeeded:2; need_pristine=1; latest_reject=failure_attribution:combat_planning|prefix:recovered_action_race|prefix_pristine_clear_false -> collect_pristine_act1_boss_clears",
+  "gate_next_action": "collect_pristine_act1_boss_clears",
+  "gate_progress": {
+    "act1_boss_reached": {
+      "current": 3,
+      "required": 3,
+      "deficit": 0,
+      "ok": true
+    },
+    "act1_boss_cleared": {
+      "current": 3,
+      "required": 2,
+      "deficit": 0,
+      "ok": true
+    },
+    "pristine_act1_boss_cleared": {
+      "current": 1,
+      "required": 2,
+      "deficit": 1,
+      "ok": false
+    }
+  },
+  "gate_remaining_progress": [
+    {
+      "metric": "pristine_act1_boss_cleared",
+      "current": 1,
+      "required": 2,
+      "deficit": 1,
+      "ok": false
+    }
+  ],
+  "gate_primary_remaining_progress": {
+    "metric": "pristine_act1_boss_cleared",
+    "current": 1,
+    "required": 2,
+    "deficit": 1,
+    "ok": false
+  },
+  "next_probe_goal": {
+    "action": "collect_pristine_act1_boss_clears",
+    "primary_blocking_reason": "insufficient_pristine_act1_boss_cleared",
+    "metric": "pristine_act1_boss_cleared",
+    "deficit": 1,
+    "summary": "collect 1 more pristine Act 1 boss clear",
+    "acceptance_criteria": {
+      "scope": "next_matching_run",
+      "counts_toward_metric": "pristine_act1_boss_cleared",
+      "accepted_manifest_categories": [
+        "clean_trainable",
+        "diagnostic_excluded"
+      ],
+      "rejected_manifest_categories": [
+        "infra_blocked"
+      ],
+      "requires_known_failure_attribution_if_failed": true,
+      "unknown_failure_attribution_values": [
+        "",
+        "none",
+        "unknown",
+        "unknown_clean_failure"
+      ],
+      "act1_boss": {
+        "reached": true,
+        "cleared": true,
+        "prefix_pristine_clear": true,
+        "prefix_blockers": []
+      },
+      "disallowed_prefix_blockers": [
+        "recovered_action_race",
+        "unrecovered_action_race",
+        "failed_action",
+        "synthetic_terminal_state",
+        "synthetic_terminal",
+        "synthetic_after_mcp_null"
+      ]
+    }
+  },
+  "latest_run_acceptance": {
+    "available": true,
+    "accepted": false,
+    "metric": "pristine_act1_boss_cleared",
+    "action": "collect_pristine_act1_boss_clears",
+    "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_36\\20260707_214033_ironclad_a0.jsonl",
+    "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json",
+    "category": "clean_trainable",
+    "reason": "completed_clean",
+    "validation_grade": "usable_with_recoveries",
+    "failure_attribution": "combat_planning",
+    "act1_boss": {
+      "reached": true,
+      "cleared": true,
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "entry_step": 202,
+      "entry_hp": 46,
+      "entry_potion_count": 0,
+      "clear_step": 236,
+      "prefix_pristine_clear": false,
+      "prefix_blockers": [
+        "recovered_action_race"
+      ],
+      "last_turn": null,
+      "last_hp": 11,
+      "potion_use_steps": []
+    },
+    "blockers": [
+      "failure_attribution:combat_planning",
+      "prefix:recovered_action_race",
+      "prefix_pristine_clear_false"
+    ]
+  },
+  "recommended_next_action": "collect_pristine_act1_boss_clears",
+  "assignment_prompt": "Agent: main_agent\nRole: coordination and merge judgment\nFirst task: collect_pristine_act1_boss_clears (collect_pristine_act1_boss_clears)\nClassification reasons: clean_trainable=completed_clean:3\nValidation summary: grades=usable_with_recoveries:3; flags=recovered_action_race:3,synthetic_after_mcp_null:2,synthetic_terminal:2,+1 more; prefix_blockers=recovered_action_race:2; clear_blockers=recovered_action_race:2\nGate status: act1_boss_gate NEEDS_WORK: IRONCLAD A0 runs=3, reached=3/3, cleared=3/2, pristine_cleared=1/2, prefix_pristine=1, legacy_pristine=0, infra=0, unknown_attr=0; top_failure=combat_planning:2; top_non_pristine=prefix:recovered_action_race:2; top_non_pristine_boss=SlimeBoss:1/prefix:recovered_action_race:1; feature_rows=865; labels=226, label_exclusions=2/missed_single_card_search:2; evidence=route:3, terminal_sources=synthetic_after_mcp_null:2; action_recovery=unavailable_action:4/6, terminal_recovery=synthetic:2,attempted:2,succeeded:2; need_pristine=1; latest_reject=failure_attribution:combat_planning|prefix:recovered_action_race|prefix_pristine_clear_false -> collect_pristine_act1_boss_clears\nGate primary remaining progress: {\"current\":1,\"deficit\":1,\"metric\":\"pristine_act1_boss_cleared\",\"ok\":false,\"required\":2}\nGate remaining progress: [{\"current\":1,\"deficit\":1,\"metric\":\"pristine_act1_boss_cleared\",\"ok\":false,\"required\":2}]\nAcceptance criteria: {\"accepted_manifest_categories\":[\"clean_trainable\",\"diagnostic_excluded\"],\"act1_boss\":{\"cleared\":true,\"prefix_blockers\":[],\"prefix_pristine_clear\":true,\"reached\":true},\"counts_toward_metric\":\"pristine_act1_boss_cleared\",\"disallowed_prefix_blockers\":[\"recovered_action_race\",\"unrecovered_action_race\",\"failed_action\",\"synthetic_terminal_state\",\"synthetic_terminal\",\"synthetic_after_mcp_null\"],\"rejected_manifest_categories\":[\"infra_blocked\"],\"requires_known_failure_attribution_if_failed\":true,\"scope\":\"next_matching_run\",\"unknown_failure_attribution_values\":[\"\",\"none\",\"unknown\",\"unknown_clean_failure\"]}\nLatest run acceptance: {\"accepted\":false,\"act1_boss\":{\"clear_step\":236,\"cleared\":true,\"enemy_ids\":[\"SlimeBoss\"],\"entry_hp\":46,\"entry_potion_count\":0,\"entry_step\":202,\"last_hp\":11,\"last_turn\":null,\"potion_use_steps\":[],\"prefix_blockers\":[\"recovered_action_race\"],\"prefix_pristine_clear\":false,\"reached\":true},\"action\":\"collect_pristine_act1_boss_clears\",\"available\":true,\"blockers\":[\"failure_attribution:combat_planning\",\"prefix:recovered_action_race\",\"prefix_pristine_clear_false\"],\"category\":\"clean_trainable\",\"failure_attribution\":\"combat_planning\",\"manifest_path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\\\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\",\"metric\":\"pristine_act1_boss_cleared\",\"reason\":\"completed_clean\",\"run_path\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"validation_grade\":\"usable_with_recoveries\"}\nNext probe goal: {\"acceptance_criteria\":{\"accepted_manifest_categories\":[\"clean_trainable\",\"diagnostic_excluded\"],\"act1_boss\":{\"cleared\":true,\"prefix_blockers\":[],\"prefix_pristine_clear\":true,\"reached\":true},\"counts_toward_metric\":\"pristine_act1_boss_cleared\",\"disallowed_prefix_blockers\":[\"recovered_action_race\",\"unrecovered_action_race\",\"failed_action\",\"synthetic_terminal_state\",\"synthetic_terminal\",\"synthetic_after_mcp_null\"],\"rejected_manifest_categories\":[\"infra_blocked\"],\"requires_known_failure_attribution_if_failed\":true,\"scope\":\"next_matching_run\",\"unknown_failure_attribution_values\":[\"\",\"none\",\"unknown\",\"unknown_clean_failure\"]},\"action\":\"collect_pristine_act1_boss_clears\",\"deficit\":1,\"metric\":\"pristine_act1_boss_cleared\",\"primary_blocking_reason\":\"insufficient_pristine_act1_boss_cleared\",\"summary\":\"collect 1 more pristine Act 1 boss clear\"}\nExecution mode: coordination_only\nRequires live MCP ownership: False\nLive MCP policy: do not control live MCP unless ownership changes\nAllowed operations: choose_next_handoff, merge_evidence, decide_acceptance\nForbidden operations: control_live_mcp_unless_ownership_changes\nUse offline_refresh_command.resolved_argv when available to replay the exact log set without touching live MCP.\nOffline refresh command: {\"kind\":\"offline_batch_replay\",\"resolved_argv_available\":true,\"resolved_log_count\":3,\"touches_live_mcp\":false,\"trains_models\":false,\"writes_models\":false}\noffline_refresh_command.resolved_argv: [\"python\",\"-m\",\"slay_ai.offline_batch\",\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_210655_ironclad_a0.jsonl\",\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"--output-dir\",\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\",\"--name\",\"cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\",\"--knowledge-dir\",\"data\\\\static_knowledge\",\"--route-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\route_risk_model.json\",\"--potion-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\potion_tempo_model.json\",\"--deck-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\deck_quality_model.json\",\"--combat-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\combat_search_model.json\",\"--character\",\"IRONCLAD\",\"--ascension\",\"0\",\"--min-reached\",\"3\",\"--min-cleared\",\"2\",\"--min-pristine-cleared\",\"2\"]\nShadow advice provenance: {\"advice_dir\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\\\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\",\"available\":true,\"categories\":{\"combat_search\":{\"high_risk_count\":1,\"model_available\":true,\"model_load_quality\":{\"accepted\":224,\"files\":1,\"rows\":226,\"skip_reasons\":{\"missed_single_card_search\":2},\"skipped\":2},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":68,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"review_search_label\",\"attacks_removed\":5,\"floor\":10,\"label_first_card_key\":\"defendr\",\"label_missed_direct_kill\":false,\"label_missed_single_card_search\":false,\"loss_delta\":11,\"model_top_card_key\":\"striker\",\"retaliation_damage\":0,\"score\":4.875,\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"step\":88},\"watch_count\":50},\"potion_tempo\":{\"high_risk_count\":0,\"model_available\":true,\"model_load_quality\":{\"accepted\":542,\"files\":1,\"rows\":542,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":114,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"hold_potion\",\"boss_identity_known\":true,\"boss_known_count\":1,\"enemy_boss_count\":1,\"enemy_ids\":[\"Hexaghost\"],\"enemy_total_expected_attack\":36,\"floor\":16,\"incoming\":24,\"potion_block_value\":0,\"potion_damage_value\":0,\"potion_draw_value\":0,\"potion_ids\":[\"Dexterity Potion\",\"LiquidMemories\",\"Dexterity Potion\"],\"potion_vulnerable_value\":0,\"potion_weak_value\":0,\"score\":0.1566,\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"step\":150,\"used_potion\":false,\"used_potion_targeted\":false},\"watch_count\":0},\"pre_boss_deck_quality\":{\"high_risk_count\":0,\"model_available\":true,\"model_load_quality\":{\"accepted\":5,\"files\":1,\"rows\":5,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":1,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"boss_ready\",\"floor\":15,\"score\":0.9167,\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"step\":146},\"watch_count\":0},\"route_risk\":{\"high_risk_count\":9,\"model_available\":true,\"model_load_quality\":{\"accepted\":92,\"files\":1,\"rows\":92,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":29,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"avoid_or_require_recovery\",\"floor\":30,\"score\":0.9983,\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"step\":424},\"watch_count\":0}},\"mode\":\"shadow_rows\",\"resolved_file_count\":4,\"summary_path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\\\\shadow_advice_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\summary.json\",\"warnings\":[]}\nShadow label quality: {\"combat_search_labels\":{\"excluded_from_training\":2,\"exclusion_reasons\":{\"missed_single_card_search\":2},\"total\":226,\"trainable\":224}}\nCombat label audit: {\"accepted_rows\":224,\"examples\":[{\"act\":1,\"attacks_removed\":16,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":56,\"direct_kill_available\":false,\"enemy_hps\":[44,24,24],\"enemy_ids\":[\"SpikeSlime_L\",\"AcidSlime_M\",\"AcidSlime_M\"],\"enemy_intents\":[\"ATTACK_DEBUFF\",\"ATTACK\",\"ATTACK_DEBUFF\"],\"floor\":16,\"hand_ids\":[\"Pommel Strike\",\"Bash\",\"Strike_R\",\"Slimed\",\"Anger\"],\"incoming\":33,\"initial_loss\":33,\"kills\":0,\"label_first_card_key\":\"Bash\",\"label_sequence_card_keys\":[\"Bash\"],\"label_target_index\":1,\"line\":101,\"loss_delta\":16,\"max_hp\":90,\"path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\\\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\combat_search_labels.jsonl\",\"projected_loss\":17,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_210655_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"usable_with_recoveries\",\"step\":201,\"turn\":7},{\"act\":1,\"attacks_removed\":6,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":51,\"direct_kill_available\":false,\"enemy_hps\":[94],\"enemy_ids\":[\"Hexaghost\"],\"enemy_intents\":[\"ATTACK_DEBUFF\"],\"floor\":16,\"hand_ids\":[\"Strike_R\",\"Strike_R\",\"Clothesline\",\"Strike_R\"],\"incoming\":18,\"initial_loss\":18,\"kills\":0,\"label_first_card_key\":\"Clothesline\",\"label_sequence_card_keys\":[\"Clothesline\"],\"label_target_index\":1,\"line\":24,\"loss_delta\":6,\"max_hp\":80,\"path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\\\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\combat_search_labels.jsonl\",\"projected_loss\":12,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"usable_with_recoveries\",\"step\":174,\"turn\":9}],\"excluded_rows\":2,\"exclusion_reasons\":{\"missed_single_card_search\":2},\"filtered_rows\":0,\"resolved_file_count\":1,\"rows\":226,\"source_quality\":{\"usable_with_recoveries\":226},\"status_line\":\"combat_label_audit files=1 rows=226 excluded=2 missed_single_card_search=2\"}\nCombat label replay audit: {\"current_policy_matches_actual\":0,\"current_policy_matches_label\":1,\"current_policy_other\":1,\"examples\":[{\"act\":1,\"actual_action\":{\"action\":\"play_card\"},\"attacks_removed\":16,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":56,\"direct_kill_available\":false,\"enemy_hps\":[44,24,24],\"enemy_ids\":[\"SpikeSlime_L\",\"AcidSlime_M\",\"AcidSlime_M\"],\"enemy_intents\":[\"ATTACK_DEBUFF\",\"ATTACK\",\"ATTACK_DEBUFF\"],\"floor\":16,\"hand_ids\":[\"Pommel Strike\",\"Bash\",\"Strike_R\",\"Slimed\",\"Anger\"],\"incoming\":33,\"initial_loss\":33,\"kills\":0,\"label_action\":{\"action\":\"play_card\",\"card_index\":2,\"target_index\":1},\"label_first_card_key\":\"Bash\",\"label_sequence_card_keys\":[\"Bash\"],\"label_target_index\":1,\"line\":101,\"loss_delta\":16,\"max_hp\":90,\"outcome\":\"current_policy_other\",\"path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\\\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\combat_search_labels.jsonl\",\"policy_action\":{\"action\":\"use_potion\",\"potion_slot\":2,\"target_index\":1},\"policy_reason\":\"Dangerous incoming damage; use 恐惧药水.\",\"projected_loss\":17,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_210655_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"usable_with_recoveries\",\"step\":201,\"turn\":7},{\"act\":1,\"actual_action\":{\"action\":\"play_card\"},\"attacks_removed\":6,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":51,\"direct_kill_available\":false,\"enemy_hps\":[94],\"enemy_ids\":[\"Hexaghost\"],\"enemy_intents\":[\"ATTACK_DEBUFF\"],\"floor\":16,\"hand_ids\":[\"Strike_R\",\"Strike_R\",\"Clothesline\",\"Strike_R\"],\"incoming\":18,\"initial_loss\":18,\"kills\":0,\"label_action\":{\"action\":\"play_card\",\"card_index\":3,\"target_index\":1},\"label_first_card_key\":\"Clothesline\",\"label_sequence_card_keys\":[\"Clothesline\"],\"label_target_index\":1,\"line\":24,\"loss_delta\":6,\"max_hp\":80,\"outcome\":\"current_policy_matches_label\",\"path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\offline\\\\shadow_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\\\combat_search_labels.jsonl\",\"policy_action\":{\"action\":\"play_card\",\"card_index\":3,\"target_index\":1},\"policy_reason\":\"One-turn search: sequence ['Clothesline', 'Strike_R'] loss 18->12, damage=20, retaliation_damage=0, kills=0, attacks_removed=6, avoided_lethal=False, score=48.0.\",\"projected_loss\":12,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"usable_with_recoveries\",\"step\":174,\"turn\":9}],\"excluded_rows\":2,\"exclusion_reasons\":{\"missed_single_card_search\":2},\"missing_source_log\":0,\"missing_source_step\":0,\"policy_errors\":0,\"replay_outcomes\":{\"current_policy_matches_label\":1,\"current_policy_other\":1},\"replayed_rows\":2,\"resolved_file_count\":1,\"status_line\":\"combat_label_replay_audit files=1 excluded=2 replayed=2 matches_label=1 matches_actual=0 other=1\"}\nFailure evidence summary: {\"by_type\":{\"pre_boss\":3,\"route\":3,\"synthetic_terminal\":2,\"terminal_outcome_source\":2},\"runs_with_evidence\":3,\"synthetic_terminals\":{\"by_source\":{\"unknown_source\":2},\"terminal_outcome_sources\":{\"synthetic_after_mcp_null\":2}}}\nAction recovery: {\"by_kind\":{\"invalid_command\":1,\"recoverable_error\":1,\"unavailable_action\":4},\"by_status\":{\"preflight_mismatch\":4,\"recoverable_error\":2},\"examples\":[{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"proceed\"}],\"available_commands\":[\"choose\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['proceed']; available commands: ['choose']\",\"last_state\":{\"act\":1,\"current_hp\":79,\"floor\":5,\"max_hp\":80,\"room_phase\":\"COMPLETE\",\"screen_type\":\"COMPLETE\",\"step\":61},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"step\":61},{\"action_status\":\"recoverable_error\",\"actions\":[{\"action\":\"play_card\",\"card_index\":3,\"target_index\":2}],\"kind\":\"invalid_command\",\"last_error\":\"Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]\",\"last_state\":{\"act\":2,\"current_hp\":36,\"floor\":23,\"max_hp\":90,\"room_phase\":\"COMBAT\",\"screen_type\":\"NONE\",\"step\":378},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_210655_ironclad_a0.jsonl\",\"step\":378},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"choose\",\"choice_index\":4}],\"available_commands\":[\"proceed\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['choose']; available commands: ['proceed']\",\"last_state\":{\"act\":2,\"current_hp\":26,\"floor\":28,\"max_hp\":90,\"room_phase\":\"COMPLETE\",\"screen_type\":\"SHOP_SCREEN\",\"step\":435},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_210655_ironclad_a0.jsonl\",\"step\":435},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"proceed\"}],\"available_commands\":[\"choose\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['proceed']; available commands: ['choose']\",\"last_state\":{\"act\":1,\"current_hp\":64,\"floor\":13,\"max_hp\":80,\"room_phase\":\"COMPLETE\",\"screen_type\":\"COMPLETE\",\"step\":161},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"step\":161},{\"action_status\":\"recoverable_error\",\"actions\":[{\"action\":\"play_card\",\"card_index\":4,\"target_index\":3}],\"kind\":\"recoverable_error\",\"last_error\":\"Error at action 1: Index 3 out of bounds in command \\\"play 4 3\\\"\",\"last_state\":{\"act\":2,\"current_hp\":70,\"floor\":30,\"max_hp\":80,\"room_phase\":\"COMBAT\",\"screen_type\":\"NONE\",\"step\":353},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"step\":353},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"play_card\",\"card_index\":3,\"target_index\":3}],\"available_commands\":[\"end_turn\",\"use_potion\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']\",\"last_state\":{\"act\":3,\"current_hp\":47,\"floor\":37,\"max_hp\":80,\"room_phase\":\"COMBAT\",\"screen_type\":\"NONE\",\"step\":494},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"step\":494}],\"recovered\":6,\"runs_with_action_recovery\":3,\"runs_with_recovered_action\":3,\"runs_with_unrecovered_action\":0,\"total\":6,\"unrecovered\":0}\nTerminal recovery: {\"attempted\":2,\"succeeded\":2,\"synthetic_terminals\":2}\nGate execution recovery: {\"action_recovery\":{\"by_kind\":{\"invalid_command\":1,\"recoverable_error\":1,\"unavailable_action\":4},\"by_status\":{\"preflight_mismatch\":4,\"recoverable_error\":2},\"examples\":[{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"proceed\"}],\"available_commands\":[\"choose\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['proceed']; available commands: ['choose']\",\"last_state\":{\"act\":1,\"current_hp\":79,\"floor\":5,\"max_hp\":80,\"room_phase\":\"COMPLETE\",\"screen_type\":\"COMPLETE\",\"step\":61},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_203911_ironclad_a0.jsonl\",\"step\":61},{\"action_status\":\"recoverable_error\",\"actions\":[{\"action\":\"play_card\",\"card_index\":3,\"target_index\":2}],\"kind\":\"invalid_command\",\"last_error\":\"Error at action 1: Invalid command: play. Possible commands: [end, potion, key, click, wait, save, state]\",\"last_state\":{\"act\":2,\"current_hp\":36,\"floor\":23,\"max_hp\":90,\"room_phase\":\"COMBAT\",\"screen_type\":\"NONE\",\"step\":378},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_210655_ironclad_a0.jsonl\",\"step\":378},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"choose\",\"choice_index\":4}],\"available_commands\":[\"proceed\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['choose']; available commands: ['proceed']\",\"last_state\":{\"act\":2,\"current_hp\":26,\"floor\":28,\"max_hp\":90,\"room_phase\":\"COMPLETE\",\"screen_type\":\"SHOP_SCREEN\",\"step\":435},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_210655_ironclad_a0.jsonl\",\"step\":435},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"proceed\"}],\"available_commands\":[\"choose\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['proceed']; available commands: ['choose']\",\"last_state\":{\"act\":1,\"current_hp\":64,\"floor\":13,\"max_hp\":80,\"room_phase\":\"COMPLETE\",\"screen_type\":\"COMPLETE\",\"step\":161},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"step\":161},{\"action_status\":\"recoverable_error\",\"actions\":[{\"action\":\"play_card\",\"card_index\":4,\"target_index\":3}],\"kind\":\"recoverable_error\",\"last_error\":\"Error at action 1: Index 3 out of bounds in command \\\"play 4 3\\\"\",\"last_state\":{\"act\":2,\"current_hp\":70,\"floor\":30,\"max_hp\":80,\"room_phase\":\"COMBAT\",\"screen_type\":\"NONE\",\"step\":353},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"step\":353},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"play_card\",\"card_index\":3,\"target_index\":3}],\"available_commands\":[\"end_turn\",\"use_potion\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['play_card']; available commands: ['end_turn', 'use_potion']\",\"last_state\":{\"act\":3,\"current_hp\":47,\"floor\":37,\"max_hp\":80,\"room_phase\":\"COMBAT\",\"screen_type\":\"NONE\",\"step\":494},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_36\\\\20260707_214033_ironclad_a0.jsonl\",\"step\":494}],\"recovered\":6,\"runs_with_action_recovery\":3,\"runs_with_recovered_action\":3,\"runs_with_unrecovered_action\":0,\"total\":6,\"unrecovered\":0},\"terminal_recovery\":{\"attempted\":2,\"succeeded\":2,\"synthetic_terminals\":2}}\nGate data quality: {\"coverage_manifests\":1,\"label_exclusion_manifests\":1,\"label_exclusion_reasons\":{\"missed_single_card_search\":2},\"missed_single_card_search_labels\":2,\"schema_complete_manifests\":1,\"shadow_feature_rows\":865,\"shadow_label_excluded\":2,\"shadow_label_rows\":226,\"shadow_label_trainable\":224,\"total_manifests\":1}\nStatic knowledge gaps: {\"observed_aliases\":{\"cards\":58},\"resolved_log_count\":3,\"status_line\":\"static_knowledge_gaps logs=3 missing=0\",\"total_missing_occurrences\":0}\nGate failure evidence: {\"by_type\":{\"pre_boss\":3,\"route\":3,\"synthetic_terminal\":2,\"terminal_outcome_source\":2},\"runs_with_evidence\":3,\"synthetic_terminals\":{\"by_source\":{\"unknown_source\":2},\"terminal_outcome_sources\":{\"synthetic_after_mcp_null\":2}}}\nmanifest_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\ndiagnosis_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\ngate_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\nstatic_knowledge_gap_report_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\ncombat_label_audit_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\ncombat_label_replay_audit_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\nsummary_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\nartifact_manifest_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain.json\nhandoff_dir: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_36_feature_clean_retrain\\offline\\handoff_cycle_20260707_ironclad_a0_win_36_feature_clean_retrain"
+}

@@ -9,228 +9,789 @@
     {
       "name": "MCP/CommunicationMod state ids",
       "url": "https://github.com/ForgottenArbiter/CommunicationMod"
+    },
+    {
+      "name": "Spire Archive STS1 parsed game data",
+      "url": "https://github.com/nkhoit/spire-archive"
     }
   ],
   "potions": [
     {
-      "id": "Block Potion",
-      "name": "Block Potion",
-      "aliases": ["BlockPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["defense", "emergency", "lethal_prevention"],
-      "values": {"block": 12}
-    },
-    {
-      "id": "Dexterity Potion",
-      "name": "Dexterity Potion",
-      "aliases": ["DexterityPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["defense", "scaling", "boss_defense"],
-      "values": {"dexterity": 2}
-    },
-    {
-      "id": "Speed Potion",
-      "name": "Speed Potion",
-      "aliases": ["SpeedPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["defense", "burst_turn", "emergency", "multi_hit_defense"],
-      "values": {"temporary_dexterity": 5}
-    },
-    {
-      "id": "Fire Potion",
-      "name": "Fire Potion",
-      "aliases": ["FirePotion"],
-      "rarity": "COMMON",
-      "requires_target": true,
-      "combat_only": true,
-      "roles": ["offense", "lethal", "frontload", "elite_tempo"],
-      "values": {"damage": 20}
-    },
-    {
-      "id": "Explosive Potion",
-      "name": "Explosive Potion",
-      "aliases": ["ExplosivePotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["offense", "aoe", "frontload", "sentries", "slime_boss"],
-      "values": {"damage": 10}
-    },
-    {
-      "id": "Fear Potion",
-      "name": "Fear Potion",
-      "aliases": ["FearPotion"],
-      "rarity": "COMMON",
-      "requires_target": true,
-      "combat_only": true,
-      "roles": ["offense", "vulnerable", "boss_damage", "elite_tempo"],
-      "values": {"vulnerable": 3}
-    },
-    {
-      "id": "Strength Potion",
-      "name": "Strength Potion",
-      "aliases": ["StrengthPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["offense", "scaling", "boss_damage"],
-      "values": {"strength": 2}
-    },
-    {
-      "id": "Cultist Potion",
-      "name": "Cultist Potion",
-      "aliases": ["CultistPotion"],
+      "id": "Ambrosia",
+      "name": "Ambrosia",
       "rarity": "RARE",
       "requires_target": false,
       "combat_only": true,
-      "roles": ["offense", "scaling", "boss_damage", "elite_tempo", "long_fight"],
-      "values": {"ritual": 1}
-    },
-    {
-      "id": "Energy Potion",
-      "name": "Energy Potion",
-      "aliases": ["EnergyPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["tempo", "offense", "defense", "burst_turn"],
-      "values": {"energy": 2}
-    },
-    {
-      "id": "Swift Potion",
-      "name": "Swift Potion",
-      "aliases": ["SwiftPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["draw", "tempo", "emergency", "hand_fix"],
-      "values": {"draw": 3}
-    },
-    {
-      "id": "Skill Potion",
-      "name": "Skill Potion",
-      "aliases": ["SkillPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["card_generation", "defense", "emergency", "hand_fix"],
-      "values": {"generated_options": 3}
-    },
-    {
-      "id": "Attack Potion",
-      "name": "Attack Potion",
-      "aliases": ["AttackPotion"],
-      "rarity": "COMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["card_generation", "offense", "frontload", "hand_fix"],
-      "values": {"generated_options": 3}
-    },
-    {
-      "id": "Distilled Chaos",
-      "name": "Distilled Chaos",
-      "aliases": ["DistilledChaos"],
-      "rarity": "UNCOMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["tempo", "burst_turn", "card_play", "offense", "defense"],
-      "values": {"play_top_cards": 3}
-    },
-    {
-      "id": "Duplication Potion",
-      "name": "Duplication Potion",
-      "aliases": ["DuplicationPotion"],
-      "rarity": "UNCOMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["tempo", "offense", "defense", "burst_turn", "boss_damage"],
-      "values": {}
-    },
-    {
-      "id": "Gambler's Brew",
-      "name": "Gambler's Brew",
-      "aliases": ["GamblersBrew", "Gambler's Brew"],
-      "rarity": "UNCOMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["draw", "tempo", "emergency", "hand_fix"],
-      "values": {}
-    },
-    {
-      "id": "Liquid Memories",
-      "name": "Liquid Memories",
-      "aliases": ["LiquidMemories"],
-      "rarity": "UNCOMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["recursion", "tempo", "emergency", "hand_fix", "lethal_prevention"],
-      "values": {"discounted_card_cost": 0}
-    },
-    {
-      "id": "Elixir",
-      "name": "Elixir",
-      "aliases": ["ElixirPotion"],
-      "rarity": "UNCOMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["exhaust", "status_cleanup", "hand_fix", "situational"],
-      "values": {"exhaust_hand_cards": true}
-    },
-    {
-      "id": "Regeneration Potion",
-      "name": "Regeneration Potion",
-      "aliases": ["RegenPotion", "RegenerationPotion"],
-      "rarity": "UNCOMMON",
-      "requires_target": false,
-      "combat_only": true,
-      "roles": ["healing", "boss_defense", "elite_tempo"],
-      "values": {"healing_over_time": 15}
-    },
-    {
-      "id": "Weak Potion",
-      "name": "Weak Potion",
-      "aliases": ["WeakPotion"],
-      "rarity": "COMMON",
-      "requires_target": true,
-      "combat_only": true,
-      "roles": ["defense", "weak", "multi_hit_defense", "boss_defense"],
-      "values": {"weak": 3}
+      "roles": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "仙馔密酒"
+      ]
     },
     {
       "id": "Ancient Potion",
       "name": "Ancient Potion",
-      "aliases": ["AncientPotion"],
+      "aliases": [
+        "AncientPotion",
+        "先古药水"
+      ],
       "rarity": "UNCOMMON",
       "requires_target": false,
       "combat_only": true,
-      "roles": ["artifact", "boss_defense", "debuff_prevention"],
-      "values": {"artifact": 1}
+      "roles": [
+        "artifact",
+        "boss_defense",
+        "debuff_prevention"
+      ],
+      "values": {
+        "artifact": 1
+      }
     },
     {
-      "id": "Smoke Bomb",
-      "name": "Smoke Bomb",
-      "aliases": ["SmokeBomb"],
+      "id": "Attack Potion",
+      "name": "Attack Potion",
+      "aliases": [
+        "AttackPotion",
+        "攻击药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "card_generation",
+        "offense",
+        "frontload",
+        "hand_fix"
+      ],
+      "values": {
+        "generated_options": 3
+      }
+    },
+    {
+      "id": "Blessing of the Forge",
+      "name": "Blessing of the Forge",
+      "aliases": [
+        "BlessingOfTheForge",
+        "熔炉的祝福"
+      ],
       "rarity": "RARE",
       "requires_target": false,
       "combat_only": true,
-      "roles": ["escape", "route_recovery", "emergency"],
-      "values": {}
+      "roles": [
+        "upgrade",
+        "burst_turn",
+        "hand_quality",
+        "tempo"
+      ],
+      "values": {
+        "upgrade_hand_cards": true
+      }
+    },
+    {
+      "id": "Block Potion",
+      "name": "Block Potion",
+      "aliases": [
+        "BlockPotion",
+        "格挡药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "defense",
+        "emergency",
+        "lethal_prevention"
+      ],
+      "values": {
+        "block": 12
+      }
     },
     {
       "id": "Blood Potion",
       "name": "Blood Potion",
-      "aliases": ["BloodPotion"],
+      "aliases": [
+        "BloodPotion",
+        "鲜血药水"
+      ],
       "rarity": "COMMON",
       "requires_target": false,
       "combat_only": false,
-      "roles": ["healing", "route_recovery", "ironclad_only"],
-      "values": {"heal_percent_max_hp": 20}
+      "roles": [
+        "healing",
+        "route_recovery",
+        "ironclad_only"
+      ],
+      "values": {
+        "heal_percent_max_hp": 20
+      }
+    },
+    {
+      "id": "Bottled Miracle",
+      "name": "Bottled Miracle",
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "瓶装奇迹"
+      ]
+    },
+    {
+      "id": "Colorless Potion",
+      "name": "Colorless Potion",
+      "aliases": [
+        "ColorlessPotion",
+        "无色药水"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "card_generation",
+        "hand_fix",
+        "tempo",
+        "situational"
+      ],
+      "values": {
+        "generated_options": 3
+      }
+    },
+    {
+      "id": "Cultist Potion",
+      "name": "Cultist Potion",
+      "aliases": [
+        "CultistPotion",
+        "邪教徒药水"
+      ],
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "offense",
+        "scaling",
+        "boss_damage",
+        "elite_tempo",
+        "long_fight"
+      ],
+      "values": {
+        "ritual": 1
+      }
+    },
+    {
+      "id": "Cunning Potion",
+      "name": "Cunning Potion",
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "狡诈药水"
+      ]
+    },
+    {
+      "id": "Dexterity Potion",
+      "name": "Dexterity Potion",
+      "aliases": [
+        "DexterityPotion",
+        "敏捷药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "defense",
+        "scaling",
+        "boss_defense"
+      ],
+      "values": {
+        "dexterity": 2
+      }
+    },
+    {
+      "id": "Distilled Chaos",
+      "name": "Distilled Chaos",
+      "aliases": [
+        "DistilledChaos",
+        "精炼混沌"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "tempo",
+        "burst_turn",
+        "card_play",
+        "offense",
+        "defense"
+      ],
+      "values": {
+        "play_top_cards": 3
+      }
+    },
+    {
+      "id": "Duplication Potion",
+      "name": "Duplication Potion",
+      "aliases": [
+        "DuplicationPotion",
+        "复制药水"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "tempo",
+        "offense",
+        "defense",
+        "burst_turn",
+        "boss_damage"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Elixir",
+      "name": "Elixir",
+      "aliases": [
+        "ElixirPotion",
+        "万灵药水"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "exhaust",
+        "status_cleanup",
+        "hand_fix",
+        "situational"
+      ],
+      "values": {
+        "exhaust_hand_cards": true
+      }
+    },
+    {
+      "id": "Energy Potion",
+      "name": "Energy Potion",
+      "aliases": [
+        "EnergyPotion",
+        "能量药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "tempo",
+        "offense",
+        "defense",
+        "burst_turn"
+      ],
+      "values": {
+        "energy": 2
+      }
+    },
+    {
+      "id": "Entropic Brew",
+      "name": "Entropic Brew",
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "混沌药水"
+      ]
+    },
+    {
+      "id": "Essence Of Darkness",
+      "name": "Essence Of Darkness",
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "暗之精华"
+      ]
+    },
+    {
+      "id": "Essence of Steel",
+      "name": "Essence of Steel",
+      "aliases": [
+        "EssenceOfSteel",
+        "钢之精华"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "defense",
+        "scaling",
+        "boss_defense",
+        "multi_hit_defense"
+      ],
+      "values": {
+        "plated_armor": 4
+      }
+    },
+    {
+      "id": "Explosive Potion",
+      "name": "Explosive Potion",
+      "aliases": [
+        "ExplosivePotion",
+        "爆炸药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "offense",
+        "aoe",
+        "frontload",
+        "sentries",
+        "slime_boss"
+      ],
+      "values": {
+        "damage": 10
+      }
+    },
+    {
+      "id": "Fairy in a Bottle",
+      "name": "Fairy in a Bottle",
+      "aliases": [
+        "FairyPotion",
+        "瓶中精灵"
+      ],
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "healing",
+        "revive",
+        "lethal_prevention",
+        "route_recovery"
+      ],
+      "values": {
+        "revive_percent_max_hp": 30
+      }
+    },
+    {
+      "id": "Fear Potion",
+      "name": "Fear Potion",
+      "aliases": [
+        "FearPotion",
+        "恐惧药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": true,
+      "combat_only": true,
+      "roles": [
+        "offense",
+        "vulnerable",
+        "boss_damage",
+        "elite_tempo"
+      ],
+      "values": {
+        "vulnerable": 3
+      }
+    },
+    {
+      "id": "Fire Potion",
+      "name": "Fire Potion",
+      "aliases": [
+        "FirePotion",
+        "火焰药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": true,
+      "combat_only": true,
+      "roles": [
+        "offense",
+        "lethal",
+        "frontload",
+        "elite_tempo"
+      ],
+      "values": {
+        "damage": 20
+      }
+    },
+    {
+      "id": "Focus Potion",
+      "name": "Focus Potion",
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "集中药水"
+      ]
+    },
+    {
+      "id": "Fruit Juice",
+      "name": "Fruit Juice",
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": false,
+      "roles": [
+        "max_hp",
+        "route_recovery",
+        "noncombat"
+      ],
+      "values": {
+        "max_hp": 5
+      },
+      "aliases": [
+        "果汁"
+      ]
+    },
+    {
+      "id": "Gambler's Brew",
+      "name": "Gambler's Brew",
+      "aliases": [
+        "GamblersBrew",
+        "Gambler's Brew",
+        "赌徒特酿"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "draw",
+        "tempo",
+        "emergency",
+        "hand_fix"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Ghost in a Jar",
+      "name": "Ghost in a Jar",
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "rare"
+      ],
+      "values": {},
+      "aliases": [
+        "罐装幽灵"
+      ]
+    },
+    {
+      "id": "HeartOfIron",
+      "name": "Heart of Iron",
+      "aliases": [
+        "Heart of Iron",
+        "铁之心"
+      ],
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "defense",
+        "scaling",
+        "boss_defense",
+        "ironclad_only"
+      ],
+      "values": {
+        "metallicize": 6
+      }
+    },
+    {
+      "id": "Liquid Bronze",
+      "name": "Liquid Bronze",
+      "aliases": [
+        "LiquidBronze",
+        "流动铜液"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "thorns",
+        "defense",
+        "multi_hit_defense",
+        "boss_defense"
+      ],
+      "values": {
+        "thorns": 3
+      }
+    },
+    {
+      "id": "Liquid Memories",
+      "name": "Liquid Memories",
+      "aliases": [
+        "LiquidMemories",
+        "液态记忆"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "recursion",
+        "tempo",
+        "emergency",
+        "hand_fix",
+        "lethal_prevention"
+      ],
+      "values": {
+        "discounted_card_cost": 0
+      }
+    },
+    {
+      "id": "Poison Potion",
+      "name": "Poison Potion",
+      "rarity": "COMMON",
+      "requires_target": true,
+      "combat_only": true,
+      "roles": [
+        "offense",
+        "targeted",
+        "common"
+      ],
+      "values": {},
+      "aliases": [
+        "毒药水"
+      ]
+    },
+    {
+      "id": "Potion Of Capacity",
+      "name": "Potion Of Capacity",
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "扩容药水"
+      ]
+    },
+    {
+      "id": "Power Potion",
+      "name": "Power Potion",
+      "aliases": [
+        "PowerPotion",
+        "能力药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "card_generation",
+        "scaling",
+        "boss_damage",
+        "hand_fix"
+      ],
+      "values": {
+        "generated_options": 3
+      }
+    },
+    {
+      "id": "Regeneration Potion",
+      "name": "Regeneration Potion",
+      "aliases": [
+        "RegenPotion",
+        "RegenerationPotion",
+        "再生药水"
+      ],
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "healing",
+        "boss_defense",
+        "elite_tempo"
+      ],
+      "values": {
+        "healing_over_time": 15
+      }
+    },
+    {
+      "id": "Skill Potion",
+      "name": "Skill Potion",
+      "aliases": [
+        "SkillPotion",
+        "技能药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "card_generation",
+        "defense",
+        "emergency",
+        "hand_fix"
+      ],
+      "values": {
+        "generated_options": 3
+      }
+    },
+    {
+      "id": "Smoke Bomb",
+      "name": "Smoke Bomb",
+      "aliases": [
+        "SmokeBomb",
+        "烟雾弹"
+      ],
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "escape",
+        "route_recovery",
+        "emergency"
+      ],
+      "values": {}
+    },
+    {
+      "id": "Snecko Oil",
+      "name": "Snecko Oil",
+      "aliases": [
+        "SneckoOil",
+        "异蛇之油"
+      ],
+      "rarity": "RARE",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "draw",
+        "randomize_cost",
+        "emergency",
+        "hand_fix",
+        "pyramid_risk"
+      ],
+      "values": {
+        "draw_cards": 5,
+        "randomize_costs": true
+      }
+    },
+    {
+      "id": "Speed Potion",
+      "name": "Speed Potion",
+      "aliases": [
+        "SpeedPotion",
+        "速度药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "defense",
+        "burst_turn",
+        "emergency",
+        "multi_hit_defense"
+      ],
+      "values": {
+        "temporary_dexterity": 5
+      }
+    },
+    {
+      "id": "Stance Potion",
+      "name": "Stance Potion",
+      "rarity": "UNCOMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "uncommon"
+      ],
+      "values": {},
+      "aliases": [
+        "姿态药水"
+      ]
+    },
+    {
+      "id": "Steroid Potion",
+      "name": "Steroid Potion",
+      "aliases": [
+        "SteroidPotion",
+        "Flex Potion",
+        "类固醇药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "offense",
+        "burst_turn",
+        "frontload",
+        "temporary_strength"
+      ],
+      "values": {
+        "temporary_strength": 5
+      }
+    },
+    {
+      "id": "Strength Potion",
+      "name": "Strength Potion",
+      "aliases": [
+        "StrengthPotion",
+        "力量药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "offense",
+        "scaling",
+        "boss_damage"
+      ],
+      "values": {
+        "strength": 2
+      }
+    },
+    {
+      "id": "Swift Potion",
+      "name": "Swift Potion",
+      "aliases": [
+        "SwiftPotion",
+        "迅捷药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": false,
+      "combat_only": true,
+      "roles": [
+        "draw",
+        "tempo",
+        "emergency",
+        "hand_fix"
+      ],
+      "values": {
+        "draw": 3
+      }
+    },
+    {
+      "id": "Weak Potion",
+      "name": "Weak Potion",
+      "aliases": [
+        "WeakPotion",
+        "虚弱药水"
+      ],
+      "rarity": "COMMON",
+      "requires_target": true,
+      "combat_only": true,
+      "roles": [
+        "defense",
+        "weak",
+        "multi_hit_defense",
+        "boss_defense"
+      ],
+      "values": {
+        "weak": 3
+      }
     }
   ]
 }

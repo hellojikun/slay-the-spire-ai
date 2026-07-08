@@ -1,0 +1,169 @@
+{
+  "accepted_rows": 112,
+  "example_count": 3,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 32,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 80,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        213
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Shockwave",
+        "Bash",
+        "Perfected Strike",
+        "Anger"
+      ],
+      "incoming": 32,
+      "initial_loss": 32,
+      "kills": 0,
+      "label_first_card_key": "Perfected Strike",
+      "label_sequence_card_keys": [
+        "Perfected Strike"
+      ],
+      "label_target_index": 1,
+      "line": 64,
+      "loss_delta": 32,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_22\\offline\\shadow_cycle_20260707_ironclad_a0_win_22\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 230,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 32,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 62,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        216
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Pummel",
+        "Defend_R",
+        "Bludgeon"
+      ],
+      "incoming": 32,
+      "initial_loss": 32,
+      "kills": 0,
+      "label_first_card_key": "Bludgeon",
+      "label_sequence_card_keys": [
+        "Bludgeon"
+      ],
+      "label_target_index": 1,
+      "line": 101,
+      "loss_delta": 32,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_22\\offline\\shadow_cycle_20260707_ironclad_a0_win_22\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 195,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 4,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 44,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        89
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK_BUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Anger",
+        "Strike_R",
+        "Clothesline"
+      ],
+      "incoming": 12,
+      "initial_loss": 12,
+      "kills": 0,
+      "label_first_card_key": "Clothesline",
+      "label_sequence_card_keys": [
+        "Clothesline"
+      ],
+      "label_target_index": 1,
+      "line": 68,
+      "loss_delta": 1,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_22\\offline\\shadow_cycle_20260707_ironclad_a0_win_22\\combat_search_labels.jsonl",
+      "projected_loss": 11,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 250,
+      "turn": 8
+    }
+  ],
+  "excluded_rows": 3,
+  "exclusion_reasons": {
+    "missed_single_card_search": 3
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_22\\offline\\shadow_cycle_20260707_ironclad_a0_win_22"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_22\\offline\\shadow_cycle_20260707_ironclad_a0_win_22\\combat_search_labels.jsonl"
+  ],
+  "rows": 115,
+  "source_quality": {
+    "pristine": 25,
+    "usable_with_recoveries": 90
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=115 excluded=3 missed_single_card_search=3",
+  "version": 1,
+  "warnings": []
+}

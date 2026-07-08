@@ -1,0 +1,224 @@
+{
+  "version": 1,
+  "name": "cycle_20260707_ironclad_a0_win_16",
+  "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_16.json",
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_16"
+  ],
+  "input_count": 1,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_16",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 3928440,
+      "index": 0
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_16\\20260707_074209_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_16\\20260707_074737_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_16\\20260707_075337_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 3,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_16\\20260707_074209_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 966727,
+      "sha256": "3da87feabb2a42c0642122a324a84ee80bf7ef1894cb0a116673685deedc1cf9",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_16\\20260707_074737_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1017989,
+      "sha256": "8882ec275151f8c7ddca59cfd403cbb2931a4a98b8b52191b82bf215e5005f72",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_16\\20260707_075337_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1943724,
+      "sha256": "7ce3a24ba671cabec92ac084ece9d8633e0a7fe88b7a58c6a40c72c676c1cab2",
+      "index": 2
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_16.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\shadow_cycle_20260707_ironclad_a0_win_16",
+    "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_16",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_16.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_16.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_16.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_16.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_16.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_16.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_16.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_16",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 905109
+    },
+    "combat_label_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_16.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2186,
+      "sha256": "ec4cdbd8d946b81d140a2c7db87f312c1ab58e23a0ce1cbd78461cf287ebbd77"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_16.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2979,
+      "sha256": "975750396ba1424b00c6b17c82eaa92781e624be7b8df69a9c68c9344833e577"
+    },
+    "diagnosis_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_16.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 859996,
+      "sha256": "432a8536da82fb7626d721a6a69b257746d16f0e17de1a09fcae56c0273abedc"
+    },
+    "gate_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_16.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 12932,
+      "sha256": "b318b0830928b6fe947711bdfb90b55e88ac1e1b6a9a1e58222c1b358a29745f"
+    },
+    "handoff_dir": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 438567
+    },
+    "handoff_index_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 34377,
+      "sha256": "65412beb2ab2867bb0f12e439d8bbaf45829e41ad1cafd07b58dcbe69354cad7"
+    },
+    "manifest_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_16.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 259117,
+      "sha256": "50a1ec69e1a96fc917719fe7ef690302aa2f6cc98ec62af2d1e59a4f2b89a2cd"
+    },
+    "next_handoff_prompt_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 35732,
+      "sha256": "539e42f88cce860ee426abc26a45bc354d155f5bcc64cc62ec5a0767a33063d4"
+    },
+    "shadow_dir": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\shadow_cycle_20260707_ironclad_a0_win_16",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 3118401
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_16.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 11437,
+      "sha256": "2b617de658a0b9e909920ee8eb13e6284165b68714f58aac027fb7c1d6a8c0c0"
+    },
+    "summary_path": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_16.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 408805,
+      "sha256": "b82bdb18feb42f5f9c381e1700b7518ebf736ea03fb314b84e177afc387e0438"
+    },
+    "ai_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 94422,
+      "sha256": "239b64f64f17134ec23d6ba24d20c3c2912cf1a5d8d4072cf1cb16dc2922124b"
+    },
+    "engineering_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 66746,
+      "sha256": "a36a0c9bef0c9228322d6c633c24fddbe33fcfdd2e02550d62c42195ffe5ba34"
+    },
+    "main_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 77303,
+      "sha256": "422edad8b349e03e8ecf480aa4ce0d9f5a25ff59bcde173b0ecc6e813c007abe"
+    },
+    "runner_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 77414,
+      "sha256": "95569b8d8fa8aaf14296385d68d1b0dddb4283a06ebe5b9e25fbca4be0ac00a3"
+    },
+    "ai_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 13722,
+      "sha256": "01acbb9942a4d63300b1c5166f6a6cf56559c7a153bd0a0aa614363229fe0e09"
+    },
+    "engineering_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 12868,
+      "sha256": "a990447cf78d84b4ab4feb09ac7dca1f6641b719cf2f4052732554f0933a9636"
+    },
+    "main_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 12972,
+      "sha256": "9b54f31afc0fd3fcb5017be03c025bbe74b1eb077ef5f3bccc9947f4afa439f0"
+    },
+    "runner_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_16\\offline\\handoff_cycle_20260707_ironclad_a0_win_16\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 13011,
+      "sha256": "f1d25bbb2c3b51fb8c415a2c863440ce1c84f5473d5b548b47d22c67bdbcaa4e"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

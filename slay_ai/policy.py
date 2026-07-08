@@ -1,158 +1,46 @@
-﻿"""Explainable heuristic policy for Slay the Spire."""
+"""Explainable heuristic policy for Slay the Spire."""
 
 from __future__ import annotations
 
 from dataclasses import dataclass
-import re
+from pathlib import Path
 from typing import Any
 
 from .combat_search import find_best_combat_sequence
 from .domain.monsters import monster_attack_damage
 from .memory import StrategyMemory, normalize_card_name
+from .model import COMBAT_VALUE_MODEL_PATH, POTION_TEMPO_MODEL_PATH, ROUTE_RISK_MODEL_PATH, PotionTempoModel, RouteRiskModel
+from .policy_card_reward import AOE_ATTACK_CARDS, SLOW_ENGINE_CARDS, CardRewardPolicy
+from .policy_character import DEFAULT_CHARACTER_PROFILE, profile_for
 from .policy_chest import ChestPolicy
+from .policy_combat import CombatPolicy
 from .policy_decision import Decision
+from .policy_event import EventPolicy
+from .policy_potion import PotionPolicy
+from .policy_reward import CombatRewardPolicy
+from .policy_rest import RestGridPolicy
 from .policy_route import decide_route
+from .policy_shop import ShopRelicPolicy
+from .static_knowledge import StaticKnowledge
+from .train_combat_value_model import CombatValueScorer
 
 
-EXHAUST_PAYOFF_CARDS = {"Dark Embrace", "Feel No Pain"}
-EXHAUST_ENABLER_CARDS = {
-    "Burning Pact",
-    "Disarm",
-    "Fiend Fire",
-    "Ghostly Armor",
-    "Impervious",
-    "Intimidate",
-    "Offering",
-    "Second Wind",
-    "Sentinel",
-    "Sever Soul",
-    "Shockwave",
-    "True Grit",
-}
-EXHAUST_PAYOFF_UNSUPPORTED_PENALTY = 24.0
-EARLY_UNSUPPORTED_ENGINE_PENALTY = 24.0
-EARLY_DUPLICATE_EXHAUST_ENABLER_PENALTY = 16.0
-ACT1_LOW_HP_SURVIVAL_CARD_BONUS = 14.0
-ACT1_AOE_GAP_CARD_BONUS = 28.0
-ACT1_BOSS_PREP_DAMAGE_BONUS = 12.0
-ACT1_BOSS_PREP_DEFENSE_BONUS = 8.0
-ACT1_BOSS_PREP_SLOW_ENGINE_PENALTY = 14.0
 LOW_HP_ENGINE_COMBAT_PENALTY = 20.0
-SLOW_ENGINE_CARDS = {"Burning Pact", "Dark Embrace", "Havoc"}
-SELF_DAMAGE_RISK_CARDS = {"Bloodletting", "Combust", "Offering"}
-IMMEDIATE_SELF_DAMAGE_ENGINE_CARDS = {"Bloodletting", "Offering"}
-SELF_DAMAGE_HP_COST_CARDS = {"Hemokinesis": 2}
+SELF_DAMAGE_RISK_CARDS = DEFAULT_CHARACTER_PROFILE.self_damage_risk_cards
+IMMEDIATE_SELF_DAMAGE_ENGINE_CARDS = DEFAULT_CHARACTER_PROFILE.immediate_self_damage_engine_cards
+SELF_DAMAGE_HP_COST_CARDS = DEFAULT_CHARACTER_PROFILE.self_damage_hp_cost_cards
 ACT2_MULTI_ENEMY_SELF_DAMAGE_SETUP_PENALTY = 9.0
 REPEAT_SELF_DAMAGE_ENGINE_PENALTY = 18.0
 SHALLOW_SLIME_SPLIT_PENALTY = 36.0
 SHALLOW_SLIME_SPLIT_RATIO = 0.42
-ENERGY_SETUP_CARDS = {"Seeing Red"}
-SEARCH_PROTECTED_SINGLE_CARDS = {
-    "Battle Trance",
-    "Burning Pact",
-    "Dark Shackles",
-    "Disarm",
-    "Intimidate",
-    "Offering",
-    "Piercing Wail",
-    "Shockwave",
-}
-AOE_ATTACK_CARDS = {"Cleave", "Immolate", "Reaper", "Thunderclap", "Whirlwind"}
-ATTACK_BLOCK_CARDS = {"Dash", "Iron Wave", "Just Lucky", "Wallop"}
+ENERGY_SETUP_CARD_GAIN = DEFAULT_CHARACTER_PROFILE.energy_gain_cards
+ENERGY_SETUP_CARDS = frozenset(ENERGY_SETUP_CARD_GAIN)
+SEARCH_PROTECTED_SINGLE_CARDS = DEFAULT_CHARACTER_PROFILE.search_protected_single_cards
+ATTACK_BLOCK_CARDS = DEFAULT_CHARACTER_PROFILE.attack_block_cards
 REFLECT_DAMAGE_POWER_IDS = {"sharphide", "thorns"}
-SHOP_BUY_CARD_THRESHOLD = 54.0
-SHOP_PURGE_STRIKE_SCORE = 58.0
-SHOP_HIGH_IMPACT_POTION_SCORE = 50.0
-SHOP_BOSS_PREP_POTION_BONUS = 12.0
-SHOP_HIGH_IMPACT_POTION_TOKENS = {
-    "attack",
-    "block",
-    "cultist",
-    "dexterity",
-    "distilledchaos",
-    "duplication",
-    "energy",
-    "essenceofsteel",
-    "explosive",
-    "fear",
-    "fire",
-    "gambler",
-    "gamblersbrew",
-    "heartofiron",
-    "power",
-    "regen",
-    "speed",
-    "strength",
-    "swift",
-    "weak",
-}
 DUPLICATION_DEFENSE_BLOCK_THRESHOLD = 8
 DUPLICATION_ATTACK_DAMAGE_THRESHOLD = 18
-DUPLICATION_HIGH_VALUE_CARDS = {
-    "Carnage",
-    "Disarm",
-    "Flame Barrier",
-    "Impervious",
-    "Perfected Strike",
-    "Power Through",
-    "Shockwave",
-    "Shrug It Off",
-    "Uppercut",
-}
-ACT1_BLOCK_STABILIZER_CARDS = {
-    "Armaments",
-    "Disarm",
-    "Flame Barrier",
-    "Ghostly Armor",
-    "Impervious",
-    "Power Through",
-    "Second Wind",
-    "Shockwave",
-    "Shrug It Off",
-    "True Grit",
-}
-ACT1_LOW_HP_SURVIVAL_CARDS = ACT1_BLOCK_STABILIZER_CARDS | {"Iron Wave"}
-ACT1_BOSS_PREP_DAMAGE_CARDS = {
-    "Carnage",
-    "Clothesline",
-    "Dropkick",
-    "Hemokinesis",
-    "Inflame",
-    "Perfected Strike",
-    "Pommel Strike",
-    "Pummel",
-    "Rampage",
-    "Shockwave",
-    "Spot Weakness",
-    "Thunderclap",
-    "Twin Strike",
-    "Uppercut",
-    "Wild Strike",
-}
-ACT1_BOSS_PREP_DEFENSE_CARDS = ACT1_BLOCK_STABILIZER_CARDS | {"Clothesline", "Disarm", "Intimidate", "Shockwave", "Uppercut"}
-BLOCK_CARDS = ACT1_BLOCK_STABILIZER_CARDS | {"Defend", "Iron Wave"}
-IRONCLAD_ATTACK_CARDS = {
-    "Anger",
-    "Bash",
-    "Cleave",
-    "Clothesline",
-    "Hemokinesis",
-    "Perfected Strike",
-    "Pommel Strike",
-    "Strike",
-    "Thunderclap",
-    "Twin Strike",
-    "Whirlwind",
-}
-ATTACK_DUPLICATE_SOFT_CAPS = {
-    "Anger": 1,
-    "Cleave": 1,
-    "Clothesline": 2,
-    "Hemokinesis": 1,
-    "Thunderclap": 1,
-}
-
-
+DUPLICATION_HIGH_VALUE_CARDS = DEFAULT_CHARACTER_PROFILE.duplication_high_value_cards
 @dataclass
 class _PendingSearchSequence:
     floor: int
@@ -162,11 +50,69 @@ class _PendingSearchSequence:
 
 
 class HeuristicPolicy:
-    def __init__(self, memory: StrategyMemory, character: str = "IRONCLAD") -> None:
+    def __init__(
+        self,
+        memory: StrategyMemory,
+        character: str = "IRONCLAD",
+        model_authority: str = "shadow",
+        combat_value_model_path: Path | None = COMBAT_VALUE_MODEL_PATH,
+        route_risk_model_path: Path | None = ROUTE_RISK_MODEL_PATH,
+        potion_tempo_model_path: Path | None = POTION_TEMPO_MODEL_PATH,
+    ) -> None:
         self.memory = memory
         self.character = character
+        self._model_authority = model_authority
         self._pending_search_sequence: _PendingSearchSequence | None = None
+        self._combat_value_scorer = CombatValueScorer(combat_value_model_path) if combat_value_model_path else None
+        self._route_risk_model = (
+            RouteRiskModel.load(route_risk_model_path)
+            if route_risk_model_path and model_authority in {"assist", "pilot"}
+            else None
+        )
+        self._potion_tempo_model = (
+            PotionTempoModel.load(potion_tempo_model_path)
+            if potion_tempo_model_path and model_authority in {"assist", "pilot"}
+            else None
+        )
+        self._static_knowledge = (
+            StaticKnowledge.load()
+            if self._potion_tempo_model is not None and self._potion_tempo_model.feature_weights
+            else None
+        )
+        self._card_reward_policy = CardRewardPolicy(memory, character=character, model_authority=model_authority)
         self._chest_policy = ChestPolicy()
+        self._combat_reward_policy = CombatRewardPolicy(has_empty_potion_slot=_has_empty_potion_slot)
+        self._event_policy = EventPolicy(memory, character=character)
+        self._rest_grid_policy = RestGridPolicy(memory, character=character)
+        self._shop_relic_policy = ShopRelicPolicy(
+            memory,
+            card_reward_score=self._card_reward_policy.score_card_reward,
+            should_purge_strike=_shop_should_purge_strike,
+            boss_prep_needs_potion=self._card_reward_policy.act1_boss_prep_needs_potion,
+            has_empty_potion_slot=_has_empty_potion_slot,
+        )
+        self._potion_policy = PotionPolicy(
+            highest_attack_target=_highest_attack_target,
+            choose_target=_choose_target,
+            is_long_fight=_is_long_fight,
+            is_dangerous_early_scaling_fight=_is_dangerous_early_scaling_fight,
+            has_duplication_potion_target=_has_duplication_potion_target,
+            liquid_memories_target=_liquid_memories_target,
+            potion_tempo_model=self._potion_tempo_model,
+            model_authority=model_authority,
+            static_knowledge=self._static_knowledge,
+        )
+        self._combat_policy = CombatPolicy(
+            potion_policy=self._potion_policy,
+            monster_attack=_monster_attack,
+            hp_ratio=_hp_ratio,
+            empty_hand_after_actions=_empty_hand_after_actions,
+            clear_pending_search_sequence=self._clear_pending_search_sequence,
+            pending_search_action=self._pending_search_action,
+            guardian_pressure_draw_action=self._guardian_pressure_draw_action,
+            combat_local_search_action=self._combat_local_search_action,
+            best_single_combat_action=self.best_single_combat_action,
+        )
 
     def decide(self, state: dict[str, Any]) -> Decision:
         if not state.get("in_game"):
@@ -179,25 +125,25 @@ class HeuristicPolicy:
             return self._combat(game)
         self._clear_pending_search_sequence()
         if screen == "COMBAT_REWARD":
-            return self._combat_reward(game)
+            return self._combat_reward_policy.decide_combat_reward(game)
         if screen == "CARD_REWARD":
-            return self._card_reward(game)
+            return self._card_reward_policy.decide_card_reward(game)
         if screen == "MAP":
             return self._map(game)
         if screen == "REST":
-            return self._rest(game)
+            return self._rest_grid_policy.decide_rest(game)
         if screen == "GRID":
-            return self._grid(game)
+            return self._rest_grid_policy.decide_grid(game)
         if screen == "HAND_SELECT":
-            return self._hand_select(game)
+            return self._event_policy.decide_hand_select(game)
         if screen == "BOSS_REWARD":
-            return self._boss_reward(game)
+            return self._shop_relic_policy.decide_boss_reward(game)
         if screen == "EVENT":
-            return self._event(game)
+            return self._event_policy.decide_event(game)
         if screen == "SHOP_ROOM":
             return Decision([{"action": "choose", "choice_index": 1}], "Enter shop.")
         if screen == "SHOP_SCREEN":
-            return self._shop_screen(game)
+            return self._shop_relic_policy.decide_shop_screen(game)
         if screen == "CHEST":
             return self._chest_policy.decide(game)
         if screen == "GAME_OVER":
@@ -207,55 +153,7 @@ class HeuristicPolicy:
         return Decision([], f"No policy for screen {screen}; waiting.")
 
     def _combat(self, game: dict[str, Any]) -> Decision:
-        combat = game.get("combat_state", {})
-        player = combat.get("player", {})
-        hand = combat.get("hand", [])
-        monsters = combat.get("monsters", [])
-        energy = int(player.get("current_energy", 0))
-        current_block = int(player.get("block", 0))
-        incoming = sum(_monster_attack(m) for m in monsters)
-        hp_ratio = _hp_ratio(player)
-
-        if not monsters:
-            self._clear_pending_search_sequence()
-            if game.get("room_phase") == "COMPLETE":
-                return Decision([{"action": "proceed"}], "Combat complete; proceed.")
-            return Decision([{"action": "wait", "ms": 250}], "Combat is ending; wait for reward transition.")
-
-        if not hand and monsters:
-            self._clear_pending_search_sequence()
-            turn = int(combat.get("turn", 1) or 1)
-            if 0 < energy < 3:
-                return Decision([{"action": "end_turn"}], "Hand is empty after spending energy; end the turn.")
-            if turn > 1 and current_block > 0 and current_block >= incoming:
-                return Decision([{"action": "end_turn"}], "Hand is empty and block covers incoming; end the turn.")
-            if energy <= 0 and (turn > 1 or _empty_hand_after_actions(combat)):
-                return Decision([{"action": "end_turn"}], "Hand is empty; end the turn.")
-            return Decision([{"action": "wait", "ms": 250}], "Combat is still settling; wait for hand to be dealt.")
-
-        potion_action = self._emergency_potion(game, monsters, incoming, current_block, hp_ratio)
-        if potion_action:
-            self._clear_pending_search_sequence()
-            return potion_action
-        potion_action = self._strategic_combat_potion(game, monsters)
-        if potion_action:
-            self._clear_pending_search_sequence()
-            return potion_action
-
-        pending_action = self._pending_search_action(game, incoming, current_block)
-        if pending_action:
-            return pending_action
-
-        draw_setup = self._guardian_pressure_draw_action(game, monsters, incoming, current_block, hp_ratio)
-        if draw_setup:
-            self._clear_pending_search_sequence()
-            return draw_setup
-
-        search_action = self._combat_local_search_action(game)
-        if search_action:
-            return search_action
-
-        return self.best_single_combat_action(game)
+        return self._combat_policy.decide_combat(game)
 
     def _clear_pending_search_sequence(self) -> None:
         self._pending_search_sequence = None
@@ -274,6 +172,9 @@ class HeuristicPolicy:
             return None
         energy = int(player.get("current_energy", 0) or 0)
         next_key = pending.card_keys[0]
+        if _fresh_search_supersedes_pending(game, pending, next_key, incoming, current_block):
+            self._clear_pending_search_sequence()
+            return None
         match = _find_playable_card_by_key(combat.get("hand", []), next_key, energy)
         if match is None:
             self._clear_pending_search_sequence()
@@ -334,166 +235,14 @@ class HeuristicPolicy:
             )
         return None
 
-    def _strategic_combat_potion(self, game: dict[str, Any], monsters: list[dict[str, Any]]) -> Decision | None:
-        combat = game.get("combat_state", {})
-        turn = int(combat.get("turn", 1) or 1)
-        if turn > 2:
-            return None
-        long_fight = _is_long_fight(monsters)
-        dangerous_scaling_fight = _is_dangerous_early_scaling_fight(game, monsters)
-        if not long_fight and not dangerous_scaling_fight:
-            return None
-        reason_prefix = "Long boss/elite fight" if long_fight else "Dangerous early fight"
-        for slot, potion in enumerate(game.get("potions", []), start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if "cultist" in key or "strength" in key or "steroid" in key:
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot}],
-                    f"{reason_prefix}; use {potion.get('name', potion.get('id'))}.",
-                )
-        if not long_fight:
-            return None
-        for slot, potion in enumerate(game.get("potions", []), start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if "blessingoftheforge" in key or "forge" in key:
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot}],
-                    f"Long boss/elite fight; use {potion.get('name', potion.get('id'))}.",
-                )
-        for slot, potion in enumerate(game.get("potions", []), start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if "duplication" in key and _has_duplication_potion_target(game, monsters, incoming_sensitive=False):
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot}],
-                    f"Long boss/elite fight; use {potion.get('name', potion.get('id'))} before a high-impact card.",
-                )
-        return None
-
-    def _emergency_potion(
-        self,
-        game: dict[str, Any],
-        monsters: list[dict[str, Any]],
-        incoming: int,
-        current_block: int,
-        hp_ratio: float,
-    ) -> Decision | None:
-        potions = game.get("potions", [])
-        current_hp = int(game.get("current_hp", 0) or game.get("combat_state", {}).get("player", {}).get("current_hp", 0))
-        projected_loss = max(0, incoming - current_block)
-        lethal = projected_loss >= current_hp
-        high_damage = projected_loss >= max(18, int(current_hp * 0.30))
-        low_hp = hp_ratio <= 0.35
-        defensive_danger = projected_loss > 0 and (lethal or high_damage or low_hp)
-        tempo_danger = lethal or high_damage or low_hp
-        if not tempo_danger:
-            return None
-
-        target = _highest_attack_target(monsters) or 1
-        for slot, potion in enumerate(potions, start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if ("regen" in key or "fruitjuice" in key or "blood" in key) and (low_hp or defensive_danger):
-                return Decision([{"action": "use_potion", "potion_slot": slot}], f"Low HP; use {potion.get('name', potion.get('id'))}.")
-        for slot, potion in enumerate(potions, start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if defensive_danger and ("weak" in key or "fear" in key):
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot, "target_index": target}],
-                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))}.",
-                )
-        for slot, potion in enumerate(potions, start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if defensive_danger and ("essenceofsteel" in key or "heartofiron" in key or "block" in key or "metallicize" in key):
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot}],
-                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))}.",
-                )
-        for slot, potion in enumerate(potions, start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if defensive_danger and "duplication" in key and _has_duplication_potion_target(game, monsters, incoming_sensitive=True):
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot}],
-                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))} before a high-impact card.",
-                )
-        for slot, potion in enumerate(potions, start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if defensive_danger and "liquidmemories" in key:
-                target_card = _liquid_memories_target(game, monsters, incoming, current_block, current_hp)
-            else:
-                target_card = None
-            if target_card:
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot}],
-                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))} to recover {target_card.get('name', target_card.get('id'))}.",
-                )
-        for slot, potion in enumerate(potions, start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if defensive_danger and "skill" in key:
-                return Decision(
-                    [{"action": "use_potion", "potion_slot": slot}],
-                    f"Dangerous incoming damage; use {potion.get('name', potion.get('id'))} to look for defense.",
-                )
-        for slot, potion in enumerate(potions, start=1):
-            if potion.get("is_empty") or not potion.get("can_use", True):
-                continue
-            key = _potion_key(potion)
-            if any(
-                token in key
-                for token in (
-                    "fire",
-                    "explosive",
-                    "attack",
-                    "distilledchaos",
-                    "energy",
-                    "gambler",
-                    "gamblersbrew",
-                    "snecko",
-                    "swift",
-                    "power",
-                    "steroid",
-                    "strength",
-                    "dexterity",
-                    "speed",
-                    "blessingoftheforge",
-                    "cultist",
-                    "forge",
-                    "liquidbronze",
-                    "bronze",
-                    "thorn",
-                )
-            ):
-                action = {"action": "use_potion", "potion_slot": slot}
-                if potion.get("requires_target") or any(token in key for token in ("fire", "attack")):
-                    potion_target = _choose_target(monsters, 20)[0] if any(token in key for token in ("fire", "attack")) else target
-                    action["target_index"] = potion_target or target
-                return Decision([action], f"Emergency tempo; use {potion.get('name', potion.get('id'))}.")
-        return None
-
     def best_single_combat_action(self, game: dict[str, Any]) -> Decision:
         """Return the old single-card combat choice; useful for tests and debugging."""
         combat = game.get("combat_state", {})
         player = combat.get("player", {})
         hand = combat.get("hand", [])
         monsters = combat.get("monsters", [])
-        energy = int(player.get("current_energy", 0))
-        current_block = int(player.get("block", 0))
+        energy = _safe_int(player.get("current_energy"))
+        current_block = _safe_int(player.get("block"))
         current_hp = int(player.get("current_hp", game.get("current_hp", 0)) or 0)
         incoming = sum(_monster_attack(m) for m in monsters)
         hp_ratio = _hp_ratio(player)
@@ -501,6 +250,12 @@ class HeuristicPolicy:
         energy_setup = self._energy_setup_action(hand, monsters, energy, incoming, current_block)
         if energy_setup:
             return energy_setup
+
+        direct_lethal = self._single_enemy_direct_lethal_action(
+            hand, monsters, energy, incoming, current_block, current_hp, hp_ratio
+        )
+        if direct_lethal:
+            return direct_lethal
 
         best: tuple[float, dict[str, Any], str] | None = None
         for index, card in enumerate(hand, start=1):
@@ -553,20 +308,29 @@ class HeuristicPolicy:
 
     def _combat_local_search_action(self, game: dict[str, Any]) -> Decision | None:
         result = find_best_combat_sequence(game)
-        if result is None or len(result.sequence) < 2:
+        if result is None:
             return None
         combat = game.get("combat_state", {})
         player = combat.get("player", {})
         monsters = combat.get("monsters", [])
         current_hp = int(player.get("current_hp", game.get("current_hp", 0)) or 0)
         current_block = int(player.get("block", 0) or 0)
-        if current_hp > 0 and result.projected_loss >= current_hp and not result.avoided_lethal:
+        single_card_override = _single_card_search_override(result, game, monsters, current_hp)
+        if len(result.sequence) < 2 and not single_card_override:
+            return None
+        if (
+            current_hp > 0
+            and result.projected_loss >= current_hp
+            and not result.avoided_lethal
+            and not _desperate_single_card_search_override(result, game, current_hp)
+        ):
             return None
         if _is_gremlin_nob_fight(monsters) and not result.avoided_lethal:
             return None
         first_card = _card_for_action(game, result.first_action)
         if first_card and _search_first_attack_has_reflect_risk(first_card, result.first_action, monsters, player):
-            return None
+            if not (result.kills > 0 and current_hp > 0 and result.projected_loss < current_hp):
+                return None
         result_first_card_key = normalize_card_name(result.first_card_key)
         if (
             result.projected_loss >= result.initial_loss
@@ -579,6 +343,8 @@ class HeuristicPolicy:
         single = self.best_single_combat_action(game)
         single_action = single.actions[0] if single.actions else {}
         single_card_key = _card_key_for_action(game, single_action)
+        if single_action.get("action") == "play_card" and "direct lethal" in str(single.reason).lower():
+            return None
         loss_reduction = result.initial_loss - result.projected_loss
         modest_block_sequence = (
             loss_reduction >= 5
@@ -613,8 +379,37 @@ class HeuristicPolicy:
         ):
             return None
 
-        self._remember_search_sequence(game, result.sequence_card_keys, result.reason, loss_reduction)
-        return Decision([result.first_action], f"One-turn search: {result.reason}.")
+        self._remember_search_sequence(game, result.sequence_card_keys, result.reason, loss_reduction, result.initial_loss)
+        metadata = _search_result_metadata(result)
+        combat_value_shadow = self._combat_value_shadow_metadata(game, result)
+        if combat_value_shadow is not None:
+            metadata["combat_value_shadow"] = combat_value_shadow
+        return Decision(
+            [result.first_action],
+            f"One-turn search: {result.reason}.",
+            metadata={"search": metadata},
+        )
+
+    def _combat_value_shadow_metadata(self, game: dict[str, Any], result: Any) -> dict[str, Any] | None:
+        scorer = self._combat_value_scorer
+        if scorer is None or not scorer.available:
+            return None
+        row = _combat_value_shadow_row(game, result)
+        try:
+            predicted_value = scorer.score(row)
+        except Exception as exc:  # pragma: no cover - protects live play from optional model failures.
+            return {
+                "status": "error",
+                "path": str(scorer.model_path),
+                "error": str(exc)[:160],
+                "runtime_authority": False,
+            }
+        return {
+            "status": "scored",
+            "path": str(scorer.model_path),
+            "predicted_value": predicted_value,
+            "runtime_authority": False,
+        }
 
     def _remember_search_sequence(
         self,
@@ -622,6 +417,7 @@ class HeuristicPolicy:
         sequence_card_keys: tuple[str, ...],
         reason: str,
         loss_reduction: int,
+        initial_loss: int,
     ) -> None:
         self._clear_pending_search_sequence()
         remaining = tuple(normalize_card_name(key) for key in sequence_card_keys[1:])
@@ -629,8 +425,11 @@ class HeuristicPolicy:
             return
         hand = game.get("combat_state", {}).get("hand", [])
         monsters = game.get("combat_state", {}).get("monsters", [])
-        if not _sequence_has_block_followup(hand, remaining) and not (
-            _guardian_mode_shift_under_pressure(monsters) and _sequence_has_attack_followup(hand, remaining)
+        high_pressure_gain = loss_reduction >= 8 and initial_loss >= 18
+        if (
+            not high_pressure_gain
+            and not _sequence_has_block_followup(hand, remaining)
+            and not (_guardian_mode_shift_under_pressure(monsters) and _sequence_has_attack_followup(hand, remaining))
         ):
             return
         combat = game.get("combat_state", {})
@@ -665,6 +464,55 @@ class HeuristicPolicy:
                     f"Play {card.get('name')} to unlock more energy.",
                 )
         return None
+
+    def _single_enemy_direct_lethal_action(
+        self,
+        hand: list[dict[str, Any]],
+        monsters: list[dict[str, Any]],
+        energy: int,
+        incoming: int,
+        current_block: int,
+        current_hp: int,
+        hp_ratio: float,
+    ) -> Decision | None:
+        live_targets = [
+            (index, monster)
+            for index, monster in enumerate(monsters, start=1)
+            if not (monster.get("is_dead") or monster.get("is_gone")) and _monster_hp_with_block(monster) > 0
+        ]
+        if len(live_targets) != 1:
+            return None
+        target_index, target = live_targets[0]
+
+        best: tuple[float, dict[str, Any], dict[str, Any]] | None = None
+        for index, card in enumerate(hand, start=1):
+            if not card.get("is_playable", True):
+                continue
+            if int(card.get("cost", 0) or 0) < 0:
+                continue
+            cost = _card_energy_cost(card, energy)
+            if cost > energy:
+                continue
+            damage = _card_damage_value(card)
+            if damage <= 0 or not _attack_kills(target, damage):
+                continue
+            action = {"action": "play_card", "card_index": index}
+            if _card_key(card) not in AOE_ATTACK_CARDS and card.get("has_target", True):
+                action["target_index"] = target_index
+            reflect_damage = _attack_reflect_damage(monsters, action.get("target_index"), damage)
+            reflect_loss = max(0, reflect_damage - current_block - _card_block_value(card))
+            if reflect_loss >= current_hp:
+                continue
+            if _self_damage_fallback_too_risky(card, target, monsters, current_hp, incoming, current_block, hp_ratio):
+                continue
+            score = float(damage) - cost * 0.1
+            score -= SELF_DAMAGE_HP_COST_CARDS.get(_card_key(card), 0) * 0.5
+            if best is None or score > best[0]:
+                best = (score, action, card)
+
+        if best is None:
+            return None
+        return Decision([best[1]], f"Play {best[2].get('name')} for direct lethal.")
 
     def _pressure_attack_fallback(
         self,
@@ -764,6 +612,11 @@ class HeuristicPolicy:
                 reflect_loss = max(0, reflect_damage - reflect_buffer)
                 if reflect_loss >= current_hp:
                     score -= 120
+                elif pressure > 0 and not (target and _attack_stops_current_intent(target, damage)):
+                    if block <= reflect_damage:
+                        score -= reflect_damage * 4 + min(pressure, reflect_damage) * 3
+                    else:
+                        score -= reflect_damage * 1.5
                 elif hp_ratio < 0.35:
                     score -= reflect_damage * 2 + reflect_loss * 10
             if target and _bad_shallow_slime_split(card, target, damage, incoming, current_block, energy):
@@ -814,6 +667,7 @@ class HeuristicPolicy:
             score += self.memory.card_score(name, self.character) * 0.35
             if incoming > current_block + 10 and hp_ratio < 0.45:
                 score -= 10
+            score -= _high_pressure_power_penalty(name, pressure, current_hp, hp_ratio)
 
         if card.get("exhausts"):
             score += 2
@@ -826,267 +680,43 @@ class HeuristicPolicy:
         self_damage_cost = SELF_DAMAGE_HP_COST_CARDS.get(name, 0)
         if self_damage_cost:
             kills_target = bool(target and _attack_kills(target, damage))
+            ends_fight = bool(kills_target and _all_other_monsters_gone(monsters, target))
             if current_hp <= self_damage_cost:
                 score -= 200
+            elif current_hp - self_damage_cost <= 6 and not ends_fight:
+                score -= 24
+            elif hp_ratio < 0.20 and kills_target and not ends_fight:
+                score -= 14
             elif hp_ratio < 0.25 and not kills_target:
                 score -= 28
             elif hp_ratio < 0.45 and not kills_target:
                 score -= 16
+            if pressure > 0 and not ends_fight:
+                score -= _high_pressure_self_damage_penalty(self_damage_cost, pressure, current_hp, hp_ratio)
         if name in {"Feed", "Hand of Greed"} and target_index is not None:
             score += 5
 
         return score, target_index, f"Play {card.get('name')} with score {score:.1f}."
 
-    def _combat_reward(self, game: dict[str, Any]) -> Decision:
-        rewards = game.get("screen_state", {}).get("rewards", [])
-        for index, reward in enumerate(rewards, start=1):
-            rtype = reward.get("reward_type")
-            if rtype in {"GOLD", "STOLEN_GOLD", "RELIC"}:
-                return Decision([{"action": "choose", "choice_index": index}], f"Collect {rtype}.")
-            if rtype == "POTION" and _has_empty_potion_slot(game):
-                return Decision([{"action": "choose", "choice_index": index}], "Take potion into empty slot.")
-        for index, reward in enumerate(rewards, start=1):
-            if reward.get("reward_type") == "CARD":
-                return Decision([{"action": "choose", "choice_index": index}], "Open card reward.")
-        if rewards and all(reward.get("reward_type") == "POTION" for reward in rewards):
-            return Decision([{"action": "proceed"}], "Potion slots are full; skip remaining potion rewards.")
-        if game.get("screen_state", {}).get("rewards"):
-            return Decision([{"action": "choose", "choice_index": 1}], "Take remaining reward.")
-        return Decision([{"action": "proceed"}], "Rewards collected; proceed.")
-
-    def _card_reward(self, game: dict[str, Any]) -> Decision:
-        cards = game.get("screen_state", {}).get("cards", [])
-        if not cards:
-            return Decision([{"action": "skip"}], "No card reward cards visible.")
-        ranked = [
-            (self._card_reward_score(card, game), index, card)
-            for index, card in enumerate(cards, start=1)
-        ]
-        score, index, card = max(ranked, key=lambda item: item[0])
-        if score < 28 and game.get("floor", 0) > 8:
-            return Decision([{"action": "skip"}], f"Skip low-impact card reward; best was {card.get('name')} ({score:.1f}).")
-        name = card.get("id") or card.get("name", "")
-        display_name = card.get("name", name)
-        return Decision(
-            [{"action": "choose", "choice_index": index}],
-            f"Pick {display_name}; reward score {score:.1f}.",
-            learn_card_pick=name,
-        )
-
-    def _card_reward_score(self, card: dict[str, Any], game: dict[str, Any]) -> float:
-        name = _card_key(card)
-        score = self.memory.card_score(name, self.character)
-        if self.character == "IRONCLAD" and name in EXHAUST_PAYOFF_CARDS and not _deck_has_exhaust_enabler(game):
-            score -= EXHAUST_PAYOFF_UNSUPPORTED_PENALTY
-        if (
-            self.character == "IRONCLAD"
-            and name in SLOW_ENGINE_CARDS
-            and _is_early_act1(game)
-            and not _deck_has_exhaust_payoff(game)
-        ):
-            score -= EARLY_UNSUPPORTED_ENGINE_PENALTY
-        if (
-            self.character == "IRONCLAD"
-            and name in EXHAUST_ENABLER_CARDS
-            and _is_early_act1(game)
-            and not _deck_has_exhaust_payoff(game)
-        ):
-            enabler_count = _deck_exhaust_enabler_count(game)
-            if enabler_count >= 1:
-                score -= EARLY_DUPLICATE_EXHAUST_ENABLER_PENALTY
-            if enabler_count >= 2:
-                score -= EARLY_DUPLICATE_EXHAUST_ENABLER_PENALTY
-        if (
-            self.character == "IRONCLAD"
-            and _is_early_act1(game)
-            and _hp_ratio(game) < 0.55
-            and name in ACT1_LOW_HP_SURVIVAL_CARDS
-        ):
-            score += ACT1_LOW_HP_SURVIVAL_CARD_BONUS
-        if self.character == "IRONCLAD" and _act1_deck_needs_aoe(game) and name in AOE_ATTACK_CARDS:
-            score += ACT1_AOE_GAP_CARD_BONUS
-        if self.character == "IRONCLAD" and _act1_deck_needs_block_stabilizer(game):
-            if name in ACT1_BLOCK_STABILIZER_CARDS:
-                score += 16
-            if name in ATTACK_DUPLICATE_SOFT_CAPS and _deck_is_attack_heavy(game):
-                copies = _deck_card_count(game, name)
-                soft_cap = ATTACK_DUPLICATE_SOFT_CAPS[name]
-                if copies >= soft_cap:
-                    score -= 12 + max(0, copies - soft_cap) * 4
-        if self.character == "IRONCLAD" and _act1_boss_prep_needed(game):
-            if name in ACT1_BOSS_PREP_DAMAGE_CARDS:
-                score += ACT1_BOSS_PREP_DAMAGE_BONUS
-            if name in ACT1_BOSS_PREP_DEFENSE_CARDS:
-                score += ACT1_BOSS_PREP_DEFENSE_BONUS
-            if name in SLOW_ENGINE_CARDS and not _deck_has_exhaust_enabler(game):
-                score -= ACT1_BOSS_PREP_SLOW_ENGINE_PENALTY
-        return score
-
-    def _shop_screen(self, game: dict[str, Any]) -> Decision:
-        screen_state = game.get("screen_state", {})
-        gold = int(game.get("gold", 0) or 0)
-        if (
-            not screen_state.get("cards")
-            and not screen_state.get("relics")
-            and not screen_state.get("potions")
-            and screen_state.get("purge_available") is None
-        ):
-            return Decision([{"action": "wait", "ms": 250}], "Shop inventory is still loading.")
-        candidates: list[tuple[float, int, str]] = []
-        choice_index = 1
-
-        purge_cost = int(screen_state.get("purge_cost", 0) or 0)
-        if screen_state.get("purge_available") and purge_cost <= gold and _shop_should_purge_strike(game):
-            candidates.append((SHOP_PURGE_STRIKE_SCORE - purge_cost * 0.05, choice_index, f"purge Strike for {purge_cost} gold"))
-        if screen_state.get("purge_available") and purge_cost <= gold:
-            choice_index += 1
-
-        for card in screen_state.get("cards", []):
-            price = _shop_price(card)
-            if price > gold:
-                continue
-            score = self._card_reward_score(card, game) - price * 0.08
-            if score >= SHOP_BUY_CARD_THRESHOLD:
-                candidates.append((score, choice_index, f"buy {card.get('name', card.get('id'))} for {price} gold"))
-            choice_index += 1
-
-        for relic in screen_state.get("relics", []):
-            price = _shop_price(relic)
-            if price <= gold:
-                choice_index += 1
-
-        has_empty_potion_slot = _has_empty_potion_slot(game)
-        for potion in screen_state.get("potions", []):
-            price = _shop_price(potion)
-            if price > gold:
-                continue
-            key = _potion_key(potion)
-            if has_empty_potion_slot and any(token in key for token in SHOP_HIGH_IMPACT_POTION_TOKENS):
-                potion_score = SHOP_HIGH_IMPACT_POTION_SCORE
-                if _act1_boss_prep_needs_potion(game):
-                    potion_score += SHOP_BOSS_PREP_POTION_BONUS
-                candidates.append(
-                    (
-                        potion_score - price * 0.04,
-                        choice_index,
-                        f"buy {potion.get('name', potion.get('id'))} for {price} gold",
-                    )
-                )
-            choice_index += 1
-
-        if not candidates:
-            return Decision([{"action": "cancel"}], "No high-confidence shop purchase; leave.")
-        score, index, reason = max(candidates, key=lambda item: item[0])
-        return Decision([{"action": "choose", "choice_index": index}], f"Shop {reason}; score {score:.1f}.")
-
     def _map(self, game: dict[str, Any]) -> Decision:
-        return decide_route(game, self.memory)
-
-    def _rest(self, game: dict[str, Any]) -> Decision:
-        options = game.get("screen_state", {}).get("rest_options", [])
-        hp_ratio = _hp_ratio(game)
-        labels = [str(opt).lower() for opt in options]
-        rest_index = _rest_option_index(labels)
-        if game.get("room_phase") == "COMPLETE":
-            return Decision([{"action": "proceed"}], "Rest site complete.")
-        if rest_index and hp_ratio < 0.42:
-            return Decision([{"action": "choose", "choice_index": rest_index}], "Low HP; rest.")
-        if rest_index and _should_rest_before_act1_danger(game, hp_ratio):
-            return Decision([{"action": "choose", "choice_index": rest_index}], "Act 1 risk is high without potions; rest.")
-        for index, label in enumerate(labels, start=1):
-            if "smith" in label or "upgrade" in label:
-                return Decision([{"action": "choose", "choice_index": index}], "HP is safe; smith.")
-        return Decision([{"action": "choose", "choice_index": 1}], "Use first rest option.")
-
-    def _grid(self, game: dict[str, Any]) -> Decision:
-        screen_state = game.get("screen_state", {})
-        cards = screen_state.get("cards", [])
-        selected_cards = screen_state.get("selected_cards", [])
-        if screen_state.get("confirm_up") or _grid_selection_complete(screen_state):
-            return Decision([{"action": "confirm"}], "Confirm grid selection.")
-        if not cards:
-            return Decision([{"action": "confirm"}], "No grid cards; confirm.")
-        if screen_state.get("for_upgrade"):
-            ranked = [
-                (self.memory.upgrade_score(_card_key(card), self.character), index, card)
-                for index, card in enumerate(cards, start=1)
-            ]
-        elif screen_state.get("for_purge") or game.get("room_phase") == "EVENT":
-            selected_uuids = {card.get("uuid") for card in selected_cards if isinstance(card, dict) and card.get("uuid")}
-            selected_keys = {_card_key(card) for card in selected_cards if isinstance(card, dict)}
-            ranked = [
-                (-self.memory.card_score(_card_key(card), self.character), index, card)
-                for index, card in enumerate(cards, start=1)
-                if (not card.get("uuid") or card.get("uuid") not in selected_uuids)
-                and _card_key(card) not in selected_keys
-            ]
-        else:
-            ranked = [(self.memory.card_score(_card_key(card), self.character), index, card) for index, card in enumerate(cards, start=1)]
-        if not ranked:
-            return Decision([{"action": "confirm"}], "No unselected grid cards; confirm.")
-        score, index, card = max(ranked, key=lambda item: item[0])
-        return Decision([{"action": "choose", "choice_index": index}], f"Grid choose {card.get('name')} score {score:.1f}.")
-
-    def _hand_select(self, game: dict[str, Any]) -> Decision:
-        screen_state = game.get("screen_state", {})
-        hand = screen_state.get("hand", [])
-        max_cards = int(screen_state.get("max_cards", 1) or 1)
-        ranked = sorted(
-            ((self.memory.card_score(_card_key(card), self.character), index, card) for index, card in enumerate(hand, start=1)),
-            key=lambda item: item[0],
+        return decide_route(
+            game,
+            self.memory,
+            route_risk_model=self._route_risk_model,
+            model_authority=self._model_authority,
         )
-        drop = [index for _, index, _ in ranked[:max_cards]]
-        return Decision([{"action": "select_cards", "drop": drop}], f"Drop weakest hand cards {drop}.")
-
-    def _boss_reward(self, game: dict[str, Any]) -> Decision:
-        relics = game.get("screen_state", {}).get("relics", [])
-        if not relics:
-            return Decision([{"action": "skip"}], "No boss relics visible.")
-        ranked = [
-            (self.memory.relic_score(relic.get("name", relic.get("id", ""))), index, relic)
-            for index, relic in enumerate(relics, start=1)
-        ]
-        score, index, relic = max(ranked, key=lambda item: item[0])
-        return Decision([{"action": "choose", "choice_index": index}], f"Pick boss relic {relic.get('name')} score {score:.1f}.")
-
-    def _event(self, game: dict[str, Any]) -> Decision:
-        options = game.get("screen_state", {}).get("options", [])
-        enabled = [opt for opt in options if not opt.get("disabled")]
-        if not enabled:
-            return Decision([], "Event has no enabled option.")
-        hp_ratio = _hp_ratio(game)
-        current_hp = int(game.get("current_hp", 0) or 0)
-        best = None
-        for option in enabled:
-            text = _option_text(option)
-            score = 50
-            hp_loss = _event_hp_loss(text)
-            if _text_has_any(text, _SAFE_EVENT_WORDS):
-                score += 8
-            if _text_has_any(text, _HEAL_EVENT_WORDS):
-                score += 20 if hp_ratio < 0.65 else 5
-            if hp_loss > 0:
-                if current_hp and hp_loss >= current_hp:
-                    score -= 100
-                elif hp_ratio < 0.25:
-                    score -= 65
-                elif hp_ratio < 0.45:
-                    score -= 35
-                else:
-                    score -= min(20, hp_loss)
-            if _text_has_any(text, _DANGEROUS_EVENT_WORDS):
-                score -= 45 if hp_ratio < 0.45 else 12
-            if _text_has_any(text, _REWARD_EVENT_WORDS):
-                score += 15
-            if best is None or score > best[0]:
-                best = (score, option)
-        assert best is not None
-        choice_index = int(best[1].get("choice_index", 0)) + 1
-        return Decision([{"action": "choose", "choice_index": choice_index}], f"Event option score {best[0]:.1f}: {best[1].get('label')}.")
-
 
 def _monster_attack(monster: dict[str, Any]) -> int:
     return monster_attack_damage(monster)
+
+
+def _safe_int(value: Any) -> int:
+    try:
+        if isinstance(value, bool):
+            return int(value)
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
 
 
 def _is_gremlin_nob_fight(monsters: list[dict[str, Any]]) -> bool:
@@ -1166,107 +796,11 @@ def _deck_card_count(game: dict[str, Any], name: str) -> int:
     return _deck_card_names(game).count(normalize_card_name(name))
 
 
-def _shop_price(item: dict[str, Any]) -> int:
-    try:
-        return int(item.get("price", 9999) or 9999)
-    except (TypeError, ValueError):
-        return 9999
-
-
 def _shop_should_purge_strike(game: dict[str, Any]) -> bool:
     if int(game.get("act", 1) or 1) > 2:
         return False
-    return _deck_card_count(game, "Strike") + _deck_card_count(game, "Strike_R") >= 4
-
-
-def _act1_deck_needs_block_stabilizer(game: dict[str, Any]) -> bool:
-    if int(game.get("act", 1) or 1) != 1:
-        return False
-    floor = int(game.get("floor", 0) or 0)
-    if floor < 6 or floor > 15:
-        return False
-    names = _deck_card_names(game)
-    if not names:
-        return False
-    premium_block = sum(1 for name in names if name in ACT1_BLOCK_STABILIZER_CARDS)
-    total_block = sum(1 for name in names if name in BLOCK_CARDS)
-    if premium_block == 0:
-        return True
-    return floor >= 10 and total_block < max(5, int(len(names) * 0.30))
-
-
-def _act1_deck_needs_aoe(game: dict[str, Any]) -> bool:
-    if int(game.get("act", 1) or 1) != 1:
-        return False
-    floor = int(game.get("floor", 0) or 0)
-    if floor < 5 or floor > 15:
-        return False
-    names = _deck_card_names(game)
-    if not names:
-        return False
-    return not any(name in AOE_ATTACK_CARDS for name in names)
-
-
-def _act1_boss_prep_needed(game: dict[str, Any]) -> bool:
-    if int(game.get("act", 1) or 1) != 1:
-        return False
-    floor = int(game.get("floor", 0) or 0)
-    if floor < 7 or floor > 15:
-        return False
-    return (
-        _act1_deck_lacks_boss_output(game)
-        or _act1_deck_needs_block_stabilizer(game)
-        or not _has_usable_potion(game)
-    )
-
-
-def _act1_boss_prep_needs_potion(game: dict[str, Any]) -> bool:
-    if int(game.get("act", 1) or 1) != 1:
-        return False
-    floor = int(game.get("floor", 0) or 0)
-    if floor < 5 or floor > 15:
-        return False
-    if _has_usable_potion(game):
-        return False
-    return _act1_deck_lacks_boss_output(game) or _act1_deck_needs_block_stabilizer(game)
-
-
-def _act1_deck_lacks_boss_output(game: dict[str, Any]) -> bool:
-    names = _deck_card_names(game)
-    if not names:
-        return False
-    boss_cards = sum(1 for name in names if name in ACT1_BOSS_PREP_DAMAGE_CARDS and name not in {"Bash", "Strike"})
-    weak_or_strength_down = sum(1 for name in names if name in {"Clothesline", "Disarm", "Intimidate", "Shockwave", "Uppercut"})
-    return boss_cards < 2 and weak_or_strength_down <= 0
-
-
-def _deck_is_attack_heavy(game: dict[str, Any]) -> bool:
-    names = _deck_card_names(game)
-    attacks = sum(1 for name in names if name in IRONCLAD_ATTACK_CARDS)
-    blocks = sum(1 for name in names if name in BLOCK_CARDS)
-    return attacks >= blocks + 4
-
-
-def _is_early_act1(game: dict[str, Any]) -> bool:
-    return int(game.get("act", 1) or 1) == 1 and int(game.get("floor", 0) or 0) <= 6
-
-
-def _deck_has_exhaust_enabler(game: dict[str, Any]) -> bool:
-    for name in _deck_card_names(game):
-        if name in EXHAUST_ENABLER_CARDS:
-            return True
-    return False
-
-
-def _deck_exhaust_enabler_count(game: dict[str, Any]) -> int:
-    return sum(1 for name in _deck_card_names(game) if name in EXHAUST_ENABLER_CARDS)
-
-
-def _deck_has_exhaust_payoff(game: dict[str, Any]) -> bool:
-    for name in _deck_card_names(game):
-        if name in EXHAUST_PAYOFF_CARDS:
-            return True
-    return False
+    profile = profile_for(game.get("class"))
+    return sum(1 for card in game.get("deck", []) if profile.is_starter_strike(card)) >= 4
 
 
 def _card_energy_cost(card: dict[str, Any], current_energy: int) -> int:
@@ -1289,7 +823,7 @@ def _energy_setup_has_payoff(
     current_block: int,
 ) -> bool:
     name = _card_key(card)
-    gain = 2 if name == "Seeing Red" else 0
+    gain = ENERGY_SETUP_CARD_GAIN.get(name, 0)
     cost = _card_energy_cost(card, energy)
     energy_after_cost = max(0, energy - cost)
     energy_after_gain = energy_after_cost + gain
@@ -1459,6 +993,43 @@ def _self_damage_fallback_too_risky(
     return False
 
 
+def _high_pressure_power_penalty(name: str, pressure: int, current_hp: int, hp_ratio: float) -> float:
+    if pressure <= 0 or current_hp <= 0:
+        return 0.0
+    lethal_pressure = pressure >= current_hp
+    high_pressure = lethal_pressure or pressure >= max(14, int(current_hp * 0.30))
+    if not high_pressure:
+        return 0.0
+    penalty = min(34.0, 8.0 + pressure * 0.75)
+    projected_hp = current_hp - pressure
+    if lethal_pressure:
+        penalty += 36.0
+    if projected_hp <= max(10, int(current_hp * 0.25)):
+        penalty += 18.0
+    if hp_ratio < 0.45:
+        penalty += 10.0
+    if name in {"Demon Form", "Barricade", "Dark Embrace", "Inflame"}:
+        penalty += 8.0
+    if name == "Metallicize":
+        penalty *= 0.65
+    return penalty
+
+
+def _high_pressure_self_damage_penalty(self_damage_cost: int, pressure: int, current_hp: int, hp_ratio: float) -> float:
+    projected_loss = self_damage_cost + pressure
+    if projected_loss <= 0 or current_hp <= 0:
+        return 0.0
+    penalty = 0.0
+    if projected_loss >= max(12, int(current_hp * 0.30)):
+        penalty += min(42.0, 10.0 + projected_loss * 0.55)
+    remaining_hp = current_hp - projected_loss
+    if remaining_hp <= max(8, int(current_hp * 0.20)):
+        penalty += 22.0
+    if hp_ratio < 0.35:
+        penalty += 8.0
+    return penalty
+
+
 def _self_damage_engine_penalty(
     card: dict[str, Any],
     game: dict[str, Any],
@@ -1596,6 +1167,107 @@ def _is_hexaghost_fight(monsters: list[dict[str, Any]]) -> bool:
     return False
 
 
+def _is_act1_boss_fight(monsters: list[dict[str, Any]]) -> bool:
+    for monster in monsters:
+        if monster.get("is_dead") or monster.get("is_gone"):
+            continue
+        label = f"{monster.get('id', '')} {monster.get('name', '')}".replace(" ", "").lower()
+        if any(boss in label for boss in ("hexaghost", "slimeboss", "theguardian")):
+            return True
+    return False
+
+
+def _boss_single_card_search_override(
+    result: Any,
+    game: dict[str, Any],
+    monsters: list[dict[str, Any]],
+    current_hp: int,
+) -> bool:
+    if len(getattr(result, "sequence", ()) or ()) != 1:
+        return False
+    if not (_is_act1_boss_fight(monsters) or (_safe_int(game.get("act")) == 1 and _safe_int(game.get("floor")) >= 16)):
+        return False
+    loss_reduction = int(result.initial_loss or 0) - int(result.projected_loss or 0)
+    if bool(result.avoided_lethal):
+        return True
+    if int(result.attacks_removed or 0) >= 10:
+        return True
+    return loss_reduction >= max(10, int(max(current_hp, 1) * 0.25))
+
+
+def _single_card_search_override(
+    result: Any,
+    game: dict[str, Any],
+    monsters: list[dict[str, Any]],
+    current_hp: int,
+) -> bool:
+    if _boss_single_card_search_override(result, game, monsters, current_hp):
+        return True
+    if len(getattr(result, "sequence", ()) or ()) != 1:
+        return False
+    if bool(result.avoided_lethal):
+        return True
+    if current_hp <= 0:
+        return False
+    loss_reduction = int(result.initial_loss or 0) - int(result.projected_loss or 0)
+    high_pressure = int(result.initial_loss or 0) >= max(12, int(max(current_hp, 1) * 0.35))
+    if not high_pressure or loss_reduction <= 0:
+        return False
+    if int(result.attacks_removed or 0) >= 8 and loss_reduction >= 6:
+        return True
+    if _action_adds_block(game, result.first_action) and loss_reduction >= max(6, int(current_hp * 0.20)):
+        return True
+    return loss_reduction >= max(10, int(current_hp * 0.25)) and int(result.projected_loss or 0) <= max(
+        6, int(current_hp * 0.50)
+    )
+
+
+def _desperate_single_card_search_override(result: Any, game: dict[str, Any], current_hp: int) -> bool:
+    if len(getattr(result, "sequence", ()) or ()) != 1:
+        return False
+    if current_hp <= 0 or int(result.initial_loss or 0) < current_hp:
+        return False
+    loss_reduction = int(result.initial_loss or 0) - int(result.projected_loss or 0)
+    if loss_reduction < max(6, int(max(current_hp, 1) * 0.25)):
+        return False
+    return int(result.attacks_removed or 0) > 0 or _action_adds_block(game, result.first_action)
+
+
+def _fresh_search_supersedes_pending(
+    game: dict[str, Any],
+    pending: _PendingSearchSequence,
+    next_key: str,
+    incoming: int,
+    current_block: int,
+) -> bool:
+    combat = game.get("combat_state", {})
+    player = combat.get("player", {})
+    current_hp = int(player.get("current_hp", game.get("current_hp", 0)) or 0)
+    result = find_best_combat_sequence(game)
+    if result is None:
+        return False
+    result_first_key = normalize_card_name(result.first_card_key)
+    if result_first_key == normalize_card_name(next_key):
+        return False
+    if current_hp > 0 and result.projected_loss >= current_hp and not result.avoided_lethal:
+        return False
+
+    monsters = combat.get("monsters", [])
+    loss_reduction = int(result.initial_loss or 0) - int(result.projected_loss or 0)
+    if _boss_single_card_search_override(result, game, monsters, current_hp):
+        return True
+    if result.avoided_lethal:
+        return True
+    if result.attacks_removed > 0 and loss_reduction >= max(6, int(max(current_hp, 1) * 0.20)):
+        return True
+    if _action_adds_block(game, result.first_action) and loss_reduction >= max(6, int(max(current_hp, 1) * 0.20)):
+        return True
+    pressure = max(0, incoming - current_block)
+    if pressure >= max(12, int(max(current_hp, 1) * 0.30)) and result.projected_loss <= max(5, int(current_hp * 0.25)):
+        return True
+    return False
+
+
 def _dangerous_pressure(pressure: int, current_hp: int, hp_ratio: float) -> bool:
     if pressure <= 0:
         return False
@@ -1605,8 +1277,26 @@ def _dangerous_pressure(pressure: int, current_hp: int, hp_ratio: float) -> bool
 
 
 def _attack_kills(monster: dict[str, Any], damage: int) -> bool:
-    hp_with_block = int(monster.get("current_hp", 0)) + int(monster.get("block", 0))
-    return damage >= hp_with_block
+    hp_with_block = _monster_hp_with_block(monster)
+    return hp_with_block > 0 and damage >= hp_with_block
+
+
+def _all_other_monsters_gone(monsters: list[dict[str, Any]], target: dict[str, Any]) -> bool:
+    for monster in monsters:
+        if monster is target:
+            continue
+        if monster.get("is_dead") or monster.get("is_gone"):
+            continue
+        if _monster_hp_with_block(monster) > 0:
+            return False
+    return True
+
+
+def _monster_hp_with_block(monster: dict[str, Any]) -> int:
+    hp = monster.get("current_hp")
+    if hp is None:
+        hp = monster.get("hp", 0)
+    return max(0, int(hp or 0)) + max(0, int(monster.get("block", 0) or 0))
 
 
 def _monster_power_amount(monster: dict[str, Any], power_ids: set[str]) -> int:
@@ -1665,9 +1355,9 @@ def _attack_stops_current_intent(monster: dict[str, Any], damage: int) -> bool:
         return True
     if not _is_splitting_slime(monster):
         return False
-    hp = int(monster.get("current_hp", 0))
-    max_hp = int(monster.get("max_hp", 0))
-    block = int(monster.get("block", 0))
+    hp = _safe_int(monster.get("current_hp"))
+    max_hp = _safe_int(monster.get("max_hp"))
+    block = _safe_int(monster.get("block"))
     hp_loss = max(0, damage - block)
     return hp > max_hp / 2 and hp - hp_loss <= max_hp / 2
 
@@ -1730,9 +1420,7 @@ def _choose_target(monsters: list[dict[str, Any]], damage: int) -> tuple[int | N
     for index, monster in enumerate(monsters, start=1):
         if monster.get("is_dead") or monster.get("is_gone"):
             continue
-        hp_with_block = int(monster.get("current_hp", 0)) + int(monster.get("block", 0))
-        if hp_with_block <= 0:
-            hp_with_block = int(monster.get("hp", 0)) + int(monster.get("block", 0))
+        hp_with_block = _monster_hp_with_block(monster)
         attack = _monster_attack(monster)
         killable = _attack_kills(monster, damage)
         stops_attack = _attack_stops_current_intent(monster, damage)
@@ -1765,6 +1453,18 @@ def _card_for_action(game: dict[str, Any], action: dict[str, Any]) -> dict[str, 
         return None
     card = hand[index - 1]
     return card if isinstance(card, dict) else None
+
+
+def _same_play_card_action(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    if left.get("action") != "play_card" or right.get("action") != "play_card":
+        return False
+    if _safe_int(left.get("card_index")) != _safe_int(right.get("card_index")):
+        return False
+    left_target = _safe_int(left.get("target_index"))
+    right_target = _safe_int(right.get("target_index"))
+    if left_target > 0 and right_target > 0:
+        return left_target == right_target
+    return True
 
 
 def _action_adds_block(game: dict[str, Any], action: dict[str, Any]) -> bool:
@@ -1805,102 +1505,10 @@ def _highest_attack_target(monsters: list[dict[str, Any]]) -> int | None:
     return max(ranked)[1]
 
 
-def _potion_key(potion: dict[str, Any]) -> str:
-    return "".join(ch for ch in str(potion.get("id") or potion.get("name") or "").lower() if ch.isalnum())
-
-
 def _empty_hand_after_actions(combat: dict[str, Any]) -> bool:
     if int(combat.get("cards_discarded_this_turn", 0) or 0) > 0:
         return True
     return bool(combat.get("discard_pile") or combat.get("exhaust_pile"))
-
-
-_SAFE_EVENT_WORDS = (
-    "leave",
-    "ignore",
-    "skip",
-    "depart",
-    "continue",
-    "离开",
-    "離開",
-    "无视",
-    "無視",
-    "跳过",
-    "跳過",
-    "继续",
-    "繼續",
-)
-_HEAL_EVENT_WORDS = ("heal", "healing", "治疗", "治療", "回复", "恢復", "恢复")
-_DANGEROUS_EVENT_WORDS = (
-    "fight",
-    "combat",
-    "battle",
-    "attack",
-    "stomp",
-    "smash",
-    "lose",
-    "damage",
-    "curse",
-    "sacrifice",
-    "战斗",
-    "戰鬥",
-    "攻击",
-    "攻擊",
-    "踩扁",
-    "失去",
-    "损失",
-    "損失",
-    "伤害",
-    "傷害",
-    "诅咒",
-    "詛咒",
-    "献祭",
-    "獻祭",
-)
-_REWARD_EVENT_WORDS = (
-    "remove",
-    "upgrade",
-    "transform",
-    "relic",
-    "gold",
-    "card",
-    "移除",
-    "升级",
-    "升級",
-    "变化",
-    "變化",
-    "遗物",
-    "遺物",
-    "金币",
-    "金幣",
-    "卡牌",
-)
-
-
-def _option_text(option: dict[str, Any]) -> str:
-    parts = [
-        str(option.get("text", "")),
-        str(option.get("label", "")),
-        str(option.get("description", "")),
-    ]
-    return " ".join(parts).lower()
-
-
-def _event_hp_loss(text: str) -> int:
-    patterns = (
-        r"(?:lose|loss|pay|take)\s*(\d+)\s*(?:hp|health|life)",
-        r"(?:失去|损失|損失|支付)\s*(\d+)\s*(?:点)?\s*(?:生命|生命值|血|体力|體力)",
-        r"ʧȥ\s*(\d+)\s*������",
-    )
-    for pattern in patterns:
-        match = re.search(pattern, text, flags=re.IGNORECASE)
-        if match:
-            return int(match.group(1))
-    return 0
-
-
-def _text_has_any(text: str, words: tuple[str, ...]) -> bool:
-    return any(word.lower() in text for word in words)
 
 
 def _copy_monster(monster: dict[str, Any]) -> dict[str, Any]:
@@ -1914,10 +1522,10 @@ def _apply_attack(monsters: list[dict[str, Any]], target_index: int, damage: int
     if target_index < 1 or target_index > len(monsters):
         return False
     monster = monsters[target_index - 1]
-    block = int(monster.get("block", 0))
+    block = _safe_int(monster.get("block"))
     remaining_damage = max(0, damage - block)
     monster["block"] = max(0, block - damage)
-    monster["current_hp"] = max(0, int(monster.get("current_hp", 0)) - remaining_damage)
+    monster["current_hp"] = max(0, _safe_int(monster.get("current_hp")) - remaining_damage)
     if int(monster["current_hp"]) <= 0:
         del monsters[target_index - 1]
         return True
@@ -1936,10 +1544,6 @@ def _hp_ratio(obj: dict[str, Any]) -> float:
 
 def _has_empty_potion_slot(game: dict[str, Any]) -> bool:
     return any(potion.get("is_empty") for potion in game.get("potions", []))
-
-
-def _has_usable_potion(game: dict[str, Any]) -> bool:
-    return any(not potion.get("is_empty") for potion in game.get("potions", []))
 
 
 def _has_duplication_potion_target(
@@ -2042,85 +1646,62 @@ def _liquid_memories_card_score(
     return score
 
 
-def _has_elite_tempo_potion(game: dict[str, Any]) -> bool:
-    tempo_tokens = {
-        "attack",
-        "bronze",
-        "cultist",
-        "distilledchaos",
-        "duplication",
-        "essenceofsteel",
-        "explosive",
-        "fear",
-        "fire",
-        "forge",
-        "heartofiron",
-        "liquidbronze",
-        "power",
-        "steroid",
-        "strength",
-        "thorn",
-        "weak",
-        "blessingoftheforge",
+def _search_result_metadata(result: Any) -> dict[str, Any]:
+    return {
+        "type": "one_turn_search",
+        "sequence_card_keys": list(result.sequence_card_keys),
+        "first_card_key": result.first_card_key,
+        "score": result.score,
+        "initial_loss": result.initial_loss,
+        "projected_loss": result.projected_loss,
+        "kills": result.kills,
+        "attacks_removed": result.attacks_removed,
+        "avoided_lethal": result.avoided_lethal,
+        "retaliation_damage": getattr(result, "retaliation_damage", 0),
     }
-    for potion in game.get("potions", []):
-        if potion.get("is_empty"):
-            continue
-        key = _potion_key(potion)
-        if any(token in key for token in tempo_tokens):
-            return True
-    return False
 
 
-def _has_high_impact_elite_potion(game: dict[str, Any]) -> bool:
-    high_impact_tokens = {
-        "attack",
-        "cultist",
-        "distilledchaos",
-        "duplication",
-        "explosive",
-        "fear",
-        "fire",
-        "forge",
-        "power",
-        "steroid",
-        "strength",
-        "blessingoftheforge",
+def _combat_value_shadow_row(game: dict[str, Any], result: Any) -> dict[str, Any]:
+    combat = game.get("combat_state", {})
+    player = combat.get("player", {})
+    hand = combat.get("hand", [])
+    monsters = [
+        monster
+        for monster in combat.get("monsters", [])
+        if isinstance(monster, dict) and not (monster.get("is_dead") or monster.get("is_gone"))
+    ]
+    current_hp = _safe_int(player.get("current_hp", game.get("current_hp")))
+    max_hp = _safe_int(player.get("max_hp", game.get("max_hp"))) or max(current_hp, 1)
+    initial_loss = _safe_int(getattr(result, "initial_loss", 0))
+    projected_loss = _safe_int(getattr(result, "projected_loss", 0))
+    return {
+        "character": game.get("class"),
+        "ascension": game.get("ascension_level"),
+        "floor": game.get("floor"),
+        "act": game.get("act"),
+        "turn": combat.get("turn"),
+        "hp_ratio": current_hp / max(max_hp, 1),
+        "current_hp": current_hp,
+        "max_hp": max_hp,
+        "current_block": player.get("block"),
+        "current_energy": player.get("current_energy"),
+        "incoming": sum(_monster_attack(monster) for monster in monsters),
+        "hand_size": len(hand),
+        "hand_ids": [_card_key(card) for card in hand if isinstance(card, dict)],
+        "hand_names": [card.get("name") for card in hand if isinstance(card, dict)],
+        "playable_count": sum(1 for card in hand if not isinstance(card, dict) or card.get("is_playable", True)),
+        "enemy_count": len(monsters),
+        "enemy_ids": [monster.get("id") or monster.get("name") for monster in monsters],
+        "enemy_intents": [monster.get("intent") or monster.get("move") for monster in monsters],
+        "label_first_card_key": getattr(result, "first_card_key", None),
+        "label_sequence_card_keys": list(getattr(result, "sequence_card_keys", ()) or []),
+        "sequence_length": len(getattr(result, "sequence_card_keys", ()) or []),
+        "search_type": "one_turn_search",
+        "initial_loss": initial_loss,
+        "projected_loss": projected_loss,
+        "loss_delta": initial_loss - projected_loss,
+        "kills": getattr(result, "kills", 0),
+        "attacks_removed": getattr(result, "attacks_removed", 0),
+        "retaliation_damage": getattr(result, "retaliation_damage", 0),
+        "avoided_lethal": bool(getattr(result, "avoided_lethal", False)),
     }
-    for potion in game.get("potions", []):
-        if potion.get("is_empty"):
-            continue
-        key = _potion_key(potion)
-        if any(token in key for token in high_impact_tokens):
-            return True
-    return False
-
-
-def _grid_selection_complete(screen_state: dict[str, Any]) -> bool:
-    try:
-        needed = int(screen_state.get("num_cards", 0) or 0)
-    except (TypeError, ValueError):
-        needed = 0
-    if needed <= 0:
-        return False
-    selected = screen_state.get("selected_cards", [])
-    return isinstance(selected, list) and len(selected) >= needed
-
-
-def _rest_option_index(labels: list[str]) -> int | None:
-    for index, label in enumerate(labels, start=1):
-        if "rest" in label or "sleep" in label:
-            return index
-    return None
-
-
-def _should_rest_before_act1_danger(game: dict[str, Any], hp_ratio: float) -> bool:
-    if int(game.get("act", 1) or 1) != 1:
-        return False
-    if int(game.get("floor", 0) or 0) < 5:
-        return False
-    if hp_ratio >= 0.78:
-        return False
-    if hp_ratio < 0.70:
-        return True
-    return not _has_elite_tempo_potion(game)

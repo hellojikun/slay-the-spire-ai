@@ -18,7 +18,7 @@ from typing import Any, Iterable
 
 from .memory import normalize_card_name
 from .model import MODEL_PATH, CardValueModel
-from .training_manifest import clean_log_paths_from_manifest
+from .training_manifest import iter_log_files, resolve_log_training_source
 
 
 @dataclass
@@ -42,18 +42,32 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--backend", choices=["auto", "stats"], default="auto")
     args = parser.parse_args(argv)
 
-    examples = load_examples(clean_log_paths_from_manifest(args.manifest) if args.manifest else args.logs)
+    training_source = resolve_training_source(args.logs, args.manifest)
+    examples = load_examples(Path(path) for path in training_source["resolved_logs"])
     model = train_stats_model(examples, args.model_path, min_count=args.min_count, max_delta=args.max_delta)
+    model.metadata.update(
+        {
+            "training_source": training_source,
+            "training_source_quality": training_source["quality_policy"],
+        }
+    )
     model.metadata.update(hardware_metadata(args.backend))
     model.save()
+    print(f"Resolved {training_source['resolved_log_count']} log files from {training_source['mode']}.")
+    if training_source["warnings"]:
+        print(f"Training source warnings: {', '.join(training_source['warnings'])}.")
     print(f"Loaded {len(examples)} card-pick examples.")
     print(f"Wrote {len(model.card_deltas)} card deltas to {model.path}.")
     return 0
 
 
+def resolve_training_source(logs: Iterable[Path], manifest: Path | None = None) -> dict[str, Any]:
+    return resolve_log_training_source(logs, manifest)
+
+
 def load_examples(paths: Iterable[Path]) -> list[CardExample]:
     examples: list[CardExample] = []
-    for path in _iter_log_files(paths):
+    for path in iter_log_files(paths):
         examples.extend(_examples_from_log(path))
     return examples
 
@@ -167,14 +181,6 @@ def _reward(example: CardExample) -> float:
     if example.final_floor < 34:
         return -2.5 + progress * 2.0
     return 0.5 + progress * 2.0
-
-
-def _iter_log_files(paths: Iterable[Path]) -> Iterable[Path]:
-    for path in paths:
-        if path.is_dir():
-            yield from sorted(path.glob("*.jsonl"))
-        elif path.exists():
-            yield path
 
 
 def hardware_metadata(backend: str) -> dict[str, Any]:

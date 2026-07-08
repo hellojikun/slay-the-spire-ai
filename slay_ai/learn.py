@@ -5,11 +5,12 @@ from __future__ import annotations
 import argparse
 import json
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 from .memory import LEARNED_MEMORY, StrategyMemory
-from .training_manifest import clean_log_paths_from_manifest
+from .training_manifest import resolve_log_training_source
 
 
 @dataclass
@@ -38,9 +39,11 @@ def main(argv: list[str] | None = None) -> int:
             "runs": {"victories": 0, "deaths": 0, "total": 0},
             "card_picks": {},
             "recent_outcomes": [],
+            "learning_replays": [],
         }
 
-    logs = clean_log_paths_from_manifest(args.manifest) if args.manifest else list(_iter_log_files(args.logs))
+    training_source = resolve_log_training_source(args.logs, args.manifest)
+    logs = [Path(path) for path in training_source["resolved_logs"]]
     learned = [read_log(path) for path in logs]
     applied = 0
     skipped = 0
@@ -59,18 +62,36 @@ def main(argv: list[str] | None = None) -> int:
             episode_picks=item.picks,
         )
         applied += 1
+    record_learning_replay(memory, training_source, applied=applied, skipped=skipped)
     memory.save()
+    print(f"Resolved {training_source['resolved_log_count']} log files from {training_source['mode']}.")
+    if training_source["warnings"]:
+        print(f"Learning source warnings: {', '.join(training_source['warnings'])}.")
     print(f"Read {len(logs)} logs, applied {applied} completed runs, skipped {skipped} incomplete runs.")
     print(f"Updated learned memory: {memory.learned_path}")
     return 0
 
 
-def _iter_log_files(paths: Iterable[Path]) -> Iterable[Path]:
-    for path in paths:
-        if path.is_dir():
-            yield from sorted(path.glob("*.jsonl"))
-        elif path.exists():
-            yield path
+def record_learning_replay(
+    memory: StrategyMemory,
+    training_source: dict[str, Any],
+    *,
+    applied: int,
+    skipped: int,
+) -> None:
+    entry = {
+        "time": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "source": training_source,
+        "read_logs": training_source["resolved_log_count"],
+        "applied_completed_runs": applied,
+        "skipped_incomplete_runs": skipped,
+    }
+    memory.learned["last_learning_replay"] = entry
+    history = memory.learned.setdefault("learning_replays", [])
+    if not isinstance(history, list):
+        history = []
+        memory.learned["learning_replays"] = history
+    history.append(entry)
 
 
 def read_log(path: Path) -> LearnedLog:

@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "shadow_inputs": {
+    "mode": "shadow_rows",
+    "resolved_files": [
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\combat_search_labels.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\potion_tempo.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\pre_boss_deck_quality.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\route_risk.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\combat_search_labels.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\potion_tempo.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\pre_boss_deck_quality.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\route_risk.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\combat_search_labels.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\potion_tempo.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\pre_boss_deck_quality.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\route_risk.jsonl"
+    ],
+    "resolved_file_count": 12,
+    "categories": {
+      "route_risk": {
+        "row_count": 18,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\route_risk.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\route_risk.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\route_risk.jsonl"
+        ],
+        "resolved_file_count": 3,
+        "warnings": []
+      },
+      "potion_tempo": {
+        "row_count": 46,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\potion_tempo.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\potion_tempo.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\potion_tempo.jsonl"
+        ],
+        "resolved_file_count": 3,
+        "warnings": []
+      },
+      "pre_boss_deck_quality": {
+        "row_count": 0,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\pre_boss_deck_quality.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\pre_boss_deck_quality.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\pre_boss_deck_quality.jsonl"
+        ],
+        "resolved_file_count": 3,
+        "warnings": []
+      },
+      "combat_search": {
+        "row_count": 53,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\combat_search_labels.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\combat_search_labels.jsonl",
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\combat_search_labels.jsonl"
+        ],
+        "resolved_file_count": 3,
+        "warnings": []
+      }
+    },
+    "warnings": []
+  },
+  "advice_rows": {
+    "route_risk": 18,
+    "potion_tempo": 46,
+    "pre_boss_deck_quality": 0,
+    "combat_search": 53
+  },
+  "models_available": {
+    "route_risk": true,
+    "potion_tempo": true,
+    "pre_boss_deck_quality": false,
+    "combat_search": true
+  },
+  "model_training_source": {
+    "route_risk": {
+      "mode": "shadow_rows",
+      "category": "route_risk",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "route_risk.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\route_risk.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\route_risk.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\route_risk.jsonl"
+      ],
+      "resolved_file_count": 3,
+      "warnings": []
+    },
+    "potion_tempo": {
+      "mode": "shadow_rows",
+      "category": "potion_tempo",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "potion_tempo.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\potion_tempo.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\potion_tempo.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\potion_tempo.jsonl"
+      ],
+      "resolved_file_count": 3,
+      "warnings": []
+    },
+    "pre_boss_deck_quality": {},
+    "combat_search": {
+      "mode": "shadow_rows",
+      "category": "combat_search",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0"
+      ],
+      "missing_inputs": [],
+      "row_file": "combat_search_labels.jsonl",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_160545_ironclad_a0\\combat_search_labels.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_161645_ironclad_a0\\combat_search_labels.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_31\\live_shadow\\20260707_162319_ironclad_a0\\combat_search_labels.jsonl"
+      ],
+      "resolved_file_count": 3,
+      "warnings": []
+    }
+  },
+  "model_training_source_quality": {
+    "route_risk": "usable",
+    "potion_tempo": "usable",
+    "pre_boss_deck_quality": null,
+    "combat_search": "usable"
+  },
+  "model_load_quality": {
+    "route_risk": {
+      "files": 3,
+      "rows": 18,
+      "accepted": 18,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "potion_tempo": {
+      "files": 3,
+      "rows": 46,
+      "accepted": 46,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "pre_boss_deck_quality": {},
+    "combat_search": {
+      "files": 3,
+      "rows": 53,
+      "accepted": 53,
+      "skipped": 0,
+      "skip_reasons": {}
+    }
+  }
+}

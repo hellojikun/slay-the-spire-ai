@@ -1,0 +1,122 @@
+{
+  "accepted_rows": 116,
+  "example_count": 2,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 62,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        80
+      ],
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Strike_R",
+        "Slimed",
+        "Shrug It Off"
+      ],
+      "incoming": 35,
+      "initial_loss": 30,
+      "kills": 0,
+      "label_first_card_key": "Shrug It Off",
+      "label_sequence_card_keys": [
+        "Shrug It Off"
+      ],
+      "line": 93,
+      "loss_delta": 11,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11\\combat_search_labels.jsonl",
+      "projected_loss": 19,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_11\\20260707_043124_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 194,
+      "turn": 3
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 40,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        112
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Bash",
+        "Rampage",
+        "Defend_R",
+        "Burn"
+      ],
+      "incoming": 24,
+      "initial_loss": 26,
+      "kills": 0,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R"
+      ],
+      "line": 63,
+      "loss_delta": 10,
+      "max_hp": 87,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11\\combat_search_labels.jsonl",
+      "projected_loss": 16,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_11\\20260707_042125_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 218,
+      "turn": 9
+    }
+  ],
+  "excluded_rows": 2,
+  "exclusion_reasons": {
+    "missed_single_card_search": 2
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11\\combat_search_labels.jsonl"
+  ],
+  "rows": 118,
+  "source_quality": {
+    "pristine": 87,
+    "usable_with_recoveries": 31
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=118 excluded=2 missed_single_card_search=2",
+  "version": 1,
+  "warnings": []
+}

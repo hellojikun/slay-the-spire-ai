@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from .memory import StrategyMemory, normalize_card_name
+from .model import RouteRiskModel
 from .policy_decision import Decision
 from .readiness import act1_readiness
 
@@ -18,7 +19,16 @@ ACT1_ELITE_CHAIN_LOW_BUFFER_PENALTY = 38.0
 ACT1_REST_FORCED_ELITE_RESOURCE_PENALTY_CAP = 64.0
 ACT2_LOW_HP_MONSTER_OVER_QUESTION_PENALTY = 35.0
 ACT2_INJURED_MONSTER_OVER_QUESTION_PENALTY = 18.0
+ACT2_INJURED_COMBAT_OVER_SAFE_QUESTION_PENALTY = 24.0
+ACT2_INJURED_COMBAT_OVER_RECOVERY_PENALTY = 42.0
+ACT2_NO_REST_FORCED_ELITE_OVER_SAFE_QUESTION_PENALTY = 44.0
 ACT2_LOW_HP_ROUTE_RISK_CAP = 95.0
+ACT2_LOW_MAX_HP_ELITE_PENALTY = 46.0
+ROUTE_MODEL_ASSIST_MIN_RISK = 0.55
+ROUTE_MODEL_ASSIST_MAX_PENALTY = 30.0
+ROUTE_MODEL_SMALL_SAMPLE_MAX_PENALTY = 12.0
+ROUTE_MODEL_SMALL_SAMPLE_THRESHOLD = 30
+ROUTE_MODEL_PILOT_MAX_PENALTY = 45.0
 ROUTE_LOOKAHEAD_HORIZON = 6
 ROUTE_PATH_CAP = 128
 ROUTE_CHILD_KEYS = ("children", "next_nodes", "edges", "connected_nodes", "connections", "links")
@@ -36,7 +46,13 @@ ACT1_BLOCK_STABILIZER_CARDS = {
 }
 
 
-def decide_route(game: dict[str, Any], memory: StrategyMemory) -> Decision:
+def decide_route(
+    game: dict[str, Any],
+    memory: StrategyMemory,
+    *,
+    route_risk_model: RouteRiskModel | None = None,
+    model_authority: str = "shadow",
+) -> Decision:
     nodes = game.get("screen_state", {}).get("next_nodes", [])
     hp_ratio = _hp_ratio(game)
     floor = int(game.get("floor", 0))
@@ -44,7 +60,8 @@ def decide_route(game: dict[str, Any], memory: StrategyMemory) -> Decision:
         return Decision([{"action": "choose", "choice_index": 1}], "Boss node available.")
     if not nodes:
         return Decision([], "No map choices visible.")
-    has_rest_choice = any(str(node.get("symbol", "")) == "R" for node in nodes)
+    can_rest_heal = _can_rest_heal(game)
+    has_rest_choice = can_rest_heal and any(str(node.get("symbol", "")) == "R" for node in nodes)
     has_shop_choice = any(str(node.get("symbol", "")) == "$" for node in nodes)
     has_question_choice = any(str(node.get("symbol", "")) == "?" for node in nodes)
     has_safe_choice = has_rest_choice or has_shop_choice or any(str(node.get("symbol", "")) == "?" for node in nodes)
@@ -64,7 +81,17 @@ def decide_route(game: dict[str, Any], memory: StrategyMemory) -> Decision:
             has_question_choice,
         )
         lookahead_adjustment, lookahead_features = _route_lookahead_adjustment(game, node, hp_ratio, route_context)
-        score = base_score + lookahead_adjustment
+        score_before_model = base_score + lookahead_adjustment
+        model_adjustment, model_features = _route_model_adjustment(
+            game,
+            node,
+            index,
+            score_before_model,
+            lookahead_features,
+            route_risk_model,
+            model_authority,
+        )
+        score = score_before_model + model_adjustment
         option_record = {
             "choice_index": index,
             "symbol": node.get("symbol"),
@@ -72,10 +99,13 @@ def decide_route(game: dict[str, Any], memory: StrategyMemory) -> Decision:
             "y": node.get("y"),
             "base_score": round(base_score, 1),
             "lookahead_adjustment": round(lookahead_adjustment, 1),
+            "model_adjustment": round(model_adjustment, 1),
             "score": round(score, 1),
         }
         if lookahead_features:
             option_record["lookahead"] = lookahead_features
+        if model_features:
+            option_record["model_assist"] = model_features
         route_options.append(option_record)
         ranked.append((score, index, node, option_record))
     score, index, node, selected_record = max(ranked, key=lambda item: item[0])
@@ -91,6 +121,12 @@ def decide_route(game: dict[str, Any], memory: StrategyMemory) -> Decision:
         reason = (
             f"Route to {node.get('symbol')} at x={node.get('x')} score {score:.1f} "
             f"(map risk {selected_record['lookahead_adjustment']:+.1f})."
+        )
+    if selected_record.get("model_adjustment"):
+        reason = (
+            f"Route to {node.get('symbol')} at x={node.get('x')} score {score:.1f} "
+            f"(map risk {selected_record['lookahead_adjustment']:+.1f}, "
+            f"model risk {selected_record['model_adjustment']:+.1f})."
         )
     return Decision([{"action": "choose", "choice_index": index}], reason)
 
@@ -183,6 +219,134 @@ def _map_node_score(
     return score
 
 
+def _route_model_adjustment(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    choice_index: int,
+    route_score: float,
+    lookahead_features: dict[str, Any],
+    route_risk_model: RouteRiskModel | None,
+    model_authority: str,
+) -> tuple[float, dict[str, Any]]:
+    authority = str(model_authority or "shadow").lower()
+    if authority not in {"assist", "pilot"}:
+        return 0.0, {}
+    if route_risk_model is None or not route_risk_model.feature_weights:
+        return 0.0, {
+            "status": "model_missing",
+            "model_type": "route_risk",
+            "runtime_authority": False,
+            "runtime_authority_level": authority,
+            "decision_authority": authority,
+            "direct_mcp_control": False,
+            "does_not_control_live_mcp": True,
+        }
+
+    row = _route_model_row(game, choice_node, choice_index, route_score, lookahead_features)
+    try:
+        risk = float(route_risk_model.score_row(row))
+    except Exception as exc:  # pragma: no cover - live-play safety guard for optional model scoring.
+        return 0.0, {
+            "status": "error",
+            "model_type": "route_risk",
+            "runtime_authority": False,
+            "runtime_authority_level": authority,
+            "decision_authority": authority,
+            "direct_mcp_control": False,
+            "error": str(exc)[:160],
+            "does_not_control_live_mcp": True,
+        }
+
+    if risk < ROUTE_MODEL_ASSIST_MIN_RISK:
+        penalty = 0.0
+    else:
+        cap = ROUTE_MODEL_PILOT_MAX_PENALTY if authority == "pilot" else ROUTE_MODEL_ASSIST_MAX_PENALTY
+        examples = _safe_int(route_risk_model.metadata.get("examples"))
+        if authority == "assist" and 0 < examples < ROUTE_MODEL_SMALL_SAMPLE_THRESHOLD:
+            cap = min(cap, ROUTE_MODEL_SMALL_SAMPLE_MAX_PENALTY)
+        penalty = -min(cap, (risk - ROUTE_MODEL_ASSIST_MIN_RISK) * 80.0)
+    examples = route_risk_model.metadata.get("examples")
+    source_quality = route_risk_model.metadata.get("training_source_quality")
+    return penalty, {
+        "status": "scored",
+        "model_type": "route_risk",
+        "risk_score": round(risk, 4),
+        "penalty": round(penalty, 1),
+        "threshold": ROUTE_MODEL_ASSIST_MIN_RISK,
+        "runtime_authority": False,
+        "runtime_authority_level": authority,
+        "decision_authority": authority,
+        "decision_influence": "route_score_adjustment",
+        "model_examples": examples,
+        "model_training_source_quality": source_quality,
+        "small_sample_cap": ROUTE_MODEL_SMALL_SAMPLE_MAX_PENALTY
+        if authority == "assist" and 0 < _safe_int(examples) < ROUTE_MODEL_SMALL_SAMPLE_THRESHOLD
+        else None,
+        "direct_mcp_control": False,
+        "does_not_control_live_mcp": True,
+    }
+
+
+def _route_model_row(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    choice_index: int,
+    route_score: float,
+    lookahead_features: dict[str, Any],
+) -> dict[str, Any]:
+    row: dict[str, Any] = {
+        "floor": _safe_int(game.get("floor")),
+        "act": _safe_int(game.get("act"), default=1),
+        "hp_ratio": _hp_ratio(game),
+        "selected_choice": choice_index,
+        "selected_symbol": str(choice_node.get("symbol", "")),
+        "route_score": route_score,
+        "forced_elite_within_3": bool(lookahead_features.get("forced_elite_within_3")),
+        "forced_combat_within_2": bool(lookahead_features.get("forced_combat_within_2")),
+        "nearest_rest": lookahead_features.get("nearest_rest"),
+        "nearest_shop": lookahead_features.get("nearest_shop"),
+        "readiness_penalty": lookahead_features.get("readiness_penalty", 0.0),
+    }
+    if int(game.get("act", 1) or 1) == 1 and lookahead_features.get("map_match"):
+        readiness = _act1_route_readiness(game, choice_node, lookahead_features)
+        scores = readiness.get("scores") if isinstance(readiness.get("scores"), dict) else {}
+        for key, value in scores.items():
+            if _is_numeric_like(value):
+                row[f"readiness_score_{key}"] = _numeric(value)
+        features = readiness.get("features") if isinstance(readiness.get("features"), dict) else {}
+        for key, value in features.items():
+            if not _is_numeric_like(value):
+                continue
+            number = _numeric(value)
+            if _route_model_deck_feature(key):
+                row[f"deck_{key}"] = number
+            if _route_model_potion_feature(key):
+                row[key if key.startswith("potion_") else f"potion_{key}"] = number
+    return row
+
+
+def _route_model_deck_feature(key: str) -> bool:
+    return key in {
+        "deck_size",
+        "known_cards",
+        "unknown_cards",
+        "attack_cards",
+        "block_cards",
+        "premium_block_cards",
+        "aoe_cards",
+        "weak_sources",
+        "vulnerable_sources",
+        "scaling_sources",
+        "risky_engine_cards",
+        "total_base_damage",
+        "total_base_block",
+    }
+
+
+def _route_model_potion_feature(key: str) -> bool:
+    return key == "potion_count" or key.startswith("potion_") or key.endswith("_potions")
+
+
 def _route_lookahead_adjustment(
     game: dict[str, Any],
     choice_node: dict[str, Any],
@@ -225,12 +389,19 @@ def _route_lookahead_adjustment(
             adjustment -= ACT1_DEEP_FORCED_ELITE_NO_BUFFER_PENALTY
         elif (nearest_rest is not None and nearest_rest <= 4) or (nearest_shop is not None and nearest_shop <= 3):
             adjustment += ACT1_FORCED_ELITE_BUFFER_BONUS * 0.5
-    if hp_ratio < 0.50 and nearest_rest is not None and nearest_rest <= 2:
+    can_rest_heal = _can_rest_heal(game)
+    if can_rest_heal and hp_ratio < 0.50 and nearest_rest is not None and nearest_rest <= 2:
         adjustment += 35
     if hp_ratio < 0.50 and nearest_shop is not None and nearest_shop <= 2 and int(game.get("gold", 0) or 0) >= 80:
         adjustment += 25
 
-    act2_adjustment, act2_features = _route_act2_risk_adjustment(game, choice_node, hp_ratio, features)
+    act2_adjustment, act2_features = _route_act2_risk_adjustment(
+        game,
+        choice_node,
+        hp_ratio,
+        features,
+        route_context,
+    )
     adjustment += act2_adjustment
     features.update(act2_features)
 
@@ -255,10 +426,9 @@ def _route_act2_risk_adjustment(
     choice_node: dict[str, Any],
     hp_ratio: float,
     lookahead_features: dict[str, Any],
+    route_context: dict[str, Any] | None = None,
 ) -> tuple[float, dict[str, Any]]:
     if int(game.get("act", 1) or 1) < 2 or not lookahead_features.get("map_match"):
-        return 0.0, {}
-    if hp_ratio >= 0.50 or lookahead_features.get("forced_elite_within_3"):
         return 0.0, {}
     symbol = str(choice_node.get("symbol", "")).upper()
     if symbol in {"$", "R", "T"}:
@@ -267,14 +437,79 @@ def _route_act2_risk_adjustment(
     forced_combat = bool(lookahead_features.get("forced_combat_within_2")) or immediate_combat
     if not forced_combat:
         return 0.0, {}
+    low_max_hp_elite_adjustment, low_max_hp_elite_features = _route_act2_low_max_hp_elite_adjustment(
+        game,
+        symbol,
+        lookahead_features,
+    )
+    if (
+        hp_ratio < 0.85
+        and not _can_rest_heal(game)
+        and (lookahead_features.get("forced_elite_within_3") or lookahead_features.get("forced_elite_within_5"))
+        and _has_act2_safer_question_choice(game, choice_node, route_context, lookahead_features)
+    ):
+        penalty = -ACT2_NO_REST_FORCED_ELITE_OVER_SAFE_QUESTION_PENALTY + low_max_hp_elite_adjustment
+        flags = ["act2_no_rest_forced_elite_safe_question_available"]
+        flags.extend(low_max_hp_elite_features.get("act2_route_flags", []))
+        return penalty, {
+            "act2_route_penalty": round(penalty, 1),
+            "act2_route_flags": flags,
+            "act2_route_gaps": [],
+            **low_max_hp_elite_features,
+        }
+    if hp_ratio >= 0.50:
+        if (
+            hp_ratio < 0.70
+            and _has_act2_safer_question_choice(game, choice_node, route_context, lookahead_features)
+        ):
+            penalty = -ACT2_INJURED_COMBAT_OVER_SAFE_QUESTION_PENALTY + low_max_hp_elite_adjustment
+            flags = ["act2_injured_safer_question_available"]
+            flags.extend(low_max_hp_elite_features.get("act2_route_flags", []))
+            return penalty, {
+                "act2_route_penalty": round(penalty, 1),
+                "act2_route_flags": flags,
+                "act2_route_gaps": [],
+                **low_max_hp_elite_features,
+            }
+        if (
+            hp_ratio < 0.65
+            and immediate_combat
+            and _has_act2_recovery_choice(game, choice_node, route_context)
+            and (
+                lookahead_features.get("forced_elite_within_3")
+                or lookahead_features.get("forced_elite_within_5")
+                or lookahead_features.get("nearest_rest") is None
+                or lookahead_features.get("nearest_rest") > 1
+            )
+        ):
+            penalty = -ACT2_INJURED_COMBAT_OVER_RECOVERY_PENALTY + low_max_hp_elite_adjustment
+            flags = ["act2_injured_recovery_available"]
+            if lookahead_features.get("forced_elite_within_3") or lookahead_features.get("forced_elite_within_5"):
+                flags.append("act2_injured_forced_elite_chain")
+            flags.extend(low_max_hp_elite_features.get("act2_route_flags", []))
+            return penalty, {
+                "act2_route_penalty": round(penalty, 1),
+                "act2_route_flags": flags,
+                "act2_route_gaps": [],
+                **low_max_hp_elite_features,
+            }
+        if low_max_hp_elite_adjustment:
+            return low_max_hp_elite_adjustment, low_max_hp_elite_features
+        return 0.0, {}
+    if lookahead_features.get("forced_elite_within_3"):
+        return 0.0, {}
 
     nearest_rest = lookahead_features.get("nearest_rest")
     nearest_shop = lookahead_features.get("nearest_shop")
-    close_rest = nearest_rest is not None and nearest_rest <= 1
+    can_rest_heal = _can_rest_heal(game)
+    close_rest = can_rest_heal and nearest_rest is not None and nearest_rest <= 1
     close_shop = nearest_shop is not None and nearest_shop <= 1 and int(game.get("gold", 0) or 0) >= 80
     flags: list[str] = []
     gaps: list[str] = []
     penalty = 0.0
+    if low_max_hp_elite_adjustment:
+        penalty += low_max_hp_elite_adjustment
+        flags.extend(low_max_hp_elite_features.get("act2_route_flags", []))
 
     if hp_ratio < 0.35:
         flags.append("act2_critical_hp_forced_combat")
@@ -303,6 +538,107 @@ def _route_act2_risk_adjustment(
         "act2_route_flags": flags,
         "act2_route_gaps": gaps,
     }
+
+
+def _route_act2_low_max_hp_elite_adjustment(
+    game: dict[str, Any],
+    symbol: str,
+    lookahead_features: dict[str, Any],
+) -> tuple[float, dict[str, Any]]:
+    elite_path = symbol == "E" or bool(lookahead_features.get("forced_elite_within_3"))
+    if not elite_path:
+        return 0.0, {}
+    current_hp = float(game.get("current_hp", 0) or 0)
+    max_hp = float(game.get("max_hp", current_hp) or current_hp or 0)
+    if max_hp <= 0:
+        return 0.0, {}
+    low_max_hp = max_hp <= 60
+    thin_absolute_buffer = current_hp <= 62 and max_hp <= 66
+    if not (low_max_hp or thin_absolute_buffer):
+        return 0.0, {}
+    penalty = -ACT2_LOW_MAX_HP_ELITE_PENALTY
+    if symbol == "E":
+        penalty -= 12.0
+    if not _has_act2_emergency_potion(game):
+        penalty -= 10.0
+    nearest_rest = lookahead_features.get("nearest_rest")
+    if not _can_rest_heal(game) or nearest_rest is None or nearest_rest > 1:
+        penalty -= 8.0
+    flags = ["act2_low_max_hp_elite_path"]
+    if symbol == "E":
+        flags.append("act2_low_max_hp_immediate_elite")
+    return penalty, {
+        "act2_route_penalty": round(penalty, 1),
+        "act2_route_flags": flags,
+        "act2_low_max_hp_elite_penalty": round(penalty, 1),
+    }
+
+
+def _has_act2_safer_question_choice(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    route_context: dict[str, Any] | None,
+    choice_features: dict[str, Any],
+) -> bool:
+    if route_context is None:
+        return False
+    choice_id = _find_route_node_id(route_context, choice_node)
+    for node in game.get("screen_state", {}).get("next_nodes", []):
+        if not isinstance(node, dict) or str(node.get("symbol", "")).upper() != "?":
+            continue
+        question_id = _find_route_node_id(route_context, node)
+        if question_id is None or question_id == choice_id:
+            continue
+        question_paths = _enumerate_symbol_paths(route_context, question_id, ROUTE_LOOKAHEAD_HORIZON)
+        if not question_paths:
+            continue
+        question_features = _route_path_features(question_paths)
+        if question_features.get("forced_elite_within_3"):
+            continue
+        question_forced_combat = bool(question_features.get("forced_combat_within_2"))
+        choice_forced_combat = bool(choice_features.get("forced_combat_within_2")) or str(
+            choice_node.get("symbol", "")
+        ).upper() in {"M", "E"}
+        can_rest_heal = _can_rest_heal(game)
+        close_rest = (
+            can_rest_heal
+            and question_features.get("nearest_rest") is not None
+            and question_features.get("nearest_rest") <= 1
+        )
+        close_shop = (
+            question_features.get("nearest_shop") is not None
+            and question_features.get("nearest_shop") <= 1
+            and int(game.get("gold", 0) or 0) >= 80
+        )
+        if choice_forced_combat and (not question_forced_combat or close_rest or close_shop):
+            return True
+    return False
+
+
+def _has_act2_recovery_choice(
+    game: dict[str, Any],
+    choice_node: dict[str, Any],
+    route_context: dict[str, Any] | None,
+) -> bool:
+    if route_context is None:
+        return False
+    choice_id = _find_route_node_id(route_context, choice_node)
+    gold = int(game.get("gold", 0) or 0)
+    for node in game.get("screen_state", {}).get("next_nodes", []):
+        if not isinstance(node, dict):
+            continue
+        symbol = str(node.get("symbol", "")).upper()
+        if symbol == "$" and gold < 80:
+            continue
+        if symbol == "R" and not _can_rest_heal(game):
+            continue
+        if symbol not in {"$", "R"}:
+            continue
+        node_id = _find_route_node_id(route_context, node)
+        if node_id is None or node_id == choice_id:
+            continue
+        return True
+    return False
 
 
 def _route_act1_rest_commitment_adjustment(
@@ -395,6 +731,12 @@ def _route_readiness_adjustment(
             penalty -= 10.0
         if "hallway_lacks_premium_block" in flags:
             penalty -= 10.0
+    if "act1_late_forced_hallway_frontload_gap" in flags:
+        penalty -= 18.0
+    if "act1_late_forced_hallway_aoe_gap" in flags:
+        penalty -= 12.0
+    if "act1_late_forced_hallway_no_tempo_potion" in flags:
+        penalty -= 10.0
 
     penalty = max(-85.0, penalty)
     if not penalty:
@@ -653,6 +995,42 @@ def _hp_ratio(obj: dict[str, Any]) -> float:
     return current / max(max_hp, 1.0)
 
 
+def _safe_int(value: Any, default: int = 0) -> int:
+    try:
+        if value is None:
+            return default
+        if isinstance(value, bool):
+            return int(value)
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _is_numeric_like(value: Any) -> bool:
+    if isinstance(value, bool):
+        return True
+    if isinstance(value, (int, float)):
+        return True
+    if value is None or isinstance(value, (list, dict)):
+        return False
+    try:
+        float(value)
+        return True
+    except (TypeError, ValueError):
+        return False
+
+
+def _numeric(value: Any) -> float:
+    if isinstance(value, bool):
+        return 1.0 if value else 0.0
+    try:
+        if value is None:
+            return 0.0
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def _act1_deck_lacks_premium_block(game: dict[str, Any]) -> bool:
     if int(game.get("act", 1) or 1) != 1:
         return False
@@ -732,6 +1110,31 @@ def _has_high_impact_elite_potion(game: dict[str, Any]) -> bool:
         if any(token in key for token in high_impact_tokens):
             return True
     return False
+
+
+def _can_rest_heal(game: dict[str, Any]) -> bool:
+    for relic in _iter_relic_items(game):
+        key = _relic_key(relic)
+        if key in {"coffeedripper", "coffee dripper"} or "coffeedripper" in key:
+            return False
+    return True
+
+
+def _iter_relic_items(game: dict[str, Any]) -> list[Any]:
+    items: list[Any] = []
+    for field in ("relic_items", "relics"):
+        raw = game.get(field)
+        if isinstance(raw, list):
+            items.extend(raw)
+    return items
+
+
+def _relic_key(relic: Any) -> str:
+    if isinstance(relic, dict):
+        raw = relic.get("id") or relic.get("name") or relic.get("relic_id") or ""
+    else:
+        raw = relic
+    return "".join(ch for ch in str(raw).lower() if ch.isalnum())
 
 
 def _has_act2_emergency_potion(game: dict[str, Any]) -> bool:

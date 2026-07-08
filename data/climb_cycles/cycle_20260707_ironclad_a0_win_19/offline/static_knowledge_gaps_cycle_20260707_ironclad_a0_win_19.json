@@ -1,0 +1,110 @@
+{
+  "entities": {
+    "bosses": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "monsters": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "items": [
+        {
+          "count": 150,
+          "entity": "White Beast Statue",
+          "normalized_keys": [
+            "whitebeaststatue",
+            "\u767d\u517d\u96d5\u50cf"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_19\\20260707_085619_ironclad_a0.jsonl",
+              "step": 54
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_19\\20260707_085619_ironclad_a0.jsonl",
+              "step": 55
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_19\\20260707_085619_ironclad_a0.jsonl",
+              "step": 56
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_19\\20260707_085619_ironclad_a0.jsonl",
+              "step": 57
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_19\\20260707_085619_ironclad_a0.jsonl",
+              "step": 58
+            }
+          ]
+        }
+      ],
+      "occurrences": 150,
+      "unique": 1
+    }
+  },
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_19\\20260707_085619_ironclad_a0.jsonl"
+  ],
+  "knowledge_dir": "data\\static_knowledge",
+  "knowledge_source_counts": {
+    "bosses": 3,
+    "cards": 75,
+    "monsters": 29,
+    "potions": 30,
+    "relics": 44
+  },
+  "observed_aliases": {
+    "cards": 17
+  },
+  "read_errors": [],
+  "resolved_log_count": 1,
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_19\\20260707_085619_ironclad_a0.jsonl"
+  ],
+  "status_line": "static_knowledge_gaps logs=1 missing=150 relics=150/1",
+  "total_missing_occurrences": 150,
+  "totals": {
+    "bosses": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "monsters": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "occurrences": 150,
+      "unique": 1
+    }
+  },
+  "version": 1,
+  "warnings": []
+}

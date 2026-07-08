@@ -1,0 +1,157 @@
+{
+  "current_policy_matches_actual": 1,
+  "current_policy_matches_label": 0,
+  "current_policy_other": 1,
+  "example_count": 2,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "actual_action": {
+        "action": "play_card"
+      },
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 40,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        112
+      ],
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Bash",
+        "Rampage",
+        "Defend_R",
+        "Burn"
+      ],
+      "incoming": 24,
+      "initial_loss": 26,
+      "kills": 0,
+      "label_action": {
+        "action": "play_card",
+        "card_index": 4
+      },
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R"
+      ],
+      "line": 63,
+      "loss_delta": 10,
+      "max_hp": 87,
+      "outcome": "current_policy_other",
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11\\combat_search_labels.jsonl",
+      "policy_action": {
+        "action": "use_potion",
+        "potion_slot": 1
+      },
+      "policy_reason": "Emergency tempo; use \u901f\u5ea6\u836f\u6c34.",
+      "projected_loss": 16,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_11\\20260707_042125_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 218,
+      "turn": 9
+    },
+    {
+      "act": 1,
+      "actual_action": {
+        "action": "play_card",
+        "card_index": 1,
+        "target_index": 1
+      },
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 62,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        80
+      ],
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Strike_R",
+        "Slimed",
+        "Shrug It Off"
+      ],
+      "incoming": 35,
+      "initial_loss": 30,
+      "kills": 0,
+      "label_action": {
+        "action": "play_card",
+        "card_index": 4
+      },
+      "label_first_card_key": "Shrug It Off",
+      "label_sequence_card_keys": [
+        "Shrug It Off"
+      ],
+      "line": 93,
+      "loss_delta": 11,
+      "max_hp": 80,
+      "outcome": "current_policy_matches_actual",
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11\\combat_search_labels.jsonl",
+      "policy_action": {
+        "action": "play_card",
+        "card_index": 1,
+        "target_index": 1
+      },
+      "policy_reason": "One-turn search: sequence ['Strike_R', 'Strike_R'] loss 30->0, damage=12, retaliation_damage=0, kills=0, attacks_removed=35, avoided_lethal=False, score=201.5.",
+      "projected_loss": 19,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_11\\20260707_043124_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 194,
+      "turn": 3
+    }
+  ],
+  "excluded_rows": 2,
+  "exclusion_reasons": {
+    "missed_single_card_search": 2
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11"
+  ],
+  "missing_source_log": 0,
+  "missing_source_step": 0,
+  "policy_errors": 0,
+  "read_errors": [],
+  "replay_outcomes": {
+    "current_policy_matches_actual": 1,
+    "current_policy_other": 1
+  },
+  "replayed_rows": 2,
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_11\\offline\\shadow_cycle_20260707_ironclad_a0_win_11\\combat_search_labels.jsonl"
+  ],
+  "rows": 118,
+  "source_quality_policy": "all",
+  "status_line": "combat_label_replay_audit files=1 excluded=2 replayed=2 matches_label=0 matches_actual=1 other=1",
+  "version": 1,
+  "warnings": []
+}

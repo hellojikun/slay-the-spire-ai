@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "diagnoses": [
+    {
+      "manifest_path": "data\\training_manifest_probe104_a0.json",
+      "category": "clean_trainable",
+      "reason": "completed_clean",
+      "failure_attribution": "combat_planning",
+      "failure_tags": [
+        "run_loss",
+        "combat_planning"
+      ],
+      "path": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+      "character": "IRONCLAD",
+      "ascension": 0,
+      "floor": 29,
+      "victory": false,
+      "steps": 451,
+      "action_records": 448,
+      "recovered_actions": 1,
+      "failed_actions": 0,
+      "action_recovery_summary": {
+        "total": 1,
+        "recovered": 1,
+        "unrecovered": 0,
+        "by_status": {
+          "preflight_mismatch": 1
+        },
+        "by_kind": {
+          "unavailable_action": 1
+        }
+      },
+      "validation_grade": "usable_with_recoveries",
+      "validation_flags": [
+        "recovered_action_race"
+      ],
+      "act1_boss": {
+        "reached": true,
+        "cleared": true,
+        "prefix_pristine_clear": false,
+        "prefix_blockers": [
+          "recovered_action_race"
+        ],
+        "floor": 16,
+        "enemy_ids": [
+          "SlimeBoss"
+        ],
+        "entry_step": 220,
+        "entry_hp": 74,
+        "entry_potion_count": 3,
+        "clear_step": 260,
+        "last_step": 259,
+        "last_hp": 60,
+        "last_turn": null,
+        "potion_use_steps": [
+          228,
+          239
+        ]
+      },
+      "shadow_examples": {
+        "route_risk": 28,
+        "potion_tempo": 197,
+        "pre_boss_deck_quality": 2,
+        "combat_search_labels": 68
+      },
+      "shadow_label_quality": {
+        "combat_search_labels": {
+          "total": 68,
+          "trainable": 63,
+          "excluded_from_training": 5,
+          "direct_kill_available": 7,
+          "exclusion_reasons": {
+            "missed_direct_kill": 5
+          }
+        }
+      },
+      "shadow_advice": {
+        "available": true,
+        "path": "data\\shadow_advice_probe104_a0",
+        "categories": {
+          "route_risk": {
+            "rows": 28,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 28
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "potion_tempo": {
+            "rows": 197,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 197
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "pre_boss_deck_quality": {
+            "rows": 2,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 2
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          },
+          "combat_search": {
+            "rows": 68,
+            "model_available": false,
+            "scored_rows": 0,
+            "advice_counts": {
+              "model_missing": 68
+            },
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "top_signal": null,
+            "model_load_quality": {}
+          }
+        }
+      },
+      "combat_endgame": {
+        "available": true,
+        "path": "runs\\ai_runs_strategy_probe104_a0\\20260706_100513_ironclad_a0.jsonl",
+        "step": 232,
+        "floor": 16,
+        "turn": 3,
+        "current_hp": 74,
+        "current_energy": 0,
+        "incoming_damage": 0,
+        "enemy_count": 1,
+        "enemy_id": "SlimeBoss",
+        "enemy_hp": 65,
+        "kill_cards": [],
+        "chosen_action": "end_turn",
+        "chosen_card_index": null,
+        "missed_lethal": false
+      },
+      "next_action": "inspect_combat_planning",
+      "status_line": "clean_trainable/combat_planning: IRONCLAD A0 floor 29 (completed_clean; recovered=1, failed=0, recovery=unavailable_action:1; validation=usable_with_recoveries; act1_boss=cleared:SlimeBoss[hp=60,potions=2,clear_step=260,prefix_pristine=false,prefix_blockers=recovered_action_race]; label_exclusions=combat_search:5/missed_direct_kill:5) -> inspect_combat_planning; advice=no_signals"
+    }
+  ]
+}

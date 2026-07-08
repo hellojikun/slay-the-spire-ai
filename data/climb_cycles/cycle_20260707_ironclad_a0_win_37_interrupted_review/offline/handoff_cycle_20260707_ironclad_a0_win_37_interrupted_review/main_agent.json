@@ -1,0 +1,1249 @@
+{
+  "version": 1,
+  "batch_name": "cycle_20260707_ironclad_a0_win_37_interrupted_review",
+  "owner": "main_agent",
+  "handoff_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\main_agent.json",
+  "assignment_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\main_agent.txt",
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\runner_agent.txt"
+  },
+  "ownership_contract": {
+    "role": "coordination and merge judgment",
+    "owns": [
+      "handoff selection",
+      "scope arbitration",
+      "acceptance decisions"
+    ],
+    "live_mcp_policy": "do not control live MCP unless ownership changes"
+  },
+  "default_execution_contract": {
+    "mode": "coordination_only",
+    "requires_live_mcp_ownership": false,
+    "allowed_operations": [
+      "choose_next_handoff",
+      "merge_evidence",
+      "decide_acceptance"
+    ],
+    "forbidden_operations": [
+      "control_live_mcp_unless_ownership_changes"
+    ]
+  },
+  "queue_count": 1,
+  "first_item": {
+    "action": "improve_route_and_early_act1_survival",
+    "gate_next_action": "improve_route_and_early_act1_survival",
+    "diagnosis_next_action": "inspect_potion_planning",
+    "priority": 0,
+    "next_probe_goal": {
+      "action": "improve_route_and_early_act1_survival",
+      "primary_blocking_reason": "insufficient_act1_boss_reached",
+      "metric": "act1_boss_reached",
+      "deficit": 2,
+      "summary": "collect 2 more Act 1 boss reaches",
+      "acceptance_criteria": {
+        "scope": "next_matching_run",
+        "counts_toward_metric": "act1_boss_reached",
+        "accepted_manifest_categories": [
+          "clean_trainable",
+          "diagnostic_excluded"
+        ],
+        "rejected_manifest_categories": [
+          "infra_blocked"
+        ],
+        "requires_known_failure_attribution_if_failed": true,
+        "unknown_failure_attribution_values": [
+          "",
+          "none",
+          "unknown",
+          "unknown_clean_failure"
+        ],
+        "act1_boss": {
+          "reached": true
+        }
+      }
+    },
+    "acceptance_criteria": {
+      "scope": "next_matching_run",
+      "counts_toward_metric": "act1_boss_reached",
+      "accepted_manifest_categories": [
+        "clean_trainable",
+        "diagnostic_excluded"
+      ],
+      "rejected_manifest_categories": [
+        "infra_blocked"
+      ],
+      "requires_known_failure_attribution_if_failed": true,
+      "unknown_failure_attribution_values": [
+        "",
+        "none",
+        "unknown",
+        "unknown_clean_failure"
+      ],
+      "act1_boss": {
+        "reached": true
+      }
+    },
+    "latest_run_acceptance": {
+      "available": true,
+      "accepted": true,
+      "metric": "act1_boss_reached",
+      "action": "improve_route_and_early_act1_survival",
+      "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+      "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "category": "clean_trainable",
+      "reason": "completed_clean",
+      "validation_grade": "pristine",
+      "failure_attribution": "potion_planning",
+      "act1_boss": {
+        "reached": true,
+        "cleared": false,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "entry_step": 205,
+        "entry_hp": 52,
+        "entry_potion_count": 0,
+        "clear_step": null,
+        "prefix_pristine_clear": false,
+        "prefix_blockers": [],
+        "last_turn": 10,
+        "last_hp": 0,
+        "potion_use_steps": []
+      },
+      "blockers": []
+    },
+    "gate_data_quality": {
+      "total_manifests": 1,
+      "coverage_manifests": 1,
+      "shadow_feature_rows": 57,
+      "shadow_label_rows": 41,
+      "shadow_label_trainable": 41,
+      "schema_complete_manifests": 1
+    },
+    "gate_failure_evidence": {
+      "runs_with_evidence": 1,
+      "by_type": {
+        "boss_combat": 1,
+        "pre_boss": 1,
+        "route": 1
+      }
+    },
+    "artifact_paths": {
+      "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+      "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+      "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+      "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+      "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\index.json",
+      "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\next_handoff.txt"
+    },
+    "execution_contract": {
+      "mode": "coordination_only",
+      "requires_live_mcp_ownership": false,
+      "allowed_operations": [
+        "choose_next_handoff",
+        "merge_evidence",
+        "decide_acceptance"
+      ],
+      "forbidden_operations": [
+        "control_live_mcp_unless_ownership_changes"
+      ]
+    }
+  },
+  "queue": [
+    {
+      "action": "improve_route_and_early_act1_survival",
+      "gate_next_action": "improve_route_and_early_act1_survival",
+      "diagnosis_next_action": "inspect_potion_planning",
+      "priority": 0,
+      "next_probe_goal": {
+        "action": "improve_route_and_early_act1_survival",
+        "primary_blocking_reason": "insufficient_act1_boss_reached",
+        "metric": "act1_boss_reached",
+        "deficit": 2,
+        "summary": "collect 2 more Act 1 boss reaches",
+        "acceptance_criteria": {
+          "scope": "next_matching_run",
+          "counts_toward_metric": "act1_boss_reached",
+          "accepted_manifest_categories": [
+            "clean_trainable",
+            "diagnostic_excluded"
+          ],
+          "rejected_manifest_categories": [
+            "infra_blocked"
+          ],
+          "requires_known_failure_attribution_if_failed": true,
+          "unknown_failure_attribution_values": [
+            "",
+            "none",
+            "unknown",
+            "unknown_clean_failure"
+          ],
+          "act1_boss": {
+            "reached": true
+          }
+        }
+      },
+      "acceptance_criteria": {
+        "scope": "next_matching_run",
+        "counts_toward_metric": "act1_boss_reached",
+        "accepted_manifest_categories": [
+          "clean_trainable",
+          "diagnostic_excluded"
+        ],
+        "rejected_manifest_categories": [
+          "infra_blocked"
+        ],
+        "requires_known_failure_attribution_if_failed": true,
+        "unknown_failure_attribution_values": [
+          "",
+          "none",
+          "unknown",
+          "unknown_clean_failure"
+        ],
+        "act1_boss": {
+          "reached": true
+        }
+      },
+      "latest_run_acceptance": {
+        "available": true,
+        "accepted": true,
+        "metric": "act1_boss_reached",
+        "action": "improve_route_and_early_act1_survival",
+        "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "category": "clean_trainable",
+        "reason": "completed_clean",
+        "validation_grade": "pristine",
+        "failure_attribution": "potion_planning",
+        "act1_boss": {
+          "reached": true,
+          "cleared": false,
+          "enemy_ids": [
+            "Hexaghost"
+          ],
+          "entry_step": 205,
+          "entry_hp": 52,
+          "entry_potion_count": 0,
+          "clear_step": null,
+          "prefix_pristine_clear": false,
+          "prefix_blockers": [],
+          "last_turn": 10,
+          "last_hp": 0,
+          "potion_use_steps": []
+        },
+        "blockers": []
+      },
+      "gate_data_quality": {
+        "total_manifests": 1,
+        "coverage_manifests": 1,
+        "shadow_feature_rows": 57,
+        "shadow_label_rows": 41,
+        "shadow_label_trainable": 41,
+        "schema_complete_manifests": 1
+      },
+      "gate_failure_evidence": {
+        "runs_with_evidence": 1,
+        "by_type": {
+          "boss_combat": 1,
+          "pre_boss": 1,
+          "route": 1
+        }
+      },
+      "artifact_paths": {
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+        "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+        "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+        "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+        "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\index.json",
+        "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\next_handoff.txt"
+      },
+      "execution_contract": {
+        "mode": "coordination_only",
+        "requires_live_mcp_ownership": false,
+        "allowed_operations": [
+          "choose_next_handoff",
+          "merge_evidence",
+          "decide_acceptance"
+        ],
+        "forbidden_operations": [
+          "control_live_mcp_unless_ownership_changes"
+        ]
+      }
+    }
+  ],
+  "next_handoff": {
+    "primary_worker": {
+      "owner": "ai_agent",
+      "item": {
+        "action": "improve_route_and_early_act1_survival",
+        "reason": "act1_boss_gate_needs_reach",
+        "priority": 1,
+        "next_probe_goal": {
+          "action": "improve_route_and_early_act1_survival",
+          "primary_blocking_reason": "insufficient_act1_boss_reached",
+          "metric": "act1_boss_reached",
+          "deficit": 2,
+          "summary": "collect 2 more Act 1 boss reaches",
+          "acceptance_criteria": {
+            "scope": "next_matching_run",
+            "counts_toward_metric": "act1_boss_reached",
+            "accepted_manifest_categories": [
+              "clean_trainable",
+              "diagnostic_excluded"
+            ],
+            "rejected_manifest_categories": [
+              "infra_blocked"
+            ],
+            "requires_known_failure_attribution_if_failed": true,
+            "unknown_failure_attribution_values": [
+              "",
+              "none",
+              "unknown",
+              "unknown_clean_failure"
+            ],
+            "act1_boss": {
+              "reached": true
+            }
+          }
+        },
+        "acceptance_criteria": {
+          "scope": "next_matching_run",
+          "counts_toward_metric": "act1_boss_reached",
+          "accepted_manifest_categories": [
+            "clean_trainable",
+            "diagnostic_excluded"
+          ],
+          "rejected_manifest_categories": [
+            "infra_blocked"
+          ],
+          "requires_known_failure_attribution_if_failed": true,
+          "unknown_failure_attribution_values": [
+            "",
+            "none",
+            "unknown",
+            "unknown_clean_failure"
+          ],
+          "act1_boss": {
+            "reached": true
+          }
+        },
+        "latest_run_acceptance": {
+          "available": true,
+          "accepted": true,
+          "metric": "act1_boss_reached",
+          "action": "improve_route_and_early_act1_survival",
+          "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+          "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "category": "clean_trainable",
+          "reason": "completed_clean",
+          "validation_grade": "pristine",
+          "failure_attribution": "potion_planning",
+          "act1_boss": {
+            "reached": true,
+            "cleared": false,
+            "enemy_ids": [
+              "Hexaghost"
+            ],
+            "entry_step": 205,
+            "entry_hp": 52,
+            "entry_potion_count": 0,
+            "clear_step": null,
+            "prefix_pristine_clear": false,
+            "prefix_blockers": [],
+            "last_turn": 10,
+            "last_hp": 0,
+            "potion_use_steps": []
+          },
+          "blockers": []
+        },
+        "gate_data_quality": {
+          "total_manifests": 1,
+          "coverage_manifests": 1,
+          "shadow_feature_rows": 57,
+          "shadow_label_rows": 41,
+          "shadow_label_trainable": 41,
+          "schema_complete_manifests": 1
+        },
+        "gate_failure_evidence": {
+          "runs_with_evidence": 1,
+          "by_type": {
+            "boss_combat": 1,
+            "pre_boss": 1,
+            "route": 1
+          }
+        },
+        "artifact_paths": {
+          "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+          "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+          "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+          "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\index.json",
+          "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\next_handoff.txt"
+        },
+        "execution_contract": {
+          "mode": "offline_strategy_or_shadow_model",
+          "requires_live_mcp_ownership": false,
+          "allowed_operations": [
+            "inspect_logs",
+            "score_shadow_advice",
+            "train_shadow_models_to_scratch_dir"
+          ],
+          "forbidden_operations": [
+            "control_live_mcp",
+            "replace_live_policy_with_model"
+          ]
+        }
+      }
+    },
+    "coordinator": {
+      "owner": "main_agent",
+      "item": {
+        "action": "improve_route_and_early_act1_survival",
+        "gate_next_action": "improve_route_and_early_act1_survival",
+        "diagnosis_next_action": "inspect_potion_planning",
+        "priority": 0,
+        "next_probe_goal": {
+          "action": "improve_route_and_early_act1_survival",
+          "primary_blocking_reason": "insufficient_act1_boss_reached",
+          "metric": "act1_boss_reached",
+          "deficit": 2,
+          "summary": "collect 2 more Act 1 boss reaches",
+          "acceptance_criteria": {
+            "scope": "next_matching_run",
+            "counts_toward_metric": "act1_boss_reached",
+            "accepted_manifest_categories": [
+              "clean_trainable",
+              "diagnostic_excluded"
+            ],
+            "rejected_manifest_categories": [
+              "infra_blocked"
+            ],
+            "requires_known_failure_attribution_if_failed": true,
+            "unknown_failure_attribution_values": [
+              "",
+              "none",
+              "unknown",
+              "unknown_clean_failure"
+            ],
+            "act1_boss": {
+              "reached": true
+            }
+          }
+        },
+        "acceptance_criteria": {
+          "scope": "next_matching_run",
+          "counts_toward_metric": "act1_boss_reached",
+          "accepted_manifest_categories": [
+            "clean_trainable",
+            "diagnostic_excluded"
+          ],
+          "rejected_manifest_categories": [
+            "infra_blocked"
+          ],
+          "requires_known_failure_attribution_if_failed": true,
+          "unknown_failure_attribution_values": [
+            "",
+            "none",
+            "unknown",
+            "unknown_clean_failure"
+          ],
+          "act1_boss": {
+            "reached": true
+          }
+        },
+        "latest_run_acceptance": {
+          "available": true,
+          "accepted": true,
+          "metric": "act1_boss_reached",
+          "action": "improve_route_and_early_act1_survival",
+          "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+          "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "category": "clean_trainable",
+          "reason": "completed_clean",
+          "validation_grade": "pristine",
+          "failure_attribution": "potion_planning",
+          "act1_boss": {
+            "reached": true,
+            "cleared": false,
+            "enemy_ids": [
+              "Hexaghost"
+            ],
+            "entry_step": 205,
+            "entry_hp": 52,
+            "entry_potion_count": 0,
+            "clear_step": null,
+            "prefix_pristine_clear": false,
+            "prefix_blockers": [],
+            "last_turn": 10,
+            "last_hp": 0,
+            "potion_use_steps": []
+          },
+          "blockers": []
+        },
+        "gate_data_quality": {
+          "total_manifests": 1,
+          "coverage_manifests": 1,
+          "shadow_feature_rows": 57,
+          "shadow_label_rows": 41,
+          "shadow_label_trainable": 41,
+          "schema_complete_manifests": 1
+        },
+        "gate_failure_evidence": {
+          "runs_with_evidence": 1,
+          "by_type": {
+            "boss_combat": 1,
+            "pre_boss": 1,
+            "route": 1
+          }
+        },
+        "artifact_paths": {
+          "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+          "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+          "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+          "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+          "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\index.json",
+          "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\next_handoff.txt"
+        },
+        "execution_contract": {
+          "mode": "coordination_only",
+          "requires_live_mcp_ownership": false,
+          "allowed_operations": [
+            "choose_next_handoff",
+            "merge_evidence",
+            "decide_acceptance"
+          ],
+          "forbidden_operations": [
+            "control_live_mcp_unless_ownership_changes"
+          ]
+        }
+      }
+    },
+    "by_agent": {
+      "ai_agent": {
+        "owner": "ai_agent",
+        "item": {
+          "action": "improve_route_and_early_act1_survival",
+          "reason": "act1_boss_gate_needs_reach",
+          "priority": 1,
+          "next_probe_goal": {
+            "action": "improve_route_and_early_act1_survival",
+            "primary_blocking_reason": "insufficient_act1_boss_reached",
+            "metric": "act1_boss_reached",
+            "deficit": 2,
+            "summary": "collect 2 more Act 1 boss reaches",
+            "acceptance_criteria": {
+              "scope": "next_matching_run",
+              "counts_toward_metric": "act1_boss_reached",
+              "accepted_manifest_categories": [
+                "clean_trainable",
+                "diagnostic_excluded"
+              ],
+              "rejected_manifest_categories": [
+                "infra_blocked"
+              ],
+              "requires_known_failure_attribution_if_failed": true,
+              "unknown_failure_attribution_values": [
+                "",
+                "none",
+                "unknown",
+                "unknown_clean_failure"
+              ],
+              "act1_boss": {
+                "reached": true
+              }
+            }
+          },
+          "acceptance_criteria": {
+            "scope": "next_matching_run",
+            "counts_toward_metric": "act1_boss_reached",
+            "accepted_manifest_categories": [
+              "clean_trainable",
+              "diagnostic_excluded"
+            ],
+            "rejected_manifest_categories": [
+              "infra_blocked"
+            ],
+            "requires_known_failure_attribution_if_failed": true,
+            "unknown_failure_attribution_values": [
+              "",
+              "none",
+              "unknown",
+              "unknown_clean_failure"
+            ],
+            "act1_boss": {
+              "reached": true
+            }
+          },
+          "latest_run_acceptance": {
+            "available": true,
+            "accepted": true,
+            "metric": "act1_boss_reached",
+            "action": "improve_route_and_early_act1_survival",
+            "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "category": "clean_trainable",
+            "reason": "completed_clean",
+            "validation_grade": "pristine",
+            "failure_attribution": "potion_planning",
+            "act1_boss": {
+              "reached": true,
+              "cleared": false,
+              "enemy_ids": [
+                "Hexaghost"
+              ],
+              "entry_step": 205,
+              "entry_hp": 52,
+              "entry_potion_count": 0,
+              "clear_step": null,
+              "prefix_pristine_clear": false,
+              "prefix_blockers": [],
+              "last_turn": 10,
+              "last_hp": 0,
+              "potion_use_steps": []
+            },
+            "blockers": []
+          },
+          "gate_data_quality": {
+            "total_manifests": 1,
+            "coverage_manifests": 1,
+            "shadow_feature_rows": 57,
+            "shadow_label_rows": 41,
+            "shadow_label_trainable": 41,
+            "schema_complete_manifests": 1
+          },
+          "gate_failure_evidence": {
+            "runs_with_evidence": 1,
+            "by_type": {
+              "boss_combat": 1,
+              "pre_boss": 1,
+              "route": 1
+            }
+          },
+          "artifact_paths": {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+            "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+            "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+            "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\index.json",
+            "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "offline_strategy_or_shadow_model",
+            "requires_live_mcp_ownership": false,
+            "allowed_operations": [
+              "inspect_logs",
+              "score_shadow_advice",
+              "train_shadow_models_to_scratch_dir"
+            ],
+            "forbidden_operations": [
+              "control_live_mcp",
+              "replace_live_policy_with_model"
+            ]
+          }
+        }
+      },
+      "main_agent": {
+        "owner": "main_agent",
+        "item": {
+          "action": "improve_route_and_early_act1_survival",
+          "gate_next_action": "improve_route_and_early_act1_survival",
+          "diagnosis_next_action": "inspect_potion_planning",
+          "priority": 0,
+          "next_probe_goal": {
+            "action": "improve_route_and_early_act1_survival",
+            "primary_blocking_reason": "insufficient_act1_boss_reached",
+            "metric": "act1_boss_reached",
+            "deficit": 2,
+            "summary": "collect 2 more Act 1 boss reaches",
+            "acceptance_criteria": {
+              "scope": "next_matching_run",
+              "counts_toward_metric": "act1_boss_reached",
+              "accepted_manifest_categories": [
+                "clean_trainable",
+                "diagnostic_excluded"
+              ],
+              "rejected_manifest_categories": [
+                "infra_blocked"
+              ],
+              "requires_known_failure_attribution_if_failed": true,
+              "unknown_failure_attribution_values": [
+                "",
+                "none",
+                "unknown",
+                "unknown_clean_failure"
+              ],
+              "act1_boss": {
+                "reached": true
+              }
+            }
+          },
+          "acceptance_criteria": {
+            "scope": "next_matching_run",
+            "counts_toward_metric": "act1_boss_reached",
+            "accepted_manifest_categories": [
+              "clean_trainable",
+              "diagnostic_excluded"
+            ],
+            "rejected_manifest_categories": [
+              "infra_blocked"
+            ],
+            "requires_known_failure_attribution_if_failed": true,
+            "unknown_failure_attribution_values": [
+              "",
+              "none",
+              "unknown",
+              "unknown_clean_failure"
+            ],
+            "act1_boss": {
+              "reached": true
+            }
+          },
+          "latest_run_acceptance": {
+            "available": true,
+            "accepted": true,
+            "metric": "act1_boss_reached",
+            "action": "improve_route_and_early_act1_survival",
+            "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "category": "clean_trainable",
+            "reason": "completed_clean",
+            "validation_grade": "pristine",
+            "failure_attribution": "potion_planning",
+            "act1_boss": {
+              "reached": true,
+              "cleared": false,
+              "enemy_ids": [
+                "Hexaghost"
+              ],
+              "entry_step": 205,
+              "entry_hp": 52,
+              "entry_potion_count": 0,
+              "clear_step": null,
+              "prefix_pristine_clear": false,
+              "prefix_blockers": [],
+              "last_turn": 10,
+              "last_hp": 0,
+              "potion_use_steps": []
+            },
+            "blockers": []
+          },
+          "gate_data_quality": {
+            "total_manifests": 1,
+            "coverage_manifests": 1,
+            "shadow_feature_rows": 57,
+            "shadow_label_rows": 41,
+            "shadow_label_trainable": 41,
+            "schema_complete_manifests": 1
+          },
+          "gate_failure_evidence": {
+            "runs_with_evidence": 1,
+            "by_type": {
+              "boss_combat": 1,
+              "pre_boss": 1,
+              "route": 1
+            }
+          },
+          "artifact_paths": {
+            "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+            "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+            "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+            "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+            "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\index.json",
+            "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "coordination_only",
+            "requires_live_mcp_ownership": false,
+            "allowed_operations": [
+              "choose_next_handoff",
+              "merge_evidence",
+              "decide_acceptance"
+            ],
+            "forbidden_operations": [
+              "control_live_mcp_unless_ownership_changes"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "agent_queue_counts": {
+    "runner_agent": 0,
+    "engineering_agent": 0,
+    "ai_agent": 2,
+    "main_agent": 1
+  },
+  "agent_queue_actions": {
+    "runner_agent": [],
+    "engineering_agent": [],
+    "ai_agent": [
+      {
+        "action": "improve_route_and_early_act1_survival",
+        "reason": "act1_boss_gate_needs_reach",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false,
+        "gate_metric": "act1_boss_reached",
+        "gate_deficit": 2,
+        "acceptance_scope": "next_matching_run",
+        "counts_toward_metric": "act1_boss_reached",
+        "latest_run_accepted": true
+      },
+      {
+        "action": "inspect_potion_planning",
+        "count": 1,
+        "reason": "per_run_diagnosis",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      }
+    ],
+    "main_agent": [
+      {
+        "action": "improve_route_and_early_act1_survival",
+        "priority": 0,
+        "execution_mode": "coordination_only",
+        "requires_live_mcp_ownership": false,
+        "gate_metric": "act1_boss_reached",
+        "gate_deficit": 2,
+        "acceptance_scope": "next_matching_run",
+        "counts_toward_metric": "act1_boss_reached",
+        "latest_run_accepted": true
+      }
+    ]
+  },
+  "classification_reasons": {
+    "clean_trainable": {
+      "completed_clean": 1
+    },
+    "diagnostic_excluded": {},
+    "infra_blocked": {}
+  },
+  "validation": {
+    "by_grade": {
+      "pristine": 1
+    },
+    "by_flag": {},
+    "act1_boss_reached": 1,
+    "act1_boss_cleared": 0,
+    "pristine_act1_boss_cleared": 0,
+    "act1_boss_prefix_blockers": {},
+    "act1_boss_clear_blockers": {}
+  },
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+    "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review\\next_handoff.txt"
+  },
+  "offline_refresh_command": {
+    "kind": "offline_batch_replay",
+    "argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37",
+      "--output-dir",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline",
+      "--name",
+      "cycle_20260707_ironclad_a0_win_37_interrupted_review",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+      "--output-dir",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline",
+      "--name",
+      "cycle_20260707_ironclad_a0_win_37_interrupted_review",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv_available": true,
+    "resolved_log_count": 1,
+    "touches_live_mcp": false,
+    "trains_models": false,
+    "writes_models": false
+  },
+  "shadow_advice_provenance": {
+    "available": true,
+    "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review",
+    "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review\\summary.json",
+    "mode": "shadow_rows",
+    "resolved_file_count": 4,
+    "warnings": [],
+    "categories": {
+      "route_risk": {
+        "rows": 15,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.0,
+          "advice": "route_ok",
+          "floor": 0,
+          "step": 6,
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl"
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 92,
+          "accepted": 92,
+          "skipped": 0
+        }
+      },
+      "potion_tempo": {
+        "rows": 0,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": false,
+        "shadow_source_file_count": 0,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": null,
+        "model_training_source_file_count": 0,
+        "model_training_source_policy": null
+      },
+      "pre_boss_deck_quality": {
+        "rows": 1,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.9167,
+          "advice": "boss_ready",
+          "floor": 15,
+          "step": 204,
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl"
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 5,
+          "accepted": 5,
+          "skipped": 0
+        }
+      },
+      "combat_search": {
+        "rows": 41,
+        "high_risk_count": 0,
+        "watch_count": 37,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 4.9388,
+          "advice": "review_search_label",
+          "floor": 3,
+          "step": 30,
+          "source_log": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+          "label_first_card_key": "bash",
+          "model_top_card_key": "striker",
+          "loss_delta": 5,
+          "attacks_removed": 5,
+          "retaliation_damage": 0,
+          "label_missed_direct_kill": false,
+          "label_missed_single_card_search": false
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 226,
+          "accepted": 224,
+          "skipped": 2,
+          "skip_reasons": {
+            "missed_single_card_search": 2
+          }
+        }
+      }
+    }
+  },
+  "shadow_label_quality": {
+    "combat_search_labels": {
+      "total": 41,
+      "trainable": 41,
+      "excluded_from_training": 0,
+      "exclusion_reasons": {}
+    }
+  },
+  "combat_label_audit": {
+    "status_line": "combat_label_audit files=1 rows=41 excluded=0",
+    "resolved_file_count": 1,
+    "rows": 41,
+    "filtered_rows": 0,
+    "accepted_rows": 41,
+    "excluded_rows": 0,
+    "source_quality": {
+      "pristine": 41
+    }
+  },
+  "combat_label_replay_audit": {
+    "status_line": "combat_label_replay_audit files=1 excluded=0 replayed=0 matches_label=0 matches_actual=0 other=0",
+    "resolved_file_count": 1,
+    "excluded_rows": 0,
+    "replayed_rows": 0,
+    "current_policy_matches_label": 0,
+    "current_policy_matches_actual": 0,
+    "current_policy_other": 0,
+    "missing_source_log": 0,
+    "missing_source_step": 0,
+    "policy_errors": 0
+  },
+  "failure_evidence": {
+    "runs_with_evidence": 1,
+    "by_type": {
+      "boss_combat": 1,
+      "pre_boss": 1,
+      "route": 1
+    }
+  },
+  "action_recovery": {},
+  "terminal_recovery": {},
+  "gate_execution_recovery": {},
+  "gate_data_quality": {
+    "total_manifests": 1,
+    "coverage_manifests": 1,
+    "shadow_feature_rows": 57,
+    "shadow_label_rows": 41,
+    "shadow_label_trainable": 41,
+    "schema_complete_manifests": 1
+  },
+  "gate_data_quality_replay_resolved_issues": {},
+  "static_knowledge_gaps": {
+    "status_line": "static_knowledge_gaps logs=1 missing=0",
+    "resolved_log_count": 1,
+    "total_missing_occurrences": 0,
+    "observed_aliases": {
+      "cards": 7
+    }
+  },
+  "gate_failure_evidence": {
+    "runs_with_evidence": 1,
+    "by_type": {
+      "boss_combat": 1,
+      "pre_boss": 1,
+      "route": 1
+    }
+  },
+  "gate_passed": false,
+  "gate_status_line": "act1_boss_gate NEEDS_WORK: IRONCLAD A0 runs=1, reached=1/3, cleared=0/2, pristine_cleared=0/2, infra=0, unknown_attr=0; top_failure=potion_planning:1; top_uncleared_boss=Hexaghost:1/potion_planning:1; feature_rows=57; labels=41; evidence=route:1; need_reached=2, need_cleared=2, need_pristine=2; latest_accept=accepted -> improve_route_and_early_act1_survival",
+  "gate_next_action": "improve_route_and_early_act1_survival",
+  "gate_progress": {
+    "act1_boss_reached": {
+      "current": 1,
+      "required": 3,
+      "deficit": 2,
+      "ok": false
+    },
+    "act1_boss_cleared": {
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    },
+    "pristine_act1_boss_cleared": {
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    }
+  },
+  "gate_remaining_progress": [
+    {
+      "metric": "act1_boss_reached",
+      "current": 1,
+      "required": 3,
+      "deficit": 2,
+      "ok": false
+    },
+    {
+      "metric": "act1_boss_cleared",
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    },
+    {
+      "metric": "pristine_act1_boss_cleared",
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    }
+  ],
+  "gate_primary_remaining_progress": {
+    "metric": "act1_boss_reached",
+    "current": 1,
+    "required": 3,
+    "deficit": 2,
+    "ok": false
+  },
+  "next_probe_goal": {
+    "action": "improve_route_and_early_act1_survival",
+    "primary_blocking_reason": "insufficient_act1_boss_reached",
+    "metric": "act1_boss_reached",
+    "deficit": 2,
+    "summary": "collect 2 more Act 1 boss reaches",
+    "acceptance_criteria": {
+      "scope": "next_matching_run",
+      "counts_toward_metric": "act1_boss_reached",
+      "accepted_manifest_categories": [
+        "clean_trainable",
+        "diagnostic_excluded"
+      ],
+      "rejected_manifest_categories": [
+        "infra_blocked"
+      ],
+      "requires_known_failure_attribution_if_failed": true,
+      "unknown_failure_attribution_values": [
+        "",
+        "none",
+        "unknown",
+        "unknown_clean_failure"
+      ],
+      "act1_boss": {
+        "reached": true
+      }
+    }
+  },
+  "latest_run_acceptance": {
+    "available": true,
+    "accepted": true,
+    "metric": "act1_boss_reached",
+    "action": "improve_route_and_early_act1_survival",
+    "run_path": "runs\\ai_runs_cycle_20260707_ironclad_a0_win_37\\20260707_222717_ironclad_a0.jsonl",
+    "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json",
+    "category": "clean_trainable",
+    "reason": "completed_clean",
+    "validation_grade": "pristine",
+    "failure_attribution": "potion_planning",
+    "act1_boss": {
+      "reached": true,
+      "cleared": false,
+      "enemy_ids": [
+        "Hexaghost"
+      ],
+      "entry_step": 205,
+      "entry_hp": 52,
+      "entry_potion_count": 0,
+      "clear_step": null,
+      "prefix_pristine_clear": false,
+      "prefix_blockers": [],
+      "last_turn": 10,
+      "last_hp": 0,
+      "potion_use_steps": []
+    },
+    "blockers": []
+  },
+  "recommended_next_action": "improve_route_and_early_act1_survival",
+  "assignment_prompt": "Agent: main_agent\nRole: coordination and merge judgment\nFirst task: improve_route_and_early_act1_survival (improve_route_and_early_act1_survival)\nClassification reasons: clean_trainable=completed_clean:1\nValidation summary: grades=pristine:1\nGate status: act1_boss_gate NEEDS_WORK: IRONCLAD A0 runs=1, reached=1/3, cleared=0/2, pristine_cleared=0/2, infra=0, unknown_attr=0; top_failure=potion_planning:1; top_uncleared_boss=Hexaghost:1/potion_planning:1; feature_rows=57; labels=41; evidence=route:1; need_reached=2, need_cleared=2, need_pristine=2; latest_accept=accepted -> improve_route_and_early_act1_survival\nGate primary remaining progress: {\"current\":1,\"deficit\":2,\"metric\":\"act1_boss_reached\",\"ok\":false,\"required\":3}\nGate remaining progress: [{\"current\":1,\"deficit\":2,\"metric\":\"act1_boss_reached\",\"ok\":false,\"required\":3},{\"current\":0,\"deficit\":2,\"metric\":\"act1_boss_cleared\",\"ok\":false,\"required\":2},{\"current\":0,\"deficit\":2,\"metric\":\"pristine_act1_boss_cleared\",\"ok\":false,\"required\":2}]\nAcceptance criteria: {\"accepted_manifest_categories\":[\"clean_trainable\",\"diagnostic_excluded\"],\"act1_boss\":{\"reached\":true},\"counts_toward_metric\":\"act1_boss_reached\",\"rejected_manifest_categories\":[\"infra_blocked\"],\"requires_known_failure_attribution_if_failed\":true,\"scope\":\"next_matching_run\",\"unknown_failure_attribution_values\":[\"\",\"none\",\"unknown\",\"unknown_clean_failure\"]}\nLatest run acceptance: {\"accepted\":true,\"act1_boss\":{\"clear_step\":null,\"cleared\":false,\"enemy_ids\":[\"Hexaghost\"],\"entry_hp\":52,\"entry_potion_count\":0,\"entry_step\":205,\"last_hp\":0,\"last_turn\":10,\"potion_use_steps\":[],\"prefix_blockers\":[],\"prefix_pristine_clear\":false,\"reached\":true},\"action\":\"improve_route_and_early_act1_survival\",\"available\":true,\"blockers\":[],\"category\":\"clean_trainable\",\"failure_attribution\":\"potion_planning\",\"manifest_path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\\\offline\\\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\",\"metric\":\"act1_boss_reached\",\"reason\":\"completed_clean\",\"run_path\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_37\\\\20260707_222717_ironclad_a0.jsonl\",\"validation_grade\":\"pristine\"}\nNext probe goal: {\"acceptance_criteria\":{\"accepted_manifest_categories\":[\"clean_trainable\",\"diagnostic_excluded\"],\"act1_boss\":{\"reached\":true},\"counts_toward_metric\":\"act1_boss_reached\",\"rejected_manifest_categories\":[\"infra_blocked\"],\"requires_known_failure_attribution_if_failed\":true,\"scope\":\"next_matching_run\",\"unknown_failure_attribution_values\":[\"\",\"none\",\"unknown\",\"unknown_clean_failure\"]},\"action\":\"improve_route_and_early_act1_survival\",\"deficit\":2,\"metric\":\"act1_boss_reached\",\"primary_blocking_reason\":\"insufficient_act1_boss_reached\",\"summary\":\"collect 2 more Act 1 boss reaches\"}\nExecution mode: coordination_only\nRequires live MCP ownership: False\nLive MCP policy: do not control live MCP unless ownership changes\nAllowed operations: choose_next_handoff, merge_evidence, decide_acceptance\nForbidden operations: control_live_mcp_unless_ownership_changes\nUse offline_refresh_command.resolved_argv when available to replay the exact log set without touching live MCP.\nOffline refresh command: {\"kind\":\"offline_batch_replay\",\"resolved_argv_available\":true,\"resolved_log_count\":1,\"touches_live_mcp\":false,\"trains_models\":false,\"writes_models\":false}\noffline_refresh_command.resolved_argv: [\"python\",\"-m\",\"slay_ai.offline_batch\",\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_37\\\\20260707_222717_ironclad_a0.jsonl\",\"--output-dir\",\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\\\offline\",\"--name\",\"cycle_20260707_ironclad_a0_win_37_interrupted_review\",\"--knowledge-dir\",\"data\\\\static_knowledge\",\"--route-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\route_risk_model.json\",\"--potion-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\potion_tempo_model.json\",\"--deck-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\deck_quality_model.json\",\"--combat-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\combat_search_model.json\",\"--character\",\"IRONCLAD\",\"--ascension\",\"0\",\"--min-reached\",\"3\",\"--min-cleared\",\"2\",\"--min-pristine-cleared\",\"2\"]\nShadow advice provenance: {\"advice_dir\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\\\offline\\\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review\",\"available\":true,\"categories\":{\"combat_search\":{\"high_risk_count\":0,\"model_available\":true,\"model_load_quality\":{\"accepted\":224,\"files\":1,\"rows\":226,\"skip_reasons\":{\"missed_single_card_search\":2},\"skipped\":2},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":41,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"review_search_label\",\"attacks_removed\":5,\"floor\":3,\"label_first_card_key\":\"bash\",\"label_missed_direct_kill\":false,\"label_missed_single_card_search\":false,\"loss_delta\":5,\"model_top_card_key\":\"striker\",\"retaliation_damage\":0,\"score\":4.9388,\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_37\\\\20260707_222717_ironclad_a0.jsonl\",\"step\":30},\"watch_count\":37},\"potion_tempo\":{\"high_risk_count\":0,\"model_available\":false,\"model_training_source_file_count\":0,\"model_training_source_policy\":null,\"model_training_source_quality\":null,\"rows\":0,\"shadow_input_file_count\":1,\"shadow_source_file_count\":0,\"watch_count\":0},\"pre_boss_deck_quality\":{\"high_risk_count\":0,\"model_available\":true,\"model_load_quality\":{\"accepted\":5,\"files\":1,\"rows\":5,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":1,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"boss_ready\",\"floor\":15,\"score\":0.9167,\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_37\\\\20260707_222717_ironclad_a0.jsonl\",\"step\":204},\"watch_count\":0},\"route_risk\":{\"high_risk_count\":0,\"model_available\":true,\"model_load_quality\":{\"accepted\":92,\"files\":1,\"rows\":92,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":15,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"route_ok\",\"floor\":0,\"score\":0.0,\"source_log\":\"runs\\\\ai_runs_cycle_20260707_ironclad_a0_win_37\\\\20260707_222717_ironclad_a0.jsonl\",\"step\":6},\"watch_count\":0}},\"mode\":\"shadow_rows\",\"resolved_file_count\":4,\"summary_path\":\"data\\\\climb_cycles\\\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\\\offline\\\\shadow_advice_cycle_20260707_ironclad_a0_win_37_interrupted_review\\\\summary.json\",\"warnings\":[]}\nShadow label quality: {\"combat_search_labels\":{\"excluded_from_training\":0,\"exclusion_reasons\":{},\"total\":41,\"trainable\":41}}\nCombat label audit: {\"accepted_rows\":41,\"excluded_rows\":0,\"filtered_rows\":0,\"resolved_file_count\":1,\"rows\":41,\"source_quality\":{\"pristine\":41},\"status_line\":\"combat_label_audit files=1 rows=41 excluded=0\"}\nCombat label replay audit: {\"current_policy_matches_actual\":0,\"current_policy_matches_label\":0,\"current_policy_other\":0,\"excluded_rows\":0,\"missing_source_log\":0,\"missing_source_step\":0,\"policy_errors\":0,\"replayed_rows\":0,\"resolved_file_count\":1,\"status_line\":\"combat_label_replay_audit files=1 excluded=0 replayed=0 matches_label=0 matches_actual=0 other=0\"}\nFailure evidence summary: {\"by_type\":{\"boss_combat\":1,\"pre_boss\":1,\"route\":1},\"runs_with_evidence\":1}\nGate data quality: {\"coverage_manifests\":1,\"schema_complete_manifests\":1,\"shadow_feature_rows\":57,\"shadow_label_rows\":41,\"shadow_label_trainable\":41,\"total_manifests\":1}\nStatic knowledge gaps: {\"observed_aliases\":{\"cards\":7},\"resolved_log_count\":1,\"status_line\":\"static_knowledge_gaps logs=1 missing=0\",\"total_missing_occurrences\":0}\nGate failure evidence: {\"by_type\":{\"boss_combat\":1,\"pre_boss\":1,\"route\":1},\"runs_with_evidence\":1}\nmanifest_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\ndiagnosis_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\ngate_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\nstatic_knowledge_gap_report_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\ncombat_label_audit_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\ncombat_label_replay_audit_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\nsummary_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\nartifact_manifest_path: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_37_interrupted_review.json\nhandoff_dir: data\\climb_cycles\\cycle_20260707_ironclad_a0_win_37_interrupted_review\\offline\\handoff_cycle_20260707_ironclad_a0_win_37_interrupted_review"
+}

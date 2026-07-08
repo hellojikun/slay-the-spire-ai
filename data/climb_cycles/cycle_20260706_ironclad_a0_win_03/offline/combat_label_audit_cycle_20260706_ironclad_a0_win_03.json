@@ -1,0 +1,407 @@
+{
+  "accepted_rows": 56,
+  "example_count": 7,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 32,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 51,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        216
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Secret Weapon",
+        "Strike_R",
+        "Defend_R",
+        "Armaments"
+      ],
+      "incoming": 32,
+      "initial_loss": 32,
+      "kills": 0,
+      "label_first_card_key": "Strike_R",
+      "label_sequence_card_keys": [
+        "Strike_R"
+      ],
+      "label_target_index": 1,
+      "line": 38,
+      "loss_delta": 32,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_03\\20260706_234553_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 225,
+      "turn": 2
+    },
+    {
+      "act": 1,
+      "attacks_removed": 16,
+      "avoided_lethal": true,
+      "current_energy": 2,
+      "current_hp": 8,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        1,
+        2
+      ],
+      "direct_kill_card_keys": [
+        "Strike_R",
+        "Strike_R"
+      ],
+      "direct_kill_enemy_hp": 6,
+      "direct_kill_enemy_id": "TheGuardian",
+      "enemy_hps": [
+        6
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK_BUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Strike_R",
+        "Secret Weapon",
+        "Defend_R"
+      ],
+      "incoming": 16,
+      "initial_loss": 16,
+      "kills": 1,
+      "label_first_card_key": "Strike_R",
+      "label_sequence_card_keys": [
+        "Strike_R"
+      ],
+      "label_target_index": 1,
+      "line": 45,
+      "loss_delta": 16,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_03\\20260706_234553_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 259,
+      "turn": 12
+    },
+    {
+      "act": 1,
+      "attacks_removed": 16,
+      "avoided_lethal": true,
+      "current_energy": 2,
+      "current_hp": 5,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        1,
+        2
+      ],
+      "direct_kill_card_keys": [
+        "Strike_R",
+        "Strike_R"
+      ],
+      "direct_kill_enemy_hp": 6,
+      "direct_kill_enemy_id": "TheGuardian",
+      "enemy_hps": [
+        6
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK_BUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Strike_R",
+        "Secret Weapon",
+        "Defend_R"
+      ],
+      "incoming": 16,
+      "initial_loss": 16,
+      "kills": 1,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R",
+        "Strike_R"
+      ],
+      "line": 46,
+      "loss_delta": 16,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_03\\20260706_234553_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 260,
+      "turn": 12
+    },
+    {
+      "act": 1,
+      "attacks_removed": 9,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 8,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        31
+      ],
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Strike_R",
+        "Perfected Strike",
+        "Armaments",
+        "Flame Barrier"
+      ],
+      "incoming": 9,
+      "initial_loss": 4,
+      "kills": 1,
+      "label_first_card_key": "Perfected Strike",
+      "label_sequence_card_keys": [
+        "Perfected Strike"
+      ],
+      "label_target_index": 1,
+      "line": 43,
+      "loss_delta": 4,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_03\\20260706_234553_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 256,
+      "turn": 11
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 21,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        2,
+        3
+      ],
+      "direct_kill_card_keys": [
+        "Strike_R",
+        "Strike_R"
+      ],
+      "direct_kill_enemy_hp": 2,
+      "direct_kill_enemy_id": "FuzzyLouseDefensive",
+      "enemy_hps": [
+        2
+      ],
+      "enemy_ids": [
+        "FuzzyLouseDefensive"
+      ],
+      "enemy_intents": [
+        "DEBUFF"
+      ],
+      "floor": 14,
+      "hand_ids": [
+        "Armaments",
+        "Strike_R",
+        "Strike_R",
+        "Defend_R"
+      ],
+      "incoming": 0,
+      "initial_loss": 0,
+      "kills": 1,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R",
+        "Strike_R",
+        "Strike_R"
+      ],
+      "line": 35,
+      "loss_delta": 0,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_03\\20260706_234553_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 210,
+      "turn": 4
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 21,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        2,
+        3
+      ],
+      "direct_kill_card_keys": [
+        "Strike_R",
+        "Strike_R"
+      ],
+      "direct_kill_enemy_hp": 2,
+      "direct_kill_enemy_id": "FuzzyLouseDefensive",
+      "enemy_hps": [
+        2
+      ],
+      "enemy_ids": [
+        "FuzzyLouseDefensive"
+      ],
+      "enemy_intents": [
+        "DEBUFF"
+      ],
+      "floor": 14,
+      "hand_ids": [
+        "Armaments",
+        "Strike_R",
+        "Strike_R",
+        "Defend_R"
+      ],
+      "incoming": 0,
+      "initial_loss": 0,
+      "kills": 1,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R",
+        "Strike_R"
+      ],
+      "line": 36,
+      "loss_delta": 0,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_03\\20260706_234553_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 211,
+      "turn": 4
+    },
+    {
+      "act": 1,
+      "attacks_removed": 0,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 70,
+      "direct_kill_available": true,
+      "direct_kill_card_indices": [
+        4
+      ],
+      "direct_kill_card_keys": [
+        "Strike_R"
+      ],
+      "direct_kill_enemy_hp": 3,
+      "direct_kill_enemy_id": "FuzzyLouseNormal",
+      "enemy_hps": [
+        3
+      ],
+      "enemy_ids": [
+        "FuzzyLouseNormal"
+      ],
+      "enemy_intents": [
+        "BUFF"
+      ],
+      "floor": 1,
+      "hand_ids": [
+        "Secret Weapon",
+        "Defend_R",
+        "Defend_R",
+        "Strike_R"
+      ],
+      "incoming": 0,
+      "initial_loss": 0,
+      "kills": 1,
+      "label_first_card_key": "Defend_R",
+      "label_sequence_card_keys": [
+        "Defend_R",
+        "Strike_R"
+      ],
+      "line": 4,
+      "loss_delta": 0,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_direct_kill"
+      ],
+      "search_type": "one_turn_search",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_03\\20260706_234553_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "usable_with_recoveries",
+      "step": 15,
+      "turn": 3
+    }
+  ],
+  "excluded_rows": 7,
+  "exclusion_reasons": {
+    "missed_direct_kill": 5,
+    "missed_single_card_search": 2
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260706_ironclad_a0_win_03\\offline\\shadow_cycle_20260706_ironclad_a0_win_03\\combat_search_labels.jsonl"
+  ],
+  "rows": 63,
+  "source_quality": {
+    "usable_with_recoveries": 63
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=63 excluded=7 missed_direct_kill=5 missed_single_card_search=2",
+  "version": 1,
+  "warnings": []
+}

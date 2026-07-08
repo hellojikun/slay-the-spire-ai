@@ -1,0 +1,231 @@
+{
+  "accepted_rows": 143,
+  "example_count": 4,
+  "example_limit": 20,
+  "examples": [
+    {
+      "act": 1,
+      "attacks_removed": 33,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 73,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        75
+      ],
+      "enemy_ids": [
+        "SlimeBoss"
+      ],
+      "enemy_intents": [
+        "ATTACK"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Headbutt",
+        "Strike_R",
+        "Shockwave",
+        "Defend_R",
+        "Pommel Strike"
+      ],
+      "incoming": 33,
+      "initial_loss": 33,
+      "kills": 0,
+      "label_first_card_key": "Headbutt",
+      "label_sequence_card_keys": [
+        "Headbutt"
+      ],
+      "label_target_index": 1,
+      "line": 83,
+      "loss_delta": 33,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23\\offline\\shadow_cycle_20260707_ironclad_a0_win_23\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102217_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 188,
+      "turn": 3
+    },
+    {
+      "act": 1,
+      "attacks_removed": 4,
+      "avoided_lethal": false,
+      "current_energy": 3,
+      "current_hp": 55,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        54,
+        18,
+        18
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L",
+        "AcidSlime_M",
+        "AcidSlime_M"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF",
+        "ATTACK_DEBUFF",
+        "DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Defend_R",
+        "Slimed",
+        "True Grit",
+        "Defend_R",
+        "Clothesline"
+      ],
+      "incoming": 23,
+      "initial_loss": 23,
+      "kills": 0,
+      "label_first_card_key": "Clothesline",
+      "label_sequence_card_keys": [
+        "Clothesline"
+      ],
+      "label_target_index": 1,
+      "line": 33,
+      "loss_delta": 4,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23\\offline\\shadow_cycle_20260707_ironclad_a0_win_23\\combat_search_labels.jsonl",
+      "projected_loss": 19,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_101046_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 223,
+      "turn": 6
+    },
+    {
+      "act": 1,
+      "attacks_removed": 4,
+      "avoided_lethal": false,
+      "current_energy": 2,
+      "current_hp": 55,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        54,
+        18,
+        18
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L",
+        "AcidSlime_M",
+        "AcidSlime_M"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF",
+        "ATTACK_DEBUFF",
+        "DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Slimed",
+        "True Grit",
+        "Defend_R",
+        "Clothesline"
+      ],
+      "incoming": 23,
+      "initial_loss": 16,
+      "kills": 0,
+      "label_first_card_key": "Clothesline",
+      "label_sequence_card_keys": [
+        "Clothesline"
+      ],
+      "label_target_index": 1,
+      "line": 35,
+      "loss_delta": 4,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23\\offline\\shadow_cycle_20260707_ironclad_a0_win_23\\combat_search_labels.jsonl",
+      "projected_loss": 12,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_101046_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 225,
+      "turn": 6
+    },
+    {
+      "act": 1,
+      "attacks_removed": 16,
+      "avoided_lethal": false,
+      "current_energy": 1,
+      "current_hp": 49,
+      "direct_kill_available": false,
+      "enemy_hps": [
+        34
+      ],
+      "enemy_ids": [
+        "SpikeSlime_L"
+      ],
+      "enemy_intents": [
+        "ATTACK_DEBUFF"
+      ],
+      "floor": 16,
+      "hand_ids": [
+        "Anger",
+        "Anger",
+        "Defend_R",
+        "Slimed"
+      ],
+      "incoming": 16,
+      "initial_loss": 4,
+      "kills": 0,
+      "label_first_card_key": "Anger",
+      "label_sequence_card_keys": [
+        "Anger"
+      ],
+      "label_target_index": 1,
+      "line": 91,
+      "loss_delta": 4,
+      "max_hp": 80,
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23\\offline\\shadow_cycle_20260707_ironclad_a0_win_23\\combat_search_labels.jsonl",
+      "projected_loss": 0,
+      "reasons": [
+        "missed_single_card_search"
+      ],
+      "search_type": "single_card_search_diagnostic",
+      "source_category": "clean_trainable",
+      "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_23\\20260707_102217_ironclad_a0.jsonl",
+      "source_reason": "completed_clean",
+      "source_validation_grade": "pristine",
+      "step": 209,
+      "turn": 8
+    }
+  ],
+  "excluded_rows": 4,
+  "exclusion_reasons": {
+    "missed_single_card_search": 4
+  },
+  "filtered_rows": 0,
+  "inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23\\offline\\shadow_cycle_20260707_ironclad_a0_win_23"
+  ],
+  "read_errors": [],
+  "resolved_file_count": 1,
+  "resolved_files": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_23\\offline\\shadow_cycle_20260707_ironclad_a0_win_23\\combat_search_labels.jsonl"
+  ],
+  "rows": 147,
+  "source_quality": {
+    "pristine": 100,
+    "usable_with_recoveries": 47
+  },
+  "source_quality_policy": "all",
+  "status_line": "combat_label_audit files=1 rows=147 excluded=4 missed_single_card_search=4",
+  "version": 1,
+  "warnings": []
+}

@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "shadow_inputs": [
+    "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+  ],
+  "shadow_training_source": {
+    "mode": "shadow_rows",
+    "inputs": [
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+    ],
+    "missing_inputs": [],
+    "resolved_files": [
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\route_risk.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\potion_tempo.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\pre_boss_deck_quality.jsonl",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\combat_search_labels.jsonl"
+    ],
+    "resolved_file_count": 4,
+    "categories": {
+      "route_risk": {
+        "row_file": "route_risk.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\route_risk.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "potion_tempo": {
+        "row_file": "potion_tempo.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\potion_tempo.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "pre_boss_deck_quality": {
+        "row_file": "pre_boss_deck_quality.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\pre_boss_deck_quality.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "combat_search": {
+        "row_file": "combat_search_labels.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\combat_search_labels.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      }
+    },
+    "warnings": [],
+    "source_quality_policy": "usable"
+  },
+  "min_count": 2,
+  "max_weight": 2.0,
+  "source_quality": "usable",
+  "models": {
+    "route_risk": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\training\\usable_models\\route_risk_model.json",
+      "examples": 35,
+      "positive_examples": 7,
+      "target": "died_within_3_floors",
+      "feature_weights": 75,
+      "source_quality": {
+        "usable_with_recoveries": 35
+      },
+      "training_source_quality": "usable",
+      "training_source": {
+        "mode": "shadow_rows",
+        "category": "route_risk",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "route_risk.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\route_risk.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "load_quality": {
+        "files": 1,
+        "rows": 35,
+        "accepted": 35,
+        "skipped": 0,
+        "skip_reasons": {}
+      }
+    },
+    "potion_tempo": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\training\\usable_models\\potion_tempo_model.json",
+      "examples": 273,
+      "positive_examples": 6,
+      "target": "used_potion",
+      "feature_weights": 50,
+      "source_quality": {
+        "usable_with_recoveries": 273
+      },
+      "training_source_quality": "usable",
+      "training_source": {
+        "mode": "shadow_rows",
+        "category": "potion_tempo",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "potion_tempo.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\potion_tempo.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "load_quality": {
+        "files": 1,
+        "rows": 273,
+        "accepted": 273,
+        "skipped": 0,
+        "skip_reasons": {}
+      }
+    },
+    "pre_boss_deck_quality": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\training\\usable_models\\deck_quality_model.json",
+      "examples": 2,
+      "positive_examples": 0,
+      "target": "cleared_act1_boss",
+      "feature_weights": 0,
+      "source_quality": {
+        "usable_with_recoveries": 2
+      },
+      "training_source_quality": "usable",
+      "training_source": {
+        "mode": "shadow_rows",
+        "category": "pre_boss_deck_quality",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "pre_boss_deck_quality.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\pre_boss_deck_quality.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "load_quality": {
+        "files": 1,
+        "rows": 2,
+        "accepted": 2,
+        "skipped": 0,
+        "skip_reasons": {}
+      }
+    },
+    "combat_search": {
+      "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\training\\usable_models\\combat_search_model.json",
+      "examples": 121,
+      "label_cards": 8,
+      "target": "label_first_card_key",
+      "value_target": "loss_delta_attacks_removed_kills_retaliation_damage_avoided_lethal",
+      "card_priors": 6,
+      "context_buckets": 31,
+      "source_quality": {
+        "usable_with_recoveries": 121
+      },
+      "training_source_quality": "usable",
+      "training_source": {
+        "mode": "shadow_rows",
+        "category": "combat_search",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "combat_search_labels.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\combat_search_labels.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "load_quality": {
+        "files": 1,
+        "rows": 129,
+        "accepted": 121,
+        "skipped": 8,
+        "skip_reasons": {
+          "missed_direct_kill": 8
+        }
+      }
+    }
+  },
+  "shadow_advice": {
+    "version": 1,
+    "shadow_inputs": {
+      "mode": "shadow_rows",
+      "resolved_files": [
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\combat_search_labels.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\potion_tempo.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\pre_boss_deck_quality.jsonl",
+        "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\route_risk.jsonl"
+      ],
+      "resolved_file_count": 4,
+      "categories": {
+        "route_risk": {
+          "row_count": 35,
+          "modes": [
+            "shadow_rows"
+          ],
+          "resolved_files": [
+            "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\route_risk.jsonl"
+          ],
+          "resolved_file_count": 1,
+          "warnings": []
+        },
+        "potion_tempo": {
+          "row_count": 273,
+          "modes": [
+            "shadow_rows"
+          ],
+          "resolved_files": [
+            "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\potion_tempo.jsonl"
+          ],
+          "resolved_file_count": 1,
+          "warnings": []
+        },
+        "pre_boss_deck_quality": {
+          "row_count": 2,
+          "modes": [
+            "shadow_rows"
+          ],
+          "resolved_files": [
+            "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\pre_boss_deck_quality.jsonl"
+          ],
+          "resolved_file_count": 1,
+          "warnings": []
+        },
+        "combat_search": {
+          "row_count": 129,
+          "modes": [
+            "shadow_rows"
+          ],
+          "resolved_files": [
+            "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\combat_search_labels.jsonl"
+          ],
+          "resolved_file_count": 1,
+          "warnings": []
+        }
+      },
+      "warnings": []
+    },
+    "advice_rows": {
+      "route_risk": 35,
+      "potion_tempo": 273,
+      "pre_boss_deck_quality": 2,
+      "combat_search": 129
+    },
+    "models_available": {
+      "route_risk": true,
+      "potion_tempo": true,
+      "pre_boss_deck_quality": true,
+      "combat_search": true
+    },
+    "model_training_source": {
+      "route_risk": {
+        "mode": "shadow_rows",
+        "category": "route_risk",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "route_risk.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\route_risk.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "potion_tempo": {
+        "mode": "shadow_rows",
+        "category": "potion_tempo",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "potion_tempo.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\potion_tempo.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "pre_boss_deck_quality": {
+        "mode": "shadow_rows",
+        "category": "pre_boss_deck_quality",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "pre_boss_deck_quality.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\pre_boss_deck_quality.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "combat_search": {
+        "mode": "shadow_rows",
+        "category": "combat_search",
+        "source_quality_policy": "usable",
+        "inputs": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry"
+        ],
+        "missing_inputs": [],
+        "row_file": "combat_search_labels.jsonl",
+        "resolved_files": [
+          "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\offline\\shadow_cycle_20260707_ironclad_a0_win_05_retry\\combat_search_labels.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      }
+    },
+    "model_training_source_quality": {
+      "route_risk": "usable",
+      "potion_tempo": "usable",
+      "pre_boss_deck_quality": "usable",
+      "combat_search": "usable"
+    },
+    "model_load_quality": {
+      "route_risk": {
+        "files": 1,
+        "rows": 35,
+        "accepted": 35,
+        "skipped": 0,
+        "skip_reasons": {}
+      },
+      "potion_tempo": {
+        "files": 1,
+        "rows": 273,
+        "accepted": 273,
+        "skipped": 0,
+        "skip_reasons": {}
+      },
+      "pre_boss_deck_quality": {
+        "files": 1,
+        "rows": 2,
+        "accepted": 2,
+        "skipped": 0,
+        "skip_reasons": {}
+      },
+      "combat_search": {
+        "files": 1,
+        "rows": 129,
+        "accepted": 121,
+        "skipped": 8,
+        "skip_reasons": {
+          "missed_direct_kill": 8
+        }
+      }
+    },
+    "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_05_retry\\training\\usable_shadow_advice"
+  }
+}

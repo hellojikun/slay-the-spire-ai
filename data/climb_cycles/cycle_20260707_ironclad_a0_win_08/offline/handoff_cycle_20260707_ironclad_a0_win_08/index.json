@@ -1,0 +1,1577 @@
+{
+  "version": 1,
+  "batch_name": "cycle_20260707_ironclad_a0_win_08",
+  "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\index.json",
+  "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\next_handoff.txt",
+  "primary_worker": {
+    "owner": "ai_agent",
+    "item": {
+      "action": "fix_combat_search_priority",
+      "count": 3,
+      "reason": "per_run_diagnosis",
+      "paths": [
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+        "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl"
+      ],
+      "shadow_advice": {
+        "available": true,
+        "categories": {
+          "route_risk": {
+            "rows": 45,
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "shadow_source_file_count": 3,
+            "shadow_input_file_count": 3,
+            "model_training_source_file_count": 0,
+            "model_training_source_quality": null,
+            "model_training_source_policy": null,
+            "model_load_quality": {}
+          },
+          "potion_tempo": {
+            "rows": 234,
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "shadow_source_file_count": 3,
+            "shadow_input_file_count": 3,
+            "model_training_source_file_count": 0,
+            "model_training_source_quality": null,
+            "model_training_source_policy": null,
+            "model_load_quality": {}
+          },
+          "pre_boss_deck_quality": {
+            "rows": 3,
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "shadow_source_file_count": 3,
+            "shadow_input_file_count": 3,
+            "model_training_source_file_count": 0,
+            "model_training_source_quality": null,
+            "model_training_source_policy": null,
+            "model_load_quality": {}
+          },
+          "combat_search": {
+            "rows": 112,
+            "high_risk_count": 0,
+            "watch_count": 0,
+            "shadow_source_file_count": 3,
+            "shadow_input_file_count": 3,
+            "model_training_source_file_count": 0,
+            "model_training_source_quality": null,
+            "model_training_source_policy": null,
+            "model_load_quality": {}
+          }
+        }
+      },
+      "priority": 0,
+      "failure_evidence": {
+        "synthetic_terminals": [
+          {
+            "step": 209,
+            "last_error": "Internal error: null",
+            "previous_error": "Internal error: null",
+            "terminal_recovery_attempted": true,
+            "terminal_recovery_succeeded": true,
+            "post_recovery_status": "healthy",
+            "terminal_outcome_source": "synthetic_after_mcp_null",
+            "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl"
+          },
+          {
+            "step": 290,
+            "last_error": "Internal error: null",
+            "previous_error": "Internal error: null",
+            "terminal_recovery_attempted": true,
+            "terminal_recovery_succeeded": true,
+            "post_recovery_status": "healthy",
+            "terminal_outcome_source": "synthetic_after_mcp_null",
+            "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl"
+          }
+        ]
+      },
+      "artifact_paths": {
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_08.json",
+        "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08",
+        "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_08",
+        "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_08.json",
+        "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_08.json",
+        "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_08.json",
+        "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_08.json",
+        "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_08.json",
+        "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_08.json",
+        "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_08.json",
+        "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08",
+        "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\index.json",
+        "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\next_handoff.txt"
+      },
+      "execution_contract": {
+        "mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false,
+        "allowed_operations": [
+          "inspect_logs",
+          "score_shadow_advice",
+          "train_shadow_models_to_scratch_dir"
+        ],
+        "forbidden_operations": [
+          "control_live_mcp",
+          "replace_live_policy_with_model"
+        ]
+      }
+    }
+  },
+  "primary_worker_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\ai_agent.txt",
+  "coordinator": {
+    "owner": "main_agent",
+    "item": {
+      "action": "improve_act1_boss_combat",
+      "gate_next_action": "improve_act1_boss_combat",
+      "diagnosis_next_action": "fix_combat_search_priority",
+      "priority": 0,
+      "next_probe_goal": {
+        "action": "improve_act1_boss_combat",
+        "primary_blocking_reason": "insufficient_act1_boss_cleared",
+        "metric": "act1_boss_cleared",
+        "deficit": 2,
+        "summary": "collect 2 more Act 1 boss clears",
+        "acceptance_criteria": {
+          "scope": "next_matching_run",
+          "counts_toward_metric": "act1_boss_cleared",
+          "accepted_manifest_categories": [
+            "clean_trainable",
+            "diagnostic_excluded"
+          ],
+          "rejected_manifest_categories": [
+            "infra_blocked"
+          ],
+          "requires_known_failure_attribution_if_failed": true,
+          "unknown_failure_attribution_values": [
+            "",
+            "none",
+            "unknown",
+            "unknown_clean_failure"
+          ],
+          "act1_boss": {
+            "reached": true,
+            "cleared": true
+          }
+        }
+      },
+      "acceptance_criteria": {
+        "scope": "next_matching_run",
+        "counts_toward_metric": "act1_boss_cleared",
+        "accepted_manifest_categories": [
+          "clean_trainable",
+          "diagnostic_excluded"
+        ],
+        "rejected_manifest_categories": [
+          "infra_blocked"
+        ],
+        "requires_known_failure_attribution_if_failed": true,
+        "unknown_failure_attribution_values": [
+          "",
+          "none",
+          "unknown",
+          "unknown_clean_failure"
+        ],
+        "act1_boss": {
+          "reached": true,
+          "cleared": true
+        }
+      },
+      "latest_run_acceptance": {
+        "available": true,
+        "accepted": false,
+        "metric": "act1_boss_cleared",
+        "action": "improve_act1_boss_combat",
+        "run_path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl",
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_08.json",
+        "category": "clean_trainable",
+        "reason": "completed_clean",
+        "validation_grade": "usable_with_recoveries",
+        "failure_attribution": "potion_planning",
+        "act1_boss": {
+          "reached": true,
+          "cleared": false,
+          "enemy_ids": [
+            "TheGuardian"
+          ],
+          "entry_step": 232,
+          "entry_hp": 79,
+          "entry_potion_count": 0,
+          "clear_step": null,
+          "prefix_pristine_clear": false,
+          "prefix_blockers": [
+            "synthetic_terminal_state",
+            "synthetic_terminal",
+            "synthetic_after_mcp_null"
+          ],
+          "last_turn": null,
+          "last_hp": 0,
+          "potion_use_steps": []
+        },
+        "blockers": [
+          "act1_boss_not_cleared",
+          "failure_attribution:potion_planning"
+        ]
+      },
+      "gate_execution_recovery": {
+        "terminal_recovery": {
+          "attempted": 2,
+          "succeeded": 2,
+          "synthetic_terminals": 2
+        }
+      },
+      "gate_data_quality": {
+        "total_manifests": 1,
+        "coverage_manifests": 1,
+        "shadow_feature_rows": 394,
+        "unknown_static_manifests": 1,
+        "unknown_static_total": 462,
+        "shadow_label_rows": 112,
+        "shadow_label_trainable": 107,
+        "shadow_label_excluded": 5,
+        "label_exclusion_manifests": 1,
+        "direct_kill_available_labels": 9,
+        "missed_single_card_search_labels": 3,
+        "schema_complete_manifests": 1,
+        "feature_issue_categories": {
+          "combat_search": 1,
+          "potion_tempo": 1,
+          "pre_boss_deck_quality": 1,
+          "route_risk": 1
+        },
+        "unknown_static_features": {
+          "potion_tempo:relic_unknown_count": 245,
+          "combat_search:relic_unknown_count": 76,
+          "potion_tempo:potion_unknown_count": 53,
+          "combat_search:deck_unknown_cards": 25,
+          "route_risk:relic_unknown_count": 25,
+          "combat_search:potion_unknown_count": 12,
+          "route_risk:deck_unknown_cards": 11,
+          "route_risk:potion_unknown_count": 10,
+          "pre_boss_deck_quality:relic_unknown_count": 4,
+          "pre_boss_deck_quality:deck_unknown_cards": 1
+        },
+        "label_exclusion_reasons": {
+          "missed_single_card_search": 3,
+          "missed_direct_kill": 2
+        }
+      },
+      "gate_failure_evidence": {
+        "runs_with_evidence": 3,
+        "by_type": {
+          "boss_combat": 3,
+          "pre_boss": 3,
+          "route": 3,
+          "synthetic_terminal": 2,
+          "terminal_outcome_source": 2
+        },
+        "synthetic_terminals": {
+          "by_source": {
+            "unknown_source": 2
+          },
+          "terminal_outcome_sources": {
+            "synthetic_after_mcp_null": 2
+          }
+        }
+      },
+      "artifact_paths": {
+        "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_08.json",
+        "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08",
+        "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_08",
+        "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_08.json",
+        "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_08.json",
+        "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_08.json",
+        "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_08.json",
+        "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_08.json",
+        "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_08.json",
+        "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_08.json",
+        "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08",
+        "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\index.json",
+        "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\next_handoff.txt"
+      },
+      "execution_contract": {
+        "mode": "coordination_only",
+        "requires_live_mcp_ownership": false,
+        "allowed_operations": [
+          "choose_next_handoff",
+          "merge_evidence",
+          "decide_acceptance"
+        ],
+        "forbidden_operations": [
+          "control_live_mcp_unless_ownership_changes"
+        ]
+      }
+    }
+  },
+  "coordinator_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\main_agent.txt",
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\runner_agent.txt"
+  },
+  "agent_queue_counts": {
+    "runner_agent": 0,
+    "engineering_agent": 0,
+    "ai_agent": 4,
+    "main_agent": 1
+  },
+  "agent_queue_actions": {
+    "runner_agent": [],
+    "engineering_agent": [],
+    "ai_agent": [
+      {
+        "action": "fix_combat_search_priority",
+        "count": 3,
+        "reason": "per_run_diagnosis",
+        "priority": 0,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "improve_act1_boss_combat",
+        "reason": "act1_boss_gate_needs_clear",
+        "priority": 0,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false,
+        "gate_metric": "act1_boss_cleared",
+        "gate_deficit": 2,
+        "acceptance_scope": "next_matching_run",
+        "counts_toward_metric": "act1_boss_cleared",
+        "latest_run_accepted": false,
+        "latest_run_blockers": [
+          "act1_boss_not_cleared",
+          "failure_attribution:potion_planning"
+        ]
+      },
+      {
+        "action": "review_excluded_combat_search_labels",
+        "count": 5,
+        "reason": "excluded_from_training",
+        "priority": 1,
+        "current_policy_replay_resolved": false,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "review_gate_data_quality",
+        "count": 10,
+        "reason": "gate_data_quality_issues",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      }
+    ],
+    "main_agent": [
+      {
+        "action": "improve_act1_boss_combat",
+        "priority": 0,
+        "execution_mode": "coordination_only",
+        "requires_live_mcp_ownership": false,
+        "gate_metric": "act1_boss_cleared",
+        "gate_deficit": 2,
+        "acceptance_scope": "next_matching_run",
+        "counts_toward_metric": "act1_boss_cleared",
+        "latest_run_accepted": false,
+        "latest_run_blockers": [
+          "act1_boss_not_cleared",
+          "failure_attribution:potion_planning"
+        ]
+      }
+    ]
+  },
+  "classification_reasons": {
+    "clean_trainable": {
+      "completed_clean": 3
+    },
+    "diagnostic_excluded": {},
+    "infra_blocked": {}
+  },
+  "validation": {
+    "by_grade": {
+      "usable_with_recoveries": 2,
+      "pristine": 1
+    },
+    "by_flag": {
+      "synthetic_after_mcp_null": 2,
+      "synthetic_terminal": 2,
+      "synthetic_terminal_state": 2
+    },
+    "act1_boss_reached": 3,
+    "act1_boss_cleared": 0,
+    "pristine_act1_boss_cleared": 0,
+    "act1_boss_prefix_blockers": {
+      "synthetic_after_mcp_null": 2,
+      "synthetic_terminal": 2,
+      "synthetic_terminal_state": 2
+    },
+    "act1_boss_clear_blockers": {}
+  },
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_08.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08",
+    "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_08",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\run_diagnosis_cycle_20260707_ironclad_a0_win_08.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\act1_boss_gate_cycle_20260707_ironclad_a0_win_08.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\static_knowledge_gaps_cycle_20260707_ironclad_a0_win_08.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\combat_label_audit_cycle_20260707_ironclad_a0_win_08.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\combat_label_replay_audit_cycle_20260707_ironclad_a0_win_08.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\offline_batch_cycle_20260707_ironclad_a0_win_08.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\artifact_manifest_cycle_20260707_ironclad_a0_win_08.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\handoff_cycle_20260707_ironclad_a0_win_08\\next_handoff.txt"
+  },
+  "offline_refresh_command": {
+    "kind": "offline_batch_replay",
+    "argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_climb_cycle_ironclad_a0_win_08",
+      "--output-dir",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline",
+      "--name",
+      "cycle_20260707_ironclad_a0_win_08",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+      "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+      "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl",
+      "--output-dir",
+      "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline",
+      "--name",
+      "cycle_20260707_ironclad_a0_win_08",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv_available": true,
+    "resolved_log_count": 3,
+    "touches_live_mcp": false,
+    "trains_models": false,
+    "writes_models": false
+  },
+  "shadow_advice_provenance": {
+    "available": true,
+    "advice_dir": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_08",
+    "summary_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_advice_cycle_20260707_ironclad_a0_win_08\\summary.json",
+    "mode": "shadow_rows",
+    "resolved_file_count": 4,
+    "warnings": [],
+    "categories": {
+      "route_risk": {
+        "rows": 15,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": false,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": null,
+        "model_training_source_file_count": 0,
+        "model_training_source_policy": null
+      },
+      "potion_tempo": {
+        "rows": 75,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": false,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": null,
+        "model_training_source_file_count": 0,
+        "model_training_source_policy": null
+      },
+      "pre_boss_deck_quality": {
+        "rows": 1,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": false,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": null,
+        "model_training_source_file_count": 0,
+        "model_training_source_policy": null
+      },
+      "combat_search": {
+        "rows": 26,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": false,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": null,
+        "model_training_source_file_count": 0,
+        "model_training_source_policy": null
+      }
+    }
+  },
+  "shadow_label_quality": {
+    "combat_search_labels": {
+      "total": 112,
+      "trainable": 107,
+      "excluded_from_training": 5,
+      "exclusion_reasons": {
+        "missed_single_card_search": 3,
+        "missed_direct_kill": 2
+      }
+    }
+  },
+  "combat_label_audit": {
+    "status_line": "combat_label_audit files=1 rows=112 excluded=5 missed_single_card_search=3 missed_direct_kill=2",
+    "resolved_file_count": 1,
+    "rows": 112,
+    "filtered_rows": 0,
+    "accepted_rows": 107,
+    "excluded_rows": 5,
+    "exclusion_reasons": {
+      "missed_direct_kill": 2,
+      "missed_single_card_search": 3
+    },
+    "source_quality": {
+      "pristine": 32,
+      "usable_with_recoveries": 80
+    },
+    "examples": [
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 16,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 2,
+        "step": 160,
+        "current_hp": 85,
+        "max_hp": 85,
+        "current_energy": 3,
+        "incoming": 36,
+        "initial_loss": 36,
+        "projected_loss": 24,
+        "loss_delta": 12,
+        "attacks_removed": 12,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Uppercut",
+        "label_sequence_card_keys": [
+          "Uppercut"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          224
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Uppercut",
+          "Strike_R",
+          "Defend_R",
+          "Defend_R"
+        ]
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 111,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 16,
+        "step": 286,
+        "current_hp": 12,
+        "max_hp": 96,
+        "current_energy": 3,
+        "incoming": 32,
+        "initial_loss": 32,
+        "projected_loss": 24,
+        "loss_delta": 8,
+        "attacks_removed": 8,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Clothesline",
+        "label_sequence_card_keys": [
+          "Clothesline"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "TheGuardian"
+        ],
+        "enemy_hps": [
+          117
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Clothesline",
+          "True Grit",
+          "Defend_R",
+          "Defend_R",
+          "Strike_R"
+        ]
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 112,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 16,
+        "step": 287,
+        "current_hp": 12,
+        "max_hp": 96,
+        "current_energy": 2,
+        "incoming": 32,
+        "initial_loss": 25,
+        "projected_loss": 17,
+        "loss_delta": 8,
+        "attacks_removed": 8,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Clothesline",
+        "label_sequence_card_keys": [
+          "Clothesline"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "TheGuardian"
+        ],
+        "enemy_hps": [
+          117
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Clothesline",
+          "Defend_R",
+          "Strike_R"
+        ]
+      },
+      {
+        "reasons": [
+          "missed_direct_kill"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 14,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 14,
+        "act": 1,
+        "turn": 4,
+        "step": 142,
+        "current_hp": 82,
+        "max_hp": 85,
+        "current_energy": 3,
+        "incoming": 5,
+        "initial_loss": 5,
+        "projected_loss": 0,
+        "loss_delta": 5,
+        "attacks_removed": 5,
+        "kills": 1,
+        "avoided_lethal": false,
+        "search_type": "one_turn_search",
+        "label_first_card_key": "Bash",
+        "label_sequence_card_keys": [
+          "Bash",
+          "Defend_R"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": true,
+        "direct_kill_card_keys": [
+          "Carnage"
+        ],
+        "direct_kill_card_indices": [
+          2
+        ],
+        "direct_kill_enemy_id": "SlaverBlue",
+        "direct_kill_enemy_hp": 10,
+        "enemy_ids": [
+          "SlaverBlue"
+        ],
+        "enemy_hps": [
+          10
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Defend_R",
+          "Carnage",
+          "Defend_R",
+          "Uppercut",
+          "Bash"
+        ]
+      },
+      {
+        "reasons": [
+          "missed_direct_kill"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 2,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 1,
+        "act": 1,
+        "turn": 5,
+        "step": 19,
+        "current_hp": 62,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 15,
+        "initial_loss": 15,
+        "projected_loss": 0,
+        "loss_delta": 15,
+        "attacks_removed": 15,
+        "kills": 1,
+        "avoided_lethal": false,
+        "search_type": "one_turn_search",
+        "label_first_card_key": "Defend_R",
+        "label_sequence_card_keys": [
+          "Defend_R",
+          "Defend_R",
+          "Strike_R"
+        ],
+        "direct_kill_available": true,
+        "direct_kill_card_keys": [
+          "Strike_R",
+          "Strike_R"
+        ],
+        "direct_kill_card_indices": [
+          3,
+          4
+        ],
+        "direct_kill_enemy_id": "Cultist",
+        "direct_kill_enemy_hp": 1,
+        "enemy_ids": [
+          "Cultist"
+        ],
+        "enemy_hps": [
+          1
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Defend_R",
+          "Defend_R",
+          "Strike_R",
+          "Strike_R"
+        ]
+      }
+    ]
+  },
+  "combat_label_replay_audit": {
+    "status_line": "combat_label_replay_audit files=1 excluded=5 replayed=5 matches_label=2 matches_actual=2 other=1",
+    "resolved_file_count": 1,
+    "excluded_rows": 5,
+    "replayed_rows": 5,
+    "current_policy_matches_label": 2,
+    "current_policy_matches_actual": 2,
+    "current_policy_other": 1,
+    "missing_source_log": 0,
+    "missing_source_step": 0,
+    "policy_errors": 0,
+    "replay_outcomes": {
+      "current_policy_matches_actual": 2,
+      "current_policy_matches_label": 2,
+      "current_policy_other": 1
+    },
+    "exclusion_reasons": {
+      "missed_direct_kill": 2,
+      "missed_single_card_search": 3
+    },
+    "examples": [
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 16,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 2,
+        "step": 160,
+        "current_hp": 85,
+        "max_hp": 85,
+        "current_energy": 3,
+        "incoming": 36,
+        "initial_loss": 36,
+        "projected_loss": 24,
+        "loss_delta": 12,
+        "attacks_removed": 12,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Uppercut",
+        "label_sequence_card_keys": [
+          "Uppercut"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          224
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Uppercut",
+          "Strike_R",
+          "Defend_R",
+          "Defend_R"
+        ],
+        "outcome": "current_policy_other",
+        "policy_action": {
+          "action": "use_potion",
+          "potion_slot": 2
+        },
+        "policy_reason": "Low HP; use 鲜血药水.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 1,
+          "target_index": 1
+        },
+        "actual_action": {
+          "action": "play_card"
+        }
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 111,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 16,
+        "step": 286,
+        "current_hp": 12,
+        "max_hp": 96,
+        "current_energy": 3,
+        "incoming": 32,
+        "initial_loss": 32,
+        "projected_loss": 24,
+        "loss_delta": 8,
+        "attacks_removed": 8,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Clothesline",
+        "label_sequence_card_keys": [
+          "Clothesline"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "TheGuardian"
+        ],
+        "enemy_hps": [
+          117
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Clothesline",
+          "True Grit",
+          "Defend_R",
+          "Defend_R",
+          "Strike_R"
+        ],
+        "outcome": "current_policy_matches_actual",
+        "policy_action": {
+          "action": "play_card",
+          "card_index": 2
+        },
+        "policy_reason": "Play 坚毅 with score 29.4.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 1,
+          "target_index": 1
+        },
+        "actual_action": {
+          "action": "play_card",
+          "card_index": 2
+        }
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 112,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 16,
+        "step": 287,
+        "current_hp": 12,
+        "max_hp": 96,
+        "current_energy": 2,
+        "incoming": 32,
+        "initial_loss": 25,
+        "projected_loss": 17,
+        "loss_delta": 8,
+        "attacks_removed": 8,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Clothesline",
+        "label_sequence_card_keys": [
+          "Clothesline"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "TheGuardian"
+        ],
+        "enemy_hps": [
+          117
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Clothesline",
+          "Defend_R",
+          "Strike_R"
+        ],
+        "outcome": "current_policy_matches_actual",
+        "policy_action": {
+          "action": "play_card",
+          "card_index": 2
+        },
+        "policy_reason": "Play 防御 with score 21.0.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 1,
+          "target_index": 1
+        },
+        "actual_action": {
+          "action": "play_card",
+          "card_index": 2
+        }
+      },
+      {
+        "reasons": [
+          "missed_direct_kill"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 14,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 14,
+        "act": 1,
+        "turn": 4,
+        "step": 142,
+        "current_hp": 82,
+        "max_hp": 85,
+        "current_energy": 3,
+        "incoming": 5,
+        "initial_loss": 5,
+        "projected_loss": 0,
+        "loss_delta": 5,
+        "attacks_removed": 5,
+        "kills": 1,
+        "avoided_lethal": false,
+        "search_type": "one_turn_search",
+        "label_first_card_key": "Bash",
+        "label_sequence_card_keys": [
+          "Bash",
+          "Defend_R"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": true,
+        "direct_kill_card_keys": [
+          "Carnage"
+        ],
+        "direct_kill_card_indices": [
+          2
+        ],
+        "direct_kill_enemy_id": "SlaverBlue",
+        "direct_kill_enemy_hp": 10,
+        "enemy_ids": [
+          "SlaverBlue"
+        ],
+        "enemy_hps": [
+          10
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Defend_R",
+          "Carnage",
+          "Defend_R",
+          "Uppercut",
+          "Bash"
+        ],
+        "outcome": "current_policy_matches_label",
+        "policy_action": {
+          "action": "play_card",
+          "card_index": 5,
+          "target_index": 1
+        },
+        "policy_reason": "One-turn search: sequence ['Bash', 'Defend_R'] loss 5->0, damage=10, retaliation_damage=0, kills=1, attacks_removed=5, avoided_lethal=False, score=73.0.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 5,
+          "target_index": 1
+        },
+        "actual_action": {
+          "action": "play_card",
+          "card_index": 5,
+          "target_index": 1
+        }
+      },
+      {
+        "reasons": [
+          "missed_direct_kill"
+        ],
+        "path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\shadow_cycle_20260707_ironclad_a0_win_08\\combat_search_labels.jsonl",
+        "line": 2,
+        "source_log": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 1,
+        "act": 1,
+        "turn": 5,
+        "step": 19,
+        "current_hp": 62,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 15,
+        "initial_loss": 15,
+        "projected_loss": 0,
+        "loss_delta": 15,
+        "attacks_removed": 15,
+        "kills": 1,
+        "avoided_lethal": false,
+        "search_type": "one_turn_search",
+        "label_first_card_key": "Defend_R",
+        "label_sequence_card_keys": [
+          "Defend_R",
+          "Defend_R",
+          "Strike_R"
+        ],
+        "direct_kill_available": true,
+        "direct_kill_card_keys": [
+          "Strike_R",
+          "Strike_R"
+        ],
+        "direct_kill_card_indices": [
+          3,
+          4
+        ],
+        "direct_kill_enemy_id": "Cultist",
+        "direct_kill_enemy_hp": 1,
+        "enemy_ids": [
+          "Cultist"
+        ],
+        "enemy_hps": [
+          1
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Defend_R",
+          "Defend_R",
+          "Strike_R",
+          "Strike_R"
+        ],
+        "outcome": "current_policy_matches_label",
+        "policy_action": {
+          "action": "play_card",
+          "card_index": 1
+        },
+        "policy_reason": "One-turn search: sequence ['Defend_R', 'Defend_R', 'Strike_R'] loss 15->0, damage=1, retaliation_damage=0, kills=1, attacks_removed=15, avoided_lethal=False, score=121.2.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 1
+        },
+        "actual_action": {
+          "action": "play_card",
+          "card_index": 1
+        }
+      }
+    ]
+  },
+  "failure_evidence": {
+    "runs_with_evidence": 3,
+    "by_type": {
+      "boss_combat": 3,
+      "pre_boss": 3,
+      "route": 3,
+      "synthetic_terminal": 2,
+      "terminal_outcome_source": 2
+    },
+    "synthetic_terminals": {
+      "by_source": {
+        "unknown_source": 2
+      },
+      "terminal_outcome_sources": {
+        "synthetic_after_mcp_null": 2
+      }
+    }
+  },
+  "action_recovery": {},
+  "terminal_recovery": {
+    "attempted": 2,
+    "succeeded": 2,
+    "synthetic_terminals": 2
+  },
+  "gate_execution_recovery": {
+    "terminal_recovery": {
+      "attempted": 2,
+      "succeeded": 2,
+      "synthetic_terminals": 2
+    }
+  },
+  "gate_data_quality": {
+    "total_manifests": 1,
+    "coverage_manifests": 1,
+    "shadow_feature_rows": 394,
+    "unknown_static_manifests": 1,
+    "unknown_static_total": 462,
+    "shadow_label_rows": 112,
+    "shadow_label_trainable": 107,
+    "shadow_label_excluded": 5,
+    "label_exclusion_manifests": 1,
+    "direct_kill_available_labels": 9,
+    "missed_single_card_search_labels": 3,
+    "schema_complete_manifests": 1,
+    "feature_issue_categories": {
+      "combat_search": 1,
+      "potion_tempo": 1,
+      "pre_boss_deck_quality": 1,
+      "route_risk": 1
+    },
+    "unknown_static_features": {
+      "potion_tempo:relic_unknown_count": 245,
+      "combat_search:relic_unknown_count": 76,
+      "potion_tempo:potion_unknown_count": 53,
+      "combat_search:deck_unknown_cards": 25,
+      "route_risk:relic_unknown_count": 25,
+      "combat_search:potion_unknown_count": 12,
+      "route_risk:deck_unknown_cards": 11,
+      "route_risk:potion_unknown_count": 10,
+      "pre_boss_deck_quality:relic_unknown_count": 4,
+      "pre_boss_deck_quality:deck_unknown_cards": 1
+    },
+    "label_exclusion_reasons": {
+      "missed_single_card_search": 3,
+      "missed_direct_kill": 2
+    }
+  },
+  "gate_data_quality_replay_resolved_issues": {},
+  "static_knowledge_gaps": {
+    "status_line": "static_knowledge_gaps logs=3 missing=1003 cards=312/6 potions=111/1 relics=580/4",
+    "resolved_log_count": 3,
+    "total_missing_occurrences": 1003,
+    "observed_aliases": {
+      "cards": 37
+    },
+    "totals": {
+      "cards": {
+        "occurrences": 312,
+        "unique": 6
+      },
+      "potions": {
+        "occurrences": 111,
+        "unique": 1
+      },
+      "relics": {
+        "occurrences": 580,
+        "unique": 4
+      }
+    },
+    "entities": {
+      "cards": [
+        {
+          "entity": "Doubt",
+          "count": 254,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 46,
+              "field": "deck_cards"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 47,
+              "field": "deck_cards"
+            }
+          ]
+        },
+        {
+          "entity": "疑虑",
+          "count": 34,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 55,
+              "field": "combat.hand"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 56,
+              "field": "combat.hand"
+            }
+          ]
+        },
+        {
+          "entity": "寄生",
+          "count": 20,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+              "step": 111,
+              "field": "combat.hand"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+              "step": 112,
+              "field": "combat.hand"
+            }
+          ]
+        },
+        {
+          "entity": "Infernal Blade",
+          "count": 2,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 22,
+              "field": "card_reward_options"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 38,
+              "field": "card_reward_options"
+            }
+          ]
+        },
+        {
+          "entity": "Bloodletting",
+          "count": 1,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+              "step": 101,
+              "field": "card_reward_options"
+            }
+          ]
+        }
+      ],
+      "potions": [
+        {
+          "entity": "HeartOfIron",
+          "count": 111,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 21,
+              "field": "potions"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 22,
+              "field": "potions"
+            }
+          ]
+        }
+      ],
+      "relics": [
+        {
+          "entity": "Pantograph",
+          "count": 182,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 84,
+              "field": "relic_items"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 85,
+              "field": "relic_items"
+            }
+          ]
+        },
+        {
+          "entity": "Pen Nib",
+          "count": 169,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 97,
+              "field": "relic_items"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 98,
+              "field": "relic_items"
+            }
+          ]
+        },
+        {
+          "entity": "Orichalcum",
+          "count": 121,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+              "step": 89,
+              "field": "relic_items"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_022438_ironclad_a0.jsonl",
+              "step": 90,
+              "field": "relic_items"
+            }
+          ]
+        },
+        {
+          "entity": "MawBank",
+          "count": 108,
+          "sources": [
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 158,
+              "field": "relic_items"
+            },
+            {
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_023122_ironclad_a0.jsonl",
+              "step": 159,
+              "field": "relic_items"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "gate_failure_evidence": {
+    "runs_with_evidence": 3,
+    "by_type": {
+      "boss_combat": 3,
+      "pre_boss": 3,
+      "route": 3,
+      "synthetic_terminal": 2,
+      "terminal_outcome_source": 2
+    },
+    "synthetic_terminals": {
+      "by_source": {
+        "unknown_source": 2
+      },
+      "terminal_outcome_sources": {
+        "synthetic_after_mcp_null": 2
+      }
+    }
+  },
+  "gate_passed": false,
+  "gate_status_line": "act1_boss_gate NEEDS_WORK: IRONCLAD A0 runs=3, reached=3/3, cleared=0/2, pristine_cleared=0/2, infra=0, unknown_attr=0; top_failure=potion_planning:3; top_uncleared_boss=Hexaghost:2/potion_planning:2; feature_rows=394, feature_unknown=potion_tempo:relic_unknown_count:245; labels=112, label_exclusions=5/missed_single_card_search:3; evidence=route:3, terminal_sources=synthetic_after_mcp_null:2; terminal_recovery=synthetic:2,attempted:2,succeeded:2; need_cleared=2, need_pristine=2; latest_reject=act1_boss_not_cleared|failure_attribution:potion_planning -> improve_act1_boss_combat",
+  "gate_next_action": "improve_act1_boss_combat",
+  "gate_progress": {
+    "act1_boss_reached": {
+      "current": 3,
+      "required": 3,
+      "deficit": 0,
+      "ok": true
+    },
+    "act1_boss_cleared": {
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    },
+    "pristine_act1_boss_cleared": {
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    }
+  },
+  "gate_remaining_progress": [
+    {
+      "metric": "act1_boss_cleared",
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    },
+    {
+      "metric": "pristine_act1_boss_cleared",
+      "current": 0,
+      "required": 2,
+      "deficit": 2,
+      "ok": false
+    }
+  ],
+  "gate_primary_remaining_progress": {
+    "metric": "act1_boss_cleared",
+    "current": 0,
+    "required": 2,
+    "deficit": 2,
+    "ok": false
+  },
+  "next_probe_goal": {
+    "action": "improve_act1_boss_combat",
+    "primary_blocking_reason": "insufficient_act1_boss_cleared",
+    "metric": "act1_boss_cleared",
+    "deficit": 2,
+    "summary": "collect 2 more Act 1 boss clears",
+    "acceptance_criteria": {
+      "scope": "next_matching_run",
+      "counts_toward_metric": "act1_boss_cleared",
+      "accepted_manifest_categories": [
+        "clean_trainable",
+        "diagnostic_excluded"
+      ],
+      "rejected_manifest_categories": [
+        "infra_blocked"
+      ],
+      "requires_known_failure_attribution_if_failed": true,
+      "unknown_failure_attribution_values": [
+        "",
+        "none",
+        "unknown",
+        "unknown_clean_failure"
+      ],
+      "act1_boss": {
+        "reached": true,
+        "cleared": true
+      }
+    }
+  },
+  "latest_run_acceptance": {
+    "available": true,
+    "accepted": false,
+    "metric": "act1_boss_cleared",
+    "action": "improve_act1_boss_combat",
+    "run_path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_08\\20260707_024019_ironclad_a0.jsonl",
+    "manifest_path": "data\\climb_cycles\\cycle_20260707_ironclad_a0_win_08\\offline\\training_manifest_cycle_20260707_ironclad_a0_win_08.json",
+    "category": "clean_trainable",
+    "reason": "completed_clean",
+    "validation_grade": "usable_with_recoveries",
+    "failure_attribution": "potion_planning",
+    "act1_boss": {
+      "reached": true,
+      "cleared": false,
+      "enemy_ids": [
+        "TheGuardian"
+      ],
+      "entry_step": 232,
+      "entry_hp": 79,
+      "entry_potion_count": 0,
+      "clear_step": null,
+      "prefix_pristine_clear": false,
+      "prefix_blockers": [
+        "synthetic_terminal_state",
+        "synthetic_terminal",
+        "synthetic_after_mcp_null"
+      ],
+      "last_turn": null,
+      "last_hp": 0,
+      "potion_use_steps": []
+    },
+    "blockers": [
+      "act1_boss_not_cleared",
+      "failure_attribution:potion_planning"
+    ]
+  },
+  "recommended_next_action": "improve_act1_boss_combat"
+}

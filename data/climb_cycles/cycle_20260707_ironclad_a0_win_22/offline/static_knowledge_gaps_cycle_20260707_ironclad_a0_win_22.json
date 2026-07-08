@@ -1,0 +1,410 @@
+{
+  "entities": {
+    "bosses": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "items": [
+        {
+          "count": 123,
+          "entity": "Sever Soul",
+          "normalized_keys": [
+            "seversoul",
+            "\u65ad\u9b42\u65a9"
+          ],
+          "sources": [
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 184
+            },
+            {
+              "field": "deck_cards",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 185
+            },
+            {
+              "field": "deck_cards",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 186
+            },
+            {
+              "field": "deck_cards",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 187
+            },
+            {
+              "field": "deck_cards",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 188
+            }
+          ]
+        },
+        {
+          "count": 17,
+          "entity": "\u65ad\u9b42\u65a9",
+          "normalized_keys": [
+            "\u65ad\u9b42\u65a9"
+          ],
+          "sources": [
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 202
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 203
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 204
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 206
+            },
+            {
+              "field": "combat.hand",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 207
+            }
+          ]
+        },
+        {
+          "count": 1,
+          "entity": "Brutality",
+          "normalized_keys": [
+            "brutality",
+            "\u6b8b\u66b4"
+          ],
+          "sources": [
+            {
+              "field": "card_reward_options",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 229
+            }
+          ]
+        }
+      ],
+      "occurrences": 141,
+      "unique": 3
+    },
+    "monsters": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "items": [
+        {
+          "count": 116,
+          "entity": "HeartOfIron",
+          "normalized_keys": [
+            "heartofiron",
+            "\u94c1\u4e4b\u5fc3"
+          ],
+          "sources": [
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 27
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 28
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 29
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 30
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 31
+            }
+          ]
+        },
+        {
+          "count": 17,
+          "entity": "SneckoOil",
+          "normalized_keys": [
+            "sneckooil",
+            "\u5f02\u86c7\u4e4b\u6cb9"
+          ],
+          "sources": [
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 150
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 151
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 152
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 153
+            },
+            {
+              "field": "potions",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 154
+            }
+          ]
+        }
+      ],
+      "occurrences": 133,
+      "unique": 2
+    },
+    "relics": {
+      "items": [
+        {
+          "count": 261,
+          "entity": "Blood Vial",
+          "normalized_keys": [
+            "bloodvial",
+            "\u5c0f\u8840\u74f6"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 132
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 133
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 134
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 135
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 136
+            }
+          ]
+        },
+        {
+          "count": 188,
+          "entity": "MawBank",
+          "normalized_keys": [
+            "mawbank",
+            "\u5de8\u53e3\u50a8\u84c4\u7f50"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 205
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 206
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 207
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 208
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 209
+            }
+          ]
+        },
+        {
+          "count": 118,
+          "entity": "Centennial Puzzle",
+          "normalized_keys": [
+            "centennialpuzzle",
+            "\u767e\u5e74\u79ef\u6728"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_094523_ironclad_a0.jsonl",
+              "step": 129
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_094523_ironclad_a0.jsonl",
+              "step": 130
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_094523_ironclad_a0.jsonl",
+              "step": 131
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_094523_ironclad_a0.jsonl",
+              "step": 132
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_094523_ironclad_a0.jsonl",
+              "step": 133
+            }
+          ]
+        },
+        {
+          "count": 118,
+          "entity": "Velvet Choker",
+          "normalized_keys": [
+            "velvetchoker",
+            "\u5929\u9e45\u7ed2\u9888\u5708"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 275
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 276
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 277
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 278
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+              "step": 279
+            }
+          ]
+        },
+        {
+          "count": 56,
+          "entity": "SacredBark",
+          "normalized_keys": [
+            "sacredbark",
+            "\u795e\u5723\u6811\u76ae"
+          ],
+          "sources": [
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 233
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 234
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 235
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 236
+            },
+            {
+              "field": "relic_items",
+              "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl",
+              "step": 237
+            }
+          ]
+        }
+      ],
+      "occurrences": 741,
+      "unique": 5
+    }
+  },
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_094523_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl"
+  ],
+  "knowledge_dir": "data\\static_knowledge",
+  "knowledge_source_counts": {
+    "bosses": 3,
+    "cards": 75,
+    "monsters": 29,
+    "potions": 30,
+    "relics": 44
+  },
+  "observed_aliases": {
+    "cards": 49
+  },
+  "read_errors": [],
+  "resolved_log_count": 3,
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_094523_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_095140_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_22\\20260707_100132_ironclad_a0.jsonl"
+  ],
+  "status_line": "static_knowledge_gaps logs=3 missing=1015 cards=141/3 potions=133/2 relics=741/5",
+  "total_missing_occurrences": 1015,
+  "totals": {
+    "bosses": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "occurrences": 141,
+      "unique": 3
+    },
+    "monsters": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "occurrences": 133,
+      "unique": 2
+    },
+    "relics": {
+      "occurrences": 741,
+      "unique": 5
+    }
+  },
+  "version": 1,
+  "warnings": []
+}
