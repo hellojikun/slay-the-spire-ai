@@ -20,6 +20,27 @@ class ClimbCycleTests(unittest.TestCase):
             log = root / "runs" / "clean.jsonl"
             write_jsonl(log, clean_rows())
             external_rows = root / "external" / CARD_PRIOR_ROWS_FILE
+            raw_external = root / "external" / "raw_runs.jsonl"
+            write_jsonl(
+                raw_external,
+                [
+                    {
+                        "character_chosen": "IRONCLAD",
+                        "ascension_level": 0,
+                        "victory": True,
+                        "floor_reached": 57,
+                        "score": 3210,
+                        "card_choices": [
+                            {"floor": 1, "picked": "Shrug It Off", "not_picked": ["Flex", "Clash"]},
+                            {"floor": 4, "picked": "SKIP", "not_picked": ["Clash", "Fire Breathing"]},
+                        ],
+                        "items_purged": ["Strike_R"],
+                        "items_purged_floors": [8],
+                        "purchased_purges": 1,
+                        "master_deck": ["Strike_R", "Defend_R", "Bash", "Shrug It Off"],
+                    }
+                ],
+            )
             write_jsonl(
                 external_rows,
                 [
@@ -44,6 +65,7 @@ class ClimbCycleTests(unittest.TestCase):
                     {
                         "manifest_type": "external_prior_manifest",
                         "source_id": "unit_external",
+                        "resolved_files": [str(raw_external)],
                         "artifacts": {"card_reward_priors": str(external_rows)},
                     }
                 ),
@@ -98,6 +120,12 @@ class ClimbCycleTests(unittest.TestCase):
             self.assertEqual(result["training"]["external_priors"]["status"], "trained")
             self.assertFalse(result["training"]["external_priors"]["runtime_authority"])
             self.assertTrue(Path(result["training"]["external_priors"]["model_path"]).exists())
+            self.assertEqual(result["training"]["external_structure_priors"]["status"], "trained")
+            self.assertFalse(result["training"]["external_structure_priors"]["runtime_authority"])
+            self.assertEqual(result["training"]["external_structure_priors"]["reward_decision_rows"], 2)
+            self.assertEqual(result["training"]["external_structure_priors"]["purge_rows"], 1)
+            self.assertEqual(result["training"]["external_structure_priors"]["deck_cycle_rows"], 1)
+            self.assertTrue(Path(result["training"]["external_structure_priors"]["model_path"]).exists())
             self.assertEqual(result["training"]["card_external_prior_blend"]["status"], "trained")
             self.assertFalse(result["training"]["card_external_prior_blend"]["runtime_authority"])
             blend_path = Path(result["training"]["card_external_prior_blend"]["model_path"])
@@ -114,6 +142,7 @@ class ClimbCycleTests(unittest.TestCase):
             self.assertIn("shadow=trained", result["status_line"])
             self.assertIn("combat_value=skipped", result["status_line"])
             self.assertIn("external_prior=trained", result["training"]["status_line"])
+            self.assertIn("external_structure=trained", result["training"]["status_line"])
             self.assertIn("external_blend=trained", result["training"]["status_line"])
             self.assertEqual(result["policy_boundary"]["heuristic_strategy_investment"], "frozen")
             self.assertEqual(result["policy_boundary"]["model_authority"], "assist")
@@ -171,6 +200,7 @@ class ClimbCycleTests(unittest.TestCase):
             self.assertEqual(result["training"]["combat_value_model"]["status"], "skipped")
             self.assertEqual(result["training"]["learned_memory"]["status"], "skipped")
             self.assertEqual(result["training"]["external_priors"]["status"], "skipped")
+            self.assertEqual(result["training"]["external_structure_priors"]["status"], "skipped")
             self.assertEqual(result["training"]["card_external_prior_blend"]["status"], "skipped")
             self.assertEqual(
                 result["training"]["external_priors"]["reason"],
@@ -185,6 +215,7 @@ class ClimbCycleTests(unittest.TestCase):
             log = root / "runs" / "clean.jsonl"
             write_jsonl(log, clean_rows())
             external_rows = root / "external" / CARD_PRIOR_ROWS_FILE
+
             write_jsonl(
                 external_rows,
                 [

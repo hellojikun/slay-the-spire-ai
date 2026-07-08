@@ -1,4 +1,4 @@
-﻿"""Run the climb -> replay -> learn cycle as one auditable command."""
+"""Run the climb -> replay -> learn cycle as one auditable command."""
 
 from __future__ import annotations
 
@@ -38,6 +38,7 @@ from .import_external_runs import EXTERNAL_PRIOR_GRADE
 from .train_external_priors import external_prior_runtime_output_risk
 from .train_external_priors import load_examples_with_stats as load_external_prior_examples_with_stats
 from .train_external_priors import train_external_card_prior_model
+from .train_external_structure_priors import train_external_structure_priors
 from .train_potion_tempo_model import load_examples_with_stats as load_potion_examples_with_stats
 from .train_potion_tempo_model import train_stats_model as train_potion_model
 from .train_route_risk_model import load_examples_with_stats as load_route_examples_with_stats
@@ -518,6 +519,11 @@ def _train_from_offline_batch(
         prior_scale=external_prior_scale,
     )
     summary["external_priors"] = external_summary
+    summary["external_structure_priors"] = _train_external_structure_priors_from_inputs(
+        external_prior_inputs or [],
+        cycle_dir=cycle_dir,
+        model_dir=external_prior_model_dir,
+    )
     summary["card_external_prior_blend"] = _blend_card_model_with_external_prior(
         card_summary,
         external_summary,
@@ -1008,6 +1014,37 @@ def _train_external_priors_from_inputs(
     summary_path = model_path.parent / "external_prior_training_summary.json"
     _write_json(summary_path, summary)
     return {**summary, "summary_path": str(summary_path)}
+
+
+def _train_external_structure_priors_from_inputs(
+    inputs: Iterable[Path],
+    *,
+    cycle_dir: Path,
+    model_dir: Path | None,
+) -> dict[str, Any]:
+    input_paths = [Path(path) for path in inputs]
+    if not input_paths:
+        return {
+            "status": "skipped",
+            "reason": "external_prior_inputs_not_configured",
+            "source_quality": EXTERNAL_PRIOR_GRADE,
+            "runtime_authority": False,
+        }
+    output_model_dir = model_dir or (cycle_dir / "training" / "external_structure_models")
+    rows_dir = cycle_dir / "training" / "external_structure_rows"
+    summary = train_external_structure_priors(
+        input_paths,
+        rows_dir=rows_dir,
+        model_dir=output_model_dir,
+        backend="auto",
+    )
+    return {
+        **summary,
+        "source_quality": EXTERNAL_PRIOR_GRADE,
+        "runtime_authority": False,
+        "runtime_default_enabled": False,
+        "does_not_control_live_mcp": True,
+    }
 
 
 def _replay_learned_memory(manifest_path: Path, *, learned_path: Path, reset: bool) -> dict[str, Any]:
@@ -1688,6 +1725,11 @@ def _training_status_line(summary: dict[str, Any]) -> str:
     memory = summary.get("learned_memory") if isinstance(summary.get("learned_memory"), dict) else {}
     combat_value = summary.get("combat_value_model") if isinstance(summary.get("combat_value_model"), dict) else {}
     external = summary.get("external_priors") if isinstance(summary.get("external_priors"), dict) else {}
+    external_structure = (
+        summary.get("external_structure_priors")
+        if isinstance(summary.get("external_structure_priors"), dict)
+        else {}
+    )
     external_blend = (
         summary.get("card_external_prior_blend")
         if isinstance(summary.get("card_external_prior_blend"), dict)
@@ -1701,6 +1743,8 @@ def _training_status_line(summary: dict[str, Any]) -> str:
         f"combat_value={combat_value.get('status')} examples={combat_value.get('examples', 0)} "
         f"memory={memory.get('status')} applied={memory.get('applied_completed_runs', 0)} "
         f"external_prior={external.get('status')} examples={external.get('examples', 0)} "
+        f"external_structure={external_structure.get('status')} rows="
+        f"{external_structure.get('reward_decision_rows', 0) + external_structure.get('purge_rows', 0) + external_structure.get('deck_cycle_rows', 0)} "
         f"external_blend={external_blend.get('status')}"
     )
 
