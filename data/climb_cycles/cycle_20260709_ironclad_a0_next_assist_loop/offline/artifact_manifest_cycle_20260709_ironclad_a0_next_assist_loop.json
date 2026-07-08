@@ -1,0 +1,224 @@
+{
+  "version": 1,
+  "name": "cycle_20260709_ironclad_a0_next_assist_loop",
+  "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_next_assist_loop.json",
+  "inputs": [
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop"
+  ],
+  "input_count": 1,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 3888898,
+      "index": 0
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_002742_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_003547_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_004431_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 3,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_002742_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1191891,
+      "sha256": "3dc446e32f13fe99b033e7172f758839a524ce12d635972982fd0066112edfe8",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_003547_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1758703,
+      "sha256": "08fbc6069ce79fdf5dbe36a6584e7e5d8d95df9a9c5f99e955f49d95d25af6ff",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_004431_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 938304,
+      "sha256": "a5e1cde78f183e15cb910c06f106052517a1e93b436343652bd79d68f17f2964",
+      "index": 2
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\training_manifest_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\shadow_cycle_20260709_ironclad_a0_next_assist_loop",
+    "advice_dir": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\shadow_advice_cycle_20260709_ironclad_a0_next_assist_loop",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\offline_batch_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_next_assist_loop.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\shadow_advice_cycle_20260709_ironclad_a0_next_assist_loop",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 885868
+    },
+    "combat_label_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_next_assist_loop.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 4004,
+      "sha256": "a05e064c3c5ead1a9505799498bec744f3c84f37198010c20716ee902cba14cd"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_next_assist_loop.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 5098,
+      "sha256": "3d50894b18c3c47638fa0ffffe62f040b4f1cddf357b1604adc63d61a8e40125"
+    },
+    "diagnosis_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_next_assist_loop.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 931185,
+      "sha256": "66740e4625e9df71f0d5a97744f4c7589b69b838df1b96773bc4d75db499e4a4"
+    },
+    "gate_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_next_assist_loop.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 16033,
+      "sha256": "81fde97ee0b59fc24fed7b008cc17fa120cd1d6daff5f62ef6d111b84288d24d"
+    },
+    "handoff_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 573515
+    },
+    "handoff_index_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 47569,
+      "sha256": "085575c85954516f814cd62554979754f562275d7dd3cdfda8e7d7fdf0f63b84"
+    },
+    "manifest_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\training_manifest_cycle_20260709_ironclad_a0_next_assist_loop.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 275697,
+      "sha256": "54efcddd872f6bc78bb8f12b5a676c0c84088ac19927819573a4e7154f97cbe4"
+    },
+    "next_handoff_prompt_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 46179,
+      "sha256": "12d55673e5fa657fba66e5fbd6e7c1ecd2f0c5d2d8e24250b8ed6e55f6b687f0"
+    },
+    "shadow_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\shadow_cycle_20260709_ironclad_a0_next_assist_loop",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 2132525
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_next_assist_loop.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1905,
+      "sha256": "5298345c65b3913e387b7fdab92e38c6609e709af7e647b7cf914e3b816a2f5f"
+    },
+    "summary_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\offline_batch_cycle_20260709_ironclad_a0_next_assist_loop.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 486843,
+      "sha256": "439cece61e1eb58e4f02a9dbb8052bbd8cb91fb5d4c4c865a4a0aca74f6946b8"
+    },
+    "ai_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 136878,
+      "sha256": "fdf75a72125b320f543b9d7eb00080e9e12f60a7c5194628e2dba1dc03823cbc"
+    },
+    "engineering_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 85370,
+      "sha256": "10b2c0c709c9862a79050deeabe6a0436690743aa365a21dfc391fd3869701af"
+    },
+    "main_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 101630,
+      "sha256": "f462d9d9f075d0991de4d4fb24e850b38c04e46a0df288de52be07ac348c5dde"
+    },
+    "runner_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 85384,
+      "sha256": "060ff921e0cc7c37d689dab241ff7dca8ad8bbb604aeb57f1609f8eb89c74748"
+    },
+    "ai_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17875,
+      "sha256": "caf9d640e9a2e533399730ca769504740e3d9f2a5221d6391f600c558010ec44"
+    },
+    "engineering_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17418,
+      "sha256": "736c0c28326d2902aea98d5e26dfdf96c73c72b95452b286dfa464cd678ae47d"
+    },
+    "main_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17785,
+      "sha256": "41c614f63131383464d9a6b155155b33ad072abdcca550c02a0fd39c1a994ced"
+    },
+    "runner_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_ironclad_a0_next_assist_loop\\offline\\handoff_cycle_20260709_ironclad_a0_next_assist_loop\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17427,
+      "sha256": "edf325b8095e5ae5489597ef8c56d1c3a79db06ba695838c83fb8615479afe6d"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

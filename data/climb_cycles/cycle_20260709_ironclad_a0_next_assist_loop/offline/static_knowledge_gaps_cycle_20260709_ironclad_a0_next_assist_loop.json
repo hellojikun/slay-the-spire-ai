@@ -1,0 +1,78 @@
+{
+  "entities": {
+    "bosses": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "monsters": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "items": [],
+      "occurrences": 0,
+      "unique": 0
+    }
+  },
+  "inputs": [
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_002742_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_003547_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_004431_ironclad_a0.jsonl"
+  ],
+  "knowledge_dir": "data\\static_knowledge",
+  "knowledge_source_counts": {
+    "bosses": 11,
+    "cards": 354,
+    "monsters": 61,
+    "potions": 42,
+    "relics": 181
+  },
+  "observed_aliases": {
+    "cards": 45
+  },
+  "read_errors": [],
+  "resolved_log_count": 3,
+  "resolved_logs": [
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_002742_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_003547_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260709_ironclad_a0_next_assist_loop\\20260709_004431_ironclad_a0.jsonl"
+  ],
+  "status_line": "static_knowledge_gaps logs=3 missing=0",
+  "total_missing_occurrences": 0,
+  "totals": {
+    "bosses": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "cards": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "monsters": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "potions": {
+      "occurrences": 0,
+      "unique": 0
+    },
+    "relics": {
+      "occurrences": 0,
+      "unique": 0
+    }
+  },
+  "version": 1,
+  "warnings": []
+}

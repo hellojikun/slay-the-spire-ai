@@ -1,0 +1,2222 @@
+{
+  "version": 1,
+  "batch_name": "cycle_20260709_ironclad_a0_validation39_retrain_structure",
+  "owner": "runner_agent",
+  "handoff_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.json",
+  "assignment_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.txt",
+  "agent_handoff_paths": {
+    "ai_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\ai_agent.json",
+    "engineering_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\engineering_agent.json",
+    "main_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\main_agent.json",
+    "runner_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\ai_agent.txt",
+    "engineering_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\engineering_agent.txt",
+    "main_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\main_agent.txt",
+    "runner_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.txt"
+  },
+  "ownership_contract": {
+    "role": "flow/data collection",
+    "owns": [
+      "run monitoring",
+      "A0/A1 validation batches",
+      "manifest/advice/gate refresh"
+    ],
+    "live_mcp_policy": "may control live MCP only when explicitly assigned ownership"
+  },
+  "default_execution_contract": {
+    "mode": "read_only_flow_monitoring",
+    "requires_live_mcp_ownership": false,
+    "allowed_operations": [
+      "read_logs",
+      "refresh_offline_manifest_advice_gate",
+      "prepare_probe_command"
+    ],
+    "forbidden_operations": [
+      "edit_code",
+      "train_models",
+      "control_live_mcp_without_explicit_ownership"
+    ]
+  },
+  "queue_count": 1,
+  "first_item": {
+    "action": "collect_next_validation_batch",
+    "reason": "act1_boss_gate_passed",
+    "priority": 1,
+    "next_probe_goal": {
+      "action": "promote_to_next_validation_batch",
+      "primary_blocking_reason": null,
+      "metric": null,
+      "deficit": 0,
+      "summary": "gate passed; promote to the next validation batch",
+      "acceptance_criteria": {
+        "scope": "gate_already_passed",
+        "counts_toward_metric": null,
+        "no_next_validation_required": true
+      }
+    },
+    "acceptance_criteria": {
+      "scope": "gate_already_passed",
+      "counts_toward_metric": null,
+      "no_next_validation_required": true
+    },
+    "latest_run_acceptance": {
+      "available": true,
+      "accepted": true,
+      "not_required": true,
+      "metric": null,
+      "action": "promote_to_next_validation_batch",
+      "summary": "gate already passed; latest run acceptance is not required",
+      "run_path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+      "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json"
+    },
+    "gate_execution_recovery": {
+      "action_recovery": {
+        "total": 2,
+        "recovered": 2,
+        "unrecovered": 0,
+        "runs_with_action_recovery": 1,
+        "runs_with_recovered_action": 1,
+        "runs_with_unrecovered_action": 0,
+        "by_status": {
+          "preflight_mismatch": 1,
+          "recoverable_error": 1
+        },
+        "by_kind": {
+          "recoverable_error": 1,
+          "unavailable_action": 1
+        },
+        "examples": [
+          {
+            "step": 395,
+            "action_status": "recoverable_error",
+            "recovered": true,
+            "kind": "recoverable_error",
+            "actions": [
+              {
+                "action": "choose",
+                "choice_index": 2
+              }
+            ],
+            "last_error": "Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []",
+            "last_state": {
+              "step": 395,
+              "screen_type": "REST",
+              "room_phase": "INCOMPLETE",
+              "floor": 27,
+              "act": 2,
+              "current_hp": 94,
+              "max_hp": 94
+            },
+            "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          },
+          {
+            "step": 404,
+            "action_status": "preflight_mismatch",
+            "recovered": true,
+            "kind": "unavailable_action",
+            "actions": [
+              {
+                "action": "choose",
+                "choice_index": 8
+              }
+            ],
+            "available_commands": [
+              "proceed"
+            ],
+            "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+            "last_state": {
+              "step": 404,
+              "screen_type": "SHOP_SCREEN",
+              "room_phase": "COMPLETE",
+              "floor": 28,
+              "act": 2,
+              "current_hp": 94,
+              "max_hp": 94
+            },
+            "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+            "source_category": "clean_trainable"
+          }
+        ]
+      },
+      "terminal_recovery": {
+        "attempted": 2,
+        "succeeded": 2,
+        "synthetic_terminals": 2
+      }
+    },
+    "gate_data_quality": {
+      "total_manifests": 1,
+      "coverage_manifests": 1,
+      "shadow_feature_rows": 675,
+      "shadow_label_rows": 266,
+      "shadow_label_trainable": 263,
+      "shadow_label_excluded": 3,
+      "label_exclusion_manifests": 1,
+      "direct_kill_available_labels": 1,
+      "missed_single_card_search_labels": 3,
+      "schema_complete_manifests": 1,
+      "label_exclusion_reasons": {
+        "missed_single_card_search": 3
+      }
+    },
+    "gate_failure_evidence": {
+      "runs_with_evidence": 3,
+      "by_type": {
+        "pre_boss": 3,
+        "route": 3,
+        "synthetic_terminal": 2,
+        "terminal_outcome_source": 2
+      },
+      "synthetic_terminals": {
+        "by_source": {
+          "unknown_source": 2
+        },
+        "terminal_outcome_sources": {
+          "synthetic_after_mcp_null": 2
+        }
+      }
+    },
+    "artifact_paths": {
+      "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+      "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+    },
+    "execution_contract": {
+      "mode": "live_mcp_gated_collection",
+      "requires_live_mcp_ownership": true,
+      "allowed_operations": [
+        "read_logs",
+        "refresh_offline_manifest_advice_gate",
+        "prepare_probe_command"
+      ],
+      "forbidden_operations": [
+        "edit_code",
+        "train_models",
+        "control_live_mcp_without_explicit_ownership"
+      ]
+    }
+  },
+  "queue": [
+    {
+      "action": "collect_next_validation_batch",
+      "reason": "act1_boss_gate_passed",
+      "priority": 1,
+      "next_probe_goal": {
+        "action": "promote_to_next_validation_batch",
+        "primary_blocking_reason": null,
+        "metric": null,
+        "deficit": 0,
+        "summary": "gate passed; promote to the next validation batch",
+        "acceptance_criteria": {
+          "scope": "gate_already_passed",
+          "counts_toward_metric": null,
+          "no_next_validation_required": true
+        }
+      },
+      "acceptance_criteria": {
+        "scope": "gate_already_passed",
+        "counts_toward_metric": null,
+        "no_next_validation_required": true
+      },
+      "latest_run_acceptance": {
+        "available": true,
+        "accepted": true,
+        "not_required": true,
+        "metric": null,
+        "action": "promote_to_next_validation_batch",
+        "summary": "gate already passed; latest run acceptance is not required",
+        "run_path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+        "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json"
+      },
+      "gate_execution_recovery": {
+        "action_recovery": {
+          "total": 2,
+          "recovered": 2,
+          "unrecovered": 0,
+          "runs_with_action_recovery": 1,
+          "runs_with_recovered_action": 1,
+          "runs_with_unrecovered_action": 0,
+          "by_status": {
+            "preflight_mismatch": 1,
+            "recoverable_error": 1
+          },
+          "by_kind": {
+            "recoverable_error": 1,
+            "unavailable_action": 1
+          },
+          "examples": [
+            {
+              "step": 395,
+              "action_status": "recoverable_error",
+              "recovered": true,
+              "kind": "recoverable_error",
+              "actions": [
+                {
+                  "action": "choose",
+                  "choice_index": 2
+                }
+              ],
+              "last_error": "Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []",
+              "last_state": {
+                "step": 395,
+                "screen_type": "REST",
+                "room_phase": "INCOMPLETE",
+                "floor": 27,
+                "act": 2,
+                "current_hp": 94,
+                "max_hp": 94
+              },
+              "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            },
+            {
+              "step": 404,
+              "action_status": "preflight_mismatch",
+              "recovered": true,
+              "kind": "unavailable_action",
+              "actions": [
+                {
+                  "action": "choose",
+                  "choice_index": 8
+                }
+              ],
+              "available_commands": [
+                "proceed"
+              ],
+              "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+              "last_state": {
+                "step": 404,
+                "screen_type": "SHOP_SCREEN",
+                "room_phase": "COMPLETE",
+                "floor": 28,
+                "act": 2,
+                "current_hp": 94,
+                "max_hp": 94
+              },
+              "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+              "source_category": "clean_trainable"
+            }
+          ]
+        },
+        "terminal_recovery": {
+          "attempted": 2,
+          "succeeded": 2,
+          "synthetic_terminals": 2
+        }
+      },
+      "gate_data_quality": {
+        "total_manifests": 1,
+        "coverage_manifests": 1,
+        "shadow_feature_rows": 675,
+        "shadow_label_rows": 266,
+        "shadow_label_trainable": 263,
+        "shadow_label_excluded": 3,
+        "label_exclusion_manifests": 1,
+        "direct_kill_available_labels": 1,
+        "missed_single_card_search_labels": 3,
+        "schema_complete_manifests": 1,
+        "label_exclusion_reasons": {
+          "missed_single_card_search": 3
+        }
+      },
+      "gate_failure_evidence": {
+        "runs_with_evidence": 3,
+        "by_type": {
+          "pre_boss": 3,
+          "route": 3,
+          "synthetic_terminal": 2,
+          "terminal_outcome_source": 2
+        },
+        "synthetic_terminals": {
+          "by_source": {
+            "unknown_source": 2
+          },
+          "terminal_outcome_sources": {
+            "synthetic_after_mcp_null": 2
+          }
+        }
+      },
+      "artifact_paths": {
+        "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+        "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+        "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+        "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+        "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+        "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+      },
+      "execution_contract": {
+        "mode": "live_mcp_gated_collection",
+        "requires_live_mcp_ownership": true,
+        "allowed_operations": [
+          "read_logs",
+          "refresh_offline_manifest_advice_gate",
+          "prepare_probe_command"
+        ],
+        "forbidden_operations": [
+          "edit_code",
+          "train_models",
+          "control_live_mcp_without_explicit_ownership"
+        ]
+      }
+    }
+  ],
+  "next_handoff": {
+    "primary_worker": {
+      "owner": "ai_agent",
+      "item": {
+        "action": "fix_combat_search_priority",
+        "count": 1,
+        "reason": "per_run_diagnosis",
+        "paths": [
+          "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl"
+        ],
+        "shadow_advice": {
+          "available": true,
+          "categories": {
+            "route_risk": {
+              "rows": 18,
+              "high_risk_count": 0,
+              "watch_count": 0,
+              "shadow_source_file_count": 1,
+              "shadow_input_file_count": 1,
+              "model_training_source_file_count": 1,
+              "model_training_source_quality": "usable",
+              "model_training_source_policy": "usable",
+              "model_load_quality": {
+                "files": 1,
+                "rows": 359,
+                "accepted": 359,
+                "skipped": 0
+              },
+              "top_signals": [
+                {
+                  "score": 0.2849,
+                  "advice": "route_ok",
+                  "floor": 19,
+                  "step": 374,
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl"
+                }
+              ]
+            },
+            "potion_tempo": {
+              "rows": 110,
+              "high_risk_count": 0,
+              "watch_count": 0,
+              "shadow_source_file_count": 1,
+              "shadow_input_file_count": 1,
+              "model_training_source_file_count": 1,
+              "model_training_source_quality": "usable",
+              "model_training_source_policy": "usable",
+              "model_load_quality": {
+                "files": 1,
+                "rows": 1186,
+                "accepted": 1186,
+                "skipped": 0
+              },
+              "top_signals": [
+                {
+                  "score": 0.3944,
+                  "advice": "hold_potion",
+                  "floor": 16,
+                  "step": 249,
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+                  "incoming": 24,
+                  "potion_ids": [
+                    "FearPotion",
+                    "Regen Potion"
+                  ],
+                  "used_potion": true,
+                  "used_potion_slot": 3,
+                  "used_potion_targeted": false,
+                  "enemy_ids": [
+                    "Hexaghost"
+                  ],
+                  "potion_block_value": 0,
+                  "potion_damage_value": 0,
+                  "potion_draw_value": 0,
+                  "potion_vulnerable_value": 3,
+                  "potion_weak_value": 0,
+                  "enemy_total_expected_attack": 36,
+                  "enemy_boss_count": 1,
+                  "boss_identity_known": true,
+                  "boss_known_count": 1
+                }
+              ]
+            },
+            "pre_boss_deck_quality": {
+              "rows": 1,
+              "high_risk_count": 1,
+              "watch_count": 0,
+              "shadow_source_file_count": 1,
+              "shadow_input_file_count": 1,
+              "model_training_source_file_count": 1,
+              "model_training_source_quality": "usable",
+              "model_training_source_policy": "usable",
+              "model_load_quality": {
+                "files": 1,
+                "rows": 20,
+                "accepted": 20,
+                "skipped": 0
+              },
+              "top_signals": [
+                {
+                  "score": 0.0031,
+                  "advice": "needs_boss_resources",
+                  "floor": 15,
+                  "step": 243,
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl"
+                }
+              ]
+            },
+            "combat_search": {
+              "rows": 45,
+              "high_risk_count": 2,
+              "watch_count": 36,
+              "shadow_source_file_count": 1,
+              "shadow_input_file_count": 1,
+              "model_training_source_file_count": 1,
+              "model_training_source_quality": "usable",
+              "model_training_source_policy": "usable",
+              "model_load_quality": {
+                "files": 1,
+                "rows": 907,
+                "accepted": 899,
+                "skipped": 8,
+                "skip_reasons": {
+                  "missed_single_card_search": 7,
+                  "missed_direct_kill": 1
+                }
+              },
+              "top_signals": [
+                {
+                  "score": 4.5849,
+                  "advice": "review_search_label",
+                  "floor": 4,
+                  "step": 78,
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+                  "label_first_card_key": "bash",
+                  "model_top_card_key": "striker",
+                  "loss_delta": 9,
+                  "attacks_removed": 9,
+                  "retaliation_damage": 0,
+                  "label_missed_direct_kill": false,
+                  "label_missed_single_card_search": false
+                }
+              ]
+            }
+          }
+        },
+        "priority": 0,
+        "artifact_paths": {
+          "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+          "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+          "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+          "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+          "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+        },
+        "execution_contract": {
+          "mode": "offline_strategy_or_shadow_model",
+          "requires_live_mcp_ownership": false,
+          "allowed_operations": [
+            "inspect_logs",
+            "score_shadow_advice",
+            "train_shadow_models_to_scratch_dir"
+          ],
+          "forbidden_operations": [
+            "control_live_mcp",
+            "replace_live_policy_with_model"
+          ]
+        }
+      }
+    },
+    "coordinator": {
+      "owner": "main_agent",
+      "item": {
+        "action": "promote_to_next_validation_batch",
+        "gate_next_action": "promote_to_next_validation_batch",
+        "diagnosis_next_action": "fix_combat_search_priority",
+        "priority": 0,
+        "next_probe_goal": {
+          "action": "promote_to_next_validation_batch",
+          "primary_blocking_reason": null,
+          "metric": null,
+          "deficit": 0,
+          "summary": "gate passed; promote to the next validation batch",
+          "acceptance_criteria": {
+            "scope": "gate_already_passed",
+            "counts_toward_metric": null,
+            "no_next_validation_required": true
+          }
+        },
+        "acceptance_criteria": {
+          "scope": "gate_already_passed",
+          "counts_toward_metric": null,
+          "no_next_validation_required": true
+        },
+        "latest_run_acceptance": {
+          "available": true,
+          "accepted": true,
+          "not_required": true,
+          "metric": null,
+          "action": "promote_to_next_validation_batch",
+          "summary": "gate already passed; latest run acceptance is not required",
+          "run_path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+          "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json"
+        },
+        "gate_execution_recovery": {
+          "action_recovery": {
+            "total": 2,
+            "recovered": 2,
+            "unrecovered": 0,
+            "runs_with_action_recovery": 1,
+            "runs_with_recovered_action": 1,
+            "runs_with_unrecovered_action": 0,
+            "by_status": {
+              "preflight_mismatch": 1,
+              "recoverable_error": 1
+            },
+            "by_kind": {
+              "recoverable_error": 1,
+              "unavailable_action": 1
+            },
+            "examples": [
+              {
+                "step": 395,
+                "action_status": "recoverable_error",
+                "recovered": true,
+                "kind": "recoverable_error",
+                "actions": [
+                  {
+                    "action": "choose",
+                    "choice_index": 2
+                  }
+                ],
+                "last_error": "Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []",
+                "last_state": {
+                  "step": 395,
+                  "screen_type": "REST",
+                  "room_phase": "INCOMPLETE",
+                  "floor": 27,
+                  "act": 2,
+                  "current_hp": 94,
+                  "max_hp": 94
+                },
+                "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              },
+              {
+                "step": 404,
+                "action_status": "preflight_mismatch",
+                "recovered": true,
+                "kind": "unavailable_action",
+                "actions": [
+                  {
+                    "action": "choose",
+                    "choice_index": 8
+                  }
+                ],
+                "available_commands": [
+                  "proceed"
+                ],
+                "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                "last_state": {
+                  "step": 404,
+                  "screen_type": "SHOP_SCREEN",
+                  "room_phase": "COMPLETE",
+                  "floor": 28,
+                  "act": 2,
+                  "current_hp": 94,
+                  "max_hp": 94
+                },
+                "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+                "source_category": "clean_trainable"
+              }
+            ]
+          },
+          "terminal_recovery": {
+            "attempted": 2,
+            "succeeded": 2,
+            "synthetic_terminals": 2
+          }
+        },
+        "gate_data_quality": {
+          "total_manifests": 1,
+          "coverage_manifests": 1,
+          "shadow_feature_rows": 675,
+          "shadow_label_rows": 266,
+          "shadow_label_trainable": 263,
+          "shadow_label_excluded": 3,
+          "label_exclusion_manifests": 1,
+          "direct_kill_available_labels": 1,
+          "missed_single_card_search_labels": 3,
+          "schema_complete_manifests": 1,
+          "label_exclusion_reasons": {
+            "missed_single_card_search": 3
+          }
+        },
+        "gate_failure_evidence": {
+          "runs_with_evidence": 3,
+          "by_type": {
+            "pre_boss": 3,
+            "route": 3,
+            "synthetic_terminal": 2,
+            "terminal_outcome_source": 2
+          },
+          "synthetic_terminals": {
+            "by_source": {
+              "unknown_source": 2
+            },
+            "terminal_outcome_sources": {
+              "synthetic_after_mcp_null": 2
+            }
+          }
+        },
+        "artifact_paths": {
+          "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+          "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+          "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+          "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+          "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+          "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+        },
+        "execution_contract": {
+          "mode": "coordination_only",
+          "requires_live_mcp_ownership": false,
+          "allowed_operations": [
+            "choose_next_handoff",
+            "merge_evidence",
+            "decide_acceptance"
+          ],
+          "forbidden_operations": [
+            "control_live_mcp_unless_ownership_changes"
+          ]
+        }
+      }
+    },
+    "by_agent": {
+      "runner_agent": {
+        "owner": "runner_agent",
+        "item": {
+          "action": "collect_next_validation_batch",
+          "reason": "act1_boss_gate_passed",
+          "priority": 1,
+          "next_probe_goal": {
+            "action": "promote_to_next_validation_batch",
+            "primary_blocking_reason": null,
+            "metric": null,
+            "deficit": 0,
+            "summary": "gate passed; promote to the next validation batch",
+            "acceptance_criteria": {
+              "scope": "gate_already_passed",
+              "counts_toward_metric": null,
+              "no_next_validation_required": true
+            }
+          },
+          "acceptance_criteria": {
+            "scope": "gate_already_passed",
+            "counts_toward_metric": null,
+            "no_next_validation_required": true
+          },
+          "latest_run_acceptance": {
+            "available": true,
+            "accepted": true,
+            "not_required": true,
+            "metric": null,
+            "action": "promote_to_next_validation_batch",
+            "summary": "gate already passed; latest run acceptance is not required",
+            "run_path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+            "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json"
+          },
+          "gate_execution_recovery": {
+            "action_recovery": {
+              "total": 2,
+              "recovered": 2,
+              "unrecovered": 0,
+              "runs_with_action_recovery": 1,
+              "runs_with_recovered_action": 1,
+              "runs_with_unrecovered_action": 0,
+              "by_status": {
+                "preflight_mismatch": 1,
+                "recoverable_error": 1
+              },
+              "by_kind": {
+                "recoverable_error": 1,
+                "unavailable_action": 1
+              },
+              "examples": [
+                {
+                  "step": 395,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "recoverable_error",
+                  "actions": [
+                    {
+                      "action": "choose",
+                      "choice_index": 2
+                    }
+                  ],
+                  "last_error": "Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []",
+                  "last_state": {
+                    "step": 395,
+                    "screen_type": "REST",
+                    "room_phase": "INCOMPLETE",
+                    "floor": 27,
+                    "act": 2,
+                    "current_hp": 94,
+                    "max_hp": 94
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 404,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "choose",
+                      "choice_index": 8
+                    }
+                  ],
+                  "available_commands": [
+                    "proceed"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                  "last_state": {
+                    "step": 404,
+                    "screen_type": "SHOP_SCREEN",
+                    "room_phase": "COMPLETE",
+                    "floor": 28,
+                    "act": 2,
+                    "current_hp": 94,
+                    "max_hp": 94
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                }
+              ]
+            },
+            "terminal_recovery": {
+              "attempted": 2,
+              "succeeded": 2,
+              "synthetic_terminals": 2
+            }
+          },
+          "gate_data_quality": {
+            "total_manifests": 1,
+            "coverage_manifests": 1,
+            "shadow_feature_rows": 675,
+            "shadow_label_rows": 266,
+            "shadow_label_trainable": 263,
+            "shadow_label_excluded": 3,
+            "label_exclusion_manifests": 1,
+            "direct_kill_available_labels": 1,
+            "missed_single_card_search_labels": 3,
+            "schema_complete_manifests": 1,
+            "label_exclusion_reasons": {
+              "missed_single_card_search": 3
+            }
+          },
+          "gate_failure_evidence": {
+            "runs_with_evidence": 3,
+            "by_type": {
+              "pre_boss": 3,
+              "route": 3,
+              "synthetic_terminal": 2,
+              "terminal_outcome_source": 2
+            },
+            "synthetic_terminals": {
+              "by_source": {
+                "unknown_source": 2
+              },
+              "terminal_outcome_sources": {
+                "synthetic_after_mcp_null": 2
+              }
+            }
+          },
+          "artifact_paths": {
+            "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+            "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "live_mcp_gated_collection",
+            "requires_live_mcp_ownership": true,
+            "allowed_operations": [
+              "read_logs",
+              "refresh_offline_manifest_advice_gate",
+              "prepare_probe_command"
+            ],
+            "forbidden_operations": [
+              "edit_code",
+              "train_models",
+              "control_live_mcp_without_explicit_ownership"
+            ]
+          }
+        }
+      },
+      "ai_agent": {
+        "owner": "ai_agent",
+        "item": {
+          "action": "fix_combat_search_priority",
+          "count": 1,
+          "reason": "per_run_diagnosis",
+          "paths": [
+            "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl"
+          ],
+          "shadow_advice": {
+            "available": true,
+            "categories": {
+              "route_risk": {
+                "rows": 18,
+                "high_risk_count": 0,
+                "watch_count": 0,
+                "shadow_source_file_count": 1,
+                "shadow_input_file_count": 1,
+                "model_training_source_file_count": 1,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 359,
+                  "accepted": 359,
+                  "skipped": 0
+                },
+                "top_signals": [
+                  {
+                    "score": 0.2849,
+                    "advice": "route_ok",
+                    "floor": 19,
+                    "step": 374,
+                    "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl"
+                  }
+                ]
+              },
+              "potion_tempo": {
+                "rows": 110,
+                "high_risk_count": 0,
+                "watch_count": 0,
+                "shadow_source_file_count": 1,
+                "shadow_input_file_count": 1,
+                "model_training_source_file_count": 1,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 1186,
+                  "accepted": 1186,
+                  "skipped": 0
+                },
+                "top_signals": [
+                  {
+                    "score": 0.3944,
+                    "advice": "hold_potion",
+                    "floor": 16,
+                    "step": 249,
+                    "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+                    "incoming": 24,
+                    "potion_ids": [
+                      "FearPotion",
+                      "Regen Potion"
+                    ],
+                    "used_potion": true,
+                    "used_potion_slot": 3,
+                    "used_potion_targeted": false,
+                    "enemy_ids": [
+                      "Hexaghost"
+                    ],
+                    "potion_block_value": 0,
+                    "potion_damage_value": 0,
+                    "potion_draw_value": 0,
+                    "potion_vulnerable_value": 3,
+                    "potion_weak_value": 0,
+                    "enemy_total_expected_attack": 36,
+                    "enemy_boss_count": 1,
+                    "boss_identity_known": true,
+                    "boss_known_count": 1
+                  }
+                ]
+              },
+              "pre_boss_deck_quality": {
+                "rows": 1,
+                "high_risk_count": 1,
+                "watch_count": 0,
+                "shadow_source_file_count": 1,
+                "shadow_input_file_count": 1,
+                "model_training_source_file_count": 1,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 20,
+                  "accepted": 20,
+                  "skipped": 0
+                },
+                "top_signals": [
+                  {
+                    "score": 0.0031,
+                    "advice": "needs_boss_resources",
+                    "floor": 15,
+                    "step": 243,
+                    "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl"
+                  }
+                ]
+              },
+              "combat_search": {
+                "rows": 45,
+                "high_risk_count": 2,
+                "watch_count": 36,
+                "shadow_source_file_count": 1,
+                "shadow_input_file_count": 1,
+                "model_training_source_file_count": 1,
+                "model_training_source_quality": "usable",
+                "model_training_source_policy": "usable",
+                "model_load_quality": {
+                  "files": 1,
+                  "rows": 907,
+                  "accepted": 899,
+                  "skipped": 8,
+                  "skip_reasons": {
+                    "missed_single_card_search": 7,
+                    "missed_direct_kill": 1
+                  }
+                },
+                "top_signals": [
+                  {
+                    "score": 4.5849,
+                    "advice": "review_search_label",
+                    "floor": 4,
+                    "step": 78,
+                    "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+                    "label_first_card_key": "bash",
+                    "model_top_card_key": "striker",
+                    "loss_delta": 9,
+                    "attacks_removed": 9,
+                    "retaliation_damage": 0,
+                    "label_missed_direct_kill": false,
+                    "label_missed_single_card_search": false
+                  }
+                ]
+              }
+            }
+          },
+          "priority": 0,
+          "artifact_paths": {
+            "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+            "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "offline_strategy_or_shadow_model",
+            "requires_live_mcp_ownership": false,
+            "allowed_operations": [
+              "inspect_logs",
+              "score_shadow_advice",
+              "train_shadow_models_to_scratch_dir"
+            ],
+            "forbidden_operations": [
+              "control_live_mcp",
+              "replace_live_policy_with_model"
+            ]
+          }
+        }
+      },
+      "main_agent": {
+        "owner": "main_agent",
+        "item": {
+          "action": "promote_to_next_validation_batch",
+          "gate_next_action": "promote_to_next_validation_batch",
+          "diagnosis_next_action": "fix_combat_search_priority",
+          "priority": 0,
+          "next_probe_goal": {
+            "action": "promote_to_next_validation_batch",
+            "primary_blocking_reason": null,
+            "metric": null,
+            "deficit": 0,
+            "summary": "gate passed; promote to the next validation batch",
+            "acceptance_criteria": {
+              "scope": "gate_already_passed",
+              "counts_toward_metric": null,
+              "no_next_validation_required": true
+            }
+          },
+          "acceptance_criteria": {
+            "scope": "gate_already_passed",
+            "counts_toward_metric": null,
+            "no_next_validation_required": true
+          },
+          "latest_run_acceptance": {
+            "available": true,
+            "accepted": true,
+            "not_required": true,
+            "metric": null,
+            "action": "promote_to_next_validation_batch",
+            "summary": "gate already passed; latest run acceptance is not required",
+            "run_path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+            "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json"
+          },
+          "gate_execution_recovery": {
+            "action_recovery": {
+              "total": 2,
+              "recovered": 2,
+              "unrecovered": 0,
+              "runs_with_action_recovery": 1,
+              "runs_with_recovered_action": 1,
+              "runs_with_unrecovered_action": 0,
+              "by_status": {
+                "preflight_mismatch": 1,
+                "recoverable_error": 1
+              },
+              "by_kind": {
+                "recoverable_error": 1,
+                "unavailable_action": 1
+              },
+              "examples": [
+                {
+                  "step": 395,
+                  "action_status": "recoverable_error",
+                  "recovered": true,
+                  "kind": "recoverable_error",
+                  "actions": [
+                    {
+                      "action": "choose",
+                      "choice_index": 2
+                    }
+                  ],
+                  "last_error": "Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []",
+                  "last_state": {
+                    "step": 395,
+                    "screen_type": "REST",
+                    "room_phase": "INCOMPLETE",
+                    "floor": 27,
+                    "act": 2,
+                    "current_hp": 94,
+                    "max_hp": 94
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                },
+                {
+                  "step": 404,
+                  "action_status": "preflight_mismatch",
+                  "recovered": true,
+                  "kind": "unavailable_action",
+                  "actions": [
+                    {
+                      "action": "choose",
+                      "choice_index": 8
+                    }
+                  ],
+                  "available_commands": [
+                    "proceed"
+                  ],
+                  "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+                  "last_state": {
+                    "step": 404,
+                    "screen_type": "SHOP_SCREEN",
+                    "room_phase": "COMPLETE",
+                    "floor": 28,
+                    "act": 2,
+                    "current_hp": 94,
+                    "max_hp": 94
+                  },
+                  "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+                  "source_category": "clean_trainable"
+                }
+              ]
+            },
+            "terminal_recovery": {
+              "attempted": 2,
+              "succeeded": 2,
+              "synthetic_terminals": 2
+            }
+          },
+          "gate_data_quality": {
+            "total_manifests": 1,
+            "coverage_manifests": 1,
+            "shadow_feature_rows": 675,
+            "shadow_label_rows": 266,
+            "shadow_label_trainable": 263,
+            "shadow_label_excluded": 3,
+            "label_exclusion_manifests": 1,
+            "direct_kill_available_labels": 1,
+            "missed_single_card_search_labels": 3,
+            "schema_complete_manifests": 1,
+            "label_exclusion_reasons": {
+              "missed_single_card_search": 3
+            }
+          },
+          "gate_failure_evidence": {
+            "runs_with_evidence": 3,
+            "by_type": {
+              "pre_boss": 3,
+              "route": 3,
+              "synthetic_terminal": 2,
+              "terminal_outcome_source": 2
+            },
+            "synthetic_terminals": {
+              "by_source": {
+                "unknown_source": 2
+              },
+              "terminal_outcome_sources": {
+                "synthetic_after_mcp_null": 2
+              }
+            }
+          },
+          "artifact_paths": {
+            "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+            "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+            "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+            "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+          },
+          "execution_contract": {
+            "mode": "coordination_only",
+            "requires_live_mcp_ownership": false,
+            "allowed_operations": [
+              "choose_next_handoff",
+              "merge_evidence",
+              "decide_acceptance"
+            ],
+            "forbidden_operations": [
+              "control_live_mcp_unless_ownership_changes"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "agent_queue_counts": {
+    "runner_agent": 1,
+    "engineering_agent": 0,
+    "ai_agent": 4,
+    "main_agent": 1
+  },
+  "agent_queue_actions": {
+    "runner_agent": [
+      {
+        "action": "collect_next_validation_batch",
+        "reason": "act1_boss_gate_passed",
+        "priority": 1,
+        "execution_mode": "live_mcp_gated_collection",
+        "requires_live_mcp_ownership": true,
+        "gate_deficit": 0,
+        "acceptance_scope": "gate_already_passed",
+        "latest_run_accepted": true
+      }
+    ],
+    "engineering_agent": [],
+    "ai_agent": [
+      {
+        "action": "fix_combat_search_priority",
+        "count": 1,
+        "reason": "per_run_diagnosis",
+        "priority": 0,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "inspect_combat_planning",
+        "count": 2,
+        "reason": "per_run_diagnosis",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "review_excluded_combat_search_labels",
+        "count": 3,
+        "reason": "excluded_from_training",
+        "priority": 1,
+        "current_policy_replay_resolved": false,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      },
+      {
+        "action": "review_gate_data_quality",
+        "count": 7,
+        "reason": "gate_data_quality_issues",
+        "priority": 1,
+        "execution_mode": "offline_strategy_or_shadow_model",
+        "requires_live_mcp_ownership": false
+      }
+    ],
+    "main_agent": [
+      {
+        "action": "promote_to_next_validation_batch",
+        "priority": 0,
+        "execution_mode": "coordination_only",
+        "requires_live_mcp_ownership": false,
+        "gate_deficit": 0,
+        "acceptance_scope": "gate_already_passed",
+        "latest_run_accepted": true
+      }
+    ]
+  },
+  "classification_reasons": {
+    "clean_trainable": {
+      "completed_clean": 3
+    },
+    "diagnostic_excluded": {},
+    "infra_blocked": {}
+  },
+  "validation": {
+    "by_grade": {
+      "usable_with_recoveries": 2,
+      "pristine": 1
+    },
+    "by_flag": {
+      "synthetic_after_mcp_null": 2,
+      "synthetic_terminal": 2,
+      "synthetic_terminal_state": 2,
+      "recovered_action_race": 1
+    },
+    "act1_boss_reached": 3,
+    "act1_boss_cleared": 3,
+    "pristine_act1_boss_cleared": 3,
+    "act1_boss_prefix_blockers": {},
+    "act1_boss_clear_blockers": {}
+  },
+  "artifact_paths": {
+    "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+    "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+    "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+    "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+    "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+  },
+  "offline_refresh_command": {
+    "kind": "offline_batch_replay",
+    "argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39",
+      "--output-dir",
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline",
+      "--name",
+      "cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv": [
+      "python",
+      "-m",
+      "slay_ai.offline_batch",
+      "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl",
+      "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+      "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+      "--output-dir",
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline",
+      "--name",
+      "cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "--knowledge-dir",
+      "data\\static_knowledge",
+      "--route-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\route_risk_model.json",
+      "--potion-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\potion_tempo_model.json",
+      "--deck-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\deck_quality_model.json",
+      "--combat-model-path",
+      "C:\\Users\\jikun\\Documents\\game\\models\\combat_search_model.json",
+      "--character",
+      "IRONCLAD",
+      "--ascension",
+      "0",
+      "--min-reached",
+      "3",
+      "--min-cleared",
+      "2",
+      "--min-pristine-cleared",
+      "2"
+    ],
+    "resolved_argv_available": true,
+    "resolved_log_count": 3,
+    "touches_live_mcp": false,
+    "trains_models": false,
+    "writes_models": false
+  },
+  "shadow_advice_provenance": {
+    "available": true,
+    "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+    "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure\\summary.json",
+    "mode": "shadow_rows",
+    "resolved_file_count": 4,
+    "warnings": [],
+    "categories": {
+      "route_risk": {
+        "rows": 36,
+        "high_risk_count": 21,
+        "watch_count": 1,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.9999,
+          "advice": "avoid_or_require_recovery",
+          "floor": 37,
+          "step": 685,
+          "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl"
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 359,
+          "accepted": 359,
+          "skipped": 0
+        }
+      },
+      "potion_tempo": {
+        "rows": 209,
+        "high_risk_count": 0,
+        "watch_count": 0,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.2421,
+          "advice": "hold_potion",
+          "floor": 13,
+          "step": 125,
+          "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl",
+          "incoming": 21,
+          "potion_ids": [
+            "Explosive Potion",
+            "Fruit Juice",
+            "DuplicationPotion"
+          ],
+          "used_potion": false,
+          "used_potion_targeted": false,
+          "enemy_ids": [
+            "GremlinFat",
+            "GremlinWarrior",
+            "GremlinThief"
+          ],
+          "potion_block_value": 0,
+          "potion_damage_value": 10,
+          "potion_draw_value": 0,
+          "potion_vulnerable_value": 0,
+          "potion_weak_value": 0,
+          "enemy_total_expected_attack": 100,
+          "enemy_boss_count": 0,
+          "boss_identity_known": false,
+          "boss_known_count": 0
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 1186,
+          "accepted": 1186,
+          "skipped": 0
+        }
+      },
+      "pre_boss_deck_quality": {
+        "rows": 2,
+        "high_risk_count": 1,
+        "watch_count": 0,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 0.0533,
+          "advice": "needs_boss_resources",
+          "floor": 15,
+          "step": 181,
+          "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl"
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 20,
+          "accepted": 20,
+          "skipped": 0
+        }
+      },
+      "combat_search": {
+        "rows": 128,
+        "high_risk_count": 1,
+        "watch_count": 90,
+        "model_available": true,
+        "shadow_source_file_count": 1,
+        "shadow_input_file_count": 1,
+        "model_training_source_quality": "usable",
+        "model_training_source_file_count": 1,
+        "model_training_source_policy": "usable",
+        "top_signal": {
+          "score": 4.6938,
+          "advice": "review_search_label",
+          "floor": 1,
+          "step": 10,
+          "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl",
+          "label_first_card_key": "defendr",
+          "model_top_card_key": "striker",
+          "loss_delta": 7,
+          "attacks_removed": 7,
+          "retaliation_damage": 0,
+          "label_missed_direct_kill": false,
+          "label_missed_single_card_search": false
+        },
+        "model_load_quality": {
+          "files": 1,
+          "rows": 907,
+          "accepted": 899,
+          "skipped": 8,
+          "skip_reasons": {
+            "missed_single_card_search": 7,
+            "missed_direct_kill": 1
+          }
+        }
+      }
+    }
+  },
+  "shadow_label_quality": {
+    "combat_search_labels": {
+      "total": 266,
+      "trainable": 263,
+      "excluded_from_training": 3,
+      "exclusion_reasons": {
+        "missed_single_card_search": 3
+      }
+    }
+  },
+  "combat_label_audit": {
+    "status_line": "combat_label_audit files=1 rows=266 excluded=3 missed_single_card_search=3",
+    "resolved_file_count": 1,
+    "rows": 266,
+    "filtered_rows": 0,
+    "accepted_rows": 263,
+    "excluded_rows": 3,
+    "exclusion_reasons": {
+      "missed_single_card_search": 3
+    },
+    "source_quality": {
+      "pristine": 45,
+      "usable_with_recoveries": 221
+    },
+    "examples": [
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl",
+        "line": 33,
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 7,
+        "step": 205,
+        "current_hp": 78,
+        "max_hp": 85,
+        "current_energy": 2,
+        "incoming": 27,
+        "initial_loss": 21,
+        "projected_loss": 10,
+        "loss_delta": 11,
+        "attacks_removed": 11,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Uppercut",
+        "label_sequence_card_keys": [
+          "Uppercut"
+        ],
+        "label_target_index": 2,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "SpikeSlime_L",
+          "AcidSlime_L"
+        ],
+        "enemy_hps": [
+          61,
+          36
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF",
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Strike_R",
+          "Slimed",
+          "Defend_R",
+          "Uppercut"
+        ]
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl",
+        "line": 257,
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+        "source_validation_grade": "pristine",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 2,
+        "step": 249,
+        "current_hp": 61,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 24,
+        "initial_loss": 24,
+        "projected_loss": 16,
+        "loss_delta": 8,
+        "attacks_removed": 0,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Shrug It Off",
+        "label_sequence_card_keys": [
+          "Shrug It Off"
+        ],
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          250
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Strike_R",
+          "Shrug It Off",
+          "Strike_R",
+          "Shrug It Off"
+        ]
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl",
+        "line": 265,
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+        "source_validation_grade": "pristine",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 18,
+        "step": 306,
+        "current_hp": 30,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 6,
+        "initial_loss": 10,
+        "projected_loss": 4,
+        "loss_delta": 6,
+        "attacks_removed": 6,
+        "kills": 1,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Strike_R",
+        "label_sequence_card_keys": [
+          "Strike_R"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": true,
+        "direct_kill_card_keys": [
+          "Anger",
+          "Strike_R"
+        ],
+        "direct_kill_card_indices": [
+          1,
+          3
+        ],
+        "direct_kill_enemy_id": "Hexaghost",
+        "direct_kill_enemy_hp": 1,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          1
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Anger",
+          "Burn",
+          "Strike_R"
+        ]
+      }
+    ]
+  },
+  "combat_label_replay_audit": {
+    "status_line": "combat_label_replay_audit files=1 excluded=3 replayed=3 matches_label=0 matches_actual=2 other=1",
+    "resolved_file_count": 1,
+    "excluded_rows": 3,
+    "replayed_rows": 3,
+    "current_policy_matches_label": 0,
+    "current_policy_matches_actual": 2,
+    "current_policy_other": 1,
+    "missing_source_log": 0,
+    "missing_source_step": 0,
+    "policy_errors": 0,
+    "replay_outcomes": {
+      "current_policy_matches_actual": 2,
+      "current_policy_other": 1
+    },
+    "exclusion_reasons": {
+      "missed_single_card_search": 3
+    },
+    "examples": [
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl",
+        "line": 257,
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+        "source_validation_grade": "pristine",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 2,
+        "step": 249,
+        "current_hp": 61,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 24,
+        "initial_loss": 24,
+        "projected_loss": 16,
+        "loss_delta": 8,
+        "attacks_removed": 0,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Shrug It Off",
+        "label_sequence_card_keys": [
+          "Shrug It Off"
+        ],
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          250
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Strike_R",
+          "Shrug It Off",
+          "Strike_R",
+          "Shrug It Off"
+        ],
+        "outcome": "current_policy_other",
+        "policy_action": {
+          "action": "use_potion",
+          "potion_slot": 2
+        },
+        "policy_reason": "Low HP; use 再生药水.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 2
+        },
+        "actual_action": {
+          "action": "play_card"
+        }
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl",
+        "line": 33,
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl",
+        "source_validation_grade": "usable_with_recoveries",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 7,
+        "step": 205,
+        "current_hp": 78,
+        "max_hp": 85,
+        "current_energy": 2,
+        "incoming": 27,
+        "initial_loss": 21,
+        "projected_loss": 10,
+        "loss_delta": 11,
+        "attacks_removed": 11,
+        "kills": 0,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Uppercut",
+        "label_sequence_card_keys": [
+          "Uppercut"
+        ],
+        "label_target_index": 2,
+        "direct_kill_available": false,
+        "enemy_ids": [
+          "SpikeSlime_L",
+          "AcidSlime_L"
+        ],
+        "enemy_hps": [
+          61,
+          36
+        ],
+        "enemy_intents": [
+          "ATTACK_DEBUFF",
+          "ATTACK_DEBUFF"
+        ],
+        "hand_ids": [
+          "Strike_R",
+          "Slimed",
+          "Defend_R",
+          "Uppercut"
+        ],
+        "outcome": "current_policy_matches_actual",
+        "policy_action": {
+          "action": "play_card",
+          "card_index": 3
+        },
+        "policy_reason": "One-turn search: sequence ['Defend_R', 'Strike_R'] loss 21->7, damage=6, retaliation_damage=0, kills=0, attacks_removed=11, avoided_lethal=False, score=77.0.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 4,
+          "target_index": 2
+        },
+        "actual_action": {
+          "action": "play_card",
+          "card_index": 3
+        }
+      },
+      {
+        "reasons": [
+          "missed_single_card_search"
+        ],
+        "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl",
+        "line": 265,
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+        "source_validation_grade": "pristine",
+        "source_category": "clean_trainable",
+        "source_reason": "completed_clean",
+        "floor": 16,
+        "act": 1,
+        "turn": 18,
+        "step": 306,
+        "current_hp": 30,
+        "max_hp": 80,
+        "current_energy": 3,
+        "incoming": 6,
+        "initial_loss": 10,
+        "projected_loss": 4,
+        "loss_delta": 6,
+        "attacks_removed": 6,
+        "kills": 1,
+        "avoided_lethal": false,
+        "search_type": "single_card_search_diagnostic",
+        "label_first_card_key": "Strike_R",
+        "label_sequence_card_keys": [
+          "Strike_R"
+        ],
+        "label_target_index": 1,
+        "direct_kill_available": true,
+        "direct_kill_card_keys": [
+          "Anger",
+          "Strike_R"
+        ],
+        "direct_kill_card_indices": [
+          1,
+          3
+        ],
+        "direct_kill_enemy_id": "Hexaghost",
+        "direct_kill_enemy_hp": 1,
+        "enemy_ids": [
+          "Hexaghost"
+        ],
+        "enemy_hps": [
+          1
+        ],
+        "enemy_intents": [
+          "ATTACK"
+        ],
+        "hand_ids": [
+          "Anger",
+          "Burn",
+          "Strike_R"
+        ],
+        "outcome": "current_policy_matches_actual",
+        "policy_action": {
+          "action": "play_card",
+          "card_index": 1,
+          "target_index": 1
+        },
+        "policy_reason": "Play 愤怒 for direct lethal.",
+        "label_action": {
+          "action": "play_card",
+          "card_index": 3,
+          "target_index": 1
+        },
+        "actual_action": {
+          "action": "play_card",
+          "card_index": 1,
+          "target_index": 1
+        }
+      }
+    ]
+  },
+  "failure_evidence": {
+    "runs_with_evidence": 3,
+    "by_type": {
+      "pre_boss": 3,
+      "route": 3,
+      "synthetic_terminal": 2,
+      "terminal_outcome_source": 2
+    },
+    "synthetic_terminals": {
+      "by_source": {
+        "unknown_source": 2
+      },
+      "terminal_outcome_sources": {
+        "synthetic_after_mcp_null": 2
+      }
+    }
+  },
+  "action_recovery": {
+    "total": 2,
+    "recovered": 2,
+    "unrecovered": 0,
+    "runs_with_action_recovery": 1,
+    "runs_with_recovered_action": 1,
+    "runs_with_unrecovered_action": 0,
+    "by_status": {
+      "preflight_mismatch": 1,
+      "recoverable_error": 1
+    },
+    "by_kind": {
+      "recoverable_error": 1,
+      "unavailable_action": 1
+    },
+    "examples": [
+      {
+        "step": 395,
+        "action_status": "recoverable_error",
+        "recovered": true,
+        "kind": "recoverable_error",
+        "actions": [
+          {
+            "action": "choose",
+            "choice_index": 2
+          }
+        ],
+        "last_error": "Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []",
+        "last_state": {
+          "step": 395,
+          "screen_type": "REST",
+          "room_phase": "INCOMPLETE",
+          "floor": 27,
+          "act": 2,
+          "current_hp": 94,
+          "max_hp": 94
+        },
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      },
+      {
+        "step": 404,
+        "action_status": "preflight_mismatch",
+        "recovered": true,
+        "kind": "unavailable_action",
+        "actions": [
+          {
+            "action": "choose",
+            "choice_index": 8
+          }
+        ],
+        "available_commands": [
+          "proceed"
+        ],
+        "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+        "last_state": {
+          "step": 404,
+          "screen_type": "SHOP_SCREEN",
+          "room_phase": "COMPLETE",
+          "floor": 28,
+          "act": 2,
+          "current_hp": 94,
+          "max_hp": 94
+        },
+        "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+        "source_category": "clean_trainable"
+      }
+    ]
+  },
+  "terminal_recovery": {
+    "attempted": 2,
+    "succeeded": 2,
+    "synthetic_terminals": 2
+  },
+  "gate_execution_recovery": {
+    "action_recovery": {
+      "total": 2,
+      "recovered": 2,
+      "unrecovered": 0,
+      "runs_with_action_recovery": 1,
+      "runs_with_recovered_action": 1,
+      "runs_with_unrecovered_action": 0,
+      "by_status": {
+        "preflight_mismatch": 1,
+        "recoverable_error": 1
+      },
+      "by_kind": {
+        "recoverable_error": 1,
+        "unavailable_action": 1
+      },
+      "examples": [
+        {
+          "step": 395,
+          "action_status": "recoverable_error",
+          "recovered": true,
+          "kind": "recoverable_error",
+          "actions": [
+            {
+              "action": "choose",
+              "choice_index": 2
+            }
+          ],
+          "last_error": "Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []",
+          "last_state": {
+            "step": 395,
+            "screen_type": "REST",
+            "room_phase": "INCOMPLETE",
+            "floor": 27,
+            "act": 2,
+            "current_hp": 94,
+            "max_hp": 94
+          },
+          "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        },
+        {
+          "step": 404,
+          "action_status": "preflight_mismatch",
+          "recovered": true,
+          "kind": "unavailable_action",
+          "actions": [
+            {
+              "action": "choose",
+              "choice_index": 8
+            }
+          ],
+          "available_commands": [
+            "proceed"
+          ],
+          "last_error": "Preflight unavailable action(s): ['choose']; available commands: ['proceed']",
+          "last_state": {
+            "step": 404,
+            "screen_type": "SHOP_SCREEN",
+            "room_phase": "COMPLETE",
+            "floor": 28,
+            "act": 2,
+            "current_hp": 94,
+            "max_hp": 94
+          },
+          "source_log": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+          "source_category": "clean_trainable"
+        }
+      ]
+    },
+    "terminal_recovery": {
+      "attempted": 2,
+      "succeeded": 2,
+      "synthetic_terminals": 2
+    }
+  },
+  "gate_data_quality": {
+    "total_manifests": 1,
+    "coverage_manifests": 1,
+    "shadow_feature_rows": 675,
+    "shadow_label_rows": 266,
+    "shadow_label_trainable": 263,
+    "shadow_label_excluded": 3,
+    "label_exclusion_manifests": 1,
+    "direct_kill_available_labels": 1,
+    "missed_single_card_search_labels": 3,
+    "schema_complete_manifests": 1,
+    "label_exclusion_reasons": {
+      "missed_single_card_search": 3
+    }
+  },
+  "gate_data_quality_replay_resolved_issues": {},
+  "static_knowledge_gaps": {
+    "status_line": "static_knowledge_gaps logs=3 missing=0",
+    "resolved_log_count": 3,
+    "total_missing_occurrences": 0,
+    "observed_aliases": {
+      "cards": 72
+    }
+  },
+  "gate_failure_evidence": {
+    "runs_with_evidence": 3,
+    "by_type": {
+      "pre_boss": 3,
+      "route": 3,
+      "synthetic_terminal": 2,
+      "terminal_outcome_source": 2
+    },
+    "synthetic_terminals": {
+      "by_source": {
+        "unknown_source": 2
+      },
+      "terminal_outcome_sources": {
+        "synthetic_after_mcp_null": 2
+      }
+    }
+  },
+  "gate_passed": true,
+  "gate_status_line": "act1_boss_gate PASS: IRONCLAD A0 runs=3, reached=3/3, cleared=3/2, pristine_cleared=3/2, prefix_pristine=3, legacy_pristine=0, infra=0, unknown_attr=0; top_failure=combat_planning:3; feature_rows=675; labels=266, label_exclusions=3/missed_single_card_search:3; evidence=route:3, terminal_sources=synthetic_after_mcp_null:2; action_recovery=unavailable_action:1/2, terminal_recovery=synthetic:2,attempted:2,succeeded:2 -> promote_to_next_validation_batch",
+  "gate_next_action": "promote_to_next_validation_batch",
+  "gate_progress": {
+    "act1_boss_reached": {
+      "current": 3,
+      "required": 3,
+      "deficit": 0,
+      "ok": true
+    },
+    "act1_boss_cleared": {
+      "current": 3,
+      "required": 2,
+      "deficit": 0,
+      "ok": true
+    },
+    "pristine_act1_boss_cleared": {
+      "current": 3,
+      "required": 2,
+      "deficit": 0,
+      "ok": true
+    }
+  },
+  "gate_remaining_progress": [],
+  "gate_primary_remaining_progress": null,
+  "next_probe_goal": {
+    "action": "promote_to_next_validation_batch",
+    "primary_blocking_reason": null,
+    "metric": null,
+    "deficit": 0,
+    "summary": "gate passed; promote to the next validation batch",
+    "acceptance_criteria": {
+      "scope": "gate_already_passed",
+      "counts_toward_metric": null,
+      "no_next_validation_required": true
+    }
+  },
+  "latest_run_acceptance": {
+    "available": true,
+    "accepted": true,
+    "not_required": true,
+    "metric": null,
+    "action": "promote_to_next_validation_batch",
+    "summary": "gate already passed; latest run acceptance is not required",
+    "run_path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+    "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json"
+  },
+  "recommended_next_action": "promote_to_next_validation_batch",
+  "assignment_prompt": "Agent: runner_agent\nRole: flow/data collection\nFirst task: collect_next_validation_batch (act1_boss_gate_passed)\nClassification reasons: clean_trainable=completed_clean:3\nValidation summary: grades=usable_with_recoveries:2,pristine:1; flags=synthetic_after_mcp_null:2,synthetic_terminal:2,synthetic_terminal_state:2,+1 more\nGate status: act1_boss_gate PASS: IRONCLAD A0 runs=3, reached=3/3, cleared=3/2, pristine_cleared=3/2, prefix_pristine=3, legacy_pristine=0, infra=0, unknown_attr=0; top_failure=combat_planning:3; feature_rows=675; labels=266, label_exclusions=3/missed_single_card_search:3; evidence=route:3, terminal_sources=synthetic_after_mcp_null:2; action_recovery=unavailable_action:1/2, terminal_recovery=synthetic:2,attempted:2,succeeded:2 -> promote_to_next_validation_batch\nAcceptance criteria: {\"counts_toward_metric\":null,\"no_next_validation_required\":true,\"scope\":\"gate_already_passed\"}\nLatest run acceptance: {\"accepted\":true,\"action\":\"promote_to_next_validation_batch\",\"available\":true,\"manifest_path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\",\"metric\":null,\"not_required\":true,\"run_path\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260709_001052_ironclad_a0.jsonl\",\"summary\":\"gate already passed; latest run acceptance is not required\"}\nNext probe goal: {\"acceptance_criteria\":{\"counts_toward_metric\":null,\"no_next_validation_required\":true,\"scope\":\"gate_already_passed\"},\"action\":\"promote_to_next_validation_batch\",\"deficit\":0,\"metric\":null,\"primary_blocking_reason\":null,\"summary\":\"gate passed; promote to the next validation batch\"}\nExecution mode: live_mcp_gated_collection\nRequires live MCP ownership: True\nLive MCP policy: may control live MCP only when explicitly assigned ownership\nAllowed operations: read_logs, refresh_offline_manifest_advice_gate, prepare_probe_command\nForbidden operations: edit_code, train_models, control_live_mcp_without_explicit_ownership\nUse offline_refresh_command.resolved_argv when available to replay the exact log set without touching live MCP.\nOffline refresh command: {\"kind\":\"offline_batch_replay\",\"resolved_argv_available\":true,\"resolved_log_count\":3,\"touches_live_mcp\":false,\"trains_models\":false,\"writes_models\":false}\noffline_refresh_command.resolved_argv: [\"python\",\"-m\",\"slay_ai.offline_batch\",\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_234020_ironclad_a0.jsonl\",\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_235639_ironclad_a0.jsonl\",\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260709_001052_ironclad_a0.jsonl\",\"--output-dir\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\",\"--name\",\"cycle_20260709_ironclad_a0_validation39_retrain_structure\",\"--knowledge-dir\",\"data\\\\static_knowledge\",\"--route-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\route_risk_model.json\",\"--potion-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\potion_tempo_model.json\",\"--deck-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\deck_quality_model.json\",\"--combat-model-path\",\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\models\\\\combat_search_model.json\",\"--character\",\"IRONCLAD\",\"--ascension\",\"0\",\"--min-reached\",\"3\",\"--min-cleared\",\"2\",\"--min-pristine-cleared\",\"2\"]\nShadow advice provenance: {\"advice_dir\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure\",\"available\":true,\"categories\":{\"combat_search\":{\"high_risk_count\":1,\"model_available\":true,\"model_load_quality\":{\"accepted\":899,\"files\":1,\"rows\":907,\"skip_reasons\":{\"missed_direct_kill\":1,\"missed_single_card_search\":7},\"skipped\":8},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":128,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"review_search_label\",\"attacks_removed\":7,\"floor\":1,\"label_first_card_key\":\"defendr\",\"label_missed_direct_kill\":false,\"label_missed_single_card_search\":false,\"loss_delta\":7,\"model_top_card_key\":\"striker\",\"retaliation_damage\":0,\"score\":4.6938,\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_234020_ironclad_a0.jsonl\",\"step\":10},\"watch_count\":90},\"potion_tempo\":{\"high_risk_count\":0,\"model_available\":true,\"model_load_quality\":{\"accepted\":1186,\"files\":1,\"rows\":1186,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":209,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"hold_potion\",\"boss_identity_known\":false,\"boss_known_count\":0,\"enemy_boss_count\":0,\"enemy_ids\":[\"GremlinFat\",\"GremlinWarrior\",\"GremlinThief\"],\"enemy_total_expected_attack\":100,\"floor\":13,\"incoming\":21,\"potion_block_value\":0,\"potion_damage_value\":10,\"potion_draw_value\":0,\"potion_ids\":[\"Explosive Potion\",\"Fruit Juice\",\"DuplicationPotion\"],\"potion_vulnerable_value\":0,\"potion_weak_value\":0,\"score\":0.2421,\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_234020_ironclad_a0.jsonl\",\"step\":125,\"used_potion\":false,\"used_potion_targeted\":false},\"watch_count\":0},\"pre_boss_deck_quality\":{\"high_risk_count\":1,\"model_available\":true,\"model_load_quality\":{\"accepted\":20,\"files\":1,\"rows\":20,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":2,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"needs_boss_resources\",\"floor\":15,\"score\":0.0533,\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_234020_ironclad_a0.jsonl\",\"step\":181},\"watch_count\":0},\"route_risk\":{\"high_risk_count\":21,\"model_available\":true,\"model_load_quality\":{\"accepted\":359,\"files\":1,\"rows\":359,\"skipped\":0},\"model_training_source_file_count\":1,\"model_training_source_policy\":\"usable\",\"model_training_source_quality\":\"usable\",\"rows\":36,\"shadow_input_file_count\":1,\"shadow_source_file_count\":1,\"top_signal\":{\"advice\":\"avoid_or_require_recovery\",\"floor\":37,\"score\":0.9999,\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_234020_ironclad_a0.jsonl\",\"step\":685},\"watch_count\":1}},\"mode\":\"shadow_rows\",\"resolved_file_count\":4,\"summary_path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\summary.json\",\"warnings\":[]}\nShadow label quality: {\"combat_search_labels\":{\"excluded_from_training\":3,\"exclusion_reasons\":{\"missed_single_card_search\":3},\"total\":266,\"trainable\":263}}\nCombat label audit: {\"accepted_rows\":263,\"examples\":[{\"act\":1,\"attacks_removed\":11,\"avoided_lethal\":false,\"current_energy\":2,\"current_hp\":78,\"direct_kill_available\":false,\"enemy_hps\":[61,36],\"enemy_ids\":[\"SpikeSlime_L\",\"AcidSlime_L\"],\"enemy_intents\":[\"ATTACK_DEBUFF\",\"ATTACK_DEBUFF\"],\"floor\":16,\"hand_ids\":[\"Strike_R\",\"Slimed\",\"Defend_R\",\"Uppercut\"],\"incoming\":27,\"initial_loss\":21,\"kills\":0,\"label_first_card_key\":\"Uppercut\",\"label_sequence_card_keys\":[\"Uppercut\"],\"label_target_index\":2,\"line\":33,\"loss_delta\":11,\"max_hp\":85,\"path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\combat_search_labels.jsonl\",\"projected_loss\":10,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_234020_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"usable_with_recoveries\",\"step\":205,\"turn\":7},{\"act\":1,\"attacks_removed\":0,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":61,\"direct_kill_available\":false,\"enemy_hps\":[250],\"enemy_ids\":[\"Hexaghost\"],\"enemy_intents\":[\"ATTACK\"],\"floor\":16,\"hand_ids\":[\"Strike_R\",\"Shrug It Off\",\"Strike_R\",\"Shrug It Off\"],\"incoming\":24,\"initial_loss\":24,\"kills\":0,\"label_first_card_key\":\"Shrug It Off\",\"label_sequence_card_keys\":[\"Shrug It Off\"],\"line\":257,\"loss_delta\":8,\"max_hp\":80,\"path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\combat_search_labels.jsonl\",\"projected_loss\":16,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260709_001052_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"pristine\",\"step\":249,\"turn\":2},{\"act\":1,\"attacks_removed\":6,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":30,\"direct_kill_available\":true,\"direct_kill_card_indices\":[1,3],\"direct_kill_card_keys\":[\"Anger\",\"Strike_R\"],\"direct_kill_enemy_hp\":1,\"direct_kill_enemy_id\":\"Hexaghost\",\"enemy_hps\":[1],\"enemy_ids\":[\"Hexaghost\"],\"enemy_intents\":[\"ATTACK\"],\"floor\":16,\"hand_ids\":[\"Anger\",\"Burn\",\"Strike_R\"],\"incoming\":6,\"initial_loss\":10,\"kills\":1,\"label_first_card_key\":\"Strike_R\",\"label_sequence_card_keys\":[\"Strike_R\"],\"label_target_index\":1,\"line\":265,\"loss_delta\":6,\"max_hp\":80,\"path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\combat_search_labels.jsonl\",\"projected_loss\":4,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260709_001052_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"pristine\",\"step\":306,\"turn\":18}],\"excluded_rows\":3,\"exclusion_reasons\":{\"missed_single_card_search\":3},\"filtered_rows\":0,\"resolved_file_count\":1,\"rows\":266,\"source_quality\":{\"pristine\":45,\"usable_with_recoveries\":221},\"status_line\":\"combat_label_audit files=1 rows=266 excluded=3 missed_single_card_search=3\"}\nCombat label replay audit: {\"current_policy_matches_actual\":2,\"current_policy_matches_label\":0,\"current_policy_other\":1,\"examples\":[{\"act\":1,\"actual_action\":{\"action\":\"play_card\"},\"attacks_removed\":0,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":61,\"direct_kill_available\":false,\"enemy_hps\":[250],\"enemy_ids\":[\"Hexaghost\"],\"enemy_intents\":[\"ATTACK\"],\"floor\":16,\"hand_ids\":[\"Strike_R\",\"Shrug It Off\",\"Strike_R\",\"Shrug It Off\"],\"incoming\":24,\"initial_loss\":24,\"kills\":0,\"label_action\":{\"action\":\"play_card\",\"card_index\":2},\"label_first_card_key\":\"Shrug It Off\",\"label_sequence_card_keys\":[\"Shrug It Off\"],\"line\":257,\"loss_delta\":8,\"max_hp\":80,\"outcome\":\"current_policy_other\",\"path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\combat_search_labels.jsonl\",\"policy_action\":{\"action\":\"use_potion\",\"potion_slot\":2},\"policy_reason\":\"Low HP; use 再生药水.\",\"projected_loss\":16,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260709_001052_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"pristine\",\"step\":249,\"turn\":2},{\"act\":1,\"actual_action\":{\"action\":\"play_card\",\"card_index\":3},\"attacks_removed\":11,\"avoided_lethal\":false,\"current_energy\":2,\"current_hp\":78,\"direct_kill_available\":false,\"enemy_hps\":[61,36],\"enemy_ids\":[\"SpikeSlime_L\",\"AcidSlime_L\"],\"enemy_intents\":[\"ATTACK_DEBUFF\",\"ATTACK_DEBUFF\"],\"floor\":16,\"hand_ids\":[\"Strike_R\",\"Slimed\",\"Defend_R\",\"Uppercut\"],\"incoming\":27,\"initial_loss\":21,\"kills\":0,\"label_action\":{\"action\":\"play_card\",\"card_index\":4,\"target_index\":2},\"label_first_card_key\":\"Uppercut\",\"label_sequence_card_keys\":[\"Uppercut\"],\"label_target_index\":2,\"line\":33,\"loss_delta\":11,\"max_hp\":85,\"outcome\":\"current_policy_matches_actual\",\"path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\combat_search_labels.jsonl\",\"policy_action\":{\"action\":\"play_card\",\"card_index\":3},\"policy_reason\":\"One-turn search: sequence ['Defend_R', 'Strike_R'] loss 21->7, damage=6, retaliation_damage=0, kills=0, attacks_removed=11, avoided_lethal=False, score=77.0.\",\"projected_loss\":10,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_234020_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"usable_with_recoveries\",\"step\":205,\"turn\":7},{\"act\":1,\"actual_action\":{\"action\":\"play_card\",\"card_index\":1,\"target_index\":1},\"attacks_removed\":6,\"avoided_lethal\":false,\"current_energy\":3,\"current_hp\":30,\"direct_kill_available\":true,\"direct_kill_card_indices\":[1,3],\"direct_kill_card_keys\":[\"Anger\",\"Strike_R\"],\"direct_kill_enemy_hp\":1,\"direct_kill_enemy_id\":\"Hexaghost\",\"enemy_hps\":[1],\"enemy_ids\":[\"Hexaghost\"],\"enemy_intents\":[\"ATTACK\"],\"floor\":16,\"hand_ids\":[\"Anger\",\"Burn\",\"Strike_R\"],\"incoming\":6,\"initial_loss\":10,\"kills\":1,\"label_action\":{\"action\":\"play_card\",\"card_index\":3,\"target_index\":1},\"label_first_card_key\":\"Strike_R\",\"label_sequence_card_keys\":[\"Strike_R\"],\"label_target_index\":1,\"line\":265,\"loss_delta\":6,\"max_hp\":80,\"outcome\":\"current_policy_matches_actual\",\"path\":\"C:\\\\Users\\\\jikun\\\\Documents\\\\game\\\\data\\\\climb_cycles\\\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\offline\\\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\\\combat_search_labels.jsonl\",\"policy_action\":{\"action\":\"play_card\",\"card_index\":1,\"target_index\":1},\"policy_reason\":\"Play 愤怒 for direct lethal.\",\"projected_loss\":4,\"reasons\":[\"missed_single_card_search\"],\"search_type\":\"single_card_search_diagnostic\",\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260709_001052_ironclad_a0.jsonl\",\"source_reason\":\"completed_clean\",\"source_validation_grade\":\"pristine\",\"step\":306,\"turn\":18}],\"excluded_rows\":3,\"exclusion_reasons\":{\"missed_single_card_search\":3},\"missing_source_log\":0,\"missing_source_step\":0,\"policy_errors\":0,\"replay_outcomes\":{\"current_policy_matches_actual\":2,\"current_policy_other\":1},\"replayed_rows\":3,\"resolved_file_count\":1,\"status_line\":\"combat_label_replay_audit files=1 excluded=3 replayed=3 matches_label=0 matches_actual=2 other=1\"}\nFailure evidence summary: {\"by_type\":{\"pre_boss\":3,\"route\":3,\"synthetic_terminal\":2,\"terminal_outcome_source\":2},\"runs_with_evidence\":3,\"synthetic_terminals\":{\"by_source\":{\"unknown_source\":2},\"terminal_outcome_sources\":{\"synthetic_after_mcp_null\":2}}}\nAction recovery: {\"by_kind\":{\"recoverable_error\":1,\"unavailable_action\":1},\"by_status\":{\"preflight_mismatch\":1,\"recoverable_error\":1},\"examples\":[{\"action_status\":\"recoverable_error\",\"actions\":[{\"action\":\"choose\",\"choice_index\":2}],\"kind\":\"recoverable_error\",\"last_error\":\"Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []\",\"last_state\":{\"act\":2,\"current_hp\":94,\"floor\":27,\"max_hp\":94,\"room_phase\":\"INCOMPLETE\",\"screen_type\":\"REST\",\"step\":395},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_235639_ironclad_a0.jsonl\",\"step\":395},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"choose\",\"choice_index\":8}],\"available_commands\":[\"proceed\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['choose']; available commands: ['proceed']\",\"last_state\":{\"act\":2,\"current_hp\":94,\"floor\":28,\"max_hp\":94,\"room_phase\":\"COMPLETE\",\"screen_type\":\"SHOP_SCREEN\",\"step\":404},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_235639_ironclad_a0.jsonl\",\"step\":404}],\"recovered\":2,\"runs_with_action_recovery\":1,\"runs_with_recovered_action\":1,\"runs_with_unrecovered_action\":0,\"total\":2,\"unrecovered\":0}\nTerminal recovery: {\"attempted\":2,\"succeeded\":2,\"synthetic_terminals\":2}\nGate execution recovery: {\"action_recovery\":{\"by_kind\":{\"recoverable_error\":1,\"unavailable_action\":1},\"by_status\":{\"preflight_mismatch\":1,\"recoverable_error\":1},\"examples\":[{\"action_status\":\"recoverable_error\",\"actions\":[{\"action\":\"choose\",\"choice_index\":2}],\"kind\":\"recoverable_error\",\"last_error\":\"Error at action 1: choice_index 2 out of bounds. Initial choices had 0 items: []\",\"last_state\":{\"act\":2,\"current_hp\":94,\"floor\":27,\"max_hp\":94,\"room_phase\":\"INCOMPLETE\",\"screen_type\":\"REST\",\"step\":395},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_235639_ironclad_a0.jsonl\",\"step\":395},{\"action_status\":\"preflight_mismatch\",\"actions\":[{\"action\":\"choose\",\"choice_index\":8}],\"available_commands\":[\"proceed\"],\"kind\":\"unavailable_action\",\"last_error\":\"Preflight unavailable action(s): ['choose']; available commands: ['proceed']\",\"last_state\":{\"act\":2,\"current_hp\":94,\"floor\":28,\"max_hp\":94,\"room_phase\":\"COMPLETE\",\"screen_type\":\"SHOP_SCREEN\",\"step\":404},\"recovered\":true,\"source_category\":\"clean_trainable\",\"source_log\":\"runs\\\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\\\20260708_235639_ironclad_a0.jsonl\",\"step\":404}],\"recovered\":2,\"runs_with_action_recovery\":1,\"runs_with_recovered_action\":1,\"runs_with_unrecovered_action\":0,\"total\":2,\"unrecovered\":0},\"terminal_recovery\":{\"attempted\":2,\"succeeded\":2,\"synthetic_terminals\":2}}\nGate data quality: {\"coverage_manifests\":1,\"direct_kill_available_labels\":1,\"label_exclusion_manifests\":1,\"label_exclusion_reasons\":{\"missed_single_card_search\":3},\"missed_single_card_search_labels\":3,\"schema_complete_manifests\":1,\"shadow_feature_rows\":675,\"shadow_label_excluded\":3,\"shadow_label_rows\":266,\"shadow_label_trainable\":263,\"total_manifests\":1}\nStatic knowledge gaps: {\"observed_aliases\":{\"cards\":72},\"resolved_log_count\":3,\"status_line\":\"static_knowledge_gaps logs=3 missing=0\",\"total_missing_occurrences\":0}\nGate failure evidence: {\"by_type\":{\"pre_boss\":3,\"route\":3,\"synthetic_terminal\":2,\"terminal_outcome_source\":2},\"runs_with_evidence\":3,\"synthetic_terminals\":{\"by_source\":{\"unknown_source\":2},\"terminal_outcome_sources\":{\"synthetic_after_mcp_null\":2}}}\nmanifest_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\ndiagnosis_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\ngate_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\nstatic_knowledge_gap_report_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\ncombat_label_audit_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\ncombat_label_replay_audit_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\nsummary_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\nartifact_manifest_path: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json\nhandoff_dir: C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure"
+}

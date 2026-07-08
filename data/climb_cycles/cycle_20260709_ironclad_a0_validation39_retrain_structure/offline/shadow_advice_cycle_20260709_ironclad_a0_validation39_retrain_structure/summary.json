@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "shadow_inputs": {
+    "mode": "shadow_rows",
+    "resolved_files": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl",
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\potion_tempo.jsonl",
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\pre_boss_deck_quality.jsonl",
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\route_risk.jsonl"
+    ],
+    "resolved_file_count": 4,
+    "categories": {
+      "route_risk": {
+        "row_count": 85,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\route_risk.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "potion_tempo": {
+        "row_count": 319,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\potion_tempo.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "pre_boss_deck_quality": {
+        "row_count": 5,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\pre_boss_deck_quality.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      },
+      "combat_search": {
+        "row_count": 266,
+        "modes": [
+          "shadow_rows"
+        ],
+        "resolved_files": [
+          "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure\\combat_search_labels.jsonl"
+        ],
+        "resolved_file_count": 1,
+        "warnings": []
+      }
+    },
+    "warnings": []
+  },
+  "advice_rows": {
+    "route_risk": 85,
+    "potion_tempo": 319,
+    "pre_boss_deck_quality": 5,
+    "combat_search": 266
+  },
+  "models_available": {
+    "route_risk": true,
+    "potion_tempo": true,
+    "pre_boss_deck_quality": true,
+    "combat_search": true
+  },
+  "model_training_source": {
+    "route_risk": {
+      "mode": "shadow_rows",
+      "category": "route_risk",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37"
+      ],
+      "missing_inputs": [],
+      "row_file": "route_risk.jsonl",
+      "resolved_files": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37\\route_risk.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    },
+    "potion_tempo": {
+      "mode": "shadow_rows",
+      "category": "potion_tempo",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37"
+      ],
+      "missing_inputs": [],
+      "row_file": "potion_tempo.jsonl",
+      "resolved_files": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37\\potion_tempo.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    },
+    "pre_boss_deck_quality": {
+      "mode": "shadow_rows",
+      "category": "pre_boss_deck_quality",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37"
+      ],
+      "missing_inputs": [],
+      "row_file": "pre_boss_deck_quality.jsonl",
+      "resolved_files": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37\\pre_boss_deck_quality.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    },
+    "combat_search": {
+      "mode": "shadow_rows",
+      "category": "combat_search",
+      "source_quality_policy": "usable",
+      "inputs": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37"
+      ],
+      "missing_inputs": [],
+      "row_file": "combat_search_labels.jsonl",
+      "resolved_files": [
+        "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260708_ironclad_a0_external_deep_train_30_37\\offline\\shadow_cycle_20260708_ironclad_a0_external_deep_train_30_37\\combat_search_labels.jsonl"
+      ],
+      "resolved_file_count": 1,
+      "warnings": []
+    }
+  },
+  "model_training_source_quality": {
+    "route_risk": "usable",
+    "potion_tempo": "usable",
+    "pre_boss_deck_quality": "usable",
+    "combat_search": "usable"
+  },
+  "model_load_quality": {
+    "route_risk": {
+      "files": 1,
+      "rows": 359,
+      "accepted": 359,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "potion_tempo": {
+      "files": 1,
+      "rows": 1186,
+      "accepted": 1186,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "pre_boss_deck_quality": {
+      "files": 1,
+      "rows": 20,
+      "accepted": 20,
+      "skipped": 0,
+      "skip_reasons": {}
+    },
+    "combat_search": {
+      "files": 1,
+      "rows": 907,
+      "accepted": 899,
+      "skipped": 8,
+      "skip_reasons": {
+        "missed_direct_kill": 1,
+        "missed_single_card_search": 7
+      }
+    }
+  }
+}

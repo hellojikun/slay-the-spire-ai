@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import gzip
 import hashlib
 import json
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Iterator, TextIO
 
 
 CARD_PRIOR_ROWS_FILE = "card_reward_priors.jsonl"
@@ -120,9 +121,13 @@ def import_external_runs(
                         "reason": reject_reason,
                     }
                 )
+                if limit_runs is not None and seen_runs >= limit_runs:
+                    break
                 continue
             accepted_runs.append(_manifest_run_summary(normalized))
             card_prior_rows.extend(_card_prior_rows_from_run(normalized))
+            if limit_runs is not None and seen_runs >= limit_runs:
+                break
         if limit_runs is not None and seen_runs >= limit_runs:
             break
 
@@ -166,32 +171,25 @@ def iter_external_files(paths: Iterable[Path]) -> Iterable[Path]:
 
 
 def iter_external_records(path: Path) -> Iterable[dict[str, Any]]:
-    text = _read_external_text(path)
-    stripped = text.lstrip()
-    if not stripped:
-        return
-    if stripped[0] in "[{":
+    with _open_external_text(path) as handle:
+        if _is_jsonl_file(path):
+            yield from _iter_json_lines_handle(handle, path)
+            return
+
+        prefix = handle.read(4096)
+        stripped = prefix.lstrip()
+        if not stripped:
+            return
+        if stripped[0] == "[":
+            yield from _iter_json_array_stream(_chain_text(prefix, handle), path)
+            return
+        text = prefix + handle.read()
         try:
             payload = json.loads(text)
         except json.JSONDecodeError:
-            yield from _iter_json_lines(text, path)
+            yield from _iter_json_lines_text(text, path)
             return
-        if isinstance(payload, list):
-            for item in payload:
-                if isinstance(item, dict):
-                    yield item
-        elif isinstance(payload, dict):
-            runs = payload.get("runs") or payload.get("data")
-            if isinstance(runs, list):
-                for item in runs:
-                    if isinstance(item, dict):
-                        yield item
-            else:
-                yield payload
-        return
-    yield from _iter_json_lines(text, path)
-
-
+        yield from _records_from_json_payload(payload)
 def normalize_external_run(
     record: dict[str, Any],
     *,
@@ -328,6 +326,7 @@ def _build_manifest(
         "inputs": [str(path) for path in input_paths],
         "resolved_files": [str(path) for path in resolved_files],
         "filters": filters,
+        "sample_method": "stream_first_n" if filters.get("limit_runs") is not None else "full_stream",
         "artifacts": {
             "card_reward_priors": str(output_dir / CARD_PRIOR_ROWS_FILE),
         },
@@ -336,6 +335,7 @@ def _build_manifest(
             "resolved_file_count": len(resolved_files),
             "accepted_runs": len(accepted_runs),
             "rejected_runs": len(rejected_runs),
+            "seen_runs": len(accepted_runs) + len(rejected_runs),
             "card_prior_rows": len(card_prior_rows),
             "characters": characters,
             "ascensions": ascensions,
@@ -403,25 +403,118 @@ def _is_supported_external_file(path: Path) -> bool:
     return suffixes[-1] in SUPPORTED_SUFFIXES
 
 
-def _read_external_text(path: Path) -> str:
+@contextmanager
+def _open_external_text(path: Path) -> Iterator[TextIO]:
     if path.suffix.lower() == ".gz":
         with gzip.open(path, "rt", encoding="utf-8") as handle:
-            return handle.read()
-    return path.read_text(encoding="utf-8")
+            yield handle
+        return
+    with path.open("r", encoding="utf-8") as handle:
+        yield handle
 
 
-def _iter_json_lines(text: str, path: Path) -> Iterable[dict[str, Any]]:
+def _read_external_text(path: Path) -> str:
+    with _open_external_text(path) as handle:
+        return handle.read()
+
+
+def _iter_json_lines_text(text: str, path: Path) -> Iterable[dict[str, Any]]:
     for line_number, line in enumerate(text.splitlines(), start=1):
-        if not line.strip():
-            continue
-        try:
-            payload = json.loads(line)
-        except json.JSONDecodeError as exc:
-            raise ValueError(f"Invalid JSON line in {path} at {line_number}: {exc}") from exc
-        if isinstance(payload, dict):
+        yield from _parse_json_line(line, path, line_number)
+
+
+def _iter_json_lines_handle(handle: TextIO, path: Path) -> Iterable[dict[str, Any]]:
+    for line_number, line in enumerate(handle, start=1):
+        yield from _parse_json_line(line, path, line_number)
+
+
+def _parse_json_line(line: str, path: Path, line_number: int) -> Iterable[dict[str, Any]]:
+    if not line.strip():
+        return
+    try:
+        payload = json.loads(line)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"Invalid JSON line in {path} at {line_number}: {exc}") from exc
+    if isinstance(payload, dict):
+        yield payload
+
+
+def _records_from_json_payload(payload: Any) -> Iterable[dict[str, Any]]:
+    if isinstance(payload, list):
+        for item in payload:
+            if isinstance(item, dict):
+                yield item
+    elif isinstance(payload, dict):
+        runs = payload.get("runs") or payload.get("data")
+        if isinstance(runs, list):
+            for item in runs:
+                if isinstance(item, dict):
+                    yield item
+        else:
             yield payload
 
 
+def _iter_json_array_stream(chunks: Iterable[str], path: Path) -> Iterable[dict[str, Any]]:
+    decoder = json.JSONDecoder()
+    buffer = ""
+    pos = 0
+    started = False
+    finished = False
+    for chunk in chunks:
+        buffer += chunk
+        while True:
+            pos = _skip_json_ws(buffer, pos)
+            if pos >= len(buffer):
+                break
+            if not started:
+                if buffer[pos] != "[":
+                    raise ValueError(f"Expected JSON array in {path}")
+                started = True
+                pos += 1
+                continue
+            if buffer[pos] == "]":
+                finished = True
+                return
+            if buffer[pos] == ",":
+                pos += 1
+                continue
+            try:
+                payload, end = decoder.raw_decode(buffer, pos)
+            except json.JSONDecodeError:
+                break
+            if isinstance(payload, dict):
+                yield payload
+            pos = end
+        if pos > 65536:
+            buffer = buffer[pos:]
+            pos = 0
+    pos = _skip_json_ws(buffer, pos)
+    if started and not finished and pos < len(buffer):
+        if buffer[pos] == "]":
+            return
+        raise ValueError(f"Unfinished JSON array in {path}")
+
+
+def _chain_text(prefix: str, handle: TextIO, *, chunk_size: int = 65536) -> Iterable[str]:
+    yield prefix
+    while True:
+        chunk = handle.read(chunk_size)
+        if not chunk:
+            break
+        yield chunk
+
+
+def _skip_json_ws(text: str, pos: int) -> int:
+    while pos < len(text) and text[pos].isspace():
+        pos += 1
+    return pos
+
+
+def _is_jsonl_file(path: Path) -> bool:
+    suffixes = [suffix.lower() for suffix in path.suffixes]
+    if suffixes and suffixes[-1] == ".gz":
+        suffixes = suffixes[:-1]
+    return bool(suffixes and suffixes[-1] == ".jsonl")
 def _source_run_hash(source_id: str, path: Path, index: int, record: dict[str, Any]) -> str:
     raw_id = _first_value(record, "id", "run_id", "runId", "play_id", "playId")
     seed = f"{source_id}|{path}|{index}|{raw_id or json.dumps(record, sort_keys=True, ensure_ascii=False)[:500]}"

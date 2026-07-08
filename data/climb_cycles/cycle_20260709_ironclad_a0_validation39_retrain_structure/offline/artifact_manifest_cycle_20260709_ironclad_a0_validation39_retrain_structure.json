@@ -1,0 +1,224 @@
+{
+  "version": 1,
+  "name": "cycle_20260709_ironclad_a0_validation39_retrain_structure",
+  "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+  "inputs": [
+    "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39"
+  ],
+  "input_count": 1,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3,
+      "bytes": 9189777,
+      "index": 0
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+    "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 3,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_234020_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 4552165,
+      "sha256": "4f5889a29ecfd6beb5d5d71068ce4342e2fcdd6bd07bd269d27e646cfda96556",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260708_235639_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 2739833,
+      "sha256": "9a2a01481af7b154e66d6c207b5d8761055d3ac6cd12c113344636ef92722f42",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_cycle_20260708_ironclad_a0_post_external_validation_39\\20260709_001052_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1897779,
+      "sha256": "2c32f8fe04aaafbc66dd3f6c58f5b43e38cc0e87c025fde6d8394b79c5b6616e",
+      "index": 2
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "shadow_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+    "advice_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+    "diagnosis_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "gate_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "static_knowledge_gap_report_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "combat_label_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "combat_label_replay_audit_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "summary_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "artifact_manifest_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\artifact_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+    "handoff_dir": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+    "handoff_index_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+    "next_handoff_prompt_path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\ai_agent.json",
+    "engineering_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\engineering_agent.json",
+    "main_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\main_agent.json",
+    "runner_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\ai_agent.txt",
+    "engineering_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\engineering_agent.txt",
+    "main_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\main_agent.txt",
+    "runner_agent": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_advice_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 1666199
+    },
+    "combat_label_audit_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 5560,
+      "sha256": "815454d7e6c2f1eff1c4356613398644ef63f363fd7b25830086cf423470ee59"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\combat_label_replay_audit_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 7164,
+      "sha256": "5706b514d90f97e21ec3d6cc4f96712a26a6302a9b15387d2a139720ec8e2dbc"
+    },
+    "diagnosis_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\run_diagnosis_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 994008,
+      "sha256": "2d04a0e4bea6953e904ef9f2a1171750b12268cd96c6ee458268d1b0040b7abb"
+    },
+    "gate_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\act1_boss_gate_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 15372,
+      "sha256": "6853e55d60c927008668766768f5ecadb0af4c36208e44493ab14ad92e113ac9"
+    },
+    "handoff_dir": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 702387
+    },
+    "handoff_index_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 54311,
+      "sha256": "74cc7e11b60f7e2c7bbc3873551dbb5922cbe77b63a1bcd8bac7d476f6bb5bf5"
+    },
+    "manifest_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\training_manifest_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 293380,
+      "sha256": "e1774f33cdb3e80c9738a6d08a8b060efe8852ab9dffadbb3030afa6ea09455d"
+    },
+    "next_handoff_prompt_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 53958,
+      "sha256": "5bfc321b4013d67481a7c812a12a59686b68d4c5a32b7c758df15342ca0c79b9"
+    },
+    "shadow_dir": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\shadow_cycle_20260709_ironclad_a0_validation39_retrain_structure",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 4122868
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\static_knowledge_gaps_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1971,
+      "sha256": "6c9508d4382884097c04c09291d510a346357f9b1d6df581e2839b7fb36a9330"
+    },
+    "summary_path": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\offline_batch_cycle_20260709_ironclad_a0_validation39_retrain_structure.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 541249,
+      "sha256": "5031ce984dd3b31e0830a5ccc8c8be33ec92e524958f2dcbb5aad07b17ba14ad"
+    },
+    "ai_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 157526,
+      "sha256": "09019e4deb1af8e513a88e37448d9b244e41bbda7cc06cdf8531782f27db2174"
+    },
+    "engineering_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 106237,
+      "sha256": "c61b699c5c60307f093f938c40ba7e06a424201013c512ff884cf959bf3d8f0f"
+    },
+    "main_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 123014,
+      "sha256": "e0636bee6d7df69eb6fd49598b643ac4c08ce20fb90682a0bed67494bb158d6e"
+    },
+    "runner_agent_handoff": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 123119,
+      "sha256": "171af77472b57efa1dd924a606680f251db694c79da16dd71ff92c2e32f9b7fa"
+    },
+    "ai_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 21299,
+      "sha256": "de502990f7c1e89e6cfb8accf31ea9cd9fd22fff7ec6e10180a0462bdaae11b6"
+    },
+    "engineering_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 20892,
+      "sha256": "f1acc0825e9919b80a31eb181bf9decc09ac4b7a6ea06d21e67b7c41339842d0"
+    },
+    "main_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 20996,
+      "sha256": "1b081ab6b169efea46d1e4e75b30d6fd2a03bc159d99186f69948281d7b0da4d"
+    },
+    "runner_agent_prompt": {
+      "path": "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_ironclad_a0_validation39_retrain_structure\\offline\\handoff_cycle_20260709_ironclad_a0_validation39_retrain_structure\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 21035,
+      "sha256": "9465467168c7601676f1be95b55db553b7dadd348f9a414abdc285ac9bdf8cab"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}
