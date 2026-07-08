@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "name": "cycle_20260709_external_decision_readiness_report",
+  "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\artifact_manifest_cycle_20260709_external_decision_readiness_report.json",
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "input_count": 3,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 3,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\training_manifest_cycle_20260709_external_decision_readiness_report.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\shadow_cycle_20260709_external_decision_readiness_report",
+    "advice_dir": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\shadow_advice_cycle_20260709_external_decision_readiness_report",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\run_diagnosis_cycle_20260709_external_decision_readiness_report.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\act1_boss_gate_cycle_20260709_external_decision_readiness_report.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\static_knowledge_gaps_cycle_20260709_external_decision_readiness_report.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\combat_label_audit_cycle_20260709_external_decision_readiness_report.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\combat_label_replay_audit_cycle_20260709_external_decision_readiness_report.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\offline_batch_cycle_20260709_external_decision_readiness_report.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\artifact_manifest_cycle_20260709_external_decision_readiness_report.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\shadow_advice_cycle_20260709_external_decision_readiness_report",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 942818
+    },
+    "combat_label_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\combat_label_audit_cycle_20260709_external_decision_readiness_report.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 3657,
+      "sha256": "d72f60258eb6d95ee7538fde3e7b58d4e4aaae8b8a870bdf0ce274778efb4ba0"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\combat_label_replay_audit_cycle_20260709_external_decision_readiness_report.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 4710,
+      "sha256": "d5d3b4f6b4e809ef27d5f3e51d7187cc633c0b1fb017e67ac57ccb4cd5f06ac5"
+    },
+    "diagnosis_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\run_diagnosis_cycle_20260709_external_decision_readiness_report.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 873312,
+      "sha256": "670a91725f6b493d11ab5db5e5ad49f0217c9801409b3aa15d155e2bfc959e31"
+    },
+    "gate_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\act1_boss_gate_cycle_20260709_external_decision_readiness_report.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17713,
+      "sha256": "d6caf83eb29896e5cae7dfa7d196967456c1ee5c3ee1810424df71d49d00ba58"
+    },
+    "handoff_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 622807
+    },
+    "handoff_index_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 51509,
+      "sha256": "940d319541f84c470e693b69294f6f8509589865f193ca0c8d8ccded658b7744"
+    },
+    "manifest_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\training_manifest_cycle_20260709_external_decision_readiness_report.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 260364,
+      "sha256": "049c358353622204f1cbe02c6bce9e7fd3acc4cb1c23049e066d406cf193551c"
+    },
+    "next_handoff_prompt_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 48445,
+      "sha256": "45489b680951845eebb046bedaae241e6591e10be93915eed7698166b9df98bf"
+    },
+    "shadow_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\shadow_cycle_20260709_external_decision_readiness_report",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 2416103
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\static_knowledge_gaps_cycle_20260709_external_decision_readiness_report.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1862,
+      "sha256": "ca7b95886e4c2f5b1b49b8e8b849689d714a2192c4401fab0ae87fbbc6d87232"
+    },
+    "summary_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\offline_batch_cycle_20260709_external_decision_readiness_report.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 491173,
+      "sha256": "836be0da2b7dd65f744d20ece4fa99fdd7e3b2fd9ec7a05b11aae6c94f1656d1"
+    },
+    "ai_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 151941,
+      "sha256": "0710d19e3270f24a23ff3eac3dacb9d5b24b0b21ee205ea5b4544ca66182d6e0"
+    },
+    "engineering_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 92552,
+      "sha256": "16c341c2f28ff1e62bf1587f4f4b579a1ddadd1af3a202865883c6dce60d136f"
+    },
+    "main_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 111558,
+      "sha256": "6c323116879c6c044880b90d03e604af959b88a13e79b2282af18430df010530"
+    },
+    "runner_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 92566,
+      "sha256": "0344a5667152885dd551ed8e62e85f72d9c9a095a3b3ddbe7de5de7b9a113aff"
+    },
+    "ai_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 19077,
+      "sha256": "3d70339a908cf17342b621167c449bb618491c79ead2940ed096092f8ad97e3a"
+    },
+    "engineering_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 18261,
+      "sha256": "603d25633b24994c0e7acd9b219c6f4db349f42ee29df68975af949ecf34821b"
+    },
+    "main_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 18628,
+      "sha256": "f11951c10b43960b75282026976cf16bc1d9e6968044f00475f4ce2dc05dbb80"
+    },
+    "runner_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_external_decision_readiness_report\\offline\\handoff_cycle_20260709_external_decision_readiness_report\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 18270,
+      "sha256": "33a1321e6d5a6c0b69068c91299f67e2bc1929ba7532e818a87b0f8e39cb082f"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

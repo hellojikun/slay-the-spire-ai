@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "name": "cycle_20260709_decision_curriculum_smoke",
+  "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\artifact_manifest_cycle_20260709_decision_curriculum_smoke.json",
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "input_count": 3,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 3,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\training_manifest_cycle_20260709_decision_curriculum_smoke.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\shadow_cycle_20260709_decision_curriculum_smoke",
+    "advice_dir": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\shadow_advice_cycle_20260709_decision_curriculum_smoke",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\run_diagnosis_cycle_20260709_decision_curriculum_smoke.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\act1_boss_gate_cycle_20260709_decision_curriculum_smoke.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\static_knowledge_gaps_cycle_20260709_decision_curriculum_smoke.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\combat_label_audit_cycle_20260709_decision_curriculum_smoke.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\combat_label_replay_audit_cycle_20260709_decision_curriculum_smoke.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\offline_batch_cycle_20260709_decision_curriculum_smoke.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\artifact_manifest_cycle_20260709_decision_curriculum_smoke.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\shadow_advice_cycle_20260709_decision_curriculum_smoke",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 935168
+    },
+    "combat_label_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\combat_label_audit_cycle_20260709_decision_curriculum_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 3585,
+      "sha256": "9071527262fd64fca278e4d7ebbbb3e49588bd40b4ecefdc65f09f3806b6659f"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\combat_label_replay_audit_cycle_20260709_decision_curriculum_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 4638,
+      "sha256": "3e96eeeb30101eb524918258dff7c6ee4e583110f334ad380da06763d957c81b"
+    },
+    "diagnosis_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\run_diagnosis_cycle_20260709_decision_curriculum_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 872178,
+      "sha256": "62918fa4bf9b46d6c05486088257ced8b919e7fb24ca3b5279ef90b8aa33a605"
+    },
+    "gate_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\act1_boss_gate_cycle_20260709_decision_curriculum_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 15778,
+      "sha256": "18dd568e99f846fa9f613889e199b4768df058d4cde7e24ec4ea664ddbd07bd6"
+    },
+    "handoff_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 602660
+    },
+    "handoff_index_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 46506,
+      "sha256": "ac49f05ca5f73b6addc098fc15cf595de79cbe71b6aedb5e1cb625f6b5d38747"
+    },
+    "manifest_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\training_manifest_cycle_20260709_decision_curriculum_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 260202,
+      "sha256": "fdc8bfa6cab6ebfe59169d0354382ff5c3f04c596cb699dc964ef1de123121e3"
+    },
+    "next_handoff_prompt_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 43620,
+      "sha256": "6d66788c3c647718f889e9fce8ee3c71b8f1519134c8ab467328d01310d7acd9"
+    },
+    "shadow_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\shadow_cycle_20260709_decision_curriculum_smoke",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 2416103
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\static_knowledge_gaps_cycle_20260709_decision_curriculum_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1862,
+      "sha256": "ca7b95886e4c2f5b1b49b8e8b849689d714a2192c4401fab0ae87fbbc6d87232"
+    },
+    "summary_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\offline_batch_cycle_20260709_decision_curriculum_smoke.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 478135,
+      "sha256": "a9e12d1f0191af000a6c7b15cb5e4ac161fbad160cf13d9f5d0c9a878d43e780"
+    },
+    "ai_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 139963,
+      "sha256": "19c46dca366789e4de52123f792b032f9438a9d4babed1b78a97f0a40abf225e"
+    },
+    "engineering_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 91609,
+      "sha256": "08fa72ddb95a92fea31c6d261b8d5b58542e3a5a412023242ffd5b58bad3da06"
+    },
+    "main_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 106354,
+      "sha256": "e12b9446ca89f532d9343219950a8dc903aba84adfbe1b2573c81aa0e625687e"
+    },
+    "runner_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 106459,
+      "sha256": "89b26604c6a341652510f6f7e127e0cac8907501d1f649fc07224d9efdaed33a"
+    },
+    "ai_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17586,
+      "sha256": "393cfe57d636bf9acfdf431dad7647cd16e3cd6ac90d414dff46bb3330a79efd"
+    },
+    "engineering_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 16772,
+      "sha256": "0d2e4abd784638a4948a1334e3cb44ef559397dc57984ce925d74639f2c005df"
+    },
+    "main_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 16876,
+      "sha256": "047189acbfa42f635008c21d0d4acc76881697135bf616da65965c2e231187ea"
+    },
+    "runner_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\offline\\handoff_cycle_20260709_decision_curriculum_smoke\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 16915,
+      "sha256": "4d2265da36be4875bb0ba32dace9f0adfe236a52907b4b562dfc50ecd5d72d84"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

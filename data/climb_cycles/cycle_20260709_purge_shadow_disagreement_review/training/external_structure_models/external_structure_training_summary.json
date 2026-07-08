@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "status": "trained",
+  "runs": 5,
+  "seen_runs": 5,
+  "skipped_runs": 0,
+  "skip_reasons": {},
+  "reward_decision_rows": 106,
+  "purge_rows": 11,
+  "deck_cycle_rows": 5,
+  "rows": {
+    "card_reward_decisions": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\training\\external_structure_rows\\card_reward_decisions.jsonl",
+    "card_purge_priors": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\training\\external_structure_rows\\card_purge_priors.jsonl",
+    "deck_cycle_priors": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\training\\external_structure_rows\\deck_cycle_priors.jsonl"
+  },
+  "model_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\training\\external_structure_models\\structure_prior_model.json",
+  "summary_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\training\\external_structure_models\\external_structure_training_summary.json",
+  "training_source": {
+    "mode": "external_structure_prior",
+    "source_category": "external_run_history",
+    "source_quality_policy": "external_prior",
+    "source_id": "mat1g3r_stream_smoke",
+    "source_uri": "https://github.com/MaT1g3R/Slay-the-Spire-data",
+    "source_weight": 0.05,
+    "inputs": [
+      "data\\external\\sts_runs\\mat1g3r_stream_smoke\\external_manifest.json"
+    ],
+    "manifest_paths": [
+      "data\\external\\sts_runs\\mat1g3r_stream_smoke\\external_manifest.json"
+    ],
+    "resolved_files": [
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663630852.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663717142.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663893019.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664318636.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664572100.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664746141.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664922519.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665180688.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665190097.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665362526.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665444896.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665624532.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665789079.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665884343.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1666133579.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1666217644.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667011250.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667097527.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667185157.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667437226.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667608513.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667785731.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667961063.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668133125.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668290007.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668452862.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668644450.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668819752.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668985574.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669250910.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669505708.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669685251.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669860376.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669951769.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670196367.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670211901.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670449264.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670627478.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670717694.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670797709.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670978851.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671150411.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671231414.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671316554.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671329786.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671502652.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671733857.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671860730.run",
+      "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671993683.run"
+    ],
+    "resolved_file_count": 50,
+    "warnings": [],
+    "filters": {
+      "game": "STS1",
+      "characters": [
+        "IRONCLAD"
+      ],
+      "ascension_min": null,
+      "ascension_max": null,
+      "limit_runs": 5
+    },
+    "forbidden_uses": [
+      "clean_trainable",
+      "pristine",
+      "gate",
+      "learned_memory",
+      "runtime_authority"
+    ]
+  },
+  "runtime_authority": false,
+  "runtime_default_enabled": false,
+  "does_not_control_live_mcp": true,
+  "forbidden_uses": [
+    "clean_trainable",
+    "pristine",
+    "gate",
+    "learned_memory",
+    "runtime_authority"
+  ]
+}

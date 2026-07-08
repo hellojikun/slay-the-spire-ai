@@ -40,6 +40,8 @@ from .train_external_priors import load_examples_with_stats as load_external_pri
 from .train_external_priors import train_external_card_prior_model
 from .train_external_structure_priors import train_external_structure_priors
 from .train_decision_multitask_model import train_decision_multitask_model
+from .decision_shadow_disagreement import evaluate_live_shadow_disagreements
+from .decision_training_curriculum import write_decision_training_curriculum
 from .train_potion_tempo_model import load_examples_with_stats as load_potion_examples_with_stats
 from .train_potion_tempo_model import train_stats_model as train_potion_model
 from .train_route_risk_model import load_examples_with_stats as load_route_examples_with_stats
@@ -526,10 +528,20 @@ def _train_from_offline_batch(
         model_dir=external_prior_model_dir,
     )
     summary["external_structure_priors"] = external_structure_summary
-    summary["external_structure_decision_model"] = _train_external_structure_decision_model(
+    external_decision_summary = _train_external_structure_decision_model(
         external_structure_summary,
         cycle_dir=cycle_dir,
     )
+    external_decision_summary["live_shadow_disagreement"] = _evaluate_external_decision_live_shadow(
+        external_decision_summary,
+        manifest_path=manifest_path,
+        cycle_dir=cycle_dir,
+    )
+    external_decision_summary["training_curriculum"] = _write_external_decision_training_curriculum(
+        external_decision_summary,
+        cycle_dir=cycle_dir,
+    )
+    summary["external_structure_decision_model"] = external_decision_summary
     summary["card_external_prior_blend"] = _blend_card_model_with_external_prior(
         card_summary,
         external_summary,
@@ -1126,6 +1138,8 @@ def _train_external_structure_decision_model(
         "train_loss": trained.get("train_loss"),
         "val_loss": trained.get("val_loss"),
         "evaluation": trained.get("evaluation", {}),
+        "prediction_audit": trained.get("prediction_audit", {}),
+        "promotion_readiness": trained.get("promotion_readiness", {}),
         "runtime_authority": False,
         "runtime_default_enabled": False,
         "runtime_authority_level": "shadow",
@@ -1137,6 +1151,104 @@ def _train_external_structure_decision_model(
         "structure_summary_path": structure_summary.get("summary_path"),
     }
 
+def _evaluate_external_decision_live_shadow(
+    decision_summary: dict[str, Any],
+    *,
+    manifest_path: Path,
+    cycle_dir: Path,
+) -> dict[str, Any]:
+    if decision_summary.get("status") != "trained":
+        return {
+            "status": "skipped",
+            "reason": "external_structure_decision_model_not_trained",
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+        }
+    model_path_text = str(decision_summary.get("model_path") or "")
+    model_path = Path(model_path_text) if model_path_text else None
+    if model_path is None or not model_path.exists():
+        return {
+            "status": "skipped",
+            "reason": "external_structure_decision_model_missing",
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+        }
+    training_source = resolve_training_source([], manifest_path)
+    logs = [Path(path) for path in training_source.get("resolved_logs", [])]
+    existing_logs = [path for path in logs if path.exists()]
+    if not existing_logs:
+        return {
+            "status": "skipped",
+            "reason": "no_replay_logs_for_live_shadow_disagreement",
+            "manifest_path": str(manifest_path),
+            "resolved_logs": training_source.get("resolved_log_count", 0),
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+        }
+    output_dir = cycle_dir / "training" / "external_structure_decision_model"
+    try:
+        summary = evaluate_live_shadow_disagreements(
+            existing_logs,
+            model_path=model_path,
+            output_path=output_dir / "live_shadow_disagreements.jsonl",
+            summary_output=output_dir / "live_shadow_disagreement_summary.json",
+        )
+    except (ImportError, RuntimeError, OSError, ValueError) as exc:
+        return {
+            "status": "skipped",
+            "reason": "live_shadow_disagreement_failed",
+            "error": str(exc),
+            "manifest_path": str(manifest_path),
+            "resolved_logs": len(existing_logs),
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+        }
+    summary["manifest_path"] = str(manifest_path)
+    summary["resolved_logs"] = len(existing_logs)
+    return summary
+
+
+def _write_external_decision_training_curriculum(
+    decision_summary: dict[str, Any],
+    *,
+    cycle_dir: Path,
+) -> dict[str, Any]:
+    if decision_summary.get("status") != "trained":
+        return {
+            "status": "skipped",
+            "reason": "external_structure_decision_model_not_trained",
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+        }
+    output_path = cycle_dir / "training" / "external_structure_decision_model" / "decision_training_curriculum.json"
+    try:
+        return write_decision_training_curriculum(decision_summary, output_path=output_path)
+    except (OSError, ValueError, TypeError) as exc:
+        return {
+            "status": "skipped",
+            "reason": "decision_training_curriculum_failed",
+            "error": str(exc),
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "runtime_authority_level": "shadow",
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+        }
 def _replay_learned_memory(manifest_path: Path, *, learned_path: Path, reset: bool) -> dict[str, Any]:
     training_source = resolve_training_source([], manifest_path)
     logs = [Path(path) for path in training_source["resolved_logs"]]
@@ -1548,8 +1660,20 @@ def _run_review_markdown_v2(
             f"- External structure decision shadow: `{external_decision.get('status')}` "
             f"examples={external_decision.get('examples', 0)}; runtime_authority={external_decision.get('runtime_authority', False)}; "
             f"direct_mcp_control={external_decision.get('direct_mcp_control', False)}.",
+            f"- External decision live shadow disagreement: `{(external_decision.get('live_shadow_disagreement') or {}).get('status')}` "
+            f"examples={(external_decision.get('live_shadow_disagreement') or {}).get('examples', 0)}; "
+            f"task_counts={(external_decision.get('live_shadow_disagreement') or {}).get('task_counts', {})}; "
+            f"purge_examples={(((external_decision.get('live_shadow_disagreement') or {}).get('supported_surfaces') or {}).get('purge_remove') or {}).get('examples', 0)}; "
+            f"disagreements={(external_decision.get('live_shadow_disagreement') or {}).get('disagreements', 0)}; "
+            f"actual_counts={(external_decision.get('live_shadow_disagreement') or {}).get('actual_counts', {})}; "
+            f"can_promote_to_assist={((external_decision.get('live_shadow_disagreement') or {}).get('promotion_readiness') or {}).get('can_promote_to_assist', False)}.",
+            f"- External decision training curriculum: `{(external_decision.get('training_curriculum') or {}).get('status')}` "
+            f"active_targets={(external_decision.get('training_curriculum') or {}).get('active_target_count', 0)}; "
+            f"output={(external_decision.get('training_curriculum') or {}).get('output_path') or None}.",
             f"- 本轮外部融合候选状态：`{external_blend.get('status')}` "
             f"deltas={external_blend.get('deltas', 0)}；runtime_authority={external_blend.get('runtime_authority', False)}。",
+            f"- External decision promotion readiness: `{(external_decision.get('promotion_readiness') or {}).get('status')}`; "
+            f"can_promote_to_assist={(external_decision.get('promotion_readiness') or {}).get('can_promote_to_assist', False)}.",
             "",
             "## 训练影响",
             "",

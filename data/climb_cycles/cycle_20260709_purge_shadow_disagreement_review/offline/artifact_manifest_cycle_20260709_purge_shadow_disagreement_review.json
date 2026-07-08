@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "name": "cycle_20260709_purge_shadow_disagreement_review",
+  "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\artifact_manifest_cycle_20260709_purge_shadow_disagreement_review.json",
+  "inputs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "input_count": 3,
+  "input_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "resolved_logs": [
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+    "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl"
+  ],
+  "resolved_log_count": 3,
+  "resolved_log_health": [
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_192510_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1093735,
+      "sha256": "94dc0f023937143f70cbce13f4f049b9df90f7d1e5634a584744b49d06e0bdd0",
+      "index": 0
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_194217_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1489158,
+      "sha256": "459ee52217ed6367ced256e87a91e08a881b9459cf5c61dd8e264e69e94cc1b7",
+      "index": 1
+    },
+    {
+      "path": "runs\\ai_runs_climb_cycle_ironclad_a0_win_35\\20260707_200349_ironclad_a0.jsonl",
+      "exists": true,
+      "kind": "file",
+      "bytes": 805079,
+      "sha256": "c76e64eb7d4ccd31132f8f8814f524e8646bb7d628ea17edcaa11afe56b933a3",
+      "index": 2
+    }
+  ],
+  "artifact_paths": {
+    "manifest_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\training_manifest_cycle_20260709_purge_shadow_disagreement_review.json",
+    "shadow_dir": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\shadow_cycle_20260709_purge_shadow_disagreement_review",
+    "advice_dir": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\shadow_advice_cycle_20260709_purge_shadow_disagreement_review",
+    "diagnosis_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\run_diagnosis_cycle_20260709_purge_shadow_disagreement_review.json",
+    "gate_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\act1_boss_gate_cycle_20260709_purge_shadow_disagreement_review.json",
+    "static_knowledge_gap_report_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\static_knowledge_gaps_cycle_20260709_purge_shadow_disagreement_review.json",
+    "combat_label_audit_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\combat_label_audit_cycle_20260709_purge_shadow_disagreement_review.json",
+    "combat_label_replay_audit_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\combat_label_replay_audit_cycle_20260709_purge_shadow_disagreement_review.json",
+    "summary_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\offline_batch_cycle_20260709_purge_shadow_disagreement_review.json",
+    "artifact_manifest_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\artifact_manifest_cycle_20260709_purge_shadow_disagreement_review.json",
+    "handoff_dir": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review",
+    "handoff_index_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\index.json",
+    "next_handoff_prompt_path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\next_handoff.txt"
+  },
+  "agent_handoff_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\ai_agent.json",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\engineering_agent.json",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\main_agent.json",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\runner_agent.json"
+  },
+  "agent_prompt_paths": {
+    "ai_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\ai_agent.txt",
+    "engineering_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\engineering_agent.txt",
+    "main_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\main_agent.txt",
+    "runner_agent": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\runner_agent.txt"
+  },
+  "files": {
+    "advice_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\shadow_advice_cycle_20260709_purge_shadow_disagreement_review",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5,
+      "bytes": 941118
+    },
+    "combat_label_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\combat_label_audit_cycle_20260709_purge_shadow_disagreement_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 3641,
+      "sha256": "3e45d491851daa3ecc980fcb75d91912e79c162e2fd0ad8b80f37d84da4ad1ba"
+    },
+    "combat_label_replay_audit_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\combat_label_replay_audit_cycle_20260709_purge_shadow_disagreement_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 4694,
+      "sha256": "bd352453952ad1e2c74a22f0ba17b935f1d8b9b56ef8a7b926b75d32bccf2a9b"
+    },
+    "diagnosis_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\run_diagnosis_cycle_20260709_purge_shadow_disagreement_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 873060,
+      "sha256": "4c22766479709301df1a0b1fc0810402fbbc0e00dac59fd8df150d0cd730d4f8"
+    },
+    "gate_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\act1_boss_gate_cycle_20260709_purge_shadow_disagreement_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 15876,
+      "sha256": "6b65652d99b3042d139ae2ea3853e1e2ee93dfff398ce3bcd70dae97bed8a81e"
+    },
+    "handoff_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 10,
+      "bytes": 613531
+    },
+    "handoff_index_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\index.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 47367,
+      "sha256": "d9d827517f626097c41356e1aaf12f4d9b4ae02d196cb25fa5f50660325ce8df"
+    },
+    "manifest_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\training_manifest_cycle_20260709_purge_shadow_disagreement_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 260328,
+      "sha256": "f6d4a794c3e2f6d4e5e3b1e373437fe56f7731e347e12a22e00fba9c6e8b8aa0"
+    },
+    "next_handoff_prompt_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\next_handoff.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 44166,
+      "sha256": "6c0afd644f3f93ed68a2182d2f1f0165f039125950ac2e22536f9bed87e48daf"
+    },
+    "shadow_dir": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\shadow_cycle_20260709_purge_shadow_disagreement_review",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 4,
+      "bytes": 2416103
+    },
+    "static_knowledge_gap_report_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\static_knowledge_gaps_cycle_20260709_purge_shadow_disagreement_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 1862,
+      "sha256": "ca7b95886e4c2f5b1b49b8e8b849689d714a2192c4401fab0ae87fbbc6d87232"
+    },
+    "summary_path": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\offline_batch_cycle_20260709_purge_shadow_disagreement_review.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 482503,
+      "sha256": "4d9d64792f09f3d3418d4422d20cddd72ce1f7f4830cbee83fea5ef578237799"
+    },
+    "ai_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\ai_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 142756,
+      "sha256": "3b1aeac3569535aa4de147e0cefdbef7b0e2e4057c3163ba11577e97d7608361"
+    },
+    "engineering_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\engineering_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 93254,
+      "sha256": "1b4b0096ad4dfc261a3ce8c20a96d75eab61b2b1fbba70f11873d93544f9651b"
+    },
+    "main_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\main_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 108391,
+      "sha256": "012bc71159606849ad2fd4c23c3fc4e13ff0ec4119f21596e59b6bb2adcd02d7"
+    },
+    "runner_agent_handoff": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\runner_agent.json",
+      "exists": true,
+      "kind": "file",
+      "bytes": 108496,
+      "sha256": "ca4caedcfaf21d5781aa67be724951963adce07bbebe9eb93b645791a829dcf8"
+    },
+    "ai_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\ai_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17824,
+      "sha256": "e6c3a36feed5fb94e3a05eb7e334472cee15ba60a1edd6c0451136bdc27c9dfe"
+    },
+    "engineering_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\engineering_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17010,
+      "sha256": "a55867fe0aafc08ab07b9c81bf725776cae1fd4e42ede0e4dc576840f1a5e2b6"
+    },
+    "main_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\main_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17114,
+      "sha256": "34aa8d2f2c7dcd0e5b8519995fab775e1b53d1de14f4304bf62f539a52b10afc"
+    },
+    "runner_agent_prompt": {
+      "path": "data\\climb_cycles\\cycle_20260709_purge_shadow_disagreement_review\\offline\\handoff_cycle_20260709_purge_shadow_disagreement_review\\runner_agent.txt",
+      "exists": true,
+      "kind": "file",
+      "bytes": 17153,
+      "sha256": "36ae3144685e5dc0142a2d3cd9de2ba9647315641874ecf4d3d5c7d618b6b320"
+    }
+  },
+  "missing": [],
+  "errors": [],
+  "warnings": [],
+  "ok": true
+}

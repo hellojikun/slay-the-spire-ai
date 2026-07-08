@@ -793,6 +793,184 @@ def _split_metrics(
 def _round_metric(value: float) -> float:
     return round(float(value), 4)
 
+def _prediction_audit(
+    examples: list[DecisionMultitaskExample],
+    predictions: list[float],
+    validation_indices: list[int],
+) -> dict[str, Any]:
+    indices = validation_indices or list(range(len(examples)))
+    error_examples: dict[str, list[dict[str, Any]]] = {task: [] for task in TASKS}
+    confident_errors: dict[str, int] = {task: 0 for task in TASKS}
+    for index in indices:
+        example = examples[index]
+        prediction = float(predictions[index])
+        target = float(example.target)
+        is_error = False
+        confidence = 0.0
+        if example.task in BINARY_TASKS:
+            predicted_target = 1.0 if prediction >= 0.5 else 0.0
+            is_error = predicted_target != (1.0 if target >= 0.5 else 0.0)
+            confidence = abs(prediction - 0.5)
+            if is_error and confidence >= 0.25:
+                confident_errors[example.task] += 1
+        else:
+            is_error = abs(prediction - target) >= 0.2
+            confidence = abs(prediction - target)
+            if is_error:
+                confident_errors[example.task] += 1
+        if is_error:
+            error_examples[example.task].append(_audit_example(index + 1, example, prediction, confidence))
+    for task in TASKS:
+        error_examples[task] = sorted(
+            error_examples[task],
+            key=lambda row: (-float(row.get("confidence", 0.0)), int(row.get("index", 0))),
+        )[:8]
+    return {
+        "scope": "validation" if validation_indices else "all_examples_no_validation_split",
+        "validation_examples": len(indices),
+        "error_examples": error_examples,
+        "confident_error_counts": confident_errors,
+        "sample_risks": _sample_risks(examples, indices),
+    }
+
+
+def _audit_example(index: int, example: DecisionMultitaskExample, prediction: float, confidence: float) -> dict[str, Any]:
+    row = example.row
+    payload: dict[str, Any] = {
+        "index": index,
+        "task": example.task,
+        "target": round(float(example.target), 4),
+        "prediction": round(float(prediction), 4),
+        "confidence": round(float(confidence), 4),
+        "floor": row.get("floor"),
+        "character": row.get("character"),
+        "source_dataset": row.get("source_dataset"),
+        "source_file": row.get("source_file"),
+    }
+    if example.task == TASK_TAKE_SKIP:
+        payload.update(
+            {
+                "actual_decision": row.get("decision"),
+                "predicted_decision": "take" if prediction >= 0.5 else "skip",
+                "picked": row.get("picked"),
+                "options": row.get("options") or [],
+            }
+        )
+    elif example.task == TASK_PURGE_REMOVE:
+        payload.update(
+            {
+                "actual_decision": "remove" if example.target >= 0.5 else "keep_candidate",
+                "predicted_decision": "remove" if prediction >= 0.5 else "keep_candidate",
+                "candidate_card": _candidate_remove_card(row),
+                "label_source": row.get("label_source"),
+            }
+        )
+    else:
+        payload.update(
+            {
+                "deck_size": row.get("deck_size"),
+                "draw_density": row.get("draw_density"),
+                "starter_density": row.get("starter_density"),
+                "purge_count": row.get("purge_count"),
+                "absolute_error": round(abs(prediction - float(example.target)), 4),
+            }
+        )
+    return payload
+
+
+def _sample_risks(examples: list[DecisionMultitaskExample], indices: list[int]) -> dict[str, Any]:
+    task_counts: dict[str, int] = {task: 0 for task in TASKS}
+    positives: dict[str, int] = {task: 0 for task in TASKS}
+    for index in indices:
+        example = examples[index]
+        task_counts[example.task] = task_counts.get(example.task, 0) + 1
+        if example.target >= 0.5:
+            positives[example.task] = positives.get(example.task, 0) + 1
+    return {
+        task: {
+            "examples": task_counts.get(task, 0),
+            "positive_examples": positives.get(task, 0),
+            "negative_examples": max(0, task_counts.get(task, 0) - positives.get(task, 0)),
+        }
+        for task in TASKS
+    }
+
+
+def _promotion_readiness(evaluation: dict[str, Any], prediction_audit: dict[str, Any]) -> dict[str, Any]:
+    validation = evaluation.get("validation") if isinstance(evaluation.get("validation"), dict) else {}
+    head_readiness: dict[str, dict[str, Any]] = {}
+    blocking_reasons = ["external_prior_only_requires_live_shadow_validation"]
+    for task in TASKS:
+        metrics = validation.get(task) if isinstance(validation.get(task), dict) else {}
+        reasons = _head_blocking_reasons(task, metrics)
+        head_readiness[task] = {
+            "status": "shadow_candidate" if not reasons else "observe_only",
+            "blocking_reasons": reasons,
+            "validation_metrics": metrics,
+            "confident_error_count": (prediction_audit.get("confident_error_counts") or {}).get(task, 0),
+        }
+        blocking_reasons.extend(f"{task}:{reason}" for reason in reasons)
+    return {
+        "status": "shadow_only",
+        "can_promote_to_assist": False,
+        "recommended_authority": "shadow",
+        "blocking_reasons": _dedupe_text(blocking_reasons),
+        "head_readiness": head_readiness,
+        "next_actions": [
+            "collect_live_shadow_disagreement_rows_before_assist",
+            "increase_take_skip_skip_examples_and_true_negatives",
+            "collect_more_real_card_removal_decisions",
+            "collect_more_deck_cycle_outcomes_before_using_cycle_head",
+        ],
+        "policy": {
+            "runtime_authority": False,
+            "runtime_default_enabled": False,
+            "does_not_control_live_mcp": True,
+            "direct_mcp_control": False,
+            "requires_audited_promotion": True,
+        },
+    }
+
+
+def _head_blocking_reasons(task: str, metrics: dict[str, Any]) -> list[str]:
+    reasons: list[str] = []
+    examples = int(metrics.get("examples") or 0)
+    if task == TASK_TAKE_SKIP:
+        if examples < 50:
+            reasons.append("insufficient_validation_examples")
+        if int(metrics.get("true_negative") or 0) < 10:
+            reasons.append("insufficient_validated_skip_predictions")
+        if float(metrics.get("precision") or 0.0) < 0.8:
+            reasons.append("precision_below_assist_threshold")
+        if float(metrics.get("recall") or 0.0) < 0.8:
+            reasons.append("recall_below_assist_threshold")
+    elif task == TASK_PURGE_REMOVE:
+        if examples < 50:
+            reasons.append("insufficient_validation_examples")
+        if int(metrics.get("positive_examples") or 0) < 20:
+            reasons.append("insufficient_real_remove_examples")
+        if int(metrics.get("true_negative") or 0) < 20:
+            reasons.append("insufficient_keep_negative_coverage")
+        reasons.append("weak_negative_labels_need_live_confirmation")
+    else:
+        if examples < 20:
+            reasons.append("insufficient_deck_cycle_validation_examples")
+        if float(metrics.get("mae") or 1.0) > 0.2:
+            reasons.append("deck_cycle_mae_above_assist_threshold")
+    return _dedupe_text(reasons)
+
+
+def _dedupe_text(items: Iterable[str]) -> list[str]:
+    result: list[str] = []
+    seen: set[str] = set()
+    for item in items:
+        text = str(item)
+        if text in seen:
+            continue
+        seen.add(text)
+        result.append(text)
+    return result
+
 def _build_feature_spec(examples: list[DecisionMultitaskExample], *, min_categorical_count: int) -> dict[str, Any]:
     numeric_values = {feature: [_numeric(example.row.get(feature)) for example in examples] for feature in NUMERIC_FEATURES}
     token_counts: Counter[str] = Counter()

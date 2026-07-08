@@ -1,0 +1,228 @@
+{
+  "version": 1,
+  "status": "active",
+  "created_at": "2026-07-09T01:50:05",
+  "objective": "collect_live_shadow_evidence_before_decision_model_assist",
+  "active_target_count": 5,
+  "targets": [
+    {
+      "key": "reward_total",
+      "title": "Collect live card reward decisions",
+      "surface": "card_reward_take_skip",
+      "observed": 10,
+      "target": 50,
+      "deficit": 40,
+      "status": "needs_data",
+      "priority": 2,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Need enough local MCP card reward examples before reward model assist.",
+      "acceptance": "CARD_REWARD records with decision learn_card_pick or action=skip.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "reward_skip",
+      "title": "Collect bad-reward skip examples",
+      "surface": "card_reward_take_skip",
+      "observed": 0,
+      "target": 10,
+      "deficit": 10,
+      "status": "needs_data",
+      "priority": 1,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "User explicitly wants the AI to skip rewards when no good card exists.",
+      "acceptance": "CARD_REWARD records where the actual decision action is skip.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "purge_total",
+      "title": "Collect live purge decision contexts",
+      "surface": "purge_remove",
+      "observed": 0,
+      "target": 20,
+      "deficit": 20,
+      "status": "needs_data",
+      "priority": 2,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Purge/remove needs local shop or grid contexts before assist.",
+      "acceptance": "SHOP_SCREEN with purge_available or GRID for_purge records scored by shadow model.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "purge_remove",
+      "title": "Collect actual remove examples",
+      "surface": "purge_remove",
+      "observed": 0,
+      "target": 10,
+      "deficit": 10,
+      "status": "needs_data",
+      "priority": 1,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Positive purge labels must come from real removed cards, not weak negatives.",
+      "acceptance": "SHOP_SCREEN purge selected or GRID for_purge selected-card records.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "purge_keep",
+      "title": "Collect purge keep examples",
+      "surface": "purge_remove",
+      "observed": 0,
+      "target": 10,
+      "deficit": 10,
+      "status": "needs_data",
+      "priority": 1,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Need keep_candidate coverage so the model does not over-remove cards.",
+      "acceptance": "SHOP_SCREEN where purge is available but the actual decision buys/declines instead.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    }
+  ],
+  "active_targets": [
+    {
+      "key": "reward_total",
+      "title": "Collect live card reward decisions",
+      "surface": "card_reward_take_skip",
+      "observed": 10,
+      "target": 50,
+      "deficit": 40,
+      "status": "needs_data",
+      "priority": 2,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Need enough local MCP card reward examples before reward model assist.",
+      "acceptance": "CARD_REWARD records with decision learn_card_pick or action=skip.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "reward_skip",
+      "title": "Collect bad-reward skip examples",
+      "surface": "card_reward_take_skip",
+      "observed": 0,
+      "target": 10,
+      "deficit": 10,
+      "status": "needs_data",
+      "priority": 1,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "User explicitly wants the AI to skip rewards when no good card exists.",
+      "acceptance": "CARD_REWARD records where the actual decision action is skip.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "purge_total",
+      "title": "Collect live purge decision contexts",
+      "surface": "purge_remove",
+      "observed": 0,
+      "target": 20,
+      "deficit": 20,
+      "status": "needs_data",
+      "priority": 2,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Purge/remove needs local shop or grid contexts before assist.",
+      "acceptance": "SHOP_SCREEN with purge_available or GRID for_purge records scored by shadow model.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "purge_remove",
+      "title": "Collect actual remove examples",
+      "surface": "purge_remove",
+      "observed": 0,
+      "target": 10,
+      "deficit": 10,
+      "status": "needs_data",
+      "priority": 1,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Positive purge labels must come from real removed cards, not weak negatives.",
+      "acceptance": "SHOP_SCREEN purge selected or GRID for_purge selected-card records.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    },
+    {
+      "key": "purge_keep",
+      "title": "Collect purge keep examples",
+      "surface": "purge_remove",
+      "observed": 0,
+      "target": 10,
+      "deficit": 10,
+      "status": "needs_data",
+      "priority": 1,
+      "execution_contract": "live_mcp_gated_collection",
+      "rationale": "Need keep_candidate coverage so the model does not over-remove cards.",
+      "acceptance": "SHOP_SCREEN where purge is available but the actual decision buys/declines instead.",
+      "forbidden_changes": [
+        "do_not_add_hardcoded_strategy_rules",
+        "do_not_change_live_policy_to_force_this_sample",
+        "do_not_promote_external_prior_to_runtime_authority"
+      ]
+    }
+  ],
+  "blocking_reasons": [
+    "external_prior_only_requires_live_shadow_validation",
+    "take_skip:insufficient_validation_examples",
+    "take_skip:insufficient_validated_skip_predictions",
+    "purge_remove:insufficient_validation_examples",
+    "purge_remove:insufficient_real_remove_examples",
+    "purge_remove:weak_negative_labels_need_live_confirmation",
+    "deck_cycle_quality:insufficient_deck_cycle_validation_examples",
+    "deck_cycle_quality:deck_cycle_mae_above_assist_threshold",
+    "live_shadow_disagreement_audit_only",
+    "insufficient_live_reward_examples",
+    "insufficient_live_skip_examples",
+    "insufficient_live_purge_examples",
+    "insufficient_live_purge_remove_examples",
+    "insufficient_live_purge_keep_examples"
+  ],
+  "next_training_actions": [
+    "collect_targeted_live_mcp_logs_for_active_curriculum_targets",
+    "prefer_reviewing_card_reward_skip_coverage_before_assist",
+    "prefer_runs_that_visit_shop_or_grid_purge_contexts",
+    "retrain_external_structure_decision_model_after_new_live_shadow_rows",
+    "keep_model_authority_shadow_until_curriculum_targets_are_satisfied"
+  ],
+  "source_paths": {
+    "decision_model": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\training\\external_structure_decision_model\\decision_multitask_model.pt",
+    "live_shadow_disagreement": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\training\\external_structure_decision_model\\live_shadow_disagreement_summary.json",
+    "external_predictions": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\training\\external_structure_decision_model\\decision_multitask_predictions.jsonl"
+  },
+  "authority_boundary": {
+    "runtime_authority": false,
+    "runtime_default_enabled": false,
+    "runtime_authority_level": "shadow",
+    "does_not_control_live_mcp": true,
+    "direct_mcp_control": false,
+    "requires_audited_promotion": true
+  },
+  "output_path": "data\\climb_cycles\\cycle_20260709_decision_curriculum_smoke\\training\\external_structure_decision_model\\decision_training_curriculum.json"
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "trained_at": "2026-07-09T01:21:03",
+  "trained_at": "2026-07-09T01:26:18",
   "model_kind": "decision_multitask_shadow",
   "backend": "pytorch_multitask_mlp",
   "training_source": {
@@ -204,6 +204,242 @@
         "mean_prediction": 0.6391,
         "mean_target": 1.0
       }
+    }
+  },
+  "prediction_audit": {
+    "scope": "validation",
+    "validation_examples": 62,
+    "error_examples": {
+      "take_skip": [
+        {
+          "index": 69,
+          "task": "take_skip",
+          "target": 0.0,
+          "prediction": 0.5519,
+          "confidence": 0.0519,
+          "floor": 2,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+          "actual_decision": "skip",
+          "predicted_decision": "take",
+          "picked": null,
+          "options": [
+            "Headbutt",
+            "Seeing Red",
+            "Havoc"
+          ]
+        },
+        {
+          "index": 71,
+          "task": "take_skip",
+          "target": 0.0,
+          "prediction": 0.5396,
+          "confidence": 0.0396,
+          "floor": 4,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+          "actual_decision": "skip",
+          "predicted_decision": "take",
+          "picked": null,
+          "options": [
+            "Warcry",
+            "Body Slam",
+            "Wild Strike"
+          ]
+        },
+        {
+          "index": 83,
+          "task": "take_skip",
+          "target": 0.0,
+          "prediction": 0.5354,
+          "confidence": 0.0354,
+          "floor": 27,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+          "actual_decision": "skip",
+          "predicted_decision": "take",
+          "picked": null,
+          "options": [
+            "Wild Strike",
+            "Iron Wave",
+            "Thunderclap"
+          ]
+        },
+        {
+          "index": 57,
+          "task": "take_skip",
+          "target": 0.0,
+          "prediction": 0.5311,
+          "confidence": 0.0311,
+          "floor": 31,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663893019.run",
+          "actual_decision": "skip",
+          "predicted_decision": "take",
+          "picked": null,
+          "options": [
+            "Body Slam+1",
+            "Headbutt+1",
+            "Clash+1"
+          ]
+        },
+        {
+          "index": 39,
+          "task": "take_skip",
+          "target": 0.0,
+          "prediction": 0.5228,
+          "confidence": 0.0228,
+          "floor": 31,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663717142.run",
+          "actual_decision": "skip",
+          "predicted_decision": "take",
+          "picked": null,
+          "options": [
+            "Dual Wield",
+            "Rupture+1",
+            "Body Slam"
+          ]
+        }
+      ],
+      "purge_remove": [],
+      "deck_cycle_quality": [
+        {
+          "index": 309,
+          "task": "deck_cycle_quality",
+          "target": 1.0,
+          "prediction": 0.6391,
+          "confidence": 0.3609,
+          "floor": null,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663893019.run",
+          "deck_size": 31,
+          "draw_density": 0.2581,
+          "starter_density": 0.129,
+          "purge_count": 3,
+          "absolute_error": 0.3609
+        }
+      ]
+    },
+    "confident_error_counts": {
+      "take_skip": 0,
+      "purge_remove": 0,
+      "deck_cycle_quality": 1
+    },
+    "sample_risks": {
+      "take_skip": {
+        "examples": 19,
+        "positive_examples": 14,
+        "negative_examples": 5
+      },
+      "purge_remove": {
+        "examples": 42,
+        "positive_examples": 6,
+        "negative_examples": 36
+      },
+      "deck_cycle_quality": {
+        "examples": 1,
+        "positive_examples": 1,
+        "negative_examples": 0
+      }
+    }
+  },
+  "promotion_readiness": {
+    "status": "shadow_only",
+    "can_promote_to_assist": false,
+    "recommended_authority": "shadow",
+    "blocking_reasons": [
+      "external_prior_only_requires_live_shadow_validation",
+      "take_skip:insufficient_validation_examples",
+      "take_skip:insufficient_validated_skip_predictions",
+      "take_skip:precision_below_assist_threshold",
+      "purge_remove:insufficient_validation_examples",
+      "purge_remove:insufficient_real_remove_examples",
+      "purge_remove:weak_negative_labels_need_live_confirmation",
+      "deck_cycle_quality:insufficient_deck_cycle_validation_examples",
+      "deck_cycle_quality:deck_cycle_mae_above_assist_threshold"
+    ],
+    "head_readiness": {
+      "take_skip": {
+        "status": "observe_only",
+        "blocking_reasons": [
+          "insufficient_validation_examples",
+          "insufficient_validated_skip_predictions",
+          "precision_below_assist_threshold"
+        ],
+        "validation_metrics": {
+          "examples": 19,
+          "positive_examples": 14,
+          "predicted_positive": 19,
+          "accuracy": 0.7368,
+          "precision": 0.7368,
+          "recall": 1.0,
+          "true_positive": 14,
+          "false_positive": 5,
+          "true_negative": 0,
+          "false_negative": 0,
+          "mean_prediction": 0.5404,
+          "mean_target": 0.7368
+        },
+        "confident_error_count": 0
+      },
+      "purge_remove": {
+        "status": "observe_only",
+        "blocking_reasons": [
+          "insufficient_validation_examples",
+          "insufficient_real_remove_examples",
+          "weak_negative_labels_need_live_confirmation"
+        ],
+        "validation_metrics": {
+          "examples": 42,
+          "positive_examples": 6,
+          "predicted_positive": 6,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positive": 6,
+          "false_positive": 0,
+          "true_negative": 36,
+          "false_negative": 0,
+          "mean_prediction": 0.422,
+          "mean_target": 0.1429
+        },
+        "confident_error_count": 0
+      },
+      "deck_cycle_quality": {
+        "status": "observe_only",
+        "blocking_reasons": [
+          "insufficient_deck_cycle_validation_examples",
+          "deck_cycle_mae_above_assist_threshold"
+        ],
+        "validation_metrics": {
+          "examples": 1,
+          "mae": 0.3609,
+          "max_absolute_error": 0.3609,
+          "mean_prediction": 0.6391,
+          "mean_target": 1.0
+        },
+        "confident_error_count": 1
+      }
+    },
+    "next_actions": [
+      "collect_live_shadow_disagreement_rows_before_assist",
+      "increase_take_skip_skip_examples_and_true_negatives",
+      "collect_more_real_card_removal_decisions",
+      "collect_more_deck_cycle_outcomes_before_using_cycle_head"
+    ],
+    "policy": {
+      "runtime_authority": false,
+      "runtime_default_enabled": false,
+      "does_not_control_live_mcp": true,
+      "direct_mcp_control": false,
+      "requires_audited_promotion": true
     }
   },
   "requested_backend": "cpu",

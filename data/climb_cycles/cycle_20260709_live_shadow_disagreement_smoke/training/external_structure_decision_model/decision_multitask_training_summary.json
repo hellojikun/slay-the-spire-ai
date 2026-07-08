@@ -1,0 +1,434 @@
+{
+  "version": 1,
+  "trained_at": "2026-07-09T01:37:19",
+  "model_kind": "decision_multitask_shadow",
+  "backend": "pytorch_multitask_mlp",
+  "training_source": {
+    "mode": "external_decision_multitask",
+    "source_category": "external_run_history",
+    "source_quality_policy": "external_prior",
+    "source_id": "card_reward_decisions",
+    "source_uri": null,
+    "source_weight": null,
+    "inputs": [
+      "data\\climb_cycles\\cycle_20260709_live_shadow_disagreement_smoke\\training\\external_structure_rows\\card_reward_decisions.jsonl",
+      "data\\climb_cycles\\cycle_20260709_live_shadow_disagreement_smoke\\training\\external_structure_rows\\card_purge_priors.jsonl",
+      "data\\climb_cycles\\cycle_20260709_live_shadow_disagreement_smoke\\training\\external_structure_rows\\deck_cycle_priors.jsonl"
+    ],
+    "manifest_paths": [],
+    "summary_paths": [],
+    "reward_files": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_live_shadow_disagreement_smoke\\training\\external_structure_rows\\card_reward_decisions.jsonl"
+    ],
+    "purge_files": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_live_shadow_disagreement_smoke\\training\\external_structure_rows\\card_purge_priors.jsonl"
+    ],
+    "deck_files": [
+      "C:\\Users\\jikun\\Documents\\game\\data\\climb_cycles\\cycle_20260709_live_shadow_disagreement_smoke\\training\\external_structure_rows\\deck_cycle_priors.jsonl"
+    ],
+    "warnings": [],
+    "forbidden_uses": [
+      "clean_trainable",
+      "pristine",
+      "gate",
+      "learned_memory",
+      "runtime_authority"
+    ]
+  },
+  "training_source_quality": "external_prior",
+  "source_validation_grade": "external_prior",
+  "runtime_authority": false,
+  "runtime_default_enabled": false,
+  "runtime_authority_level": "shadow",
+  "does_not_control_live_mcp": true,
+  "direct_mcp_control": false,
+  "requires_audited_promotion": true,
+  "forbidden_uses": [
+    "clean_trainable",
+    "pristine",
+    "gate",
+    "learned_memory",
+    "runtime_authority"
+  ],
+  "heads": [
+    "take_skip",
+    "purge_remove",
+    "deck_cycle_quality"
+  ],
+  "target_definitions": {
+    "take_skip": "binary label: take=1 skip=0 from adapted card rewards",
+    "purge_remove": "binary label: removed=1 weak_keep_candidate=0",
+    "deck_cycle_quality": "bounded outcome quality from victory/final_floor, predicted from deck-cycle features"
+  },
+  "weak_negative_sampling": {
+    "purge_keep_from_reward_options": true,
+    "weak_negative_weight": 0.25,
+    "max_purge_negatives_per_run": 64,
+    "quality": "weak_external_keep_candidate_not_pristine"
+  },
+  "examples": 311,
+  "train_examples": 249,
+  "validation_examples": 62,
+  "weighted_examples": 8.4625,
+  "task_counts": {
+    "take_skip": 106,
+    "purge_remove": 200,
+    "deck_cycle_quality": 5
+  },
+  "row_counts": {
+    "card_reward_decisions": 106,
+    "card_purge_priors": 11,
+    "deck_cycle_priors": 5
+  },
+  "device": "cuda",
+  "torch_version": "2.11.0+cu128",
+  "cuda_available": true,
+  "cuda_runtime": "12.8",
+  "epochs": 20,
+  "hidden_dim": 48,
+  "batch_size": 128,
+  "learning_rate": 0.005,
+  "weight_decay": 0.0001,
+  "min_categorical_count": 1,
+  "seed": 11,
+  "train_loss": 0.08982594311237335,
+  "val_loss": 0.20309965312480927,
+  "evaluation": {
+    "all": {
+      "take_skip": {
+        "examples": 106,
+        "positive_examples": 76,
+        "predicted_positive": 78,
+        "accuracy": 0.9057,
+        "precision": 0.9231,
+        "recall": 0.9474,
+        "true_positive": 72,
+        "false_positive": 6,
+        "true_negative": 24,
+        "false_negative": 4,
+        "mean_prediction": 0.7201,
+        "mean_target": 0.717
+      },
+      "purge_remove": {
+        "examples": 200,
+        "positive_examples": 11,
+        "predicted_positive": 11,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 11,
+        "false_positive": 0,
+        "true_negative": 189,
+        "false_negative": 0,
+        "mean_prediction": 0.0559,
+        "mean_target": 0.055
+      },
+      "deck_cycle_quality": {
+        "examples": 5,
+        "mae": 0.0894,
+        "max_absolute_error": 0.3024,
+        "mean_prediction": 0.5421,
+        "mean_target": 0.5736
+      }
+    },
+    "train": {
+      "take_skip": {
+        "examples": 87,
+        "positive_examples": 62,
+        "predicted_positive": 64,
+        "accuracy": 0.931,
+        "precision": 0.9375,
+        "recall": 0.9677,
+        "true_positive": 60,
+        "false_positive": 4,
+        "true_negative": 21,
+        "false_negative": 2,
+        "mean_prediction": 0.7326,
+        "mean_target": 0.7126
+      },
+      "purge_remove": {
+        "examples": 158,
+        "positive_examples": 5,
+        "predicted_positive": 5,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 5,
+        "false_positive": 0,
+        "true_negative": 153,
+        "false_negative": 0,
+        "mean_prediction": 0.0328,
+        "mean_target": 0.0316
+      },
+      "deck_cycle_quality": {
+        "examples": 4,
+        "mae": 0.0362,
+        "max_absolute_error": 0.0763,
+        "mean_prediction": 0.5032,
+        "mean_target": 0.467
+      }
+    },
+    "validation": {
+      "take_skip": {
+        "examples": 19,
+        "positive_examples": 14,
+        "predicted_positive": 14,
+        "accuracy": 0.7895,
+        "precision": 0.8571,
+        "recall": 0.8571,
+        "true_positive": 12,
+        "false_positive": 2,
+        "true_negative": 3,
+        "false_negative": 2,
+        "mean_prediction": 0.6631,
+        "mean_target": 0.7368
+      },
+      "purge_remove": {
+        "examples": 42,
+        "positive_examples": 6,
+        "predicted_positive": 6,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "true_positive": 6,
+        "false_positive": 0,
+        "true_negative": 36,
+        "false_negative": 0,
+        "mean_prediction": 0.1428,
+        "mean_target": 0.1429
+      },
+      "deck_cycle_quality": {
+        "examples": 1,
+        "mae": 0.3024,
+        "max_absolute_error": 0.3024,
+        "mean_prediction": 0.6976,
+        "mean_target": 1.0
+      }
+    }
+  },
+  "prediction_audit": {
+    "scope": "validation",
+    "validation_examples": 62,
+    "error_examples": {
+      "take_skip": [
+        {
+          "index": 69,
+          "task": "take_skip",
+          "target": 0.0,
+          "prediction": 0.9381,
+          "confidence": 0.4381,
+          "floor": 2,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+          "actual_decision": "skip",
+          "predicted_decision": "take",
+          "picked": null,
+          "options": [
+            "Headbutt",
+            "Seeing Red",
+            "Havoc"
+          ]
+        },
+        {
+          "index": 29,
+          "task": "take_skip",
+          "target": 1.0,
+          "prediction": 0.2596,
+          "confidence": 0.2404,
+          "floor": 8,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663717142.run",
+          "actual_decision": "take",
+          "predicted_decision": "skip",
+          "picked": "Whirlwind",
+          "options": [
+            "Whirlwind",
+            "Wild Strike",
+            "Headbutt"
+          ]
+        },
+        {
+          "index": 65,
+          "task": "take_skip",
+          "target": 1.0,
+          "prediction": 0.2982,
+          "confidence": 0.2018,
+          "floor": 46,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663893019.run",
+          "actual_decision": "take",
+          "predicted_decision": "skip",
+          "picked": "True Grit",
+          "options": [
+            "True Grit",
+            "Rupture",
+            "Combust"
+          ]
+        },
+        {
+          "index": 83,
+          "task": "take_skip",
+          "target": 0.0,
+          "prediction": 0.5443,
+          "confidence": 0.0443,
+          "floor": 27,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+          "actual_decision": "skip",
+          "predicted_decision": "take",
+          "picked": null,
+          "options": [
+            "Wild Strike",
+            "Iron Wave",
+            "Thunderclap"
+          ]
+        }
+      ],
+      "purge_remove": [],
+      "deck_cycle_quality": [
+        {
+          "index": 309,
+          "task": "deck_cycle_quality",
+          "target": 1.0,
+          "prediction": 0.6976,
+          "confidence": 0.3024,
+          "floor": null,
+          "character": "IRONCLAD",
+          "source_dataset": "mat1g3r_stream_smoke",
+          "source_file": "C:\\Users\\jikun\\Documents\\game\\_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663893019.run",
+          "deck_size": 31,
+          "draw_density": 0.2581,
+          "starter_density": 0.129,
+          "purge_count": 3,
+          "absolute_error": 0.3024
+        }
+      ]
+    },
+    "confident_error_counts": {
+      "take_skip": 1,
+      "purge_remove": 0,
+      "deck_cycle_quality": 1
+    },
+    "sample_risks": {
+      "take_skip": {
+        "examples": 19,
+        "positive_examples": 14,
+        "negative_examples": 5
+      },
+      "purge_remove": {
+        "examples": 42,
+        "positive_examples": 6,
+        "negative_examples": 36
+      },
+      "deck_cycle_quality": {
+        "examples": 1,
+        "positive_examples": 1,
+        "negative_examples": 0
+      }
+    }
+  },
+  "promotion_readiness": {
+    "status": "shadow_only",
+    "can_promote_to_assist": false,
+    "recommended_authority": "shadow",
+    "blocking_reasons": [
+      "external_prior_only_requires_live_shadow_validation",
+      "take_skip:insufficient_validation_examples",
+      "take_skip:insufficient_validated_skip_predictions",
+      "purge_remove:insufficient_validation_examples",
+      "purge_remove:insufficient_real_remove_examples",
+      "purge_remove:weak_negative_labels_need_live_confirmation",
+      "deck_cycle_quality:insufficient_deck_cycle_validation_examples",
+      "deck_cycle_quality:deck_cycle_mae_above_assist_threshold"
+    ],
+    "head_readiness": {
+      "take_skip": {
+        "status": "observe_only",
+        "blocking_reasons": [
+          "insufficient_validation_examples",
+          "insufficient_validated_skip_predictions"
+        ],
+        "validation_metrics": {
+          "examples": 19,
+          "positive_examples": 14,
+          "predicted_positive": 14,
+          "accuracy": 0.7895,
+          "precision": 0.8571,
+          "recall": 0.8571,
+          "true_positive": 12,
+          "false_positive": 2,
+          "true_negative": 3,
+          "false_negative": 2,
+          "mean_prediction": 0.6631,
+          "mean_target": 0.7368
+        },
+        "confident_error_count": 1
+      },
+      "purge_remove": {
+        "status": "observe_only",
+        "blocking_reasons": [
+          "insufficient_validation_examples",
+          "insufficient_real_remove_examples",
+          "weak_negative_labels_need_live_confirmation"
+        ],
+        "validation_metrics": {
+          "examples": 42,
+          "positive_examples": 6,
+          "predicted_positive": 6,
+          "accuracy": 1.0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "true_positive": 6,
+          "false_positive": 0,
+          "true_negative": 36,
+          "false_negative": 0,
+          "mean_prediction": 0.1428,
+          "mean_target": 0.1429
+        },
+        "confident_error_count": 0
+      },
+      "deck_cycle_quality": {
+        "status": "observe_only",
+        "blocking_reasons": [
+          "insufficient_deck_cycle_validation_examples",
+          "deck_cycle_mae_above_assist_threshold"
+        ],
+        "validation_metrics": {
+          "examples": 1,
+          "mae": 0.3024,
+          "max_absolute_error": 0.3024,
+          "mean_prediction": 0.6976,
+          "mean_target": 1.0
+        },
+        "confident_error_count": 1
+      }
+    },
+    "next_actions": [
+      "collect_live_shadow_disagreement_rows_before_assist",
+      "increase_take_skip_skip_examples_and_true_negatives",
+      "collect_more_real_card_removal_decisions",
+      "collect_more_deck_cycle_outcomes_before_using_cycle_head"
+    ],
+    "policy": {
+      "runtime_authority": false,
+      "runtime_default_enabled": false,
+      "does_not_control_live_mcp": true,
+      "direct_mcp_control": false,
+      "requires_audited_promotion": true
+    }
+  },
+  "requested_backend": "auto",
+  "torch_available": true,
+  "cuda_device_count": 1,
+  "cuda_devices": [
+    "NVIDIA GeForce RTX 4080 SUPER"
+  ],
+  "path": "data\\climb_cycles\\cycle_20260709_live_shadow_disagreement_smoke\\training\\external_structure_decision_model\\decision_multitask_model.pt",
+  "input_dim": 179,
+  "numeric_features": 23,
+  "categorical_features": 156
+}
