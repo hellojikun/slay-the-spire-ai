@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "manifest_type": "external_prior_manifest",
+  "generated_at": "2026-07-09T00:56:16",
+  "source_category": "external_run_history",
+  "source_id": "mat1g3r_stream_smoke",
+  "source_uri": "https://github.com/MaT1g3R/Slay-the-Spire-data",
+  "source_weight": 0.05,
+  "inputs": [
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD"
+  ],
+  "resolved_files": [
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663630852.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663717142.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663893019.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664318636.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664572100.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664746141.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664922519.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665180688.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665190097.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665362526.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665444896.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665624532.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665789079.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1665884343.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1666133579.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1666217644.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667011250.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667097527.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667185157.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667437226.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667608513.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667785731.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1667961063.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668133125.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668290007.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668452862.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668644450.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668819752.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1668985574.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669250910.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669505708.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669685251.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669860376.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1669951769.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670196367.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670211901.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670449264.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670627478.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670717694.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670797709.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1670978851.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671150411.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671231414.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671316554.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671329786.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671502652.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671733857.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671860730.run",
+    "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1671993683.run"
+  ],
+  "filters": {
+    "game": "STS1",
+    "characters": [
+      "IRONCLAD"
+    ],
+    "ascension_min": null,
+    "ascension_max": null,
+    "limit_runs": 5
+  },
+  "sample_method": "stream_first_n",
+  "artifacts": {
+    "card_reward_priors": "data\\external\\sts_runs\\mat1g3r_stream_smoke\\card_reward_priors.jsonl"
+  },
+  "summary": {
+    "input_count": 1,
+    "resolved_file_count": 50,
+    "accepted_runs": 5,
+    "rejected_runs": 0,
+    "seen_runs": 5,
+    "card_prior_rows": 76,
+    "characters": [
+      "IRONCLAD"
+    ],
+    "ascensions": [
+      20
+    ],
+    "warnings": []
+  },
+  "categories": {
+    "external_run_history": [
+      {
+        "source_file": "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663630852.run",
+        "source_index": 1,
+        "source_run_id_hash": "b144945b878552b5",
+        "character": "IRONCLAD",
+        "ascension": 20,
+        "victory": false,
+        "final_floor": 44,
+        "score": 1191,
+        "seed": "8942134355144449980",
+        "game_version": "2022-03-07",
+        "timestamp": 1663630852,
+        "card_choice_count": 18,
+        "source_validation_grade": "external_prior"
+      },
+      {
+        "source_file": "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663717142.run",
+        "source_index": 1,
+        "source_run_id_hash": "5d393b7492d18e2b",
+        "character": "IRONCLAD",
+        "ascension": 20,
+        "victory": false,
+        "final_floor": 33,
+        "score": 756,
+        "seed": "-1854141603364313707",
+        "game_version": "2022-03-07",
+        "timestamp": 1663717142,
+        "card_choice_count": 8,
+        "source_validation_grade": "external_prior"
+      },
+      {
+        "source_file": "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1663893019.run",
+        "source_index": 1,
+        "source_run_id_hash": "9bd5e684ded68993",
+        "character": "IRONCLAD",
+        "ascension": 20,
+        "victory": true,
+        "final_floor": 57,
+        "score": 2950,
+        "seed": "-1340207862638898885",
+        "game_version": "2022-03-07",
+        "timestamp": 1663893019,
+        "card_choice_count": 23,
+        "source_validation_grade": "external_prior"
+      },
+      {
+        "source_file": "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664136201.run",
+        "source_index": 1,
+        "source_run_id_hash": "30ed849e1842ccab",
+        "character": "IRONCLAD",
+        "ascension": 20,
+        "victory": false,
+        "final_floor": 51,
+        "score": 1534,
+        "seed": "4513250924795546329",
+        "game_version": "2022-03-07",
+        "timestamp": 1664136201,
+        "card_choice_count": 18,
+        "source_validation_grade": "external_prior"
+      },
+      {
+        "source_file": "_external\\Slay-the-Spire-data\\runs\\200-rotating-sample\\IRONCLAD\\1664318636.run",
+        "source_index": 1,
+        "source_run_id_hash": "b174ae5b51449a9a",
+        "character": "IRONCLAD",
+        "ascension": 20,
+        "victory": false,
+        "final_floor": 14,
+        "score": 212,
+        "seed": "2048386659308066905",
+        "game_version": "2022-03-07",
+        "timestamp": 1664318636,
+        "card_choice_count": 9,
+        "source_validation_grade": "external_prior"
+      }
+    ],
+    "external_reference": [],
+    "rejected_external": []
+  },
+  "permitted_uses": [
+    "shadow_prior",
+    "card_prior",
+    "offline_ablation"
+  ],
+  "forbidden_uses": [
+    "clean_trainable",
+    "pristine",
+    "gate",
+    "learned_memory",
+    "runtime_authority"
+  ]
+}
